@@ -1,0 +1,424 @@
+/*@charset "utf-8";*/
+/* CSS Document */
+
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+   font-size:18px;
+   background: url("../images/ex_bg.png") repeat-y scroll center top transparent;
+   font-family:CordiaUPC,"DB ThaiText","Arials";
+   text-align: center;
+   background-color:#fff;
+}
+
+/*body {text-align: center}
+#alignment {text-align: left; margin: auto auto; width:60%;}*/
+img
+{
+	border:0px;	
+}
+
+label {padding-right:20px; }
+ul {margin:0px;}
+p {margin:0px;}
+.button {padding:3px 5px 3px 5px; border:1px solid #a5af90; margin:5px; cursor:hand; cursor:pointer;}
+
+h1 {padding:0px; margin:5px 0px 10px 0px; font-size:30px; font-weight:bold; color:#fff;}
+h2 {padding:0px; margin:0px 0px 10px 0px; font-size:20px; font-weight:bold;}
+.dep {font-size:25px; font-weight:bold; text-align:left; padding-top:5px;}
+.proj {font-size:30px; font-weight:bold; text-align:left; padding-top:0px; margin-top:0px; padding-bottom:0px; margin-bottom:0px; color:#e3d1e1 !important;}
+.help-manual {padding-top:10px;}
+.separate {background-image:url(../images/line01.gif); height:2px; background-repeat:no-repeat; margin:10px 0px 10px 0px;} 
+.hr {background-image:url(../images/hr.gif); height:2px; background-repeat:no-repeat; margin:10px 0px 10px 0px;} 
+.comment {color:Gray; text-decoration:underline;}
+
+/* box */
+.box-header {background-image:url(../images/box_01.gif); height:18px; width:474px; background-repeat:no-repeat;}
+.box-body {background-image:url(../images/box-middle.gif);background-repeat:repeat-y; margin:0px; width:474px;}  
+.box-body div { width:440px; padding:5px 5px 5px 10px;}
+.box-body div p {padding:0px; margin:0px;}
+.box-footer {background-image:url(../images/box_03.gif); height:17px;  width:474px;background-repeat:no-repeat;} 
+.box-body ul {padding:0px; margin-left:20px;}
+.clearFix { clear:both;}
+
+/* font */
+.title {color:#8f79b8; font-weight:bold; font-size:22px !important; padding:10px 0px 0px 0px;}
+
+/* table */
+#tblogin { width:100%;}
+#tblogin .first {width:30%; text-align:right; font-size:20px;}
+.gvStyle {font-size:20px;}
+
+/* tool tips*/
+.list-help {font-size:18px;}
+
+.box-body div p {font-size:18px; padding-bottom:5px;}
+
+#container {
+    min-height:100%;
+    position:relative;
+    /*background-image:url(../images/bg-new.jpg);*/
+    background-image:url(../images/bg1.jpg);
+    background-repeat:repeat-x;
+    text-align: left; margin: auto auto; width:1024px;
+    background-color:#fff;
+   
+}
+
+#header {   
+   width:100%;
+   padding-top:0px;
+}
+
+#header #logo
+{
+	background-image:url(../images/logo-new.png);
+	background-repeat:no-repeat;
+	padding-top: 0px;
+	float:left;
+	margin:0px 5px 0px 0px;
+	height:96px;
+	width:750px;
+}
+#header #logo div
+{
+	padding-left:120px;	color:#ffffff;
+}
+ 
+#header #login
+{
+	padding-top:30px;
+	float:right;
+	width:250px;
+	padding-right:30px;
+	color:#e3d1e1;
+	font-weight:bold;
+}
+.line {padding:0px 10px 0px 10px; font-size:25px; font-weight:bold; color:#fff;}
+
+#header #login a 
+{
+	color:#e3d1e1;
+	font-size:22px;	
+	text-decoration:none;
+	font-weight:bold;	
+}
+#header #login a:hover {text-decoration:underline;}
+.logout
+{
+	color:#ffffff;
+	font-size:18px;	
+	text-decoration:none;  
+	padding-left:20px;
+	background-position-y:1px;
+	background-image:url(../images/logout.png); background-repeat:no-repeat;
+}
+.selected-right a.tooltip {text-decoration:none; color:#fff;}
+.selected-right a.logout {text-decoration:none;}
+.selected-right a.logout:hover {text-decoration:underline; color:yellow;}
+
+#menu-box
+{
+    margin-left:30px;
+    padding-top:6px;
+
+}
+
+#menu-box #menu-selected
+{
+    padding-bottom:20px;    
+}
+
+.sub-leftmenu
+{
+    padding-left:10px;    
+}
+
+.sub-leftmenu li
+{
+ list-style-type:none;   
+}
+
+#body {
+   padding:0px;
+   padding-bottom:60px;   /* Height of the footer */
+}
+
+.selected-left {float:left; width:80%;}
+.selected-right {float:right; margin-top:20px; padding-right:5px; color:#fff; 
+                 font-size:18px; text-align:right; width:255px;}
+
+#body #content
+{
+    padding-top:30px;
+    margin-left:30px;
+}
+
+.content 
+{
+    margin-left:20px;    
+}
+
+.content #selected-box
+{
+
+    }
+
+.content-box
+{
+    padding:10px 10px 20px 0px;   
+    font-size:20px; 
+}
+
+.content-left { float:left; width:450px;}
+.content-right {float:right; margin-left:10px; padding-right:0px;}
+.detail{ padding-top:20px;}
+
+#footer {
+   position:absolute;
+   padding-top:5px;
+   bottom:0;
+   width:100%;
+   height:28px;   /* Height of the footer */
+   background-color:#6f6f00;
+   border-top: 2px solid #000000;
+   color:#fff;
+   font-weight:bold;font-size:18px;
+}
+
+#footer .footer-left
+{
+	float:left;
+	/*width:50%;	*/
+	padding-left:30px;	
+}
+
+#footer .footer-left span {}
+
+#footer .footer-right
+{
+	float:left;
+	/*width:50%;	*/
+}
+
+/** controls **/
+.dropdown 
+{
+
+}
+
+/* TOn */
+.box-question{ text-align:left; margin-top:10px;  font-weight:bold;}
+.question-button { margin:5px 5px 5px 5px; text-align:center;}
+.question-option {margin-left:10px;}
+.question-error {font-size:20px; color:Red;}
+.qGroup {padding-top:5px; padding-bottom:25px; }
+.qTitle {color:Green; padding:2px 0px 2px 0px; font-size:20px; font-weight:bold;}
+.btn-black { background-color:#000; font-size:22px; color:#fff;}
+.submit-box {margin-top:20px; margin-bottom:15px;}
+.tb-submit { border-style:solid; width:900px; }
+.tr-submit {background-color:#efeed0;}
+.td-text {width:700px; color:#000; font-weight:bold; padding-left:5px;font-size:23px;border-width:2px; border-style:solid;  border-color:#666600;}
+.td-result-low {border-width:2px; font-weight:bold; font-size:23px;border-style:solid; width:100px; text-align:center; background-color:#f77062; border-color:#666600;}
+.td-result-high {border-width:2px; font-weight:bold; font-size:23px;border-style:solid; width:100px; text-align:center; background-color:#81ff81; border-color:#666600;}
+.td-result-middle {border-width:2px; font-weight:bold; font-size:23px;border-style:solid; width:100px; text-align:center; background-color:#fcd795; border-color:#666600;}
+
+.TextArea{}
+.QL1
+{
+}
+.QL1 .text
+{
+    color:Red;
+    font-size:20px;
+}
+.QL1 .assumption
+{
+    color:blue; display:none;
+}
+
+.QL2
+{
+}
+
+.QL2 .text
+{
+    color:Green;
+}
+
+.QL3
+{
+}
+
+
+.bold1
+{
+    font-weight:bold;
+}
+
+.boldGreen
+{
+    font-weight:bold;
+    color: Green;
+}
+
+.boldBlue
+{
+    font-weight:bold;
+    color:Blue;
+}
+
+/* Ton */
+.ErrorDokJan
+{
+    font-size:40px;
+}
+.textArea
+{
+    width:96%;
+}
+.td_appr_text
+{
+    color:#000; font-weight:bold; padding-left:5px;font-size:23px;border-width:2px; border-style:solid;  border-color:#666600;
+}
+.td_appr_result
+{
+    border-width:2px; font-weight:bold; font-size:23px;border-style:solid; text-align:center; border-color:#666600;
+}
+.appr_part2_blue_text
+{
+    color:Blue; 
+    font-size:22px;   
+}
+.appr_part2_black_text
+{
+    color:Black;
+    font-size:22px;   
+}
+.appr_L0_text
+{
+     font-size:20px; 
+}
+.appr_L1_text
+{
+    font-size:18px; 
+}
+.appr_L2_text
+{
+    font-size:17px; 
+}
+.popup1
+{
+   margin:0;
+   padding:0;
+   height:100%;
+   font-size:18px;
+   font-family:CordiaUPC,"DB ThaiText","Arials";
+   text-align: center;
+   background-color:#fff;
+}
+.button1
+{
+    margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;   
+}
+
+/* End */
+
+/* Ton*/
+.risk_low
+{
+    color:White;
+    background-color:green; 
+    font-weight:bold; 
+    font-size:23px; 
+    text-align:center;
+}
+.risk_middle
+{
+    color:White;
+    background-color:orange; 
+    font-weight:bold; 
+    font-size:23px; 
+    text-align:center;
+}
+.risk_high
+{
+    color:White;
+    background-color:red; 
+    font-weight:bold; 
+    font-size:23px; 
+    text-align:center;
+}
+/* End */
+
+/* CSS for ton GridView */
+.grid
+{
+    border:1px solid black;
+    width:100%;
+}
+.grid th
+{
+    border:1px solid black;
+    padding:4px 4px 4px 4px;
+}
+.grid td
+{
+    border:1px solid black;
+    padding:4px 4px 4px 4px;
+}
+.gridHeader
+{
+    background-color:#92D051;
+    color:White;
+    border:1px solid black;
+    font-weight:bold;
+}
+.gridHeader a
+{
+    color:White;
+}
+.gridFooter
+{
+    background-color:#92D051;
+    color:White;
+    border:1px solid black;
+    font-weight:bold;
+}
+.gridRow
+{
+    background-color:White;
+}
+.gridAltRow
+{
+    background-color:White;
+}
+.gridHighlightRow
+{
+    background-color:silver;
+}
+.gridPager
+{
+    font-weight:bold;
+    background-color:#336600; 
+    color:White;
+}
+.gridPager a
+{
+    color:White;
+}
+.gridPager td
+{
+    border-style:none;
+}
+/* End GridView */        

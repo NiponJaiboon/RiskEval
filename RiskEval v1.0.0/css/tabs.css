@@ -1,0 +1,235 @@
+﻿div.content {
+    /*border: #48f solid 3px;*/
+    clear: left;
+    padding: 0.5em 1em 1em 2.3em;
+}
+
+ol#toc {
+    height: 2em;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size:1.5em;
+    font-weight:bold;
+}
+
+ol#toc a {
+    background: url(../images/tab-green2.gif);
+    color: #008;
+    display: block;
+    float: left;
+    height: 2.2em;
+    padding-left: 10px;
+    text-decoration: none;
+}
+
+ol#toc a:hover {
+    /*background-color: #3af;*/
+    background-position: 0 -120px;
+}
+
+ol#toc a:hover span {
+    background-position: 100% -120px;
+}
+
+ol#toc li {
+    float: left;
+    margin: 0 1px 0 0;    
+}
+
+ol#toc li.current a {
+   /*background-color: #48f;*/
+   background-position: 0 -60px;
+   color: #fff;
+   font-weight: bold;
+}
+
+ol#toc li.current span {
+    background-position: 100% -60px;
+}
+
+ol#toc span {
+    background: url(../images/tab-green2.gif) 100% 0;
+    display: block;
+    line-height: 2em;
+    padding-right: 10px;
+    
+}
+
+ol#toc li ul
+{
+	position:absolute; 
+	left:0; 
+	display:none; 
+	list-style:none;
+	text-align:left;
+	width:200px;
+}
+
+ol#toc li ul li {display:block;}
+
+/*ol#toc li ul li a{ background-image:url(../images/box_02.gif) !important; height:30px; width:200px; float:left;}
+
+*submenu* 
+ol#toc li ul li ul{position:relative; color:Red;}
+ol#toc li ul li ul li{display:block;}
+ol#toc li ul li ul li a{ background-color:Red !important; height:30px;float:left;}*/
+ol#toc li.current ul li {display:block;}
+ol#toc li.current ul li a {color:#000088; height:30px; width:200px; float:left;background-image:url(../images/box_02.gif) !important;}
+ol#toc li.current ul li a:hover { color:#8d8d8f;}
+ol#toc li.none ul li {display:block;}
+ol#toc li.none ul li a {color:#000088; height:30px; width:200px; float:left;background-image:url(../images/box_02.gif) !important;}
+ol#toc li.none ul li a:hover { color:#8d8d8f;}
+
+
+.menu1
+{
+    margin-top:40px; 
+	margin-left:50px; 
+}
+
+.menu2
+{
+    margin-top:40px; 
+	margin-left:55px; /*
+	color:Red; background-color:Blue;*/
+}
+ 
+/*************************** Dropdown Menu ********************************************/
+/* remove the list style */
+
+#nav-menu
+{
+    text-align:left;    
+    margin-right:0px;
+    float:right;
+    width:550px !important;
+ }
+
+#nav-menu ul
+{
+    list-style: none;
+   /* padding: 0;
+    margin: 0;*/
+} 
+#nav-menu ul
+{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#nav-menu li
+{
+    float: left;
+    margin: 0 0.15em;
+}
+
+#nav-menu li a
+{
+    /*background: url(background.gif) #fff bottom left repeat-x;
+    height: 2em;*/
+    line-height: 2em;
+    display:table-row;
+    padding-right:10px;
+    color: #0d2474;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Hide from IE5-Mac \*/
+#nav-menu li a
+{
+    float: none
+}
+/* End hide */
+
+#nav-menu
+{
+    width:30em
+} 
+ 
+	#nav {
+		margin:0; 
+		padding:0; 
+		list-style:none;
+		font-size:20px;
+		
+	}	
+	
+		/* make the LI display inline */
+		/* it's position relative so that position absolute */
+		/* can be used in submenu */
+		#nav li {
+			color:#000;
+			display:block; 
+			position:relative;
+			width:100px;
+			z-index:500; 
+			/*color:#ed1b2f;
+			font-weight:normal;
+			padding-right:20px;		*/
+		}
+		
+		/* this is the parent menu */
+		#nav li a {
+			display:block; 
+			padding:8px 5px 5px 0px; 
+			
+		}
+
+		#nav li a:hover {
+			color:#56a1d5; /*blue*/
+		}
+	
+		/* you can make a different style for default selected value */
+		#nav a.selected {
+			color:#f00;
+		}
+	
+		/* submenu, it's hidden by default */
+		#nav ul {
+			position:absolute; 
+			left:0; 
+			display:none; 
+			margin:0 0 0 -1px; 
+			padding:0; 
+			list-style:none;
+			padding-left:0px;
+			text-align:left;
+		}
+		
+		#nav ul li {
+			width:110px; 
+			float:left; 
+			border-top:1px solid #8d8d8f;
+			background-color:red;
+			
+		}
+		
+		#menu3 li.itemlist
+		{
+            width:200px; 
+            background-color:#fff;
+		}		
+		
+		/* display block will make the link fill the whole area of LI */
+		#nav ul li a {
+			display:block;  
+			padding:3px 3px 4px 3px;
+			color:#b0b1b5;
+			padding-top:0px;
+		}
+		
+		#nav ul li a:hover {
+			text-decoration:none;	
+			color:#8d8d8f;
+		}
+
+
+		/* fix ie6 small issue */
+		/* we should always avoid using hack like this */
+		/* should put it into separate file : ) */
+		*html #nav ul {
+			margin:0 0 0 -2px;
+		}

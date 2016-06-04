@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MenuControl>
+
+  <Parent href="register.aspx" text="" id="0" free="1" show="n" tab="0"></Parent>
+  <Parent href="register_staff.aspx" text="" id="0" free="1" show="n" tab="0"></Parent>
+
+  <Parent href="default.aspx" text="หน้าหลัก" id="0" free="1" show="y" tab="0"></Parent>
+
+  <Parent href="#" text="โครงการที่ยังไม่สมบูรณ์" id="1" tab="1" free="0" show="y">
+    <subMenu href="projects_incomplete_real.aspx" text="โครงการบันทึกการวิเคราะห์" free="0" show="y"></subMenu>
+    <subMenu href="projects_incomplete_sim.aspx" text="โครงการจำลองการกรอกข้อมูล" free="0" show="y"></subMenu>
+    <subMenu href="question_set_a.aspx" text="โครงการจำลองการกรอกข้อมูล" free="0" show="n"></subMenu>
+    <subMenu href="question_set_b.aspx" text="โครงการจำลองการกรอกข้อมูล" free="0" show="n"></subMenu>
+    <subMenu href="question_set_c.aspx" text="โครงการจำลองการกรอกข้อมูล" free="0" show="n"></subMenu>
+    <subMenu href="project_report.aspx" text="รายงาน" free="0" show="n"></subMenu>
+    <subMenu href="factor_risk.aspx" text="ค่าความเสี่ยง" free="0" show="n"></subMenu>
+  </Parent>
+
+  <Parent href="#" text="โครงการทั้งหมด" id="1" tab="2" free="0" show="y">
+    <subMenu href="projects_real_completed_not_submitted.aspx" text="โครงการที่ยังไม่ส่งผลการวิเคราะห์" free="0" show="y"></subMenu>
+    <subMenu href="projects_completed_submitted.aspx" text="โครงการที่ส่งผลการวิเคราะห์" free="0" show="y"></subMenu>
+    <subMenu href="projects_completed_not_require_approval.aspx" text="โครงการที่ไม่อยู่ในข่ายที่ต้องวิเคราะห์ความเสี่ยงฯ" free="0" show="y"></subMenu>
+    <subMenu href="projects_sim_completed_not_submitted.aspx" text="โครงการที่จำลองการกรอกข้อมูล" free="0" show="y"></subMenu>
+  </Parent>
+
+  <Parent href="project_for_budgetor.aspx?status=0" tab="1" text="แสดงความคิดเห็นเพิ่มเติม" id="2" free="0" show="y"></Parent>
+  <Parent href="project_for_budgetor.aspx?status=1" tab="2" text="บันทึกผลการพิจารณาจากรัฐสภา" id="2" free="0" show="y"></Parent>
+  <Parent href="project_for_budgetor.aspx?status=2" tab="3" text="โครงการที่ผ่านกระบวนการพิจารณา" id="2" free="0" show="y"></Parent>
+  <Parent href="register_staff.aspx" text="แก้ไขข้อมูลส่วนตัว" tab="4" id="2" free="0" show="y"></Parent>
+
+  <Parent href="project_for_budgetor.aspx?status=2" tab="1" text="โครงการที่ผ่านการพิจารณาจากรัฐสภา" id="3" free="0" show="y"></Parent>
+  <Parent href="project_for_budgetor.aspx?status=1" tab="2" text="โครงการที่ผ่านการแสดงความคิดเห็นแล้ว" id="3" free="0" show="y"></Parent>
+  <Parent href="view_project.aspx" tab="3" text="รายงานภาพรวมทั่วประเทศ" id="3" free="0" show="y">
+    <subMenu href="#" text="รายงานภาพรวมแยกตามลักษณะโครงการ" free="0" show="y"></subMenu>
+    <subMenu href="#" text="รายงานภาพรวมตามประเภทโครงการ" free="0" show="y"></subMenu>
+    <subMenu href="#" text="รายงานภาพรวมแยกตามผลการวิเคราะห์ความเสี่ยง" free="0" show="y"></subMenu>
+    <subMenu href="#" text="รายงานภาพรวมแยกตามยุุทธศาสตร์จัดสรร" free="0" show="y"></subMenu>
+  </Parent>
+
+  <Parent href="#" text="รายงาน (Super Admin)" id="4" tab="1" free="0" show="y">
+    <subMenu href="project_submitted_list.aspx" text="โครงการที่ผ่านการวิเคราะห์ความเสี่ยงฯ" free="0" show="y"></subMenu>
+    <subMenu href="project_not_submitted_list.aspx" text="โครงการที่ไม่อยู่ในข่ายที่ต้องวิเคราะห์ความเสี่ยงฯ" free="0" show="y"></subMenu>
+  </Parent>
+  
+  <Parent href="announce.aspx" text="ผู้ดูแลระบบ (Super Admin)" id="4" tab="2" free="0" show="y">
+    <subMenu href="announce.aspx" text="ข่าวประกาศ" free="0" show="y"></subMenu>
+    <subMenu href="manage_user.aspx" text="ดูแลและกำหนดสิทธิการเข้าใช้งานในระบบ" free="0" show="y"></subMenu>
+    <subMenu href="yutasad.aspx" text="จัดการเพิ่มเติมและแก้ไขข้อมูลเกี่ยวกับยุทธศาสตร์" free="0" show="y"></subMenu>
+    <subMenu href="tammapiban.aspx" text="จัดการเพิ่มเติมและแก้ไขข้อมูลธรรมาภิบาล" free="0" show="y"></subMenu>
+    <subMenu href="tammapiban.aspx" text="จัดการเพิ่มเติมและแก้ไขข้อมูลธรรมาภิบาล" free="0" show="y"></subMenu>
+    <subMenu href="ministry_dept_info_management.aspx" text="จัดการข้อมูลกระทรวงและหน่วยงาน" free="0" show="y"></subMenu>
+  </Parent>
+
+  <Parent href="contacts.aspx" text="ติดต่อเรา" id="00" free="1" show="y" tab="00">  </Parent>
+
+</MenuControl>
