@@ -1,0 +1,75 @@
+﻿@model Budget.Project
+
+@{
+    ViewBag.Title = "คำถาม ชุด ค: การจัดลำดับและจัดสรรงบประมาณโครงการ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (@ViewBag.ErrorMessage != null)
+{
+    @ViewBag.ErrorMessage
+}
+else
+{
+
+    @Html.HiddenFor(x => x.ID)
+
+    if (@Model.Status == Budget.Status.SaveAnswerSetA2 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerA)
+    {
+        <div id="questionB1">
+            @Html.Partial("Questions/_QuestionB1", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetB1 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB)
+    {
+        <div id="questionB2">
+            @Html.Partial("Questions/_QuestionB2", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetB2 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB)
+    {
+        <div id="questionB3">
+            @Html.Partial("Questions/_QuestionB3", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetB3 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB)
+    {
+        <div id="questionB4">
+            @Html.Partial("Questions/_QuestionB4", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetB4 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB)
+    {
+        <div id="questionB5">
+            @Html.Partial("Questions/_QuestionB5", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetB5 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB)
+    {
+        <div id="questionB6">
+            @Html.Partial("Questions/_QuestionB6", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetB6 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB)
+    {
+        <div id="questionBSuccess">
+            เสร็จสิ้นการประเมินชุด ข: การวิเคราะห์และวางแผนรายละเอียดโครงการ โปรดดำเนินการต่อ
+            <div>
+                <input type="submit" value="ดำเนินงานต่อไป" id="btnSaveQuestionSetBContinun" class="btn btn-default">
+            </div>
+        </div>
+    }
+
+}
+
+<script type="text/javascript">
+
+    $(function () {
+
+        $("#btnSaveQuestionSetBContinun").click(function (e) {
+            e.preventDefault();
+
+            window.location.href = '@Url.Action("QuestionChoice", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+        });
+    });
+</script>

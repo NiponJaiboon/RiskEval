@@ -1,0 +1,130 @@
+﻿using System;
+using System.Collections.Generic;
+using DevExpress.Web.ASPxEditors;
+using imSabaya.MutualFundSystem;
+using iSabaya;
+using WebHelper;
+
+public partial class ctrls_MFAccountBankAccount : iSabayaControl
+{
+    private String cbxName = null;
+
+    public String CbxName
+    {
+        get { return this.cbxName; }
+        set { this.cbxName = value; }
+    }
+
+    public String CbName
+    {
+        get { return cbBankAccount.ClientInstanceName; }
+        set { cbBankAccount.ClientInstanceName = value; }
+    }
+
+    private bool isRequireField = true;
+
+    public bool IsRequireField
+    {
+        get { return isRequireField; }
+        set { isRequireField = value; }
+    }
+
+    private String validationGroup = "";
+
+    public String ValidationGroup
+    {
+        get { return this.validationGroup; }
+        set { this.validationGroup = value; }
+    }
+
+    private String cbClientName = null;
+
+    public String CbClientName
+    {
+        get { return this.cbClientName; }
+        set { this.cbClientName = value; }
+    }
+
+    protected override void OnInit(EventArgs e)
+    {
+        base.OnInit(e);
+        if (!IsPostBack)
+        {
+            InitializeControls();
+        }
+    }
+
+    public BankAccount BankAccount
+    {
+        get
+        {
+            int bankID = Convert.ToInt32(cbxBankAccount.SelectedItem.Value);
+            return BankAccount.Find(iSabayaContext, bankID);
+        }
+        set
+        {
+            if (value != null)
+            {
+                ListEditItem item = cbxBankAccount.Items.FindByValue(value);
+                if (item != null)
+                    cbxBankAccount.SelectedItem = item;
+            }
+            else
+                cbxBankAccount.SelectedIndex = -1;
+        }
+    }
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            Session[this.ClientID + "FundBankAccountLists"] = null;
+            cbxBankAccount.ClientInstanceName = this.ClientID + cbxBankAccount.ClientID;
+            cbxBankAccount.SetValidation(ValidationGroup, this.isRequireField);
+            cbxBankAccount.SelectedIndex = 0;
+
+            #region java script
+
+            cbBankAccount.ClientSideEvents.CallbackComplete = @"function(s,e){
+                " + cbxBankAccount.ClientInstanceName + @".PerformCallback();
+            }";
+
+            #endregion java script
+        }
+        if (Page.IsCallback)
+            this.BindCombo();
+    }
+
+    private void InitializeControls()
+    {
+        if (CbName == null)
+            CbName = this.ClientID + cbBankAccount.ID;
+    }
+
+    private void BindCombo()
+    {
+        cbxBankAccount.DataBind();
+    }
+
+    protected void cbxBankAccount_Callback(object sender, DevExpress.Web.ASPxClasses.CallbackEventArgsBase e)
+    {
+        cbxBankAccount.DataBind();
+    }
+
+    protected void cbxBankAccount_DataBinding(object sender, EventArgs e)
+    {
+        if (Session[this.ClientID + "FundBankAccountLists"] != null)
+            cbxBankAccount.DataSource = (IList<PartyBankAccount>)Session[this.ClientID + "FundBankAccountLists"];
+    }
+
+    protected void cbBankAccount_Callback(object sender, DevExpress.Web.ASPxCallback.CallbackEventArgs e)
+    {
+        Int32 accountID = Convert.ToInt32(e.Parameter);
+        MFAccount m = MFAccount.Find(iSabayaContext, accountID);
+        IList<PartyBankAccount> pba = m.AssociatedBankAccounts;
+        if (pba == null)
+            throw new ApplicationException("ไม่พบบัญชีธนาคาร");
+        Session[this.ClientID + "FundBankAccountLists"] = pba;
+        this.BindCombo();
+    }
+}

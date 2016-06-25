@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "โครงการที่เข้าข่ายการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script type="text/javascript">
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $body = $("body");
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    $(function () {
+
+        var selectedId = $("select option:selected").val();
+        if (selectedId != "") {
+            $("#project-submitted-table").show();
+            getProjects();
+        }
+        else {
+            $("#project-submitted-table").hide();
+        }
+
+        $("#ddlDepartment").change(function (e) {
+
+            getProjects();
+        });
+    });
+
+    function getProjects() {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: appName + "/Evaluation/GetProjectByDepartment/",
+            data: { departmentId: $("#ddlDepartment option:selected").val(), status: "submitted" },
+            dataType: "json",
+            success: function (data) {
+                if (data.Success) {
+                    //debugger
+                    //clear datatable
+                    $('#project-submitted-table').dataTable({
+                        "bDestroy": true
+                    }).fnDestroy();
+
+
+                    $('#project-submitted-table').DataTable({
+                        "dom": '<"toolbar">frtip',
+                        searching: false,
+                        ordering: true,
+                        paging: true,
+                        //scrollY: 400,
+                        //"bProcessing": true,
+                        //"bDeferRender": true,
+                        data: data.model,
+                        columns: [
+                            { data: 'NameLink' },
+                            { data: 'BudgetType' },
+                            { data: 'Budget', sClass: "right" },
+                            { data: 'LastUpdate' },
+                            //{ data: 'RiskResult', sClass: "center risk" },
+                            { data: 'RiskBox' , sClass: "risk" },
+                        ]
+                    });
+
+                    if (data.model.length <= 0) {
+                        $("#table_id_paginate").hide();
+                    } else {
+                        $("#project-submitted-table").show();
+                    }
+
+                } else {
+                    $("#message-fail").text(data.Message);
+                    $('#modal-fail').modal('show');
+                }
+            }
+        });
+    }
+
+</script>
+
+<div>
+    <div class="modal"></div>
+    <fieldset class="fieldset">
+        <legend class="legend">@Html.Label("", "ค้นหาโครงการ")</legend>
+        <table>
+            <tr>
+                <td>@Html.Label("", "เลือกหน่วยงาน")</td>
+                <td>@Html.DropDownList("ddlDepartment", null, "[กรุณาเลือกหน่วย]", new { @class = "form-control" })</td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+
+<div id="report-table">
+    @Html.Hidden("pageHiddle")
+</div>
+
+<div style="padding-top:5px">
+    <table id="project-submitted-table" class="table table-bordered table-striped table-hover" cellpadding="0" cellspacing="0" data-order='[[ 1, "asc" ]]' data-page-length='10'>
+        <thead>
+            <tr>
+                <th style="width:360px;vertical-align:middle">ชื่อโครงการ</th>
+                <th style="width:114px;vertical-align:middle">ลักษณะโครงการ</th>
+                <th style="width:129px;vertical-align:middle">งบประมาณ (บาท)</th>
+                <th style="width:158px;vertical-align:middle">วันที่แก้ไขครั้งสุดท้าย</th>
+                <th style="width:205px;vertical-align:middle">ผลการการวิเคราะห์ความเสี่ยง</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+

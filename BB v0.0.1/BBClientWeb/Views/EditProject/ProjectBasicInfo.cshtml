@@ -1,0 +1,188 @@
+﻿@model Budget.Project
+
+@{
+    ViewBag.Title = "กรอกข้อมูลพื้นฐานโครงการ (แก้ไข)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (@ViewBag.ErrorMessage != null)
+{
+    @ViewBag.ErrorMessage
+}
+else
+{
+    <div>
+
+        @Html.Partial("_ProjectDetail", @Model)
+
+        @Html.Label("กรอกข้อมูลพื้นฐานโครงการ", new { @class = "field-header-project" })
+
+        @Html.HiddenFor(x => x.ID)
+
+        <table style="width:100%;margin:10px">
+            <tbody>
+                <tr>
+                    <td class="bold1">1. ความเป็นมาของโครงการ</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.TextAreaFor(model => model.OriginOfProject, new { id = "OriginOfProject", @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                        <span id="originOfProjectStar" class="ErrorDokJan" style="display:none; color:red">*</span>
+                        <span id="maximum_length_Background" class="question-error" style="display:none; color:red">ห้ามเกิน 4000 ตัวอักษร</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold1">2. ความสำคัญ / เร่งด่วนของโครงการ</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.TextAreaFor(model => model.UrgencyOfProject, new { id = "UrgencyOfProject", @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                        <span id="urgencyOfProjectStar" class="ErrorDokJan" style="display:none; color:red">*</span>
+                        <span id="maximum_length_Urgency" class="question-error" style="display:none; color:red">ห้ามเกิน 4000 ตัวอักษร</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="ContentPlaceHolder1_sum1">
+            <ul>
+                <li id="originOfProjectMessage" style="display:none; color:red">กรุณากรอกความเป็นมาของโครงการ</li>
+                <li id="urgencyOfProjectMessage" style="display:none; color:red">กรุณากรอกความสำคัญ/เร่งด่วนของโครงการ</li>
+
+                <li id="originOfProjectMessageLenght" style="display:none; color:red">กรุณากรอกความเป็นมาของโครงการ ไม่เกิน 4000 ตัวอักษร</li>
+                <li id="urgencyOfProjectMessageLenght" style="display:none; color:red">กรุณากรอกความสำคัญ/เร่งด่วนของโครงการ ไม่เกิน 4000 ตัวอักษร</li>
+            </ul>
+        </div>
+        <div>
+            <input type="submit" value="บันทึกข้อมูลและดำเนินการต่อไป" id="btSaveBasicInfo" class="btn btn-default">
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+
+    var maxLength = 4000;
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    var isorigin = false, isurgency = false;
+
+    $(function () {
+
+        $("#OriginOfProject").change(function (e) {
+            e.preventDefault();
+
+            var originOfProject = $(this).val();
+            if (originOfProject == "") {
+                $("#originOfProjectStar").show();
+                $("#originOfProjectMessage").text("กรุณากรอกความเป็นมาของโครงการ").show();
+            } else {
+                if (originOfProject.length > maxLength) {
+                    $("#originOfProjectStar").show();
+                    $("#originOfProjectMessage").text("กรุณากรอกความเป็นมาของโครงการ ไม่เกิน 4000 ตัวอักษร").show();
+                } else {
+                    isorigin = true;
+                    $("#originOfProjectStar").hide();
+                    $("#originOfProjectMessage").hide();
+                }
+            }
+        });
+
+        $("#UrgencyOfProject").change(function (e) {
+            e.preventDefault();
+
+            var urgencyOfProject = $(this).val();
+            if (urgencyOfProject == "") {
+                $("#urgencyOfProjectStar").show();
+                $("#urgencyOfProjectMessage").text("กรุณากรอกความสำคัญ/เร่งด่วนของโครงการ").show();
+            } else {
+                if (urgencyOfProject.length > maxLength) {
+                    $("#urgencyOfProjectStar").show();
+                    $("#urgencyOfProjectMessage").text("กรุณากรอกความสำคัญ/เร่งด่วนของโครงการ ไม่เกิน 4000 ตัวอักษร").show();
+                } else {
+                    isurgency = true;
+                    $("#urgencyOfProjectStar").hide();
+                    $("#urgencyOfProjectMessage").hide();
+                }
+            }
+        });
+
+        $("#btSaveBasicInfo").click(function (e) {
+            e.preventDefault();
+
+            var originOfProject = $("#OriginOfProject").val();
+            var urgencyOfProject = $("#UrgencyOfProject").val();
+
+            //ความเป็นมาของโครงการ
+            if (originOfProject == "") {
+                $("#originOfProjectStar").show();
+                $("#originOfProjectMessage").text("กรุณากรอกความเป็นมาของโครงการ").show();
+            } else {
+                if (originOfProject.length > maxLength) {
+                    $("#originOfProjectStar").show();
+                    $("#originOfProjectMessage").text("กรุณากรอกความเป็นมาของโครงการ ไม่เกิน 4000 ตัวอักษร").show();
+                } else {
+                    isorigin = true;
+                    $("#originOfProjectStar").hide();
+                    $("#originOfProjectMessage").hide();
+                }
+            }
+
+            //ความสำคัญ / เร่งด่วนของโครงการ
+            if (urgencyOfProject == "") {
+                $("#urgencyOfProjectStar").show();
+                $("#urgencyOfProjectMessage").text("กรุณากรอกความสำคัญ/เร่งด่วนของโครงการ").show();
+            } else {
+                if (originOfProject.length > maxLength) {
+                    $("#urgencyOfProjectStar").show();
+                    $("#urgencyOfProjectMessage").text("กรุณากรอกความสำคัญ/เร่งด่วนของโครงการ ไม่เกิน 4000 ตัวอักษร").show();
+                } else {
+                    isurgency = true;
+                    $("#urgencyOfProjectStar").hide();
+                    $("#urgencyOfProjectMessage").hide();
+                }
+            }
+
+            if (isorigin && isurgency) {
+
+                if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: appName + "/EditProject/UpdateBasicInfo/",
+                        data: JSON.stringify({
+                            pId: $("#ID").val(),
+                            original: originOfProject,
+                            urgency: urgencyOfProject,
+                        }),
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.Success) {
+                                $("#message-success").text(data.Message);
+                                $('#modal-success').modal('show');
+
+                                $("#btnOkSuccess").click(function (e) {
+
+                                    e.preventDefault();
+                                    window.location.href = '@Url.Action("ProjectComplete", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+                                });
+                            } else {
+                                $("#message-fail").text(data.Message);
+                                $('#modal-fail').modal('show');
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+    });
+
+</script>

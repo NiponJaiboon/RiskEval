@@ -1,0 +1,160 @@
+﻿@model Budget.Project
+
+<div class="content-box">
+    <div>
+        <div class="box-question">
+            <div style="text-align:left; margin-top:10px;">
+                <div style="color:Red; font-size:20px;" class="QL1">ประเด็นที่ 3 พิจารณาขอบเขตของโครงการ</div>
+                <div style="margin-left:15px; margin-top:15px;">
+                    คำถามที่ 2 มีการนำข้อมูลจากกลุ่มเป้าหมายและกลุ่มผู้มีส่วนได้ส่วนเสียมากำหนดขอบเขตของโครงการหรือไม่
+                    <span id="questionSetB2Star" class="ErrorDokJan" style="display:none; color:red">*</span><br>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><span>@Html.RadioButton("questionSetB2", "true")<label class="field-content">มี</label></span></td>
+                                <td><span>@Html.RadioButton("questionSetB2", "false")<label class="field-content">ไม่มี</label></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-left:10px">
+                        ถ้าตอบว่า "มี" โปรดให้รายละเอียดเพิ่มเติมต่อไปนี้
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">2.1 สรุปผลการประชุมชี้แจงผลผลิต/ผลลัพธ์/ผลกระทบกับผู้เกี่ยวข้องเพื่อยืนยันการยอมรับของกลุ่มผู้มีส่วนได้ส่วนเสีย และระบุเอกสารที่เกี่ยวข้อง</span><br>
+                            @Html.TextArea("answerSetB21", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetB21Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetB21Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 2.1 เกิน 1500 ตัวอักษร</div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin:5px 5px 5px 5px; text-align:center;">
+                <input type="submit" value="บันทึกข้อมูลและดำเนินงานต่อไป" id="btnSaveQuestionSetB2" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var maxLength = 5;
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    var b2 = undefined;
+    var b21 = false;
+
+    function validateInput() {
+        //2.1 สรุปผลการประชุมชี้แจงผลผลิต/ผลลัพธ์/ผลกระทบกับผู้เกี่ยวข้องเพื่อยืนยันการยอมรับของกลุ่มผู้มีส่วนได้ส่วนเสีย และระบุเอกสารที่เกี่ยวข้อง
+        if ($("#answerSetB21").val() == "") {
+            $("#answerSetB21Star").show();
+        } else {
+            $("#answerSetB21Star").hide();
+            if ($("#answerSetB21").val().length > maxLength)
+                $("#answerSetB21Message").show();
+            else
+                $("#answerSetB21Message").hide();
+        }
+    }
+
+    function save() {
+        if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: appName + "/Government/SaveAnswerB2/",
+                data: JSON.stringify({
+                    pId: $("#ID").val(),
+                    choice: $("input[name=questionSetB2]:checked").val(),
+                    answer1: $("#answerSetB21").val(),
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        $("#message-success").text(data.Message);
+                        $('#modal-success').modal('show');
+
+                        $("#btnOkSuccess").click(function (e) {
+
+                            e.preventDefault();
+                            window.location.href = '@Url.Action("QuestionB", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+                        });
+                    } else {
+                        $("#message-fail").text(data.Message);
+                        $('#modal-fail').modal('show');
+                    }
+                }
+            });
+        }
+    }
+
+    $(function () {
+
+        $("input[name=questionSetB2]").change(function (e) {
+            e.preventDefault();
+
+            var qSetB2 = $("input[name=questionSetB2]:checked").val();
+            if (qSetB2 != undefined) {
+                $("#questionSetB2Star").hide();
+                if (qSetB2 == "true") {
+                    b2 = true;
+                    $("#answerSetB21").removeAttr('disabled');
+                } else {
+                    b2 = false;
+                    $("#answerSetB21Star").hide();
+                    $("#answerSetB21Message").hide();
+                    
+                    $("#answerSetB21").val("").attr('disabled', 'disabled');
+                }
+            } else {
+                $("#questionSetB2Star").show();
+            }
+        });
+
+        $("#answerSetB21").change(function (e) {
+            e.preventDefault();
+
+            var answerSetB21 = $("#answerSetB21").val();
+            if (answerSetB21.length > 0) {
+                $("#answerSetB21Star").hide();
+                if (answerSetB21.length > maxLength)
+                    $("#answerSetB21Message").show();
+                else {
+                    b21 = true;
+                    $("#answerSetB21Message").hide();
+                }
+            } else {
+                $("#answerSetB21Star").show();
+            }
+        });
+
+        $("#btnSaveQuestionSetB2").click(function (e) {
+            e.preventDefault();
+
+            //ตรวจสอบ ตำตอบ ข้อ 2.1 ไม่มีค่าว่างและไม่เกิน 1500 ตัวอักษร
+            if (b2) {
+                validateInput();
+                if (b21) {
+                    save();
+                }
+            } else if (b2 == undefined) {
+                $("#questionSetB2Star").show();
+                validateInput();
+            }
+            else {
+                b2 = false;
+                save();
+            }
+
+        });
+
+    });
+
+</script>

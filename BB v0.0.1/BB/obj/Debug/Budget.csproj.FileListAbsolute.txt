@@ -1,0 +1,12 @@
+D:\TFS_Kunakorn\BB\BB v0.0.1\BB\bin\Debug\Budget.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\BB\bin\Debug\Budget.pdb
+D:\TFS_Kunakorn\BB\BB v0.0.1\BB\bin\Debug\iSabaya.Config.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\BB\bin\Debug\iSabaya.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\BB\bin\Debug\iSabaya.Questionnaire.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\BB\bin\Debug\NHibernate.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\BB\bin\Debug\iSabaya.Config.pdb
+D:\TFS_Kunakorn\BB\BB v0.0.1\BB\bin\Debug\iSabaya.Questionnaire.pdb
+D:\TFS_Kunakorn\BB\BB v0.0.1\BB\bin\Debug\iSabaya.pdb
+D:\TFS_Kunakorn\BB\BB v0.0.1\BB\obj\Debug\Budget.csprojResolveAssemblyReference.cache
+D:\TFS_Kunakorn\BB\BB v0.0.1\BB\obj\Debug\Budget.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\BB\obj\Debug\Budget.pdb

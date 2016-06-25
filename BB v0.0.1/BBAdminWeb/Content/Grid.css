@@ -1,0 +1,89 @@
+﻿a:hover.event {
+    color: #4abb05;
+}
+
+a::selection.event {
+    color: #808080;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.table {
+    width: 100% !important;
+}
+
+    .table tr:hover td {
+        background: #9b9b9b !important;
+    }
+
+    .table tr td {
+        border: solid 1px black !important;
+    }
+
+    .table th {
+        text-align: center !important;
+        vertical-align: middle !important;
+        font-size: 20px !important;
+        font-weight: bold !important;
+        background-color: #808080 !important;
+        border: solid 1px black !important;
+        color: white !important;
+        height: 35px !important;
+    }
+
+        .table th a {
+            color: white;
+            text-decoration: underline;
+        }
+
+            .table th a:hover {
+                color: white;
+                text-decoration: none;
+            }
+
+        .table th img {
+            background: url(../Images/icon/sort.png);
+        }
+
+    .table td {
+        padding: 0px 10px;
+        vertical-align: top;
+    }
+
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right !important;
+}
+
+.pager {
+    text-align: center;
+    border-top: 1px solid silver;
+    padding: .5em 0 0 0;
+    margin-top: 1em;
+}
+
+    .pager A {
+        font-size: 1.1em;
+        color: #666;
+        text-decoration: none;
+        padding: 0 .4em 0 .4em;
+    }
+
+        .pager A:hover {
+            background-color: Silver;
+        }
+
+        .pager A.selected {
+            background-color: #353535;
+            color: White;
+        }

@@ -1,0 +1,160 @@
+﻿@model Budget.Project
+
+@{
+    ViewBag.Title = "คำถามปัจจัยภายในภายนอก";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .tbl_inside_panel {
+        width: 100%;
+    }
+
+        .tbl_inside_panel .fm {
+            color: Green;
+        }
+
+            .tbl_inside_panel .fm .td_text {
+                font-size: 25px;
+            }
+
+            .tbl_inside_panel .fm .td_oppo {
+                font-size: 25px;
+            }
+
+            .tbl_inside_panel .fm .td_effect {
+                font-size: 25px;
+            }
+
+            .tbl_inside_panel .fm .td_impact {
+                font-size: 25px;
+            }
+
+        .tbl_inside_panel .fs {
+            color: Olive;
+        }
+
+            .tbl_inside_panel .fs .td_text {
+                padding-left: 20px;
+                font-size: 18px;
+            }
+
+            .tbl_inside_panel .fs .td_oppo {
+                margin-left: 200px;
+            }
+
+            .tbl_inside_panel .fs .td_effect {
+            }
+
+            .tbl_inside_panel .fs .td_impact {
+            }
+
+    .desc_head {
+        color: green;
+        font-size: 25px;
+    }
+
+    .desc_text {
+    }
+
+        .desc_text .desc_more_text {
+            width: 98%;
+            height: 50px;
+            margin-top: 0px;
+        }
+
+    .save {
+        text-align: center;
+        padding: 5px;
+    }
+
+        .save .confirm_save_button {
+            width: 250px;
+            padding: 3px;
+            margin: 3px;
+        }
+
+    .next {
+        text-align: center;
+    }
+
+        .next .btn_next {
+            width: 250px;
+            padding: 3px;
+            margin: 3px;
+        }
+
+    .td_choice {
+        width: 130px;
+        text-align: center;
+    }
+
+    .td_header {
+        padding-left: 8px;
+        text-align: left;
+    }
+</style>
+
+
+@if (@ViewBag.ErrorMessage != null)
+{
+    @ViewBag.ErrorMessage
+}
+else
+{
+
+    @Html.HiddenFor(x => x.ID)
+
+    if ((@Model.ProjectType == Budget.ProjectType.Continun && @Model.StatusCategory >= Budget.StatusCategory.IncompleteAnswerE
+        && @Model.StatusCategory < Budget.StatusCategory.IncompleteAnswerR)
+        || (@Model.ProjectType == Budget.ProjectType.New && @Model.StatusCategory >= Budget.StatusCategory.IncompleteAnswerD
+        && @Model.StatusCategory < Budget.StatusCategory.IncompleteAnswerR))
+    {
+        <div id="questionRiskAnalysis1">
+            @Html.Partial("Questions/_QuestionRisk1", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetR1 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerR)
+    {
+        <div id="questionRiskAnalysis2">
+            @Html.Partial("Questions/_QuestionRisk2", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetR2 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerR)
+    {
+        <div id="questionRiskAnalysis3">
+            @Html.Partial("Questions/_QuestionRisk3", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetR3 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerR)
+    {
+        <div id="questionRiskAnalysis4">
+            @Html.Partial("Questions/_QuestionRisk4", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetR4 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerR)
+    {
+        <div id="questionRiskAnalysis5">
+            @Html.Partial("Questions/_QuestionRisk5", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetR5 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerR)
+    {
+        <div id="questionRiskAnalysis6">
+            @Html.Partial("Questions/_QuestionRisk6", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetE1 && @Model.StatusCategory == Budget.StatusCategory.CompleteUnsign)
+    {
+        <div id="questionBSuccess">
+            เสร็จสิ้นการประเมินชุด จ: ขั้นตอนการริเริ่มแผนงาน/โครงการและวิเคราะห์เบื้องต้น โปรดดำเนินการต่อ
+            <div>
+                <input type="submit" value="ดำเนินงานต่อไป" id="btnSaveQuestionSetEContinun" class="btn btn-default">
+            </div>
+        </div>
+    }
+
+}
+
+
+

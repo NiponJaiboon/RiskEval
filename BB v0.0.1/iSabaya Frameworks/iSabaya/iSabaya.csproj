@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D168C3F8-E236-4BBE-8DE4-86B05B12594F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>iSabaya</RootNamespace>
+    <AssemblyName>iSabaya</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="MonthlyResetSequenceNoGenerator.cs" />
+    <Compile Include="PeriodicallyResetSequenceNoGenerator.cs" />
+    <Compile Include="PersistentTemporallyNonoverlappingEntity.cs" />
+    <Compile Include="Financial\Bank.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="Collections\CategorizedTemporalList.cs" />
+    <Compile Include="Collections\PersistentConstrainedList.cs" />
+    <Compile Include="Collections\ICategorizedTemporalList.cs" />
+    <Compile Include="Collections\IConstrainedList.cs" />
+    <Compile Include="Collections\ITemporalList.cs" />
+    <Compile Include="Collections\ConstrainedList.cs" />
+    <Compile Include="Collections\PersistentCategorizedTemporalList.cs" />
+    <Compile Include="Collections\PersistentListType.cs" />
+    <Compile Include="Collections\PersistentTemporalList.cs" />
+    <Compile Include="CommitteeMember.cs" />
+    <Compile Include="Configuration\Configuration.cs" />
+    <Compile Include="AttributeValueTypes.cs" />
+    <Compile Include="Configuration\PasswordConfig.cs" />
+    <Compile Include="Configuration\SecurityConfig.cs" />
+    <Compile Include="IPersistentEntity.cs" />
+    <Compile Include="IPersistentTemporalEntity.cs" />
+    <Compile Include="Crypto.cs" />
+    <Compile Include="PersistentTemporalTitledEntity.cs" />
+    <Compile Include="Financial\BankAccountBase.cs" />
+    <Compile Include="Financial\ChequeBookDeliveryMethod.cs" />
+    <Compile Include="Financial\ChequeState.cs" />
+    <Compile Include="Financial\ChequeStateCategory.cs" />
+    <Compile Include="Financial\DividendPayment.cs" />
+    <Compile Include="Financial\FixedDeposit.cs" />
+    <Compile Include="Financial\AccountStatement.cs" />
+    <Compile Include="Party\PartyContact.cs" />
+    <Compile Include="Configuration\PersonConfig.cs" />
+    <Compile Include="Configuration\OrganizationConfig.cs" />
+    <Compile Include="ProvidentFundConfiguration.cs" />
+    <Compile Include="MutualFundConfiguration.cs" />
+    <Compile Include="Financial\BankAccount.cs" />
+    <Compile Include="Financial\BankAccountBalance.cs" />
+    <Compile Include="Financial\BankAccountOwner.cs" />
+    <Compile Include="Financial\LanguageSpecific.cs" />
+    <Compile Include="Organization\OrganizationRating.cs" />
+    <Compile Include="Party\PartyRelation.cs" />
+    <Compile Include="PersistentEntity.cs" />
+    <Compile Include="PersistentTemporalEntity.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Incognito.cs" />
+    <Compile Include="Party\CategorizeablePartyProperty.cs" />
+    <Compile Include="Party\PartyCreditRating.cs" />
+    <Compile Include="Party\PartyName.cs" />
+    <Compile Include="Party\PartyTemporalPropertyBase.cs" />
+    <Compile Include="Party\PartyPropertyValueContainer.cs" />
+    <Compile Include="Party\PartyPropertyTemplate.cs" />
+    <Compile Include="Party\PartyAttribute.cs" />
+    <Compile Include="Party\PartyExpense.cs" />
+    <Compile Include="Financial\TaxRate.cs" />
+    <Compile Include="Organization\OrgOrgRelation.cs" />
+    <Compile Include="PropertyTemplate\IProperty.cs" />
+    <Compile Include="PropertyTemplate\PropertyValueType.cs" />
+    <Compile Include="PropertyTemplate\PropertyValueGroupContainer.cs" />
+    <Compile Include="Party\PartyMoneyRateSchedule.cs" />
+    <Compile Include="Rate Schedule\BracketedRate.cs" />
+    <Compile Include="Rate Schedule\CompositeMoneyBuilder.cs" />
+    <Compile Include="Rate Schedule\IPersistentRate.cs" />
+    <Compile Include="Rate Schedule\MultiMoneyBracketMoneyPerItemRateSchedule.cs" />
+    <Compile Include="Rate Schedule\MoneyPerItemRate.cs" />
+    <Compile Include="Rate Schedule\Rounding.cs" />
+    <Compile Include="Rate Schedule\RateSchedule.cs" />
+    <Compile Include="Rate Schedule\MultiIntegerBracketMoneyPerItemRateSchedule.cs" />
+    <Compile Include="Rate Schedule\CompositeMoney.cs" />
+    <Compile Include="Rate Schedule\PercentageOfMoneyRate.cs" />
+    <Compile Include="Rate Schedule\MultiMoneyBracketPercentageOfMoneyRateSchedule.cs" />
+    <Compile Include="Rate Schedule\MultiDurationBracketPercentageSchedule.cs" />
+    <Compile Include="Financial\MoneyBuilder.cs" />
+    <Compile Include="Security\ActiveDirectoryUser.cs" />
+    <Compile Include="Security\ISessionContextFactory.cs" />
+    <Compile Include="Security\OneTimePassword.cs" />
+    <Compile Include="Security\FunctionMenu.cs" />
+    <Compile Include="Security\RoleFunction.cs" />
+    <Compile Include="Security\SelfAuthenticatedUser.cs" />
+    <Compile Include="Security\SystemFunction.cs" />
+    <Compile Include="Security\User.cs" />
+    <Compile Include="Security\iSystem.cs" />
+    <Compile Include="Security\UserAction.cs" />
+    <Compile Include="Security\UserGroup.cs" />
+    <Compile Include="Security\UserGroupUser.cs" />
+    <Compile Include="Security\UserOrgUnit.cs" />
+    <Compile Include="Security\UserPersonalization.cs" />
+    <Compile Include="Security\UserSession.cs" />
+    <Compile Include="Security\UserSessionLog.cs" />
+    <Compile Include="Time Schedule\RelativeTimeInterval.cs" />
+    <Compile Include="Time Schedule\SchedulePeriodic.cs" />
+    <Compile Include="Workflow\BankTransaction.cs" />
+    <Compile Include="Workflow\EntityState.cs" />
+    <Compile Include="Workflow\StatefulEntity.cs" />
+    <Compile Include="Workflow\StatefulEntityType.cs" />
+    <Compile Include="Workflow\StatefulTransaction.cs" />
+    <Compile Include="Workflow\StatefulTransactionType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Workflow\TransactionChildRelation.cs" />
+    <Compile Include="Workflow\TransactionPayment.cs" />
+    <Compile Include="Workflow\BankTransactionState.cs" />
+    <Compile Include="Workflow\TransactionRelation.cs" />
+    <Compile Include="Workflow\BankTransactionType.cs" />
+    <Compile Include="Time Schedule\ScheduleMonthlyRelativeToEOM.cs" />
+    <Compile Include="Dict.cs" />
+    <Compile Include="Context.cs" />
+    <Compile Include="Financial\BillPayment.cs" />
+    <Compile Include="Financial\ChequeFormat.cs" />
+    <Compile Include="Financial\ISimpleMath.cs" />
+    <Compile Include="Financial\ReceiptPayment.cs" />
+    <Compile Include="Party\PartyBankAccount.cs" />
+    <Compile Include="Financial\ReceiptItem.cs" />
+    <Compile Include="Financial\Receipt.cs" />
+    <Compile Include="ReportServiceBackground.cs" />
+    <Compile Include="ReportServiceParameters.cs" />
+    <Compile Include="Security\RoleAccessibility.cs" />
+    <Compile Include="Collections\TemporalList.cs" />
+    <Compile Include="Security\SystemUser.cs" />
+    <Compile Include="TimeDuration.cs" />
+    <Compile Include="Rate Schedule\MultiBracketedSchedule.cs" />
+    <Compile Include="Rate Schedule\SingleFixedRateSchedule.cs" />
+    <Compile Include="Rate Schedule\BracketedRateTemplate.cs" />
+    <Compile Include="CriteriaUtil.cs" />
+    <Compile Include="IRelatable.cs" />
+    <Compile Include="Financial\ChequeBatchItem.cs" />
+    <Compile Include="Financial\FundTransfer.cs" />
+    <Compile Include="ObjectCategory.cs" />
+    <Compile Include="Party\PartyAddress.cs" />
+    <Compile Include="Country.cs" />
+    <Compile Include="DotNetRule.cs" />
+    <Compile Include="EnumMLS.cs" />
+    <Compile Include="GeographicAddress.cs" />
+    <Compile Include="GeographicRegion.cs" />
+    <Compile Include="IDotNetRule.cs" />
+    <Compile Include="Party\Party.cs" />
+    <Compile Include="IsoScriptRule.cs" />
+    <Compile Include="Language.cs" />
+    <Compile Include="Financial\BankDeposit.cs" />
+    <Compile Include="Financial\Cash.cs" />
+    <Compile Include="Financial\Cheque.cs" />
+    <Compile Include="Financial\ChequeBatch.cs" />
+    <Compile Include="Financial\Currency.cs" />
+    <Compile Include="Financial\ExchangeRate.cs" />
+    <Compile Include="Financial\Money.cs" />
+    <Compile Include="Financial\Payment.cs" />
+    <Compile Include="NameAffix.cs" />
+    <Compile Include="Organization\Job.cs" />
+    <Compile Include="Organization\Organization.cs" />
+    <Compile Include="Organization\OrgBase.cs" />
+    <Compile Include="Organization\OrgName.cs" />
+    <Compile Include="Organization\OrgUnit.cs" />
+    <Compile Include="Organization\OrgUnitJob.cs" />
+    <Compile Include="Organization\OrgUnitPosition.cs" />
+    <Compile Include="Party\PartyIdentity.cs" />
+    <Compile Include="Organization\PersonClassification.cs" />
+    <Compile Include="Organization\PersonOrgRelation.cs" />
+    <Compile Include="Organization\Position.cs" />
+    <Compile Include="Organization\Promotion.cs" />
+    <Compile Include="ParameterList.cs" />
+    <Compile Include="Party\PartyCategory.cs" />
+    <Compile Include="Person.cs" />
+    <Compile Include="PersonName.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyTemplate\PropertyTemplateBase.cs" />
+    <Compile Include="PropertyTemplate\PropertyTemplateGroup.cs" />
+    <Compile Include="PropertyTemplate\PropertyTemplate.cs" />
+    <Compile Include="PropertyTemplate\PropertyValueContainerBase.cs" />
+    <Compile Include="PropertyTemplate\PropertyValueGroup.cs" />
+    <Compile Include="PropertyTemplate\PropertyValueContainer.cs" />
+    <Compile Include="PropertyTemplate\PropertyValue.cs" />
+    <Compile Include="Relation.cs" />
+    <Compile Include="Relationship.cs" />
+    <Compile Include="Time Schedule\RescheduleOption.cs" />
+    <Compile Include="Rule.cs" />
+    <Compile Include="RuleParameter.cs" />
+    <Compile Include="RuleResult.cs" />
+    <Compile Include="RunningNumber.cs" />
+    <Compile Include="Time Schedule\TimeSchedule.cs" />
+    <Compile Include="Time Schedule\ScheduleDayOfWeek.cs" />
+    <Compile Include="Time Schedule\ScheduleDetail.cs" />
+    <Compile Include="Time Schedule\ScheduleMonthlyOnDay.cs" />
+    <Compile Include="Time Schedule\ScheduleMonthlyOnDayOfWeek.cs" />
+    <Compile Include="Time Schedule\ScheduleSpecificDate.cs" />
+    <Compile Include="Time Schedule\ScheduleWeekly.cs" />
+    <Compile Include="Time Schedule\ScheduleYearlyOnDate.cs" />
+    <Compile Include="Security\RoleMenu.cs" />
+    <Compile Include="Security\DynamicMenu.cs" />
+    <Compile Include="Security\Password.cs" />
+    <Compile Include="Security\Role.cs" />
+    <Compile Include="Security\UserRole.cs" />
+    <Compile Include="SequenceNoGenerator.cs" />
+    <Compile Include="Workflow\EntityTypeState.cs" />
+    <Compile Include="Workflow\StateTransition.cs" />
+    <Compile Include="TimeInterval.cs" />
+    <Compile Include="TreeListNode.cs" />
+    <Compile Include="Workflow\IWorkflowActor.cs" />
+    <Compile Include="Workflow\TransactionState.cs" />
+    <Compile Include="Workflow\WorkflowDocument.cs" />
+    <Compile Include="Workflow\WorkflowStateCategory.cs" />
+    <Compile Include="Workflow\WorkflowTemplate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Class Diagrams\Party.cd" />
+    <None Include="Class Diagrams\Payment.cd" />
+    <None Include="Class Diagrams\Relationship.cd" />
+    <None Include="Class Diagrams\Response.cd" />
+    <None Include="Class Diagrams\Security.cd" />
+    <None Include="Class Diagrams\Time Schedule.cd" />
+    <None Include="Class Diagrams\Workflow.cd" />
+    <None Include="Class Diagrams\Property.cd" />
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio 10.0\Visual Studio Tools for Office\PIA\Office14\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\External Assemblies\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Office, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\iSabaya.Config\iSabaya.Config.csproj">
+      <Project>{E4E75898-CB9F-44DE-AC2A-39692F41C13A}</Project>
+      <Name>iSabaya.Config</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

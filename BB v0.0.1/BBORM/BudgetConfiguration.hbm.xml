@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Budget.General.BudgetConfiguration, Budget" table="Configuration">
+    <id name="ID" column="ConfigurationID" unsaved-value="0">
+      <generator class="native" />
+    </id>
+
+    <component name="CreateAction" >
+      <many-to-one name="ByUser" column="CreatedBy" />
+      <property name="Timestamp" column="CreatedTS" />
+    </component>
+    <component name="ApproveAction" >
+      <many-to-one name="ByUser" column="ApprovedBy" />
+      <property name="Timestamp" column="ApprovedTS" />
+    </component>
+    <component name="EffectivePeriod"   >
+      <property name="From" column="EffectiveFrom" />
+      <property name="To" column="EffectiveTo" />
+    </component>
+    <property name="IsNotFinalized" />
+
+    <property name="SystemID" type="iSabaya.SystemEnum,iSabaya.Config"/>
+
+    <!--<many-to-one name="AccountReserveCategoryRootNode" column="AccountReserveCategoryRootNodeID" />-->
+    <!--
+    <many-to-one name="BankAccountCategoryRootNode" column="BankAccountCategoryRootNodeID" />
+    <many-to-one name="BillerCategoryRootNode" column="BillerCategoryRootNodeID" />
+    <many-to-one name="BankOrgCategoryNode" column="BankOrgCategoryNodeID" />
+    -->
+    <!--<many-to-one name="BrokerOrgCategoryNode" column="BrokerOrgCategoryNodeID" />-->
+    <!--
+
+    -->
+    <!--<property name="ChequeNoToStringFormat" />-->
+    <!--
+    <many-to-one name="ContactCategoryRootNode" column="ContactCategoryRootNodeID" />
+    <many-to-one name="CountryParentNode" column="CountryParentNodeID" />
+
+    <many-to-one name="DefaultCountry" column="DefaultCountryID" />
+    <many-to-one name="DefaultCurrency" column="DefaultCurrencyCode" />-->
+    <many-to-one name="DefaultLanguage" column="DefaultLanguageCode" />
+    <!--<many-to-one name="DefaultNationality" column="DefaultNationalityNodeID" />-->
+
+    <!--<many-to-one name="GeographicAddressCategoryRootNode" column="GeographicAddressCategoryRootNodeID" />
+    <many-to-one name="IncomeTaxSchedule" class="iSabaya.MultiMoneyBracketPercentageOfMoneyRateSchedule,iSabaya" column="IncomeTaxScheduleID" />
+    <many-to-one name="PartyIdentityCategoryRootNode" column="IDCategoriesRootNodeID" />
+    <many-to-one name="NationalityParentNode" column="NationalityParentNodeID" />
+    <many-to-one name="NonworkCalendar" column="NonworkCalendarID" class="iSabaya.TimeSchedule,iSabaya" />
+    <property name="MaxLeadTimeOfFinancialTransaction" />
+    <property name="MaxTransactionLockDuration" />
+    <property name="NumberOfExtraFractionDigitsOfMoney" />
+    <property name="OneTimePasswordAgeInMinutes" />
+
+    <many-to-one name="RelationshipCategoryParentNode" column="RelationshipCategoryParentNodeID" />-->
+
+    <!--<property name="SalesTaxRate" />-->
+    <!--<many-to-one name="SalesTaxSchedule" class="iSabaya.MultiMoneyBracketPercentageOfMoneyRateSchedule,iSabaya" column="SalesTaxScheduleID" />
+    <many-to-one name="ScheduleCategoryParentNode" column="ScheduleCategoryParentNodeID" />
+    <many-to-one name="SequenceNumberGeneratingRule" column="SequenceNumberGeneratingRuleID" class="iSabaya.Rule,iSabaya" />
+    <property name="ServiceTaxRate" />
+    <many-to-one name="SystemOwnerOrg" column="SystemOwnerOrgID" class="iSabaya.Organization,iSabaya" />
+    <many-to-one name="TaxScheduleCategoryRootNode" column="TaxScheduleCategoryRootNodeID" />
+
+    <property name="WithholdSalesTaxRate" />
+    <property name="WithholdServiceTaxRate" />
+    <property name="WithholdDividendTaxRate" />
+    <many-to-one name="WorkCalendar" column="WorkCalendarID" class="iSabaya.TimeSchedule,iSabaya" />
+
+    <property name="MAPSWebServiceAddress" />
+    <property name="SMSWebServiceAddress" />
+    <property name="PrimaryLDAPServerAddress" />
+    <property name="SecondaryLDAPServerAddress" />
+    <many-to-one name="RegisteredAddressCategoryRootNode" column="RegisteredAddressCategoryRootNodeID" />
+    <many-to-one name="OtherAddressCategoryRootNode" column="OtherAddressCategoryRootNode" />
+    <many-to-one name="ResidentAddressCategoryRootNode" column="ResidentAddressCategoryRootNodeID" />
+
+    <component name="Organization" class="iSabaya.OrganizationConfig,iSabaya">
+      <many-to-one name="AttributeKeyParentNode" column="OrganizationAttributeKeyParentNodeID" />
+      <many-to-one name="BusinessCategoryRootNode" column="OrganizationBusinessCategoryRootNodeID" />
+
+      <many-to-one name="CategoryBankNode" column="OrganizationCategoryBankNodeID" />
+      <many-to-one name="CategoryRootNode" column="OrganizationCategoryRootNodeID" />
+      -->
+    <!--<many-to-one name="IdentityCategoryParentNode" column="OrganizationIdentityCategoryParentNodeID" />-->
+    <!--
+      <many-to-one name="IdentityCategoryRootNode" column="OrganizationIdentityCategoryParentNodeID" />
+      -->
+    <!--<many-to-one name="NamePrefixParentNode" column="OrganizationNamePrefixParentNodeID" />
+ <many-to-one name="NameSuffixParentNode" column="OrganizationNameSuffixParentNodeID" />-->
+    <!--
+      <many-to-one name="NationalityParentNode" column="OrganizationNationalityParentNodeID" />
+      <many-to-one name="PersonRelationshipCategoryRootNode" column="OrganizationPersonRelationshipCategoryRootNodeID" />
+    </component>-->
+
+    <!--<component name="Person" class="iSabaya.PersonConfig,iSabaya">
+      <many-to-one name="AttributeKeyParentNode" column="PersonAttributeKeyParentNodeID" />
+      <many-to-one name="BloodGroupParentNode" column="BloodGroupParentNodeID" />
+      <many-to-one name="CategoryParentNode" column="PersonCategoryParentNodeID" />
+      <many-to-one name="GenderParentNode" column="GenderParentNodeID" />
+      <many-to-one name="IdentityCategoryRootNode" column="PersonIdentityCategoryParentNodeID" />
+      <many-to-one name="NamePrefixParentNode" column="PersonNamePrefixParentNodeID" />
+      <many-to-one name="NameSuffixParentNode" column="PersonNameSuffixParentNodeID" />
+      <many-to-one name="OccupationParentNode" column="PersonOccupationParentNodeID" />
+      <many-to-one name="ReligionParentNode" column="ReligionParentNodeID" />
+    </component>-->
+
+    <component name="Security" class="iSabaya.SecurityConfig,iSabaya">
+      <!--<property name="MaxConsecutiveFailedLogonAttempts" />-->
+      <!--<property name="MaxDaysOfInactivity" />-->
+
+      <property name="MaxUsernameLength" />
+      <property name="MinUsernameLength" />
+
+      <property name="WebSessionTimeoutValueInMinutes" />
+
+      <!--<component name="PasswordPolicy" class="iSabaya.PasswordConfig,iSabaya">
+        <property name="MaxPasswordLength" />
+        <property name="MinPasswordLength" />
+        <property name="MinNumberOfSpecialCharsInPassword" />
+        <property name="MinNumberOfCapitalLettersInPassword" />
+        <property name="MinNumberOfSmallLettersInPassword" />
+        <property name="MinNumberOfDigitsInPassword" />
+        <property name="PasswordAgeInDays" />
+        <property name="PasswordHistoryDepth" />
+      </component>-->
+    </component>
+  </class>
+</hibernate-mapping>

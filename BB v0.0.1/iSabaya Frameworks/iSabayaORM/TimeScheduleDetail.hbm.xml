@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+
+  <class name="iSabaya.ScheduleDetail,iSabaya" table="TimeScheduleDetail" discriminator-value="0">
+
+    <id name="ID" column="ScheduleDetailID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+
+    <discriminator column="ScheduleDetailDiscriminator" type="byte"/>
+    
+    <property name="SeqNo" column="SeqNo" type="int" />
+    <property name="RescheduleIfHoliday" type="iSabaya.EnumRescheduleOption,iSabaya" />
+
+    <component name="HourInterval"  >
+      <property name="From" column="HourIntervalFrom"/>
+      <property name="To" column="HourIntervalTo"/>
+    </component>
+
+    <many-to-one name="Schedule" column="ScheduleID" class="iSabaya.TimeSchedule,iSabaya"  />
+    <many-to-one name="TimeCategory" column="TimeCategoryNodeID" class="iSabaya.TreeListNode,iSabaya"  />
+    <many-to-one name="Title" column="DescriptionMLSID"  />
+
+    
+    <subclass name="iSabaya.ScheduleSpecificDate, iSabaya" discriminator-value="1">
+      <property name="Date" type="DateTime" not-null="true"/>
+    </subclass>
+
+    <subclass name="iSabaya.ScheduleYearlyOnDate, iSabaya" discriminator-value="2">
+      <property name="Date" type="DateTime" not-null="true"/>
+    </subclass>
+
+    <subclass name="iSabaya.ScheduleMonthlyOnDayOfWeek, iSabaya" discriminator-value="3">
+      <property name="WeekOfMonth" column="WeekNo" type="int" not-null="true"/>
+    </subclass>
+
+    <subclass name="iSabaya.ScheduleWeekly, iSabaya" discriminator-value="4">
+      <property name="DayOfWeek" column="DayNo" type="System.DayOfWeek" not-null="true"/>
+    </subclass>
+    
+    <subclass name="iSabaya.ScheduleMonthlyOnDay, iSabaya" discriminator-value="5">
+      <property name="DayOfMonth" column="DayNo" type="int" not-null="true"/>
+    </subclass>
+
+    <subclass name="iSabaya.ScheduleMonthlyRelativeToEOM, iSabaya" discriminator-value="6">
+      <property name="LeadDays" column="DayNo" type="int" not-null="true"/>
+    </subclass>
+
+    <subclass name="iSabaya.SchedulePeriodic, iSabaya" discriminator-value="11">
+      <property name="FromDayNo" column="DayNo" type="int" not-null="true"/>
+      <property name="ToDayNo" type="int" not-null="true"/>
+      <property name="PeriodLength" type="int" not-null="true"/>
+      <property name="DateOfDayZero" column="Date" type="DateTime" not-null="true"/>
+    </subclass>
+
+  </class>
+
+</hibernate-mapping>
+
+

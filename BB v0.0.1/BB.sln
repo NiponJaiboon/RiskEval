@@ -1,0 +1,204 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Budget", "BB\Budget.csproj", "{BC3C5331-6F3F-4CD4-8259-1D2978312918}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frameworks", "Frameworks", "{DB30C3BE-A135-4186-A56D-F9F64720DA61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSabaya", "iSabaya Frameworks\iSabaya\iSabaya.csproj", "{D168C3F8-E236-4BBE-8DE4-86B05B12594F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSabayaORM", "iSabaya Frameworks\iSabayaORM\iSabayaORM.csproj", "{F8965A6D-6C8C-4CBA-9DBF-85459F9E61B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSabaya.ExtensibleORM", "iSabaya Frameworks\iSabaya.ExtensibleORM\iSabaya.ExtensibleORM.csproj", "{04E88657-E0DD-435C-8879-429C1210E27D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSabaya.Config", "iSabaya Frameworks\iSabaya.Config\iSabaya.Config.csproj", "{E4E75898-CB9F-44DE-AC2A-39692F41C13A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Budget.DataBase", "Budget.DataAccess\Budget.DataBase.csproj", "{D5297398-620A-41BF-B9A5-93E276A8510F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestORM", "TestORM\TestORM.csproj", "{D7C1915D-6F21-4A57-9BFB-F1F936CB9DAB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B4E47BC6-75AB-4E85-B2A6-B91F55266CCE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentations", "Presentations", "{29626B64-ED18-4954-AB37-3770894F7AD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitializeDatabase", "InitializeDatabase\InitializeDatabase.csproj", "{49547EAD-545E-4962-85A7-4258B482EE89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBWeb", "BBWeb\BBWeb.csproj", "{92108523-AC89-4B81-8C17-ED597A0564EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetORM", "..\..\..\Projects\Microsofts\BB\BBORM\BudgetORM.csproj", "{AF0CD22A-1C1A-439F-B4D6-6F9013ACB18B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSabaya.Questionnaire", "iSabaya Frameworks\iSabaya.Questionnaire\iSabaya.Questionnaire.csproj", "{D404CAE7-DA1D-45D5-BF0B-C980012699ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBAdminWeb", "BBAdminWeb\BBAdminWeb.csproj", "{0637F793-7519-4F86-8C43-006C0C73F743}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBAdminWebTest", "BBAdminWebTest\BBAdminWebTest.csproj", "{1343CBF1-5C21-4434-81D0-6670F8C28065}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBAnalysisWeb", "BBAnalysisWeb\BBAnalysisWeb.csproj", "{D8A85E26-13D8-4E51-A619-45009738DB38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBClientWeb", "BBClientWeb\BBClientWeb.csproj", "{FEF139F1-548C-497D-B56E-366AF531E98C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetTest", "BudgetTest\BudgetTest.csproj", "{5552564A-F2E8-4942-AFEF-E8AC0F590000}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 17
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://isabaya01:8080/tfs/isabayacollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = iSabaya\u0020Frameworks\\iSabaya.Config\\iSabaya.Config.csproj
+		SccProjectTopLevelParentUniqueName1 = BB.sln
+		SccProjectName1 = iSabaya\u0020Frameworks/iSabaya.Config
+		SccLocalPath1 = iSabaya\u0020Frameworks\\iSabaya.Config
+		SccProjectUniqueName2 = iSabaya\u0020Frameworks\\iSabaya\\iSabaya.csproj
+		SccProjectTopLevelParentUniqueName2 = BB.sln
+		SccProjectName2 = iSabaya\u0020Frameworks/iSabaya
+		SccLocalPath2 = iSabaya\u0020Frameworks\\iSabaya
+		SccProjectUniqueName3 = iSabaya\u0020Frameworks\\iSabayaORM\\iSabayaORM.csproj
+		SccProjectTopLevelParentUniqueName3 = BB.sln
+		SccProjectName3 = iSabaya\u0020Frameworks/iSabayaORM
+		SccLocalPath3 = iSabaya\u0020Frameworks\\iSabayaORM
+		SccProjectUniqueName4 = iSabaya\u0020Frameworks\\iSabaya.ExtensibleORM\\iSabaya.ExtensibleORM.csproj
+		SccProjectTopLevelParentUniqueName4 = BB.sln
+		SccProjectName4 = iSabaya\u0020Frameworks/iSabaya.ExtensibleORM
+		SccLocalPath4 = iSabaya\u0020Frameworks\\iSabaya.ExtensibleORM
+		SccProjectUniqueName5 = BB\\Budget.csproj
+		SccProjectTopLevelParentUniqueName5 = BB.sln
+		SccProjectName5 = BB
+		SccLocalPath5 = BB
+		SccProjectUniqueName6 = BBWeb\\BBWeb.csproj
+		SccProjectTopLevelParentUniqueName6 = BB.sln
+		SccProjectName6 = BBWeb
+		SccLocalPath6 = BBWeb
+		SccProjectUniqueName7 = InitializeDatabase\\InitializeDatabase.csproj
+		SccProjectName7 = InitializeDatabase
+		SccLocalPath7 = InitializeDatabase
+		SccProjectUniqueName8 = TestORM\\TestORM.csproj
+		SccProjectTopLevelParentUniqueName8 = BB.sln
+		SccProjectName8 = TestORM
+		SccLocalPath8 = TestORM
+		SccProjectUniqueName9 = ..\\..\\..\\Projects\\Microsofts\\BB\\BBORM\\BudgetORM.csproj
+		SccProjectTopLevelParentUniqueName9 = BB.sln
+		SccProjectName9 = BBORM
+		SccLocalPath9 = ..\\..\\..\\Projects\\Microsofts\\BB\\BBORM
+		SccProjectUniqueName10 = iSabaya\u0020Frameworks\\iSabaya.Questionnaire\\iSabaya.Questionnaire.csproj
+		SccProjectTopLevelParentUniqueName10 = BB.sln
+		SccProjectName10 = iSabaya\u0020Frameworks/iSabaya.Questionnaire
+		SccLocalPath10 = iSabaya\u0020Frameworks\\iSabaya.Questionnaire
+		SccProjectUniqueName11 = BBAdminWeb\\BBAdminWeb.csproj
+		SccProjectTopLevelParentUniqueName11 = BB.sln
+		SccProjectName11 = BBAdminWeb
+		SccLocalPath11 = BBAdminWeb
+		SccProjectUniqueName12 = BBAdminWebTest\\BBAdminWebTest.csproj
+		SccProjectTopLevelParentUniqueName12 = BB.sln
+		SccProjectName12 = BBAdminWebTest
+		SccLocalPath12 = BBAdminWebTest
+		SccProjectUniqueName13 = BBAnalysisWeb\\BBAnalysisWeb.csproj
+		SccProjectTopLevelParentUniqueName13 = BB.sln
+		SccProjectName13 = BBAnalysisWeb
+		SccLocalPath13 = BBAnalysisWeb
+		SccProjectUniqueName14 = BBClientWeb\\BBClientWeb.csproj
+		SccProjectTopLevelParentUniqueName14 = BB.sln
+		SccProjectName14 = BBClientWeb
+		SccLocalPath14 = BBClientWeb
+		SccProjectUniqueName15 = Budget.DataAccess\\Budget.DataBase.csproj
+		SccProjectTopLevelParentUniqueName15 = BB.sln
+		SccProjectName15 = Budget.DataAccess
+		SccLocalPath15 = Budget.DataAccess
+		SccProjectUniqueName16 = BudgetTest\\BudgetTest.csproj
+		SccProjectTopLevelParentUniqueName16 = BB.sln
+		SccProjectName16 = BudgetTest
+		SccLocalPath16 = BudgetTest
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC3C5331-6F3F-4CD4-8259-1D2978312918}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC3C5331-6F3F-4CD4-8259-1D2978312918}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC3C5331-6F3F-4CD4-8259-1D2978312918}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC3C5331-6F3F-4CD4-8259-1D2978312918}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D168C3F8-E236-4BBE-8DE4-86B05B12594F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D168C3F8-E236-4BBE-8DE4-86B05B12594F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D168C3F8-E236-4BBE-8DE4-86B05B12594F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D168C3F8-E236-4BBE-8DE4-86B05B12594F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8965A6D-6C8C-4CBA-9DBF-85459F9E61B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8965A6D-6C8C-4CBA-9DBF-85459F9E61B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8965A6D-6C8C-4CBA-9DBF-85459F9E61B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8965A6D-6C8C-4CBA-9DBF-85459F9E61B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04E88657-E0DD-435C-8879-429C1210E27D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04E88657-E0DD-435C-8879-429C1210E27D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04E88657-E0DD-435C-8879-429C1210E27D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04E88657-E0DD-435C-8879-429C1210E27D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4E75898-CB9F-44DE-AC2A-39692F41C13A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4E75898-CB9F-44DE-AC2A-39692F41C13A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4E75898-CB9F-44DE-AC2A-39692F41C13A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4E75898-CB9F-44DE-AC2A-39692F41C13A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5297398-620A-41BF-B9A5-93E276A8510F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5297398-620A-41BF-B9A5-93E276A8510F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5297398-620A-41BF-B9A5-93E276A8510F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5297398-620A-41BF-B9A5-93E276A8510F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7C1915D-6F21-4A57-9BFB-F1F936CB9DAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7C1915D-6F21-4A57-9BFB-F1F936CB9DAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7C1915D-6F21-4A57-9BFB-F1F936CB9DAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7C1915D-6F21-4A57-9BFB-F1F936CB9DAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49547EAD-545E-4962-85A7-4258B482EE89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49547EAD-545E-4962-85A7-4258B482EE89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49547EAD-545E-4962-85A7-4258B482EE89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49547EAD-545E-4962-85A7-4258B482EE89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92108523-AC89-4B81-8C17-ED597A0564EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92108523-AC89-4B81-8C17-ED597A0564EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92108523-AC89-4B81-8C17-ED597A0564EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92108523-AC89-4B81-8C17-ED597A0564EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF0CD22A-1C1A-439F-B4D6-6F9013ACB18B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF0CD22A-1C1A-439F-B4D6-6F9013ACB18B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF0CD22A-1C1A-439F-B4D6-6F9013ACB18B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF0CD22A-1C1A-439F-B4D6-6F9013ACB18B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D404CAE7-DA1D-45D5-BF0B-C980012699ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D404CAE7-DA1D-45D5-BF0B-C980012699ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D404CAE7-DA1D-45D5-BF0B-C980012699ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D404CAE7-DA1D-45D5-BF0B-C980012699ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0637F793-7519-4F86-8C43-006C0C73F743}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0637F793-7519-4F86-8C43-006C0C73F743}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0637F793-7519-4F86-8C43-006C0C73F743}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0637F793-7519-4F86-8C43-006C0C73F743}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1343CBF1-5C21-4434-81D0-6670F8C28065}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1343CBF1-5C21-4434-81D0-6670F8C28065}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1343CBF1-5C21-4434-81D0-6670F8C28065}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1343CBF1-5C21-4434-81D0-6670F8C28065}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8A85E26-13D8-4E51-A619-45009738DB38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8A85E26-13D8-4E51-A619-45009738DB38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8A85E26-13D8-4E51-A619-45009738DB38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8A85E26-13D8-4E51-A619-45009738DB38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEF139F1-548C-497D-B56E-366AF531E98C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEF139F1-548C-497D-B56E-366AF531E98C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEF139F1-548C-497D-B56E-366AF531E98C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEF139F1-548C-497D-B56E-366AF531E98C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5552564A-F2E8-4942-AFEF-E8AC0F590000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5552564A-F2E8-4942-AFEF-E8AC0F590000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5552564A-F2E8-4942-AFEF-E8AC0F590000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5552564A-F2E8-4942-AFEF-E8AC0F590000}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BC3C5331-6F3F-4CD4-8259-1D2978312918} = {DB30C3BE-A135-4186-A56D-F9F64720DA61}
+		{D168C3F8-E236-4BBE-8DE4-86B05B12594F} = {DB30C3BE-A135-4186-A56D-F9F64720DA61}
+		{F8965A6D-6C8C-4CBA-9DBF-85459F9E61B2} = {DB30C3BE-A135-4186-A56D-F9F64720DA61}
+		{04E88657-E0DD-435C-8879-429C1210E27D} = {DB30C3BE-A135-4186-A56D-F9F64720DA61}
+		{E4E75898-CB9F-44DE-AC2A-39692F41C13A} = {DB30C3BE-A135-4186-A56D-F9F64720DA61}
+		{D5297398-620A-41BF-B9A5-93E276A8510F} = {DB30C3BE-A135-4186-A56D-F9F64720DA61}
+		{D7C1915D-6F21-4A57-9BFB-F1F936CB9DAB} = {B4E47BC6-75AB-4E85-B2A6-B91F55266CCE}
+		{92108523-AC89-4B81-8C17-ED597A0564EF} = {29626B64-ED18-4954-AB37-3770894F7AD8}
+		{AF0CD22A-1C1A-439F-B4D6-6F9013ACB18B} = {DB30C3BE-A135-4186-A56D-F9F64720DA61}
+		{D404CAE7-DA1D-45D5-BF0B-C980012699ED} = {DB30C3BE-A135-4186-A56D-F9F64720DA61}
+		{0637F793-7519-4F86-8C43-006C0C73F743} = {29626B64-ED18-4954-AB37-3770894F7AD8}
+		{1343CBF1-5C21-4434-81D0-6670F8C28065} = {B4E47BC6-75AB-4E85-B2A6-B91F55266CCE}
+		{D8A85E26-13D8-4E51-A619-45009738DB38} = {29626B64-ED18-4954-AB37-3770894F7AD8}
+		{FEF139F1-548C-497D-B56E-366AF531E98C} = {29626B64-ED18-4954-AB37-3770894F7AD8}
+		{5552564A-F2E8-4942-AFEF-E8AC0F590000} = {B4E47BC6-75AB-4E85-B2A6-B91F55266CCE}
+	EndGlobalSection
+EndGlobal

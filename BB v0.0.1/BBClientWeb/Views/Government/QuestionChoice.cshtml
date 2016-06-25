@@ -1,0 +1,234 @@
+﻿@model Budget.Project
+
+@{
+    ViewBag.Title = "เลือกชุดคำถาม";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (@ViewBag.ErrorMessage != null)
+{
+    @ViewBag.ErrorMessage
+}
+else
+{
+    @Html.HiddenFor(x => x.ID)
+
+    <div style="padding-top:10px;margin-left:-5px;">
+        <div class="box">
+            <div class="box-header"></div>
+            <div class="box-body">
+                <div>
+                    <label style="margin-left:5px" class="field-header-project">เลือกชุดคำถาม</label>
+                    <div>
+                        <p style="padding-bottom:15px">
+                            @if (@Model.StatusCategory > Budget.StatusCategory.IncompleteAnswerA)
+                            {
+                                <span>คำถาม ชุด ก: ริเริ่มโครงการใหม่และการวิเคราะห์เบื้องต้น</span><br />
+                                <span style="color:blue; font-weight:bold">(ทำแล้ว 10 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 10 ข้อ)</span>
+                            }
+                            else
+                            {
+                                if (@Model.Status == Budget.Status.SaveAnswerSetA2 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerA)
+                                {
+                                    <span>คำถาม ชุด ก: ริเริ่มโครงการใหม่และการวิเคราะห์เบื้องต้น</span><br />
+                                    <span style="color:blue; font-weight:bold">(ทำแล้ว 10 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 10 ข้อ)</span>
+                                }
+                                else if (@Model.Status == Budget.Status.SaveAnswerSetA1 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerA)
+                                {
+                                    @Html.ActionLink("คำถาม ชุด ก: ริเริ่มโครงการใหม่และการวิเคราะห์เบื้องต้น", "QuestionA", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                    <span style="color:blue; font-weight:bold">(ทำแล้ว 6 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 10 ข้อ)</span>
+                                }
+                                else if (@Model.StatusCategory == Budget.StatusCategory.Incomplete)
+                                {
+                                    @Html.ActionLink("คำถาม ชุด ก: ริเริ่มโครงการใหม่และการวิเคราะห์เบื้องต้น", "QuestionA", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                    <span style="color:blue; font-weight:bold">(ยังไม่ได้ทำแบบประเมินชุดนี้</span><span style="color:green; font-weight:bold"> / ทั้งหมดมี 10 ข้อ)</span>
+                                }
+                            }
+                        </p>
+
+                        <p style="padding-bottom:15px">
+                            @if (@Model.StatusCategory > Budget.StatusCategory.IncompleteAnswerB)
+                            {
+                                <span>คำถาม ชุด ข: การวิเคราะห์และวางแผนรายละเอียดโครงการ</span><br />
+                                <span style="color:blue; font-weight:bold">(ทำแล้ว 18 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 18 ข้อ)</span>
+                            }
+                            else
+                            {
+                                if (@Model.Status == Budget.Status.SaveAnswerSetB6 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB)
+                                {
+                                    <span>คำถาม ชุด ข: การวิเคราะห์และวางแผนรายละเอียดโครงการ</span><br />
+                                    <span style="color:blue; font-weight:bold">(ทำแล้ว 18 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 18 ข้อ)</span>
+                                }
+                                else if (@Model.Status == Budget.Status.SaveAnswerSetB5 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB)
+                                {
+                                    @Html.ActionLink("คำถาม ชุด ข: การวิเคราะห์และวางแผนรายละเอียดโครงการ", "QuestionB", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                    <span style="color:blue; font-weight:bold">(ทำแล้ว 15 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 18 ข้อ)</span>
+                                }
+                                else if (@Model.Status == Budget.Status.SaveAnswerSetB4 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB)
+                                {
+                                    @Html.ActionLink("คำถาม ชุด ข: การวิเคราะห์และวางแผนรายละเอียดโครงการ", "QuestionB", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                    <span style="color:blue; font-weight:bold">(ทำแล้ว 13 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 18 ข้อ)</span>
+                                }
+                                else if (@Model.Status == Budget.Status.SaveAnswerSetB3 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB)
+                                {
+                                    @Html.ActionLink("คำถาม ชุด ข: การวิเคราะห์และวางแผนรายละเอียดโครงการ", "QuestionB", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                    <span style="color:blue; font-weight:bold">(ทำแล้ว 8 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 18 ข้อ)</span>
+                                }
+                                else if (@Model.Status == Budget.Status.SaveAnswerSetB2 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB)
+                                {
+                                    @Html.ActionLink("คำถาม ชุด ข: การวิเคราะห์และวางแผนรายละเอียดโครงการ", "QuestionB", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                    <span style="color:blue; font-weight:bold">(ทำแล้ว 6 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 18 ข้อ)</span>
+                                }
+                                else if (@Model.Status == Budget.Status.SaveAnswerSetB1 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB)
+                                {
+                                    @Html.ActionLink("คำถาม ชุด ข: การวิเคราะห์และวางแผนรายละเอียดโครงการ", "QuestionB", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                    <span style="color:blue; font-weight:bold">(ทำแล้ว 4 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 18 ข้อ)</span>
+                                }
+                                else if (@Model.Status == Budget.Status.SaveAnswerSetA2 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerA)
+                                {
+                                    @Html.ActionLink("คำถาม ชุด ข: การวิเคราะห์และวางแผนรายละเอียดโครงการ", "QuestionB", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                    <span style="color:blue; font-weight:bold">(ยังไม่ได้ทำแบบประเมินชุดนี้</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 18 ข้อ)</span>
+                                }
+                                else if (@Model.StatusCategory == Budget.StatusCategory.Incomplete || @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerA)
+                                {
+                                    <span>คำถาม ชุด ข: การวิเคราะห์และวางแผนรายละเอียดโครงการ</span><br />
+                                    <span style="color:blue; font-weight:bold">(ยังไม่ได้ทำแบบประเมินชุดนี้</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 18 ข้อ)</span>
+                                }
+                            }
+                        </p>
+
+                        <p style="padding-bottom:15px">
+                            @if (@Model.StatusCategory > Budget.StatusCategory.IncompleteAnswerC)
+                            {
+                                <span>คำถาม ชุด ค: การจัดลำดับและจัดสรรงบประมาณโครงการ</span><br />
+                                <span style="color:blue; font-weight:bold;">(ทำแล้ว 3 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 3 ข้อ)</span>
+                            }
+                            else
+                            {
+                                if (@Model.Status == Budget.Status.SaveAnswerSetC1 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerC)
+                                {
+                                    <span>คำถาม ชุด ค: การจัดลำดับและจัดสรรงบประมาณโครงการ</span><br />
+                                    <span style="color:blue; font-weight:bold;">(ทำแล้ว 3 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 3 ข้อ)</span>
+                                }
+                                else if (@Model.Status == Budget.Status.SaveAnswerSetB6 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB)
+                                {
+                                    @Html.ActionLink("คำถาม ชุด ค: การจัดลำดับและจัดสรรงบประมาณโครงการ", "QuestionC", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                    <span style="color:blue; font-weight:bold">(ยังไม่ได้ทำแบบประเมินชุดนี้</span><span style="color:green; font-weight:bold"> / ทั้งหมดมี 3 ข้อ)</span>
+                                }
+                                else if (@Model.StatusCategory == Budget.StatusCategory.Incomplete || @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerA
+                                || @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB)
+                                {
+                                    <span>คำถาม ชุด ค: การจัดลำดับและจัดสรรงบประมาณโครงการ</span><br />
+                                    <span style="color:blue; font-weight:bold">(ยังไม่ได้ทำแบบประเมินชุดนี้</span><span style="color:green; font-weight:bold"> / ทั้งหมดมี 3 ข้อ)</span>
+                                }
+                            }
+                        </p>
+
+                        <p style="padding-bottom:15px">
+
+                            @if (@Model.StatusCategory > Budget.StatusCategory.IncompleteAnswerD)
+                            {
+                                <span>คำถาม ชุด ง: การเตรียมการเพื่อติดตามความก้าวหน้าของการดำเนินโครงการ</span><br />
+                                <span style="color:blue; font-weight:bold">(ทำแล้ว 13 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 13 ข้อ)</span>
+                            }
+                            else
+                            {
+                                if (@Model.Status == Budget.Status.SaveAnswerSetD6 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerD)
+                                {
+                                    <span>คำถาม ชุด ง: การเตรียมการเพื่อติดตามความก้าวหน้าของการดำเนินโครงการ</span><br />
+                                    <span style="color:blue; font-weight:bold">(ทำแล้ว 13 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 13 ข้อ)</span>
+                                }
+                                else if (@Model.Status == Budget.Status.SaveAnswerSetD5 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerD)
+                                {
+                                    @Html.ActionLink("คำถาม ชุด ง: การเตรียมการเพื่อติดตามความก้าวหน้าของการดำเนินโครงการ", "QuestionD", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                    <span style="color:blue; font-weight:bold">(ทำแล้ว 10 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 13 ข้อ)</span>
+                                }
+                                else if (@Model.Status == Budget.Status.SaveAnswerSetD4 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerD)
+                                {
+                                    @Html.ActionLink("คำถาม ชุด ง: การเตรียมการเพื่อติดตามความก้าวหน้าของการดำเนินโครงการ", "QuestionD", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                    <span style="color:blue; font-weight:bold">(ทำแล้ว 8 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 13 ข้อ)</span>
+                                }
+                                else if (@Model.Status == Budget.Status.SaveAnswerSetD3 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerD)
+                                {
+                                    @Html.ActionLink("คำถาม ชุด ง: การเตรียมการเพื่อติดตามความก้าวหน้าของการดำเนินโครงการ", "QuestionD", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                    <span style="color:blue; font-weight:bold">(ทำแล้ว 6 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 13 ข้อ)</span>
+                                }
+                                else if (@Model.Status == Budget.Status.SaveAnswerSetD2 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerD)
+                                {
+                                    @Html.ActionLink("คำถาม ชุด ง: การเตรียมการเพื่อติดตามความก้าวหน้าของการดำเนินโครงการ", "QuestionD", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                    <span style="color:blue; font-weight:bold">(ทำแล้ว 4 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 13 ข้อ)</span>
+                                }
+                                else if (@Model.Status == Budget.Status.SaveAnswerSetD1 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerD)
+                                {
+                                    @Html.ActionLink("คำถาม ชุด ง: การเตรียมการเพื่อติดตามความก้าวหน้าของการดำเนินโครงการ", "QuestionD", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                    <span style="color:blue; font-weight:bold">(ทำแล้ว 2 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 13 ข้อ)</span>
+                                }
+                                else if (@Model.Status == Budget.Status.SaveAnswerSetC1 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerC)
+                                {
+                                    @Html.ActionLink("คำถาม ชุด ง: การเตรียมการเพื่อติดตามความก้าวหน้าของการดำเนินโครงการ", "QuestionD", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                    <span style="color:blue; font-weight:bold">(ยังไม่ได้ทำแบบประเมินชุดนี้</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 13 ข้อ)</span>
+                                }
+                                else if (@Model.StatusCategory == Budget.StatusCategory.Incomplete || @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerA
+                                || @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB || @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerC)
+                                {
+                                    <span>คำถาม ชุด ง: การเตรียมการเพื่อติดตามความก้าวหน้าของการดำเนินโครงการ</span><br />
+                                    <span style="color:blue; font-weight:bold">(ยังไม่ได้ทำแบบประเมินชุดนี้</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 13 ข้อ)</span>
+                                }
+                            }
+                        </p>
+
+                        @if (@Model.ProjectType == Budget.ProjectType.Continun)
+                        {
+                            <p style="padding-bottom:15px">
+
+                                @if (@Model.StatusCategory > Budget.StatusCategory.IncompleteAnswerE)
+                                {
+                                    <span>คำถาม ชุด จ: การประเมินผลการดำเนินงานของโครงการต่อเนื่องและโครงการที่ทำเสร็จแล้วและต้องการขยายผลโครงการ</span><br />
+                                    <span style="color:blue; font-weight:bold">(ทำแล้ว 3 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 3 ข้อ)</span>
+                                }
+                                else
+                                {
+                                    if (@Model.Status == Budget.Status.SaveAnswerSetE1 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerE)
+                                    {
+                                        <span>คำถาม ชุด จ: การประเมินผลการดำเนินงานของโครงการต่อเนื่องและโครงการที่ทำเสร็จแล้วและต้องการขยายผลโครงการ</span><br />
+                                        <span style="color:blue; font-weight:bold">(ทำแล้ว 3 ข้อ</span>  <span style="color:green; font-weight:bold"> / ทั้งหมดมี 3 ข้อ)</span>
+                                    }
+                                    else if (@Model.Status == Budget.Status.SaveAnswerSetD6 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerD)
+                                    {
+                                        @Html.ActionLink("คำถาม ชุด จ: การประเมินผลการดำเนินงานของโครงการต่อเนื่องและโครงการที่ทำเสร็จแล้วและต้องการขยายผลโครงการ", "QuestionE", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                                        <span style="color:blue; font-weight:bold">(ยังไม่ได้ทำแบบประเมินชุดนี้</span><span style="color:green; font-weight:bold"> / ทั้งหมดมี 3 ข้อ)</span>
+                                    }
+                                    else if (@Model.StatusCategory == Budget.StatusCategory.Incomplete || @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerA
+                                || @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB || @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerC
+                                || @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerD)
+                                    {
+                                        <span>คำถาม ชุด จ: การประเมินผลการดำเนินงานของโครงการต่อเนื่องและโครงการที่ทำเสร็จแล้วและต้องการขยายผลโครงการ</span><br />
+                                        <span style="color:blue; font-weight:bold">(ยังไม่ได้ทำแบบประเมินชุดนี้</span><span style="color:green; font-weight:bold"> / ทั้งหมดมี 3 ข้อ)</span>
+                                    }
+                                }
+                            </p>
+                        }
+
+                        @if (@Model.ProjectType == Budget.ProjectType.Continun && @Model.StatusCategory >= Budget.StatusCategory.IncompleteAnswerE)
+                        {
+                            @Html.ActionLink("คำถาม วิเคราะห์ความเสี่ยงสภาพแวดล้อมภายในภายนอก", "QuestionRiskAnalysis", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                        }
+                        else if (@Model.ProjectType == Budget.ProjectType.New && @Model.StatusCategory >= Budget.StatusCategory.IncompleteAnswerD)
+                        {
+                            @Html.ActionLink("คำถาม วิเคราะห์ความเสี่ยงสภาพแวดล้อมภายในภายนอก", "QuestionRiskAnalysis", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                        }
+                        else
+                        {
+                            <span>
+                                คำถาม วิเคราะห์ความเสี่ยงสภาพแวดล้อมภายในภายนอก
+                            </span>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer"></div>
+        </div>
+    </div>
+
+}

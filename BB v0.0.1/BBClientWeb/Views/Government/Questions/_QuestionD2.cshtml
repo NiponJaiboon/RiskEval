@@ -1,0 +1,160 @@
+﻿@model Budget.Project
+
+<div class="content-box">
+    <div>
+        <div class="box-question">
+            <div style="text-align:left; margin-top:10px;">
+                <div style="color:Red; font-size:20px;" class="QL1">ประเด็นที่ 7 พิจารณาความคืบหน้าตามแผนปฏิบัติการและแผนงบประมาณ</div>
+                <div style="margin-left:15px; margin-top:15px;">
+                    คำถามที่ 2 "แผนปฏิบัติการ" และ "แผนงบประมาณ" โครงการมีความสอดคล้องกันหรือไม่
+                    <span id="questionSetD2Star" class="ErrorDokJan" style="display:none; color:red">*</span><br>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><span>@Html.RadioButton("questionSetD2", "true")<label class="field-content">มี</label></span></td>
+                                <td><span>@Html.RadioButton("questionSetD2", "false")<label class="field-content">ไม่มี</label></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-left:10px">
+                        ถ้าตอบว่า "มี" โปรดให้รายละเอียดเพิ่มเติมต่อไปนี้
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">2.1 แสดงรายงานที่เปรียบเทียบ "แผนปฏิบัติการ" และ "แผนงบประมาณ"</span><br>
+                            @Html.TextArea("answerSetD21", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetD21Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetD21Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 2.1 เกิน 1500 ตัวอักษร</div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin:5px 5px 5px 5px; text-align:center;">
+                <input type="submit" value="บันทึกข้อมูลและดำเนินงานต่อไป" id="btnSaveQuestionSetD2" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var maxLength = 5;
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    var d2 = undefined;
+    var d21 = false;
+
+    function validateInput() {
+        //2.1 แสดงรายงานที่เปรียบเทียบ "แผนปฏิบัติการ" และ "แผนงบประมาณ"
+        if ($("#answerSetD21").val() == "") {
+            $("#answerSetD21Star").show();
+        } else {
+            $("#answerSetD21Star").hide();
+            if ($("#answerSetD21").val().length > maxLength)
+                $("#answerSetD21Message").show();
+            else
+                $("#answerSetD21Message").hide();
+        }
+    }
+
+    function save() {
+        if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: appName + "/Government/SaveAnswerD2/",
+                data: JSON.stringify({
+                    pId: $("#ID").val(),
+                    choice: $("input[name=questionSetD2]:checked").val(),
+                    answer1: $("#answerSetD21").val(),
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        $("#message-success").text(data.Message);
+                        $('#modal-success').modal('show');
+
+                        $("#btnOkSuccess").click(function (e) {
+
+                            e.preventDefault();
+                            window.location.href = '@Url.Action("QuestionD", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+                        });
+                    } else {
+                        $("#message-fail").text(data.Message);
+                        $('#modal-fail').modal('show');
+                    }
+                }
+            });
+        }
+    }
+
+    $(function () {
+
+        $("input[name=questionSetD2]").change(function (e) {
+            e.preventDefault();
+
+            var qSetD2 = $("input[name=questionSetD2]:checked").val();
+            if (qSetD2 != undefined) {
+                $("#questionSetD2Star").hide();
+                if (qSetD2 == "true") {
+                    d2 = true;
+                    $("#answerSetD21").removeAttr('disabled');
+                } else {
+                    d2 = false;
+                    $("#answerSetD21Star").hide();
+                    $("#answerSetD21Message").hide();
+                    
+                    $("#answerSetD21").val("").attr('disabled', 'disabled');
+                }
+            } else {
+                $("#questionSetD2Star").show();
+            }
+        });
+
+        $("#answerSetD21").change(function (e) {
+            e.preventDefault();
+
+            var answerSetD21 = $("#answerSetD21").val();
+            if (answerSetD21.length > 0) {
+                $("#answerSetD21Star").hide();
+                if (answerSetD21.length > maxLength)
+                    $("#answerSetD21Message").show();
+                else {
+                    d21 = true;
+                    $("#answerSetD21Message").hide();
+                }
+            } else {
+                $("#answerSetD21Star").show();
+            }
+        });
+
+        $("#btnSaveQuestionSetD2").click(function (e) {
+            e.preventDefault();
+
+            //ตรวจสอบ ตำตอบ ข้อ 2.1 ไม่มีค่าว่างและไม่เกิน 1500 ตัวอักษร
+            if (d2) {
+                validateInput();
+                if (d21) {
+                    save();
+                }
+            } else if (d2 == undefined) {
+                $("#questionSetD2Star").show();
+                validateInput();
+            }
+            else {
+                d2 = false;
+                save();
+            }
+
+        });
+
+    });
+
+</script>

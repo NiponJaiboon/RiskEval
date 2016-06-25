@@ -1,0 +1,200 @@
+﻿@model Budget.Project
+
+@{
+    ViewBag.Title = "รายงานวิเคราะห์ความเสี่ยงตามหลักธรรมาธิบาล (กรณีที่ยังไม่ส่งผล)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/jquery-ui.theme.css" rel="stylesheet" />
+<style>
+
+</style>
+@if (@ViewBag.ErrorMessage != null)
+{
+    @ViewBag.ErrorMessage
+}
+else
+{
+    <div>
+        @Html.Partial("_ProjectDetail", @Model)
+    </div>
+
+    @Html.HiddenFor(x => x.ID)
+    <div style="padding-top:20px">
+        <p>@Html.ActionLink("รายงานที่ 1 รายงานการกลั่นกรองโครงการ", "ScreeningProject", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+        @if (@Model.StatusCategory != Budget.StatusCategory.UnRisk)
+        {
+            <p>@Html.ActionLink("รายงานที่ 2 รายงานการวิเคราะห์ความเสี่ยงตามหลักธรรมาธิบาล", "RiskAnalysisGoodGovernance", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+            <p>@Html.ActionLink("รายงานที่่ 3 รายงานการวิเคราะห์ความเสี่ยงด้านสภาพแวดล้อมภายในและภายนอก", "RiskAnalysisEnvironment", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+
+            if (@Model.StatusCategory == Budget.StatusCategory.CompleteUnsign || @Model.StatusCategory == Budget.StatusCategory.Update)
+            {
+                <div style="padding-top:10px">
+                    <input type="button" value="แก้ไขข้อมูลวิเคราะห์ความเสี่ยง" id="btnEdit" class="btn btn-default">
+                    <input type="button" value="ส่งผลโครงการวิเคราะห์ความเสี่ยง" id="btnSign" class="btn btn-default">
+                </div>
+            }
+        }
+    </div>
+
+
+}
+
+<div id="dialog" title="ส่งผลโครงการวิเคราะห์ความเสี่ยง" class="ui-dialog">
+    <table>
+        <tr style="height:45px">
+            <td style="width:180px">เลขหนังสือนำส่ง</td>
+            <td>
+                @Html.TextBox("tbNumber", "", new { @class = "form-control" })
+            </td>
+            <td>
+                <span id="numberStar" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+            </td>
+        </tr>
+        <tr style="height:45px">
+            <td style="width:180px">วันที่นำส่ง</td>
+            <td>
+                @Html.TextBox("datepicker", "", new { @class = "form-control" })
+            </td>
+            <td>
+                <span id="datepickerStar" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="padding-top:10px">
+                <input type="button" value="ยืนยัน" id="btnSend" class="btn btn-default">
+                <input type="button" value="ยกเลิก" id="btnCancel" class="btn btn-default">
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script src="~/Scripts/jquery-ui.js"></script>
+<script type="text/javascript">
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    $(function () {
+
+        var d = new Date();
+        var toDay = d.getDate() + '/'
+             + (d.getMonth() + 1) + '/'
+            + (d.getFullYear() + 543);
+
+        $("#dialog").dialog(
+        {
+            closeOnEscape: false,
+            closeText: false,
+            height: 250,
+            width: 500,
+            autoOpen: false,
+            modal: true,
+            show: "blind",
+            hide: "blind",
+        });
+
+
+        $("#btnEdit").click(function (e) {
+            e.preventDefault();
+
+            window.location.href = '@Url.Action("ProjectComplete", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+        });
+
+        $("#datepicker").datepicker({
+            dateFormat: 'dd/mm/yy', isBuddhist: true, defaultDate: toDay, dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+            dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+            monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+            monthNamesShort: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
+            //changeMonth: true,
+            //changeYear: true,
+            buttonImage: '<%=Url.Content("~/Content/Images/calendar.gif") %>'
+
+        });
+
+        $("#tbNumber").change(function (e) {
+            if ($(this).val() != "")
+                $("#numberStar").hide();
+        });
+
+        $("#datepicker").change(function (e) {
+            if ($(this).val() != "")
+                $("#datepickerStar").hide();
+        });
+
+        $("#btnSign").click(function (e) {
+            e.preventDefault();
+
+            $("#dialog").dialog("open");
+            return false;
+        });
+
+        $("#btnCancel").click(function (e) {
+            e.preventDefault();
+
+            $("#dialog").dialog("close");
+            return false;
+        });
+
+        $("#btnSend").click(function (e) {
+            e.preventDefault();
+
+            var number = $("#tbNumber").val();
+            var date = $("#datepicker").val();
+            var numberStar = $("#numberStar");
+            var dateStar = $("#datepickerStar");
+
+            if (number != "" && date != "") {
+
+                numberStar.hide();
+                dateStar.hide();
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: appName + "/Government/Sign/",
+                    data: JSON.stringify({
+                        pId: $("#ID").val(),
+                        number: number,
+                        date: date,
+                    }),
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.Success) {
+                            $("#dialog").dialog("close");
+
+                            $("#message-success").text(data.Message);
+                            $('#modal-success').modal('show');
+
+                            $("#btnOkSuccess").click(function (e) {
+
+                                e.preventDefault();
+                                window.location.href = '@Url.Action("ProjectCompletedUnSign", "Projects")';
+                            });
+                        } else {
+                            $("#message-fail").text(data.Message);
+                            $('#modal-fail').modal('show');
+                        }
+                    }
+                });
+            } else {
+                if (number == "")
+                    numberStar.show();
+                else
+                    numberStar.hide();
+                if (date == "")
+                    dateStar.show();
+                else
+                    dateStar.hide();
+
+            }
+        });
+    });
+</script>

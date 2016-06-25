@@ -1,0 +1,4 @@
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.ExtensibleORM\bin\Debug\iSabaya.ExtensibleORM.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.ExtensibleORM\bin\Debug\iSabaya.ExtensibleORM.pdb
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.pdb

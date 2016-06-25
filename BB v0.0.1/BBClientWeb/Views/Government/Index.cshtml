@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "หน้าหลัก";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="content-left">
+        <ul class='leftnav' style="list-style:none !important">
+            <li>
+                <ul class='sub-leftmenu'>
+                    <li style ="list-style: disc !important">@Html.ActionLink("บันทึกการประเมินโครงการเพื่อประกอบคำของบประมาณ", "ProjectIntro", "Government", null, new { @class = "link" })</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="content-right">
+        <div class="box">
+            <div class="box-header"></div>
+            <div class="box-body">
+                <div>
+                    <p class="title">คู่มือการใช้งานระบบ</p>
+                    <ul>
+                        @for (int i = 0; i < ((List<Budget.Util.Menu>)ViewBag.Manuals).Count; i++)
+                        {
+                            <li>
+                                <a class="link" href="@(((List<Budget.Util.Menu>)ViewBag.Manuals)[i].Url)">@(((List<Budget.Util.Menu>)ViewBag.Manuals)[i].Name)</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="box-footer"></div>
+        </div>
+
+        <script type="text/javascript">
+
+
+        </script>
+
+        <div class="clearFix"></div>
+    </div>
+
+</div>

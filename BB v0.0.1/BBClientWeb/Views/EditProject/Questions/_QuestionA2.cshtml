@@ -1,0 +1,242 @@
+﻿@model Budget.Project
+
+<div class="content-box">
+    <div>
+        <div class="box-question">
+            <div style="text-align:left; margin-top:10px;">
+                <div style="color:Red; font-size:20px;" class="QL1">ประเด็นที่ 2 พิจารณาศักยภาพและความพร้อมของโครงการ</div>
+                <div style="margin-left:15px; margin-top:15px;">
+                    คำถามที่ 2 มีรายงานการทบทวนที่แสดงศักยภาพและความพร้อมของทีมงานโครงการหรือไม่
+                    <span id="questionSetA2Star" class="ErrorDokJan" style="display:none; color:red">*</span><br>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><span>@Html.RadioButton("questionSetA2", "true")<label class="field-content">มี</label></span></td>
+                                <td><span>@Html.RadioButton("questionSetA2", "false")<label class="field-content">ไม่มี</label></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-left:10px">
+                        ถ้าตอบว่า "มี" โปรดให้รายละเอียดเพิ่มเติมต่อไปนี้
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">2.1 สรุปศักยภาพและความพร้อมของบุคลากรในการดำเนินโครงการให้สำเร็จได้อย่างไร</span><br>
+                            @Html.TextArea("answerSetA21", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetA21Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetA21Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 2.1 เกิน 1500 ตัวอักษร</div>
+                        </p>
+
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">2.2 ระบุว่าโครงการนี้หน่วยงานของท่านสามารถดำเนินการได้เองทั้งหมด หรือต้องมีการบูรณาการกับหน่วยงานอื่น กรณีที่มีการบูรณาการกับหน่วยงานอื่น โปรดระบุชื่อหน่วยงานที่บูรณาการด้วย</span><br>
+                            @Html.TextArea("answerSetA22", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetA22Star" class="ErrorDokJan" style="display: none; color: red">*</span>
+                            <div id="answerSetA22Message" class="question-error" style="display: none;">ไม่สามารถกรอก ข้อ 2.2 เกิน 1500 ตัวอักษร</div>
+                        </p>
+
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">2.3 ระบุประสบการณ์ที่หัวหน้าโครงการเคยบริหารโครงการลักษณะเดียวกัน</span><br>
+                            @Html.TextArea("answerSetA23", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetA23Star" class="ErrorDokJan" style="display: none; color: red">*</span>
+                            <div id="answerSetA23Message" class="question-error" style="display: none;">ไม่สามารถกรอก ข้อ 2.3 เกิน 1500 ตัวอักษร</div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin:5px 5px 5px 5px; text-align:center;">
+                <input type="submit" value="บันทึกข้อมูลและดำเนินงานต่อไป" id="btnSaveQuestionSetA2" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var maxLength = 5;
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    var a2 = undefined;
+    var a21 = false;
+    var a22 = false;
+    var a23 = false;
+
+    function validateInput() {
+        //2.1 สรุปศักยภาพและความพร้อมของบุคลากรในการดำเนินโครงการให้สำเร็จได้อย่างไร
+        if ($("#answerSetA21").val() == "") {
+            $("#answerSetA21Star").show();
+        } else {
+            $("#answerSetA21Star").hide();
+            if ($("#answerSetA21").val().length > maxLength)
+                $("#answerSetA21Message").show();
+            else
+                $("#answerSetA21Message").hide();
+        }
+        //2.2 ระบุว่าโครงการนี้หน่วยงานของท่านสามารถดำเนินการได้เองทั้งหมด หรือต้องมีการบูรณาการกับหน่วยงานอื่น กรณีที่มีการบูรณาการกับหน่วยงานอื่น โปรดระบุชื่อหน่วยงานที่บูรณาการด้วย
+        if ($("#answerSetA22").val() == "") {
+            $("#answerSetA22Star").show();
+        } else {
+            $("#answerSetA22Star").hide();
+            if ($("#answerSetA22").val().length > maxLength)
+                $("#answerSetA22Message").show();
+            else
+                $("#answerSetA22Message").hide();
+        }
+        //2.3 ระบุประสบการณ์ที่หัวหน้าโครงการเคยบริหารโครงการลักษณะเดียวกั
+        if ($("#answerSetA23").val() == "") {
+            $("#answerSetA23Star").show();
+        } else {
+            $("#answerSetA23Star").hide();
+            if ($("#answerSetA23").val().length > maxLength)
+                $("#answerSetA23Message").show();
+            else
+                $("#answerSetA23Message").hide();
+        }
+    }
+
+    function save() {
+        if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: appName + "/EditProject/UpdateAnswerA2/",
+                data: JSON.stringify({
+                    pId: $("#ID").val(),
+                    choice: $("input[name=questionSetA2]:checked").val(),
+                    answer1: $("#answerSetA21").val(),
+                    answer2: $("#answerSetA22").val(),
+                    answer3: $("#answerSetA23").val(),
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        $("#message-success").text(data.Message);
+                        $('#modal-success').modal('show');
+
+                        $("#btnOkSuccess").click(function (e) {
+
+                            e.preventDefault();
+                            @*window.location.href = '@Url.Action("QuestionA", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';*@
+                            window.location.href = '@Url.Action("ProjectComplete", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+                        });
+                    } else {
+                        $("#message-fail").text(data.Message);
+                        $('#modal-fail').modal('show');
+                    }
+                }
+            });
+        }
+    }
+
+    $(function () {
+
+        $("input[name=questionSetA2]").change(function (e) {
+            e.preventDefault();
+
+            var qSetA2 = $("input[name=questionSetA2]:checked").val();
+            if (qSetA2 != undefined) {
+                $("#questionSetA2Star").hide();
+                if (qSetA2 == "true") {
+                    a2 = true;
+                    $("#answerSetA21").removeAttr('disabled');
+                    $("#answerSetA22").removeAttr('disabled');
+                    $("#answerSetA23").removeAttr('disabled');
+                } else {
+                    a2 = false;
+                    $("#answerSetA21Star").hide();
+                    $("#answerSetA22Star").hide();
+                    $("#answerSetA23Star").hide();
+
+                    $("#answerSetA21Message").hide();
+                    $("#answerSetA22Message").hide();
+                    $("#answerSetA23Message").hide();
+
+                    $("#answerSetA21").val("").attr('disabled', 'disabled');
+                    $("#answerSetA22").val("").attr('disabled', 'disabled');
+                    $("#answerSetA23").val("").attr('disabled', 'disabled');
+                }
+            } else {
+                $("#questionSetA2Star").show();
+            }
+        });
+
+        $("#answerSetA21").change(function (e) {
+            e.preventDefault();
+
+            var answerSetA21 = $("#answerSetA21").val();
+            if (answerSetA21.length > 0) {
+                $("#answerSetA21Star").hide();
+                if (answerSetA21.length > maxLength)
+                    $("#answerSetA21Message").show();
+                else {
+                    a21 = true;
+                    $("#answerSetA21Message").hide();
+                }
+            } else {
+                $("#answerSetA21Star").show();
+            }
+        });
+
+        $("#answerSetA22").change(function (e) {
+            e.preventDefault();
+
+            var answerSetA22 = $("#answerSetA22").val();
+            if (answerSetA22.length > 0) {
+                $("#answerSetA22Star").hide();
+                if (answerSetA21.length > maxLength)
+                    $("#answerSetA22Message").show();
+                else {
+                    a22 = true;
+                    $("#answerSetA22Message").hide();
+                }
+            } else {
+                $("#answerSetA22Star").show();
+            }
+        });
+
+        $("#answerSetA23").change(function (e) {
+            e.preventDefault();
+
+            var answerSetA23 = $("#answerSetA23").val();
+            if (answerSetA23.length > 0) {
+                $("#answerSetA23Star").hide();
+                if (answerSetA21.length > maxLength)
+                    $("#answerSetA23Message").show();
+                else {
+                    a23 = true;
+                    $("#answerSetA23Message").hide();
+                }
+            } else {
+                $("#answerSetA23Star").show();
+            }
+        });
+
+        $("#btnSaveQuestionSetA2").click(function (e) {
+            e.preventDefault();
+
+            //ตรวจสอบ ตำตอบ ข้อ 2.1, 2.2, 2.3 ไม่มีค่าว่างและไม่เกิน 1500 ตัวอักษร
+            if (a2) {
+                validateInput();
+                if (a21 && a22 && a23) {
+                    save();
+                }
+            } else if (a2 == undefined) {
+                $("#questionSetA2Star").show();
+                validateInput();
+            }
+            else {
+                a2 = false;
+                save();
+            }
+
+        });
+
+    });
+
+</script>

@@ -1,0 +1,10 @@
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.Questionnaire\bin\Debug\iSabaya.Questionnaire.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.Questionnaire\bin\Debug\iSabaya.Questionnaire.pdb
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.Questionnaire\bin\Debug\iSabaya.Config.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.Questionnaire\bin\Debug\iSabaya.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.Questionnaire\bin\Debug\NHibernate.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.Questionnaire\bin\Debug\iSabaya.Config.pdb
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.Questionnaire\bin\Debug\iSabaya.pdb
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.Questionnaire\obj\Debug\iSabaya.Questionnaire.csprojResolveAssemblyReference.cache
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.Questionnaire\obj\Debug\iSabaya.Questionnaire.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.Questionnaire\obj\Debug\iSabaya.Questionnaire.pdb

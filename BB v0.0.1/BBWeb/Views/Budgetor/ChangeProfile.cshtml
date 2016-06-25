@@ -1,0 +1,346 @@
+﻿
+@{
+    ViewBag.Title = "แก้ไขทะเบียนผู้ใช้งาน(สำนักงบประมาณ)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model BBWeb.Models.User
+
+<script type="text/javascript">
+    
+    $(function(){
+        //$("#r").attr('disabled','disabled');
+    });
+    
+</script>
+
+<table>
+    <tbody>
+        <tr>
+            <td>เลขที่บัตรประชาชน</td>
+            <td>
+                @Html.TextBoxFor(x => x.IdCard, new { @class = "form-control aspNetDisabled", @disabled = "disabled" })
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>ชื่อ(ภาษาไทย)</td>
+            <td>
+                @Html.TextBoxFor(x => x.FirstNameTh, new { @class = "form-control aspNetDisabled", @disabled = "disabled" })
+            </td>
+            <td style="padding-left:20px">นามสกุล(ภาษาไทย)</td>
+            <td>
+                @Html.TextBoxFor(x => x.LastNameTh, new { @class = "form-control aspNetDisabled", @disabled = "disabled" })
+            </td>
+        </tr>
+        <tr>
+            <td>ชื่อ(ภาษาอังกฤษ)</td>
+            <td>
+                @Html.TextBoxFor(x => x.FirstNameEn, new { @class = "form-control aspNetDisabled", @disabled = "disabled" })
+            </td>
+            <td style="padding-left:20px">นามสกุล(ภาษาอังกฤษ)</td>
+            <td>
+                @Html.TextBoxFor(x => x.LastNameEn, new { @class = "form-control aspNetDisabled", @disabled = "disabled" })
+            </td>
+        </tr>
+        <tr>
+            <td>ที่อยู่หน่วยงาน</td>
+            <td colspan="3">
+                @Html.TextAreaFor(x => x.Address, new { @class = "form-control aspNetDisabled", @disabled = "disabled" })
+            </td>
+        </tr>
+        <tr>
+            <td>หมายเลขโทรศัพท์กลาง</td>
+            <td>
+                @Html.TextBoxFor(x => x.PhoneCenter, new { @class = "form-control aspNetDisabled", @disabled = "disabled" })
+            </td>
+            <td style="padding-left:20px">เบอร์ต่อ</td>
+            <td>
+                @Html.TextBoxFor(x => x.PhoneCenter, new { @class = "form-control aspNetDisabled", @disabled = "disabled" })
+            </td>
+        </tr>
+        <tr>
+            <td>หมายเลขโทรศัพท์ตรง</td>
+            <td>
+                @Html.TextBoxFor(x => x.PhoneDirect, new { @class = "form-control aspNetDisabled", @disabled = "disabled" })
+            </td>
+            <td style="padding-left:20px">หมายเลขโทรศัพท์มือถือ</td>
+            <td>
+                @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control aspNetDisabled", @disabled = "disabled" })
+            </td>
+        </tr>
+        <tr>
+            <td>E-Mail</td>
+            <td colspan="3">
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control aspNetDisabled", @disabled = "disabled" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                สังกัด
+            </td>
+            <td colspan="3">
+                @Html.DropDownList("department", new List<SelectListItem> { new SelectListItem { Text = Model.Department } }, new { @class = "form-control aspNetDisabled", @disabled = "disabled" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                สถานะผู้ใช้งาน
+            </td>
+            <td colspan="3">
+                @Html.DropDownList("t", new List<SelectListItem> { new SelectListItem { Text = Model.Status } }, new { @class = "form-control aspNetDisabled", @disabled = "disabled" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                กระทรวงที่ดูแล
+            </td>
+            <td colspan="3">
+                <select name="ctl00$ContentPlaceHolder1$uc_register_staff1$ddl_ministry" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$uc_register_staff1$ddl_ministry\',\'\')', 0)" id="ContentPlaceHolder1_uc_register_staff1_ddl_ministry" disabled="disabled" class="aspNetDisabled">
+                    <option value="-1">กรุณาเลือก</option>
+                    <option value="1">01000 / สำนักนายกรัฐมนตรี</option>
+                    <option value="2">02000 / กระทรวงกลาโหม</option>
+                    <option value="3">03000 / กระทรวงการคลัง</option>
+                    <option value="4">04000 / กระทรวงการต่างประเทศ</option>
+                    <option value="5">05000 / กระทรวงการท่องเที่ยวและกีฬา</option>
+                    <option value="6">06000 / กระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์</option>
+                    <option value="7">07000 / กระทรวงเกษตรและสหกรณ์</option>
+                    <option value="8">08000 / กระทรวงคมนาคม</option>
+                    <option value="9">09000 / กระทรวงทรัพยากรธรรมชาติและสิ่งแวดล้อม</option>
+                    <option value="10">11000 / กระทรวงเทคโนโลยีสารสนเทศและการสื่อสาร</option>
+                    <option value="11">12000 / กระทรวงพลังงาน</option>
+                    <option value="12">13000 / กระทรวงพาณิชย์</option>
+                    <option value="13">14000 / ทบวงมหาวิทยาลัย</option>
+                    <option value="14">15000 / กระทรวงมหาดไทย</option>
+                    <option value="15">16000 / กระทรวงยุติธรรม</option>
+                    <option value="16">17000 / กระทรวงแรงงาน</option>
+                    <option value="17">18000 / กระทรวงวัฒนธรรม</option>
+                    <option value="18">19000 / กระทรวงวิทยาศาสตร์และเทคโนโลยี</option>
+                    <option selected="selected" value="19">20000 / กระทรวงศึกษาธิการ</option>
+                    <option value="20">21000 / กระทรวงสาธารณสุข</option>
+                    <option value="21">22000 / กระทรวงอุตสาหกรรม</option>
+                    <option value="22">25000 / หน่วยงานขององค์กรตามรัฐธรรมนูญ และหน่วยงานอิสระตามรัฐธรรมนูญ</option>
+                    <option value="24">26000 / หน่วยงานอิสระตามรัฐธรรมนูญ</option>
+                    <option value="25">70000 / จังหวัดและกลุ่มจังหวัด</option>
+                    <option value="26">50000 / รัฐวิสาหกิจ</option>
+                    <option value="27">60000 / สภากาชาดไทย</option>
+                    <option value="28">80800 / กองทุนและเงินทุนหมุนเวียน</option>
+
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                หน่วยงานที่ดูแล<span id="ContentPlaceHolder1_uc_register_staff1_CustomValidator_department" style="visibility:hidden;">*</span>
+            </td>
+            <td colspan="3">
+                <input id="ContentPlaceHolder1_uc_register_staff1_cbk_department_selectAll" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbk_department_selectAll" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbk_department_selectAll">เลือกหน่วยงานทั้งหมด</label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div id="ContentPlaceHolder1_uc_register_staff1_pnl_department_list" style="width:100%">
+
+                    <table id="ContentPlaceHolder1_uc_register_staff1_cbklist_department">
+                        <tbody>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_0" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$0" checked="checked" value="20102" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_0">20102 / มหาวิทยาลัยเกษตรศาสตร์</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_46" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$46" value="20143" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_46">20143 / มหาวิทยาลัยราชภัฎเพชรบุรี</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_1" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$1" checked="checked" value="20103" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_1">20103 / มหาวิทยาลัยขอนแก่น</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_47" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$47" value="20144" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_47">20144 / มหาวิทยาลัยราชภัฎวไลยอลงกรณ์ในพระบรมราชูปถัมภ์จังหวัดปทุมธานี</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_2" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$2" checked="checked" value="20106" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_2">20106 / มหาวิทยาลัยธรรมศาสตร์</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_48" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$48" value="20145" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_48">20145 / มหาวิทยาลัยราชภัฎเพชรบูรณ์</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_3" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$3" value="20312" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_3">20312 / มหาวิทยาลัยมหิดล</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_49" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$49" value="20146" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_49">20146 / มหาวิทยาลัยราชภัฎภูเก็ต</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_4" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$4" value="20112" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_4">20112 / มหาวิทยาลัยรามคำแหง</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_50" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$50" value="20147" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_50">20147 / มหาวิทยาลัยราชภัฎมหาสารคาม</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_5" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$5" value="20114" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_5">20114 / มหาวิทยาลัยศิลปากร</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_51" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$51" value="20148" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_51">20148 / มหาวิทยาลัยราชภัฎยะลา</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_6" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$6" checked="checked" value="20115" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_6">20115 / มหาวิทยาลัยสงขลานครินทร์</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_52" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$52" value="20149" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_52">20149 / มหาวิทยาลัยราชภัฎราชนครินทร์</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_7" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$7" value="20120" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_7">20120 / สถาบันบัณฑิตพัฒนบริหารศาสตร์</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_53" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$53" value="20150" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_53">20150 / มหาวิทยาลัยราชภัฎร้อยเอ็ด</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_8" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$8" value="20113" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_8">20113 / มหาวิทยาลัยศรีนครินทรวิโรฒ</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_54" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$54" value="20151" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_54">20151 / มหาวิทยาลัยราชภัฎรำไพพรรณี</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_9" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$9" value="20111" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_9">20111 / มหาวิทยาลัยแม่โจ้</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_55" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$55" value="20152" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_55">20152 / มหาวิทยาลัยราชภัฎเลย</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_10" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$10" value="20116" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_10">20116 / มหาวิทยาลัยสุโขทัยธรรมาธิราช</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_56" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$56" value="20153" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_56">20153 / มหาวิทยาลัยราชภัฎลำปาง</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_11" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$11" value="20318" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_11">20318 / สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_57" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$57" value="20154" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_57">20154 / มหาวิทยาลัยราชภัฎศรีสะเกษ</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_12" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$12" value="20306" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_12">20306 / มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_58" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$58" value="20155" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_58">20155 / มหาวิทยาลัยราชภัฎสกลนคร</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_13" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$13" value="20313" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_13">20313 / สถาบันเทคโนโลยีพระจอมเกล้าพระนครเหนือ</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_59" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$59" value="20156" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_59">20156 / มหาวิทยาลัยราชภัฎสงขลา</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_14" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$14" value="20107" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_14">20107 / มหาวิทยาลัยนเรศวร</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_60" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$60" value="20157" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_60">20157 / มหาวิทยาลัยราชภัฎสวนดุสิต</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_15" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$15" value="20314" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_15">20314 / มหาวิทยาลัยบูรพา</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_61" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$61" value="20158" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_61">20158 / มหาวิทยาลัยราชภัฎสวนสุนันทา</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_16" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$16" value="20117" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_16">20117 / มหาวิทยาลัยอุบลราชธานี</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_62" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$62" value="20159" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_62">20159 / มหาวิทยาลัยราชภัฎสุราษฎร์ธานี</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_17" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$17" value="20304" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_17">20304 / มหาวิทยาลัยเทคโนโลยีสุรนารี</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_63" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$63" value="20160" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_63">20160 / มหาวิทยาลัยราชภัฎสุรินทร์</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_18" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$18" value="20305" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_18">20305 / มหาวิทยาลัยวลัยลักษณ์</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_64" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$64" value="20161" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_64">20161 / มหาวิทยาลัยราชภัฎหมู่บ้านจอมบึง</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_19" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$19" value="20109" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_19">20109 / มหาวิทยาลัยมหาสารคาม</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_65" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$65" value="20162" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_65">20162 / มหาวิทยาลัยราชภัฎอุดรธานี</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_20" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$20" value="20315" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_20">20315 / มหาวิทยาลัยทักษิณ</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_66" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$66" value="20163" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_66">20163 / มหาวิทยาลัยราชภัฎุอุตรดิตถ์</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_21" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$21" value="20307" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_21">20307 / มหาวิทยาลัยแม่ฟ้าหลวง</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_67" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$67" value="20164" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_67">20164 / มหาวิทยาลัยราชภัฎอุบลราชธานี</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_22" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$22" value="20001" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_22">20001 / สำนักงานรัฐมนตรี</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_68" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$68" value="20165" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_68">20165 / มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_23" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$23" value="20002" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_23">20002 / สำนักงานปลัดกระทรวงศึกษาธิการ</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_69" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$69" value="20166" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_69">20166 / มหาวิทยาลัยเทคโนโลยีราชมงคลกรุงเทพ</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_24" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$24" value="20003" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_24">20003 / สำนักงานเลขาธิการสภาการศึกษา</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_70" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$70" value="20167" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_70">20167 / มหาวิทยาลัยเทคโนโลยีราชมงคลตะวันออก</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_25" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$25" value="20004" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_25">20004 / สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_71" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$71" value="20168" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_71">20168 / มหาวิทยาลัยเทคโนโลยีราชมงคลพระนคร</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_26" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$26" value="20005" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_26">20005 / สำนักงานคณะกรรมการการอุดมศึกษา</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_72" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$72" value="20169" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_72">20169 / มหาวิทยาลัยเทคโนโลยีราชมงคลรัตนโกสินทร์</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_27" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$27" value="20006" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_27">20006 / สำนักงานคณะกรรมการการอาชีวศึกษา</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_73" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$73" value="20170" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_73">20170 / มหาวิมยาลัยเทคโนโลยีราชมงคลล้านนา</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_28" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$28" value="20124" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_28">20124 / มหาวิทยาลัยราชภัฎกาญจนบุรี</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_74" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$74" value="20171" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_74">20171 / มหาวิทยาลัยเทคโนโลยีราชมงคลศรีวิชัย</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_29" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$29" value="20125" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_29">20125 / มหาวิทยาลัยราชภัฎกาฬสินธุ์</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_75" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$75" value="20172" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_75">20172 / มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_30" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$30" value="20126" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_30">20126 / มหาวิทยาลัราชภัฎกำแพงเพชร</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_76" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$76" value="20173" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_76">20173 / มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_31" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$31" value="20127" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_31">20127 / มหาวิทยาลัยราชภัฎจันทรเกษม</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_77" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$77" value="20174" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_77">20174 / สถาบันเทคโนโลยีปทุมวัน</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_32" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$32" value="20128" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_32">20128 / มหาวิทยาลัยราชภัฎชัยภูมิ</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_78" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$78" value="20175" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_78">20175 / มหาวิทยาลัยนราธิวาสราชนครินทร์</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_33" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$33" value="20129" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_33">20129 / มหาวิทยาลัยราชภัฎเชียงราย</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_79" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$79" value="20176" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_79">20176 / มหาวิทยาลัยนครพนม</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_34" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$34" value="20130" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_34">20130 / มหาวิทยาลัยราชภัฎเชียงใหม่</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_80" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$80" value="20301" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_80">20301 / สถาบันส่งเสริมการสอนวิทยาศาสตร์และเทคโนโลยี</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_35" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$35" value="20131" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_35">20131 / มหาวิทยาลัยราชภัฎเทพสตรี</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_81" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$81" value="20302" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_81">20302 / โรงเรียนมหิดลวิทยานุสรณ์</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_36" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$36" value="20132" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_36">20132 / มหาวิทยาลัยราชภัฎธนบุรี</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_82" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$82" value="20308" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_82">20308 / สถาบันระหว่างประเทศเพื่อการค้าและการพัฒนา(องค์การมหาชน)</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_37" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$37" value="20133" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_37">20133 / มหาวิทยาลัยราชภัฎนครปฐม</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_83" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$83" value="20309" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_83">20309 / สำนักเลขาธิการคุรุสภา</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_38" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$38" value="20135" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_38">20135 / มหาวิทยาลัยราชภัฎนครราชสีมา</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_84" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$84" value="20310" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_84">20310 / สำนักงานคณะกรรมการส่งเสริมสวัสดิการและสวัสดิภาพครูและบุคคลทางการศึกษา</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_39" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$39" value="20136" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_39">20136 / มหาวิทยาลัยราชภัฎนครศรีธรรมราช</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_85" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$85" value="20311" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_85">20311 / สถาบันทดสอบทางการศึกษาแห่งชาติ(องค์การมหาชน)</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_40" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$40" value="20137" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_40">20137 / มหาวิทยาลัยราชภัฎนครสวรรค์</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_86" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$86" value="20317" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_86">20317 / มหาวิทยาลัยเชียงใหม่</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_41" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$41" value="20138" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_41">20138 / มหาวิทยาลัยราชภัฎบ้านสมเด็จเจ้าพระยา</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_87" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$87" value="20122" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_87">20122 / มหาวิทยาลัยมหาจุฬาลงกรณราชวิทยาลัย</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_42" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$42" value="20139" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_42">20139 / มหาวิทยาลัยราชภัฎบุรีรัมย์</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_88" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$88" value="20123" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_88">20123 / มหาวิทยาลัยมหามกุฏราชวิทยาลัย</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_43" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$43" value="20140" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_43">20140 / มหาวิทยาลัยราชภัฎพระนคร</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_89" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$89" value="20316" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_89">20316 / จุฬาลงกรณ์มหาวิทยาลัย</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_44" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$44" value="20141" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_44">20141 / มหาวิทยาลัยราชภัฎพระนครศรีอยุธยา</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_90" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$90" value="20319" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_90">20319 / มหาวิทยาลัยพะเยา</label></td>
+                            </tr>
+                            <tr>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_45" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$45" value="20142" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_45">20142 / มหาวิทยาลัยราชภัฎพิบูลสงคราม</label></td>
+                                <td><input id="ContentPlaceHolder1_uc_register_staff1_cbklist_department_91" name="ctl00$ContentPlaceHolder1$uc_register_staff1$cbklist_department$91" value="" type="checkbox"><label for="ContentPlaceHolder1_uc_register_staff1_cbklist_department_91">20320 / สถาบันดนตรีกัลยาณิวัฒนา</label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <center>
+                    <input value="ลงทะเบียน" id="changeProfile" type="submit" class="btn btn-default">
+                </center>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

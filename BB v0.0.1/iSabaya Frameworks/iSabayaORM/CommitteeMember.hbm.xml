@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.CommitteeMember,iSabaya" table="CommitteeMember">
+    <id name="CommitteeMemberID" type="Int32" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <component name="EffectivePeriod" class="iSabaya.TimeInterval, iSabaya">
+      <property name="From" column="EffectiveFrom"/>
+      <property name="To" column="EffectiveTo"/>
+    </component>
+    <property name="IsNominatedByEmployer" />
+    <many-to-one name="Member" column="PersonID" class="iSabaya.Person,iSabaya" />
+    <any name="CommitteeOf" meta-type="byte" id-type="Int32" >
+      <meta-value value="10" class="iSabaya.Organization,iSabaya"/>
+      <meta-value value="15" class="iSabaya.OrgUnit,iSabaya"/>
+      <meta-value value="30" class="imSabaya.MutualFund,imSabaya"/>
+      <meta-value value="35" class="imSabaya.ProvidentFund,imSabaya"/>
+      <meta-value value="70" class="imSabaya.ProvidentFundSystem.Employer,imSabaya"/>
+      <column name="PartyDiscriminator"/>
+      <column name="PartyID"/>
+    </any>
+    <many-to-one name="Role" column="RoleID" class="iSabaya.TreeListNode,iSabaya" />
+    <property name="UpdatedTS" />
+    <many-to-one name="UpdatedBy" />
+  </class>
+</hibernate-mapping>
+
+

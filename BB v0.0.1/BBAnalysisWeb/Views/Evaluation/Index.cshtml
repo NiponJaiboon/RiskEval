@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "หน้าหลัก";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="content-left">
+        <ul class='leftnav' style="list-style:none !important">
+            <li>
+                <ul class='sub-leftmenu'>
+                    <li>@Html.ActionLink("โครงการที่ผ่านการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล", "ProjectCompleteSign", "Evaluation", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("โครงการที่ไม่อยู่ในข่ายการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล", "ProjectUnRisk", "Evaluation", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("โครงการที่ผ่านการแสดงความคิดเห็นจากเจ้าหน้าที่จัดทำงบประมาณ", "ProjectCommentted", "Evaluation", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("โครงการที่ผ่านการพิจารณาจากรัฐสภา", "ProjectApproved", "Evaluation", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("รายงานภาพรวมทั่วประเทศ แยกตามโครงการที่อยู่ในข่าย/ไม่อยู่ในข่ายการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล", "ProjectGroupByRiskAnalysisReport", "Report", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("รายงานภาพรวมทั่วประเทศ แยกตามประเภทโครงการ", "ProjectGroupByCategoryReport", "Report", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("รายงานภาพรวมทั่วประเทศ แยกตามผลการพิจารณาจากรัฐสภา", "ProjectGroupByApprovedReport", "Report", null, new { @class = "link" })</li>               
+                    <li>@Html.ActionLink("รายงานภาพรวมทั่วประเทศ แบ่งตามลักษณะของโครงการ", "ProjectGroupByTypeReport", "Report", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("รายงานภาพรวมทั่วประเทศ แบ่งตามยุทธศาสตร์จัดสรรโครงการ", "ProjectGroupByStrategicReport", "Report", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("รายงานภาพรวมทั่วประเทศ แบ่งตามสถานะการวิเคราะห์โครงการ", "ProjectGroupByStatusReport", "Report", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("รายงานภาพรวมทั่วประเทศ แยกตามผลการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล", "ProjectGroupByRiskResultAnalysisReport", "Report", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("รายงานการตรวจสอบโครงการของส่วนราชการทั่วประเทศ จำแนกตามรายกระทรวง", "ProjectCheckReport", "Report", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("รายงานภาพรวมผลการวิเคราะห์ความเสี่ยงตามหลักธรรมมาภิบาลของส่วนราชการทั่วประเทศ จำแนกตามรายกระทรวง", "ProjectAllReport", "Report", null, new { @class = "link" })</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="content-right">
+        <div class="box">
+            <div class="box-header"></div>
+            <div class="box-body">
+                <div>
+                    <p class="title">ประกาศสำนักประเมินผล</p>
+                    <ul>
+                        @for (int i = 0; i < ((List<Budget.Util.Menu>)ViewBag.Notices).Count; i++)
+                        {
+                            <li>
+                                <a class="link">@(((List<Budget.Util.Menu>)ViewBag.Notices)[i].Name)</a>
+                            </li>
+                        }
+                    </ul>
+                    <p class="title">คู่มือการใช้งานระบบ</p>
+                    <ul>
+                        @for (int i = 0; i < ((List<Budget.Util.Menu>)ViewBag.Manuals).Count; i++)
+                        {
+                            <li>
+                                <a class="link" target="_blank" href='@(((List<Budget.Util.Menu>)ViewBag.Manuals)[i].Url)'>@(((List<Budget.Util.Menu>)ViewBag.Manuals)[i].Name)</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="box-footer"></div>
+        </div>
+
+        <script type="text/javascript">
+
+
+        </script>
+
+        <div class="clearFix"></div>
+    </div>
+
+</div>

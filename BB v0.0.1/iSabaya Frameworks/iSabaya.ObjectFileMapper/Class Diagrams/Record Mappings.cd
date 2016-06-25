@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="iSabaya.ObjectFileMapper.MappingBase" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAQAEAAAAQAQAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MappingBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.RecordMapperBase&lt;T&gt;" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAABCAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RecordMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.ExcelFile.ExcelHeaderDetailsFooterRecord&lt;T, D&gt;" Collapsed="true">
+    <Position X="1.75" Y="5.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAJAAABAAAAAAAAAAAAgAAAgAAAAA=</HashCode>
+      <FileName>Excel File Mapper\ExcelHeaderDetailsFooterRecordMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.ExcelFile.ExcelRowMapperBase&lt;T&gt;" Collapsed="true">
+    <Position X="2.25" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAIAAARAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Excel File Mapper\ExcelRowMapperBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.ExcelFile.MultiExcelRowMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="3.5" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAEABAAAAAAAQAAIAAABAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Excel File Mapper\MultiExcelRowMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.ExcelFile.SingleExcelRowMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="0.75" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAACAAAAQQAIAAEBAAAAAAAAAAAAAAgIAAAAAA=</HashCode>
+      <FileName>Excel File Mapper\SingleExcelRowMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.MultiTextRecordMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="9.75" Y="4.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAACQAAIAAABAAAgAAAAAAAQAAgAAAAAAA=</HashCode>
+      <FileName>Text File\MultiTextRecordMapper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.SingleTextRecordMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="6.5" Y="4.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAQQAIAAABAAAAAAAAAAAAAAgIAAAQAA=</HashCode>
+      <FileName>Text File\SingleTextRecordMapper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.TextHeaderDetailsFooterRecordMapper&lt;T&gt;" Collapsed="true">
+    <Position X="7.75" Y="5.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAJAAABAAAAAAAAAAAAgAAAgAAAAA=</HashCode>
+      <FileName>Text File\TextHeaderDetailsFooterRecordMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.TextRecordMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="8.25" Y="3" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAIAEAAAAAAAAAAAEAAEAAAAAgAAAAAAA=</HashCode>
+      <FileName>Text File\TextRecordMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

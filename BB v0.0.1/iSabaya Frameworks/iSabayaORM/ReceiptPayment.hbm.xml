@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.ReceiptPayment,iSabaya" table="ReceiptPayment">
+    <!-- Primary key-->
+    <id name="ReceiptPaymentID" type="Int32" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <property name="SeqNo" />
+    <many-to-one name="Receipt" column="ReceiptID" class="iSabaya.Receipt,iSabaya"/>
+    <any name="Payment" meta-type="byte" id-type="Int32" >
+      <meta-value value="1" class="iSabaya.Cheque,iSabaya"/>
+      <meta-value value="2" class="iSabaya.Cash,iSabaya"/>
+      <meta-value value="3" class="iSabaya.BankDeposit,iSabaya"/>
+      <meta-value value="4" class="iSabaya.FundTransfer,iSabaya"/>
+      <meta-value value="5" class="iSabaya.BillPayment,iSabaya"/>
+      <column name="PaymentDiscriminator"/>
+      <column name="PaymentID"/>
+    </any>
+    <component name="AppliedAmount" class="iSabaya.Money, iSabaya">
+      <property name="Amount" column="AppliedAmount"/>
+      <property name="CurrencyID" column="AppliedAmountCurrencyID" />
+    </component>
+    <property name="Reference" />
+    <property name="Remark"/>
+    <property name="UpdatedTS" />
+    <many-to-one name="UpdatedBy" column="UpdatedBy" class="iSabaya.User,iSabaya" not-null="false"/>
+  </class>
+</hibernate-mapping>
+
+

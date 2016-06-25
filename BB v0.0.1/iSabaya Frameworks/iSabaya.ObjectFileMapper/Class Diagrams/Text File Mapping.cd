@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.TextRecordMapperBase&lt;T&gt;" Collapsed="true">
+    <Position X="7.5" Y="3" Width="2" />
+    <AssociationLine Name="Parent" Type="iSabaya.ObjectFileMapper.TextFile.TextRecordMapperBase&lt;T&gt;" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.25" Y="3.691" />
+        <Point X="9.25" Y="3.901" />
+        <Point X="9.719" Y="3.901" />
+        <Point X="9.719" Y="3.625" />
+        <Point X="9.5" Y="3.625" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAIAAARAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Text File\TextRecordMapperBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Parent" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.MultiTextFieldMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="13.5" Y="8.75" Width="2.5" />
+    <AssociationLine Name="FieldMappers" Type="iSabaya.ObjectFileMapper.TextFile.TextFieldMapper&lt;T&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.25" Y="8.75" />
+        <Point X="15.25" Y="7.625" />
+        <Point X="12.5" Y="7.625" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AACEAEAAAAAgQQAAAAAAAABAAAAAEAAAAAAgIAAAAAA=</HashCode>
+      <FileName>Text File\MultiTextFieldMapper.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="FieldMappers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.MultiTextFieldValueMapper&lt;V&gt;" Collapsed="true">
+    <Position X="10.25" Y="6" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAMBgCAAAQQAAAAAAAABAAAEAAAAAAAIAIAAACCA=</HashCode>
+      <FileName>Text File\MultiTextFieldValueMapper.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="FieldMappers" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="2.21" />
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.MultiTextRecordMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="3" Y="6" Width="2.5" />
+    <AssociationLine Name="RecordMappers" Type="iSabaya.ObjectFileMapper.TextFile.TextRecordMapperBase&lt;T&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.688" Y="6" />
+        <Point X="3.688" Y="3.315" />
+        <Point X="7.5" Y="3.315" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAQgAIAAABEAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Text File\MultiTextRecordMapper.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SignatureRecordMapper" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="RecordMappers" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="1.544" />
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.ObjectTextFileMapping&lt;T&gt;" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="2.5" />
+    <AssociationLine Name="RecordMapping" Type="iSabaya.ObjectFileMapper.TextFile.TextRecordMapperBase&lt;T&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="8.5" Y="2.441" />
+        <Point X="8.5" Y="3" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAgAAAAgQICAAJAAAgAAACAAAAAAABAAAAAA=</HashCode>
+      <FileName>Text File\ObjectTextFileMapping.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RecordMapping" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.SignaturedMultiTextFieldMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="13.25" Y="10" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEACAAAAQQAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Text File\SignaturedMultiTextFieldMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.SignaturedSingleTextFieldMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="6.5" Y="8.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAEAEBAAAAAQAAAAAAAAAAIAAAAAAAAAAQgAAAAAAA=</HashCode>
+      <FileName>Text File\SignaturedSingleTextFieldMapper.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FieldType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.SingleFixedLengthTextFieldMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="10" Y="8.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAEAEBAAAAAQQAAAAAAAAAAAABAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Text File\SingleFixedLengthTextFieldMapper.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FieldType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.SingleTextRecordMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="7.25" Y="6" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAARAAIAAABAAAAAAAAQAAAAEgIAAAAAA=</HashCode>
+      <FileName>Text File\SingleTextRecordMapper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.TextFieldMapper&lt;T&gt;" Collapsed="true">
+    <Position X="10.5" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAAAAMAAAAAgQQAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Text File\TextFieldMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.TextFieldType&lt;V&gt;" Collapsed="true">
+    <Position X="10.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAEAAAAAAAAEAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Text File\TextFieldType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.TextHeaderDetailsFooterRecordMapper&lt;T&gt;" Collapsed="true">
+    <Position X="9.75" Y="4.5" Width="3.25" />
+    <AssociationLine Name="HeaderMapper" Type="iSabaya.ObjectFileMapper.TextFile.MultiTextFieldValueMapper&lt;V&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="12.062" Y="5.191" />
+        <Point X="12.062" Y="6" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="DetailMapper" Type="iSabaya.ObjectFileMapper.TextFile.TextRecordMapperBase&lt;T&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="11.75" Y="4.5" />
+        <Point X="11.75" Y="3.315" />
+        <Point X="9.5" Y="3.315" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="FooterMapper" Type="iSabaya.ObjectFileMapper.TextFile.MultiTextFieldValueMapper&lt;V&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="10.875" Y="5.191" />
+        <Point X="10.875" Y="6" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAJAAABAAAAAAAAAAAAgAAAgAAAAA=</HashCode>
+      <FileName>Text File\TextHeaderDetailsFooterRecordMapper.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="HeaderMapper" />
+      <Property Name="DetailMapper" />
+      <Property Name="FooterMapper" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.TextRecordMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="5.25" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAIAEAAAAAAAAAAAEAAEAAAAAgAAAAAAA=</HashCode>
+      <FileName>Text File\TextRecordMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.ObjectFileMapping&lt;T&gt;" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MAAAEAAAEgAgAAAQIAAgBAAAAAGACAAYAAAACAAAAAA=</HashCode>
+      <FileName>ObjectFileMapping.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

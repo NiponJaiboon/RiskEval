@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+
+  <class name="iSabaya.StateTransition,iSabaya" table="StateTransition"  >
+    <!-- Primary key-->
+    <id name="StateTransitionID" column="StateTransitionID" type="Int32" unsaved-value="0">
+      <generator class="native"/>
+    </id>   
+
+    <property name="SeqNo" column="SeqNo" type="int"  not-null="true"/>
+    <many-to-one name="FromState" column="FromState" class="iSabaya.State,iSabaya"  />
+    <many-to-one name="ToState" column="ToState" class="iSabaya.State,iSabaya"  />
+    <many-to-one name="TransitionRule" column="TransitionRuleID" class="iSabaya.Rule,iSabaya"  />
+    <many-to-one name="Title" column="LabelMLSID" class="iSabaya.MultilingualString,iSabaya"  />
+  </class>
+</hibernate-mapping>
+
+

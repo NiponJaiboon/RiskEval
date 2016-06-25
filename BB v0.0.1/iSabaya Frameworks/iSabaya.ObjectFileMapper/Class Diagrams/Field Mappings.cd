@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="iSabaya.ObjectFileMapper.FieldMapper&lt;T&gt;" Collapsed="true">
+    <Position X="10.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>FieldMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.FieldValueMapper&lt;V&gt;" Collapsed="true">
+    <Position X="19" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAgQQAAAAAAAAAAAABAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>FieldValueMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.MappingBase" Collapsed="true">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAQAEAAAAQAQAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MappingBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.ExcelFile.ExcelFieldMapper&lt;T&gt;" Collapsed="true">
+    <Position X="7.25" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAgQQAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Excel File Mapper\ExcelFieldMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.ExcelFile.MultiExcelFieldMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="7" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AACEAAAAAAAgQQAAAAAAAAAAAAAAEAAAAAAgIAAAAAA=</HashCode>
+      <FileName>Excel File Mapper\MultiExcelFieldMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.ExcelFile.MultiExcelFieldValueMapper&lt;V&gt;" Collapsed="true">
+    <Position X="17.25" Y="3.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAgCAAAQQAAIAAAAAAAAAAAEAAAAAAAIAAAACA=</HashCode>
+      <FileName>Excel File Mapper\MultiExcelFieldValueMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.ExcelFile.SignatureMultiExcelFieldMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="6.75" Y="7" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Excel File Mapper\SignatureMultiExcelFieldMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.ExcelFile.SignatureSingleExcelFieldMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="4.75" Y="4.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAIAAAAAAAAAAQgAAAAAAA=</HashCode>
+      <FileName>Excel File Mapper\SignatureSingleExcelFieldMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.ExcelFile.SingleExcelFieldMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="8.5" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAQAAAAAAAAAAAAABAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Excel File Mapper\SingleExcelFieldMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.MultiTextFieldMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="13.5" Y="5.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AACEAEAAAAAgQQAAAAAAAABAAAAAEAAAAAAgIAAAAAA=</HashCode>
+      <FileName>Text File\MultiTextFieldMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.MultiTextFieldValueMapper&lt;V&gt;" Collapsed="true">
+    <Position X="20" Y="3.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAMBgCAAAQQAAAAAAAABAAAEAEAAAAAIAIAAAACA=</HashCode>
+      <FileName>Text File\MultiTextFieldValueMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.SignaturedMultiTextFieldMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="13.25" Y="7" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEACAAAAQQAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Text File\SignaturedMultiTextFieldMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.SignaturedSingleTextFieldMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="11.25" Y="4.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAEAEBAAAAAQAAAAAAAAAAIAAAAAAAAAAQgAAAAAAA=</HashCode>
+      <FileName>Text File\SignaturedSingleTextFieldMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.SingleFixedLengthTextFieldMapper&lt;T, V&gt;" Collapsed="true">
+    <Position X="15.25" Y="4.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAEAEBAAAAAQQAAAAAAAAAAAABAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Text File\SingleFixedLengthTextFieldMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ObjectFileMapper.TextFile.TextFieldMapper&lt;T&gt;" Collapsed="true">
+    <Position X="13.75" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAAAAMAAAAAgQQAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Text File\TextFieldMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

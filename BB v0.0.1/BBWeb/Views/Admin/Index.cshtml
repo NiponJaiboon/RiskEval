@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "การวิเคราะห์ความเสี่ยงตามหลักธรรมมาภิบาล ตามแผนงาน/โครงการ";
+    ViewBag.PageTitle = "หน้าหลัก";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="content">
+    <div class="content-left">
+        <ul class='leftnav'>
+            <li style="list-style:none">
+                <b>ผู้ดูแลระบบ (Super Admin)</b>
+                <ul class='sub-leftmenu'>
+                    <li>@Html.ActionLink("ข่าวประกาศ", "Index", "Announce", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("ดูแลและกำหนดสิทธิการเข้าใช้งานในระบบ", "Index", "User", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("จัดการเพิ่มเติมและแก้ไขข้อมูลเกี่ยวกับยุทธศาสตร์", "Index", "Strategic", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("จัดการเพิ่มเติมและแก้ไขข้อมูลธรรมาภิบาล", "Index", "GoodGovernance", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("จัดการข้อมูลกระทรวง", "Index", "Ministry", null, new { @class = "link" })</li>
+                    <li>@Html.ActionLink("จัดการข้อมูลหน่วยงาน", "Index", "Department", null, new { @class = "link" })</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="content-right">
+
+    </div>
+
+</div>

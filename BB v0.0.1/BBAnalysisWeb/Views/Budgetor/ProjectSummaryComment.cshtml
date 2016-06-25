@@ -1,0 +1,508 @@
+﻿@{
+    ViewBag.Title = "รายงานการวิเคราะห์ความเสี่ยงตามหลักธรรมภิบาล";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Budget.Project
+
+@Html.Partial("_ProjectDetail", @Model)
+
+<div class="Result_Summary_Area">
+    <center>
+        <div class="submit-box">
+
+            <table id="tb-sumbit" cellpadding="2" cellspacing="0">
+                <tbody>
+                    <tr class="tr-submit">
+                        <td class="td-text">
+                            สรุปผลคะแนนการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล อยู่ในเกณฑ์ที่มีระดับความเสี่ยง
+                        </td>
+                        <td style="border-style: solid; width: 100px; text-align: center; border-color: #666600;">
+                            <div style="background-color:green; font-weight:bold; font-size:23px;">ต่ำ</div>
+                        </td>
+                    </tr>
+
+                    <tr style="display:none">
+                        <td class="td-text">
+                            สรุปผลคะแนนการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล ตามชุดคำถามหลัก
+                        </td>
+                        <td style="border-style: solid; width: 100px; text-align: center; border-color: #666600;">
+                            <div style="background-color:green; font-weight:bold; font-size:23px;">ต่ำ</div>
+                        </td>
+                    </tr>
+                    <tr style="display:none">
+                        <td class="td-text">
+                            สรุปผลคะแนนการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล ตามชุดคำถามย่อย
+                        </td>
+                        <td style="border-style: solid; width: 100px; text-align: center; border-color: #666600;">
+                            <div style="background-color:green; font-weight:bold; font-size:23px;">ต่ำ</div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <br>
+            <table id="Table1" cellpadding="2" cellspacing="0">
+                <tbody>
+                    <tr class="tr-submit">
+                        <td class="td-text">
+                            ผลคะแนนการวิเคราะห์ความเสี่ยงด้านสภาพแวดล้อมภายในและภายนอก อยู่ในระดับที่มีความเสี่ยง
+                        </td>
+                        <td style="border-style: solid; width: 100px; text-align: center; border-color: #666600;">
+                            <div style="background-color:green; font-weight:bold; font-size:23px;">ต่ำ</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="submit-box" style="display:none">
+            <p>
+                <a id="ContentPlaceHolder1_linkreport1" href="project_report.aspx?reportid=3">รายงานที่ 1 รายงานการกลั่นกรองโครงการ</a>
+            </p>
+            <p>
+                <a id="ContentPlaceHolder1_linkreport2" href="project_report.aspx?reportid=6">รายงานที่ 2 รายงานการวิเคราะห์ความเสี่ยงตามหลักธรรมาธิบาล</a>
+            </p>
+            <p>
+                <a id="ContentPlaceHolder1_linkreport3" href="project_report.aspx?reportid=2">รายงานที่่ 3 รายงานการวิเคราะห์ความเสี่ยงด้านสภาพแวดล้อมภายในและภายนอก</a>
+            </p>
+        </div>
+    </center>
+
+    <center>
+        <div>
+            <p class="report_gridview_head">
+                &nbsp;
+            </p>
+            <p class="report_gridview_head">
+                สรุปการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล ตามชุดคำถามโดยรวม
+            </p>
+            <div>
+                <table class="grid" rules="all" id="ContentPlaceHolder1_GridView4" style="width:80%;border-collapse:collapse;" border="1" cellspacing="0">
+                    <tbody>
+                        <tr class="gridHeader">
+                            <th scope="col">สรุปผลคะแนนแยกตามหลักธรรมาภิบาล</th>
+                            <th scope="col">% ดำเนินการ</th>
+                            <th scope="col">ดำเนินการ</th>
+                            <th scope="col">ไม่ดำเนินการ</th>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">หลักการมีส่วนร่วมของสาธารณะ</td>
+                            <td>9.76</td>
+                            <td>4</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td align="left">หลักความโปร่งใส</td>
+                            <td>9.76</td>
+                            <td>4</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">หลักความรับผิดรับชอบต่อสาธารณะ</td>
+                            <td>41.46</td>
+                            <td>17</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td align="left">หลักความเสมอภาค</td>
+                            <td>2.44</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">หลักนิติธรรม</td>
+                            <td>4.88</td>
+                            <td>2</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td align="left">หลักคุณธรรม</td>
+                            <td>0.00</td>
+                            <td>0</td>
+                            <td>1</td>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">หลักการสนองตอบรับ</td>
+                            <td>12.20</td>
+                            <td>5</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td align="left">หลักความคุ้มค่า</td>
+                            <td>14.63</td>
+                            <td>6</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridFooter">
+                            <td>รวม</td>
+                            <td>95.13</td>
+                            <td>39</td>
+                            <td>2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <br>
+        <div>
+            <p class="report_gridview_head">
+                สรุปการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล ตามชุดคำถามหลัก
+            </p>
+            <div>
+                <table class="grid" rules="all" id="ContentPlaceHolder1_GridView1" style="width:80%;border-collapse:collapse;" border="1" cellspacing="0">
+                    <tbody>
+                        <tr class="gridHeader">
+                            <th scope="col">สรุปผลคะแนนแยกตามหลักธรรมาภิบาล</th>
+                            <th scope="col">% ดำเนินการ</th>
+                            <th scope="col">ดำเนินการ</th>
+                            <th scope="col">ไม่ดำเนินการ</th>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">หลักการมีส่วนร่วมของสาธารณะ</td>
+                            <td>6.67</td>
+                            <td>1</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td align="left">หลักความโปร่งใส</td>
+                            <td>13.33</td>
+                            <td>2</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">หลักความรับผิดรับชอบต่อสาธารณะ</td>
+                            <td>53.33</td>
+                            <td>8</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td align="left">หลักความเสมอภาค</td>
+                            <td>0.00</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">หลักนิติธรรม</td>
+                            <td>0.00</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td align="left">หลักคุณธรรม</td>
+                            <td>0.00</td>
+                            <td>0</td>
+                            <td>1</td>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">หลักการสนองตอบรับ</td>
+                            <td>6.67</td>
+                            <td>1</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td align="left">หลักความคุ้มค่า</td>
+                            <td>13.33</td>
+                            <td>2</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridFooter">
+                            <td>รวม</td>
+                            <td>93.33</td>
+                            <td>14</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div>
+            <p class="report_gridview_head">
+                ตารางสรุปผลมิติความเสี่ยงเชิงยุธศาสตร์ 3 ด้าน
+            </p>
+            <div>
+                <table class="grid" rules="all" id="ContentPlaceHolder1_GridView2" style="width:80%;border-collapse:collapse;" border="1" cellspacing="0">
+                    <tbody>
+                        <tr class="gridHeader">
+                            <th scope="col">สรุปผลคะแนนแยกตามมิติความเสี่ยงเชิงยุทธศาสตร์ 3 ด้าน</th>
+                            <th scope="col">% ดำเนินการ</th>
+                            <th scope="col">ดำเนินการ</th>
+                            <th scope="col">ไม่ดำเนินการ</th>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">Key Risk Areas</td>
+                            <td>66.67</td>
+                            <td>10</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow" style="background-color:White;">
+                            <td align="left">Political Risk</td>
+                            <td>13.33</td>
+                            <td>2</td>
+                            <td>1</td>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">Negotiation Risk</td>
+                            <td>13.33</td>
+                            <td>2</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridFooter">
+                            <td>รวม</td>
+                            <td>93.33</td>
+                            <td>14</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            <p class="report_gridview_head">
+                &nbsp;
+            </p>
+            <p class="report_gridview_head">
+                สรุปการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล ตามชุดคำถามย่อย
+            </p>
+            <div>
+                <table class="grid" rules="all" id="ContentPlaceHolder1_GridView3" style="width:80%;border-collapse:collapse;" border="1" cellspacing="0">
+                    <tbody>
+                        <tr class="gridHeader">
+                            <th scope="col">สรุปผลคะแนนแยกตามหลักธรรมาภิบาล</th>
+                            <th scope="col">% ดำเนินการ</th>
+                            <th scope="col">ดำเนินการ</th>
+                            <th scope="col">ไม่ดำเนินการ</th>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">หลักการมีส่วนร่วมของสาธารณะ</td>
+                            <td>11.54</td>
+                            <td>3</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td align="left">หลักความโปร่งใส</td>
+                            <td>7.69</td>
+                            <td>2</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">หลักความรับผิดรับชอบต่อสาธารณะ</td>
+                            <td>34.62</td>
+                            <td>9</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td align="left">หลักความเสมอภาค</td>
+                            <td>3.85</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">หลักนิติธรรม</td>
+                            <td>7.69</td>
+                            <td>2</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td align="left">หลักคุณธรรม</td>
+                            <td>0.00</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">หลักการสนองตอบรับ</td>
+                            <td>15.38</td>
+                            <td>4</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td align="left">หลักความคุ้มค่า</td>
+                            <td>15.38</td>
+                            <td>4</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridFooter">
+                            <td>รวม</td>
+                            <td>96.15</td>
+                            <td>25</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- รายชุดคำถาม -->
+        <br>
+        <div>
+            <p class="report_gridview_head">
+                สรุปการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล รายชุดคำถาม
+            </p>
+            <div>
+                <table class="grid" rules="all" id="ContentPlaceHolder1_GridView5" style="width:80%;border-collapse:collapse;" border="1" cellspacing="0">
+                    <tbody>
+                        <tr class="gridHeader">
+                            <th scope="col">ขั้นตอนการริเริ่มโครงการใหม่</th>
+                            <th scope="col">% ดำเนินการ</th>
+                            <th scope="col">จำนวนข้อรวม</th>
+                            <th scope="col">จำนวนข้อหลัก</th>
+                            <th scope="col">จำนวนข้อย่อย</th>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">ชุด ก: ริเริ่มโครงการใหม่และการวิเคราะห์เบื้องต้น</td>
+                            <td>24.39</td>
+                            <td>10</td>
+                            <td>2</td>
+                            <td>8</td>
+                        </tr>
+                        <tr class="gridAltRow" style="background-color:White;">
+                            <td align="left">ชุด ข: การวิเคราะห์และวางแผนรายละเอียดโครงการ</td>
+                            <td>31.71</td>
+                            <td>13</td>
+                            <td>5</td>
+                            <td>8</td>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">ชุด ค: การจัดลำดับและจัดสรรงบประมาณโครงการ  </td>
+                            <td>7.32</td>
+                            <td>3</td>
+                            <td>1</td>
+                            <td>2</td>
+                        </tr>
+                        <tr class="gridAltRow" style="background-color:White;">
+                            <td align="left">ชุด ง: การเตรียมการเพื่อติดตามความก้าวหน้าของการดำเนินโครงการ</td>
+                            <td>31.71</td>
+                            <td>13</td>
+                            <td>6</td>
+                            <td>7</td>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">ชุด จ: การประเมินผลการดำเนินงานของโครงการต่อเนื่องและโครงการที่ทำเสร็จแล้วและต้องการขยายผลโครงการ</td>
+                            <td>0.00</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridFooter">
+                            <td>รวม</td>
+                            <td>95.13</td>
+                            <td>39</td>
+                            <td>14</td>
+                            <td>25</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- -->
+        <div id="factor_tamma">
+            <p class="report_gridview_head">
+                <br>
+                สรุปการวิเคราะห์ความเสี่ยงสภาพแวดล้อมภายในภายนอก
+            </p>
+            <div>
+                <table class="grid" rules="all" id="ContentPlaceHolder1_GridView6" style="width:80%;border-collapse:collapse;" border="1" cellspacing="0">
+                    <tbody>
+                        <tr class="gridHeader">
+                            <th scope="col">สรุปผลคะแนนแยกตามหลักธรรมภิบาล</th>
+                            <th scope="col">% ดำเนินการ</th>
+                            <th scope="col">ดำเนินการ</th>
+                            <th scope="col">ไม่ดำเนินการ</th>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">ความเสี่ยงด้านการเมืองและสังคม</td>
+                            <td>17.14</td>
+                            <td>6</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td align="left">ความเสี่ยงด้านการเงินและเศรษฐกิจ</td>
+                            <td>11.43</td>
+                            <td>4</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">ความเสี่ยงด้านกฎหมาย</td>
+                            <td>17.14</td>
+                            <td>6</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td align="left">ความเสี่ยงด้านเทคโนโลยี</td>
+                            <td>8.57</td>
+                            <td>3</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridRow">
+                            <td align="left">ความเสี่ยงด้านการดำเนินการ</td>
+                            <td>22.86</td>
+                            <td>8</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td align="left">ความเสี่ยงด้านสิ่งแวดล้อม/ภัยธรรมชาติ</td>
+                            <td>22.86</td>
+                            <td>8</td>
+                            <td>0</td>
+                        </tr>
+                        <tr class="gridFooter">
+                            <td>รวม</td>
+                            <td>100</td>
+                            <td>35</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="tamma_no_proceed">
+            <p class="report_gridview_head">
+                <br>
+                สรุปการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล กรณีข้อที่ไม่ได้ดำเนินการ
+            </p>
+            <div>
+                <table class="grid" rules="all" id="ContentPlaceHolder1_GridView7" style="width:80%;border-collapse:collapse;" border="1" cellspacing="0">
+                    <tbody>
+                        <tr class="gridHeader">
+                            <th scope="col">ลำดับข้อ</th>
+                            <th scope="col">รายละเอียด</th>
+                            <th scope="col">ธรรมภิบาล</th>
+                        </tr>
+                        <tr class="gridRow">
+                            <td>ข-4.4</td>
+                            <td align="left">ระบุว่าผู้ที่ได้รับผลกระทบเชิงลบจะได้รับการช่วยเหลือที่เหมาะสมอย่างไร</td>
+                            <td>หลักความโปร่งใส</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td>ข-4.1</td>
+                            <td align="left">ระบุผู้ที่เสี่ยงต่อการได้รับผลกระทบทางลบจากการดำเนินโครงการ</td>
+                            <td>หลักความเสมอภาค</td>
+                        </tr>
+                        <tr class="gridRow">
+                            <td>ข-4.2</td>
+                            <td align="left">ผู้รับผิดชอบมีแนวทางในการบริหารจัดการผลกระทบเชิงลบอย่างไร</td>
+                            <td>หลักความเสมอภาค</td>
+                        </tr>
+                        <tr class="gridAltRow">
+                            <td>ข-4.3</td>
+                            <td align="left">ระบุว่าผู้ที่ได้รับผลกระทบเชิงลบจะได้รับการช่วยเหลือที่เหมาะสมอย่างไร</td>
+                            <td>หลักนิติธรรม</td>
+                        </tr>
+                        <tr class="gridFooter">
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div>
+            @Html.ActionLink("แสดงความเห็นเพิ่มเติมเพื่อประกอบคำของบประมาณ", "CommentProject", "Budgetor", new { projectId = @Model.ID }, new { @class = "btn btn-default" })
+        </div>
+    </center>
+</div>
+

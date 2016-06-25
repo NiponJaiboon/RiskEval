@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="iSabaya.TimeSchedule" Collapsed="true">
+    <Position X="6.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgaAEIEMRBAgAEBFYQAiRAIAIAAuAAAQAkAIQABEiEI=</HashCode>
+      <FileName>Time Schedule\TimeSchedule.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="scheduleDetails" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="iSabaya.ScheduleDayOfWeek" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAIAAAACAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Time Schedule\ScheduleDayOfWeek.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ScheduleYearlyOnDate" Collapsed="true">
+    <Position X="13.75" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAFAAAAAAIAAAQEAAABAAAAAQAEAAA=</HashCode>
+      <FileName>Time Schedule\ScheduleYearlyOnDate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ScheduleDetail" Collapsed="true">
+    <Position X="10.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIIABQAAgAUABAAAAAgZAAkUNAABECwAACABEACA=</HashCode>
+      <FileName>Time Schedule\ScheduleDetail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ScheduleMonthlyOnDay" Collapsed="true">
+    <Position X="8.75" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAFAAAAAAIAAAQkAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Time Schedule\ScheduleMonthlyOnDay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ScheduleMonthlyOnDayOfWeek" Collapsed="true">
+    <Position X="5.75" Y="4.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAgAAAAAAFABAAAAIAAAQEAAAAAAEAAAAFAAA=</HashCode>
+      <FileName>Time Schedule\ScheduleMonthlyOnDayOfWeek.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ScheduleMonthlyRelativeToEOM" Collapsed="true">
+    <Position X="9.75" Y="3.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAFAAAAAAIAAAYEAAACAAAAAAAFAAA=</HashCode>
+      <FileName>Time Schedule\ScheduleMonthlyRelativeToEOM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.SchedulePeriodic" Collapsed="true">
+    <Position X="11.25" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEACAAAAAABAAAAAAYACAQEAAAAAAAAAAAEBAE=</HashCode>
+      <FileName>Time Schedule\SchedulePeriodic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ScheduleSpecificDate" Collapsed="true">
+    <Position X="12.5" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAFAAAAAAIAAAQEAAABAAAAAQAEAAA=</HashCode>
+      <FileName>Time Schedule\ScheduleSpecificDate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ScheduleWeekly" Collapsed="true">
+    <Position X="8.75" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAFAAAAAAAAAAQEAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Time Schedule\ScheduleWeekly.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

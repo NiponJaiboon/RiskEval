@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="iSabaya" namespace="BizPortal">
+  <class name="Budget.General.BudgetUserSession,Budget" table="UserSession">
+
+    <!-- Primary key-->
+    <id name="ID" column="UserSessionID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <property name="ApplicationSessionID" />
+    <property name="FromIPAddress" />
+    <!--<property name="IsTimeOut" />-->
+    <component name="SessionPeriod"  >
+      <property name="From" column="SigninTS"/>
+      <property name="To" column="SignoutTS"/>
+    </component>
+    <property name="SystemID" type="iSabaya.SystemEnum,iSabaya.Config" />
+    <property name="LoginMessage" />
+    <property name="LogoutMessage" />
+    <!--<property name="Failed" />
+    <property name="" />
+    <property name="" />
+    <property name="" />-->
+
+    <property name="LoginFailed" />
+    <!--<many-to-one name="Member" column="MemberId"/>-->
+    <many-to-one name="User" column="UserId"/>
+    <property name="UserName" />
+    <bag name="SessionLogs" inverse="true" >
+      <key column="UserSessionID"/>
+      <one-to-many class="iSabaya.UserSessionLog,iSabaya"/>
+    </bag>
+
+  </class>
+</hibernate-mapping>

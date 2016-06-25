@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.UserGroupUser,iSabaya" table="UserGroupUser">
+
+    <!-- Primary key-->
+    <id name="ID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <component name="CreateAction" >
+      <many-to-one name="ByUser" column="CreatedBy" />
+      <property name="Timestamp" column="CreatedTS" />
+    </component>
+    <component name="ApproveAction" >
+      <many-to-one name="ByUser" column="ApprovedBy" />
+      <property name="Timestamp" column="ApprovedTS" />
+    </component>
+    <component name="EffectivePeriod"  >
+      <property name="From" column="EffectiveFrom"/>
+      <property name="To" column="EffectiveTo"/>
+    </component>
+    <property name="IsNotFinalized" />
+
+
+    <property name="SequenceNo" />
+    <!--<many-to-one name="Group" class="iSabaya.MemberUserGroup,iSabaya" column="GroupId" />-->
+    <many-to-one name="User" column="UserId" fetch="join"/>
+    <!--<any name="User" meta-type="byte" id-type="int" > 
+      <meta-value class="iSabaya.SelfAuthenticatedUser,iSabaya" value="1" />
+      <meta-value class="iSabaya.ActiveDirectoryUser,iSabaya" value="2" />
+      <column name="UserDiscriminator"/>
+      <column name="UserID"/>
+    </any>-->
+
+  </class>
+</hibernate-mapping>
+
+

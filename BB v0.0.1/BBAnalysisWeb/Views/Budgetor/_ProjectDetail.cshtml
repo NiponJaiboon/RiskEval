@@ -1,0 +1,43 @@
+﻿@model Budget.Project
+
+<fieldset class="fieldset">
+    <legend class="legend">ข้อมูลโครงการ</legend>
+    <table style="width:100%;padding:10px;margin-top:10px">
+        <tbody>
+            <tr>
+                <td style="width:130px" class="field-header">รหัสกระทรวง :</td>
+                <td style="padding-right:50px"><label class="field-content">@Model.OrgUnit.OrganizationParent.Code</label></td>
+                <td style="width:220px" class="field-header">กระทรวง :</td>
+                <td><label class="field-content">@Model.OrgUnit.OrganizationParent.CurrentName.Name.GetValue("th-TH")</label></td>
+            </tr>
+            <tr>
+                <td class="field-header">รหัสหน่วยงาน :</td>
+                <td><label class="field-content">@Model.OrgUnit.Code</label></td>
+                <td class="field-header">หน่วยงาน :</td>
+                <td><label class="field-content">@Model.OrgUnit.CurrentName.Name.GetValue("th-TH")</label></td>
+            </tr>
+            <tr>
+                <td class="field-header">รหัสโครงการ :</td>
+                <td><label class="field-content">@Model.ProjectNo</label></td>
+                <td class="field-header">ชื่อโครงการ :</td>
+                <td><label class="field-content">@Model.Name</label></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="field-header">ยุทธศาสตร์การจัดสรรงบประมาณ :</td>
+                <td colspan="2"><label class="field-content">@Model.Strategic.Name</label></td>
+            </tr>
+            <tr>
+                <td class="field-header">ปีงบประมาณ :</td>
+                <td><label class="field-content">@Model.BudgetYear</label></td>
+                <td class="field-header">วงเงินงบประมาณทั้งสิ้น (บาท) :</td>
+                <td><label class="field-content">@Model.BudgetAmount.ToString(Budget.Util.Formetter.MoneyFormat)</label></td>
+            </tr>
+            <tr>
+                <td>@Html.Label("", "เลขหนังสือนำส่ง : ", new { @class = "bold1" })</td>
+                <td>@Model.BookNo</td>
+                <td>@Html.Label("", "วันที่นำส่ง : ", new { @class = "bold1" })</td>
+                <td>@Model.BookDate.ToString(Budget.Util.Formetter.DateFormat)</td>
+            </tr>
+        </tbody>
+    </table>
+</fieldset>

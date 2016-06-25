@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "บันทึกผลการพิจารณาจากรัฐสภา";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    $(function () {
+
+        var selectedId = $("select option:selected").val();
+        if (selectedId != "") {
+            $("#project-comment-by-budgetor-table").show();
+            getProjects();
+        }
+        else {
+            $("#project-comment-by-budgetor-table").hide();
+        }
+
+        $("#ddlDepartment").change(function (e) {
+            getProjects();
+        });
+    });
+
+    function getProjects() {
+
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: appName + "/Evaluation/GetProjectByDepartment/",
+            data: { id: $("#ddlDepartment option:selected").val(), status: "comment" },
+            dataType: "json",
+            success: function (data) {
+                if (data.Success) {
+                    //debugger
+                    //clear datatable
+                    $('#project-comment-by-budgetor-table').dataTable({
+                        "bDestroy": true
+                    }).fnDestroy();
+
+
+                    $('#project-comment-by-budgetor-table').DataTable({
+                        "dom": '<"toolbar">frtip',
+                        searching: false,
+                        ordering: true,
+                        paging: true,
+                        //scrollY: 400,
+                        //"bProcessing": true,
+                        //"bDeferRender": true,
+                        data: data.model,
+                        columns: [
+                            { data: 'NameLink' },
+                            { data: 'BudgetType' },
+                            { data: 'Budget', sClass: "right" },
+                            { data: 'LastUpdate' },
+                            { data: 'RiskBox', sClass: "center risk" },
+                        ]
+                    });
+
+                    if (data.model.length <= 0) {
+                        $("#table_id_paginate").hide();
+                    } else {
+                        $("#project-comment-by-budgetor-table").show();
+                    }
+
+                } else {
+                    $("#message-fail").text(data.Message);
+                    $('#modal-fail').modal('show');
+                }
+            }
+        });
+    }
+</script>
+
+<div>
+    <div class="modal"></div>
+    <fieldset class="fieldset">
+        <legend class="legend">@Html.Label("", "ค้นหาโครงการ")</legend>
+        <table>
+            <tr>
+                <td>@Html.Label("", "ค้นหาโครงการแยกตามหน่วยงาน")</td>
+                <td>@Html.DropDownList("ddlDepartment", null, "ทั้งหมด", new { @class = "form-control" })</td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+
+<div style="padding-top:5px">
+    <table id="project-comment-by-budgetor-table" class="table table-bordered table-striped table-hover" cellpadding="0" cellspacing="0" data-order='[[ 1, "asc" ]]' data-page-length='10'>
+        <thead>
+            <tr>
+                <th style="width:360px;vertical-align:middle">ชื่อโครงการ</th>
+                <th style="width:114px;vertical-align:middle">ลักษณะโครงการ</th>
+                <th style="width:129px;vertical-align:middle">รหัสหน่วยงาน</th>
+                <th style="width:129px;vertical-align:middle">งบประมาณ (บาท)</th>
+                <th style="width:158px;vertical-align:middle">วันที่แก้ไขครั้งสุดท้าย</th>
+                <th style="width:205px;vertical-align:middle">ผลการการวิเคราะห์ความเสี่ยง</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>

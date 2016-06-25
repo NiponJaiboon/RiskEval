@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.Receipt,iSabaya" table="Receipt">
+    <!-- Primary key-->
+    <id name="ID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+
+    <component name="CreateAction"  >
+      <many-to-one name="ByUser" column="CreatedBy" />
+      <property name="Timestamp" column="CreatedTS" />
+    </component>
+    <component name="PrintAction"  >
+      <many-to-one name="ByUser" column="PrintedBy" />
+      <property name="Timestamp" column="PrintedTS" />
+    </component>
+    <component name="CancelAction"  >
+      <many-to-one name="ByUser" column="CancelledBy" />
+      <property name="Timestamp" column="CancelledTS" />
+      <property name="Remark" column="CancellationRemark" />
+    </component>
+
+    <many-to-one name="Category" column="CategoryNodeID" />
+
+    <any name="Payer" meta-type="byte" id-type="Int64" >
+      <meta-value value="10" class="iSabaya.Organization,iSabaya"/>
+      <meta-value value="15" class="iSabaya.OrgUnit,iSabaya"/>
+      <meta-value value="20" class="iSabaya.Person,iSabaya"/>
+      <!--<meta-value value="101" class="BizPortal.Member,BizPortal"/>-->
+      <column name="PayerDiscriminator"/>
+      <column name="PayerID"/>
+    </any>
+    <property name="PayerAddress" />
+    <property name="PayerName" />
+    <property name="Description" />
+    <!--<bag name="Payments" table="ReceiptPayment" >
+      <key column="ReceiptID"/>
+      <one-to-many class="iSabaya.ReceiptPayment,iSabaya"/>
+    </bag>-->
+
+    <property name="ReceiptDate" />
+    <property name="ReceiptNo" />
+    <bag name="Items" table="ReceiptItem" >
+      <key column="ReceiptID"/>
+      <one-to-many class="iSabaya.ReceiptItem,iSabaya"/>
+    </bag>
+    <!--<any name="Recipient" meta-type="byte" id-type="Int64" >
+      <meta-value value="10" class="iSabaya.Organization,iSabaya"/>
+      <meta-value value="15" class="iSabaya.OrgUnit,iSabaya"/>
+      <meta-value value="20" class="iSabaya.Person,iSabaya"/>
+      --><!--<meta-value value="30" class="imSabaya.MutualFund,imSabaya"/>
+      <meta-value value="35" class="imSabaya.ProvidentFund,imSabaya"/>
+      <meta-value value="50" class="imSabaya.MutualFundSystem.MFAccount,imSabaya"/>
+      <meta-value value="60" class="imSabaya.ProvidentFundSystem.Member,imSabaya"/>--><!--
+      <column name="RecipientDiscriminator"/>
+      <column name="RecipientID"/>
+    </any>-->
+    <!--<property name="RecipientAddress" />
+    <property name="RecipientName" />-->
+    <property name="Reference" />
+    <property name="Remark" />
+
+    <component name="TaxAmount" class="iSabaya.Money, iSabaya">
+      <property name="Amount" column="TaxAmount"/>
+      <property name="CurrencyCode" column="TaxAmountCurrencyCode" />
+    </component>
+    
+    <component name="TotalAmount" class="iSabaya.Money, iSabaya">
+      <property name="Amount" column="TotalAmount"/>
+      <property name="CurrencyCode" column="TotalAmountCurrencyCode" />
+    </component>
+
+  </class>
+</hibernate-mapping>

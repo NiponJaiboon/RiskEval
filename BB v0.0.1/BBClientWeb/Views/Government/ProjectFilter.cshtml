@@ -1,0 +1,214 @@
+﻿@model Budget.Project
+
+@{
+    ViewBag.Title = "กลั่นกรองโครงการ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (@ViewBag.ErrorMessage != null)
+{
+    @ViewBag.ErrorMessage
+}
+else
+{
+    <div>
+        @Html.Partial("_ProjectDetail", @Model)
+
+        @Html.Label("ระบุข้อมูลรายละเอียดโครงการ", new { @class = "field-header-project" })
+
+        @Html.HiddenFor(x => x.ID)
+
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td style="vertical-align:middle">1.</td>
+                    <td style="vertical-align:middle">เป็นแผนงาน/โครงการใหม่ ที่เพิ่งเริ่มต้นในปีงบประมาณนั้นๆ  <span class="field-hilight">หรือ</span> เป็นแผนงาน/โครงการที่ ใหม่ที่ต้องการขยายผลต่อจากโครงการที่ทำเสร็จไปแล้ว</td>
+                    <td>
+                        <span id="messageQ1" class="ErrorDokJan" style="visibility:hidden;">กรุณาเลือกใช่ หรือ ไม่ใช่</span>
+                        <span style="display: block">
+                            <span style="padding-right:15px">@Html.RadioButton("q1", "true")<label class="field-content">ใช่</label></span>
+                            <span>@Html.RadioButton("q1", "false")<label class="field-content">ไม่ใช่</label></span>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:middle">2.</td>
+                    <td style="vertical-align:middle">เป็นแผนงาน/โครงการที่มีลักษณะจัดเป็น<span class="field-hilight">รายจ่ายลงทุน</span></td>
+                    <td>
+                        <span id="messageQ2" class="ErrorDokJan" style="visibility:hidden;">กรุณาเลือกใช่ หรือ ไม่ใช่</span>
+                        <span style="display: block">
+                            <span style="padding-right:15px">@Html.RadioButton("q2", "true")<label class="field-content">ใช่</label></span>
+                            <span>@Html.RadioButton("q2", "false")<label class="field-content">ไม่ใช่</label></span>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:middle">3.</td>
+                    <td style="vertical-align:middle">
+                        เป็นแผนงาน/โครงการที่มติคณะรัฐมนตรีล่าสุดเมื่อวันที่ 29 ธันวาคม 2552 ได้กำหนดให้เป็นแผนงาน/โครงการที่มีความสำคัญทางนโยบายของรัฐบาล ดังนี้<br>
+                        <div style="margin-left:15px">
+                            ก.	เป็นแผนงาน/โครงการ ที่มีผลกระทบต่อความสำเร็จในการบรรลุผลตามเป้าหมายกระทรวง ส่วนราชการ/ รัฐวิสาหกิจภายใต้กระทรวง กลุ่มจังหวัด หรือจังหวัด
+                            <span class="field-hilight">และ</span><br>
+                            ข.	เป็นแผนงาน/โครงการ ที่มีผลกระทบต่อชีวิตความเป็นอยู่ของประชาชน สิ่งแวดล้อมหรือการให้บริการขั้นพื้นฐานของประชาชน
+                            <span class="field-hilight">และ</span><br>
+                            ค.	เป็นแผนงาน/โครงการ ที่ใช้งบประมาณสูงของส่วนราชการ /รัฐวิสาหกิจ หน่วยงานอื่นของรัฐ กลุ่มจังหวัด จังหวัด
+                        </div>
+                    </td>
+                    <td>
+                        <span id="messageQ3" class="ErrorDokJan" style="visibility:hidden;">กรุณาเลือกใช่ หรือ ไม่ใช่</span>
+                        <span style="display: block">
+                            <span style="padding-right:15px">@Html.RadioButton("q3", "true")<label class="field-content">ใช่</label></span>
+                            <span>@Html.RadioButton("q3", "false")<label class="field-content">ไม่ใช่</label></span>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:middle">4.</td>
+                    <td style="vertical-align:middle">เป็นแผนงาน/โครงการอื่นที่ส่วนราชการ/รัฐวิสาหกิจหรือผู้ตรวจราชการสำนักนายกรัฐมนตรีหรือผู้ตรวจราชการกระทรวง หรือสำนักงบประมาณเห็นควรให้มีการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล</td>
+                    <td>
+                        <span id="messageQ4" class="ErrorDokJan" style="visibility:hidden;">กรุณาเลือกใช่ หรือ ไม่ใช่</span>
+                        <span style="display: block">
+                            <span style="padding-right:15px">@Html.RadioButton("q4", "true")<label class="field-content">ใช่</label></span>
+                            <span>@Html.RadioButton("q4", "false")<label class="field-content">ไม่ใช่</label></span>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div id="Fail" style="color:White; display:none">
+            <span style="background-color:red;font-weight:bold">เกณฑ์การประเมิน: แผนงาน / โครงการ นี้ไม่อยู่ในเกณฑ์ที่ต้องวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล</span>
+            <div>
+                <label style="color:black">กรณีที่ไม่ผ่านการประเมิน โปรดพิมพ์รายงานนี้ก่อนดำเนินการต่อ</label>
+                <input type="submit" value="พิมพ์เพื่อเป็นหลักฐาน" id="btPrintFilter" class="btn btn-default" onclick="return window.print();">
+            </div>
+        </div>
+        <div id="Success" style="color:White; display:none">
+            <span style="background-color:green;font-weight:bold">เกณฑ์การประเมิน:  แผนงาน / โครงการ อยู่ในเกณฑ์ที่ต้องวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล</span>
+            <div>
+                <input type="submit" value="โปรดดำเนินงานต่อ" id="btContinueFilter" class="btn btn-default">
+            </div>
+        </div>
+        <div>
+            <input type="submit" value="บันทึกข้อมูลและดำเนินการต่อไป" id="btSaveFilter" class="btn btn-default">
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    function validate(sender, taget) {
+        if (sender == undefined)
+            taget.attr("style", "visibility: visible");
+        else
+            taget.attr("style", "visibility: hidden");
+    }
+
+    $(function () {
+
+        $("input[name=q1]").change(function (e) {
+            e.preventDefault();
+            validate($("input[name=q1]:checked").val(), $("#messageQ1"));
+        });
+
+        $("input[name=q2]").change(function (e) {
+            e.preventDefault();
+            validate($("input[name=q2]:checked").val(), $("#messageQ2"));
+        });
+
+        $("input[name=q3]").change(function (e) {
+            e.preventDefault();
+            validate($("input[name=q3]:checked").val(), $("#messageQ3"));
+        });
+
+        $("input[name=q4]").change(function (e) {
+            e.preventDefault();
+            validate($("input[name=q4]:checked").val(), $("#messageQ4"));
+        });
+
+        $("#btSaveFilter").click(function (e) {
+            e.preventDefault();
+
+            var checkedQ1 = $("input[name=q1]:checked").val();
+            var checkedQ2 = $("input[name=q2]:checked").val();
+            var checkedQ3 = $("input[name=q3]:checked").val();
+            var checkedQ4 = $("input[name=q4]:checked").val();
+
+            console.log(checkedQ1);
+            console.log(checkedQ2);
+            console.log(checkedQ3);
+            console.log(checkedQ4);
+
+            validate(checkedQ1, $("#messageQ1"));
+            validate(checkedQ2, $("#messageQ2"));
+            validate(checkedQ3, $("#messageQ3"));
+            validate(checkedQ4, $("#messageQ4"));
+
+
+            if (checkedQ1 != undefined && checkedQ2 != undefined && checkedQ3 != undefined && checkedQ4 != undefined) {
+                if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: appName + "/Government/SaveFilter/",
+                        data: JSON.stringify({
+                            pId: $("#ID").val(),
+                            q1: checkedQ1,
+                            q2: checkedQ2,
+                            q3: checkedQ3,
+                            q4: checkedQ4,
+                        }),
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.Success) {
+                                $("#message-success").text(data.Message);
+                                $('#modal-success').modal('show');
+
+                                $("#btnOkSuccess").click(function (e) {
+
+                                    e.preventDefault();
+                                    if (data.isRisk) {
+                                        $("#Success").show();
+                                    } else {
+                                        $("input[name=q1]").attr('disabled', 'disabled');
+                                        $("input[name=q2]").attr('disabled', 'disabled');
+                                        $("input[name=q3]").attr('disabled', 'disabled');
+                                        $("input[name=q4]").attr('disabled', 'disabled');
+                                        $("#Fail").show();
+                                    }
+
+                                    $("#btSaveFilter").hide();
+                                });
+                            } else {
+                                $("#message-fail").text(data.Message);
+                                $('#modal-fail').modal('show');
+                            }
+                        }
+                    });
+                }
+            } else {
+
+            }
+        });
+
+
+        $("#btContinueFilter").click(function (e) {
+            e.preventDefault();
+
+            window.location.href = '@Url.Action("ProjectBasicInfo", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';  //"/Government/ProjectBasicInfo?p=" + $("#ID").val();
+        });
+
+    });
+
+</script>

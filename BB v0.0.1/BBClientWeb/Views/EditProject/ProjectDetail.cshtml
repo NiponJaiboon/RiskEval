@@ -1,0 +1,278 @@
+﻿@model Budget.Project
+
+@{
+    ViewBag.Title = "ระบุข้อมูลรายละเอียดโครงการ (แก้ไข)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="modal"></div>
+
+    <fieldset class="fieldset">
+        <legend class="legend">ข้อมูลโครงการ</legend>
+        <table style="padding:10px;margin-top:10px">
+            <tbody>
+                <tr>
+                    <td style="width:100px" class="field-header">รหัสกระทรวง :</td>
+                    <td style="padding-right:50px"><label class="field-content">@ViewBag.MinistryCode</label></td>
+                    <td style="width:80px" class="field-header">กระทรวง :</td>
+                    <td><label class="field-content">@ViewBag.MinistryName</label></td>
+                </tr>
+                <tr>
+                    <td class="field-header">รหัสหน่วยงาน :</td>
+                    <td><label class="field-content">@ViewBag.DepartmentCode</label></td>
+                    <td class="field-header">หน่วยงาน :</td>
+                    <td><label class="field-content">@ViewBag.DepartmentName</label></td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+
+    @Html.HiddenFor(model => model.ID)
+
+    @Html.Label("ระบุข้อมูลรายละเอียดโครงการ", new { @class = "field-header-project" })
+    <div style="padding:0px 20px">
+        <table style="width:100%">
+            <tr style="height:50px">
+                <td width="250px" class="field-header">รหัสโครงการ :</td>
+                <td>
+                    <div class="field-content">
+                        @ViewBag.ProjectCode
+                    </div>
+                </td>
+            </tr>
+            <tr style="height:50px">
+                <td class="field-header">ชื่อโครงการ :</td>
+                <td>
+                    <div>
+                        @Html.TextBoxFor(model => model.Name, new { id = "ProjectName", @class = "form-control", @style = "width:95%", @maxlength = "500" })
+                        <span id="ErrorDokJan_ProjectName" class="ErrorDokJan" style="clear:both; color:red; display:none">*</span>
+                    </div>
+                </td>
+            </tr>
+            <tr style="height:50px">
+                <td class="field-header">ยุทธศาสตร์การจัดสรรงบประมาณ :</td>
+                <td>
+                    <div>
+                        @Html.DropDownList("Strategics", null, "กรุณาเลือก", new { @class = "form-control", @style = "width:95%" })
+                        <span id="ErrorDokJan_Strategic" class="ErrorDokJan" style="color:red; display:none">*</span>
+                    </div>
+                </td>
+            </tr>
+            <tr style="height:50px">
+                <td class="field-header">ปีงบประมาณ :</td>
+                <td>
+                    <div>
+                        @Html.DropDownList("Year", null, new { @class = "form-control", @style = "width:25%" })
+                        <span id="ErrorDokJan_Years" class="ErrorDokJan" style="color:red; display:none">*</span>
+                    </div>
+                </td>
+            </tr>
+            <tr style="height:50px">
+                <td class="field-header">วงเงินงบประมาณทั้งสิ้น (บาท) :</td>
+                <td>
+                    <div>
+                        @Html.TextBoxFor(model => model.BudgetAmount, new { id = "Budget", @class = "form-control", @style = "width:25%", @maxlength = "50", Value = Model.BudgetAmount.ToString(Budget.Util.Formetter.MoneyFormat) })
+                        <span id="ErrorDokJan_Budget" class="ErrorDokJan" style="color:red; display:none">*</span>
+                    </div>
+                </td>
+            </tr>
+            <tr style="height:50px">
+                <td class="field-header">อยู่ในงบรายจ่ายประเภท :</td>
+                <td>
+                    <div>
+                        @Html.DropDownList("Expenditure", null, new { @class = "form-control", @style = "width:25%" })
+                        <span id="ErrorDokJan_expenditure" class="ErrorDokJan" style="color:red; display:none">*</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <div class="form-group">
+            <input type="submit" value="บันทึกข้อมูลและดำเนินการต่อไป" id="submitNext" class="btn btn-default">
+        </div>
+        <div id="ContentPlaceHolder1_sumErr" class="question-error">
+            <ul>
+                <li id="ProjectName_error" style="display:none">กรุณากรอกชื่อโครงกการ</li>
+                <li id="Strategic_error" style="display:none">กรุณาเลือกยุทธศาสตร์การจัดสรรงบประมาณ</li>
+                <li id="Years_error" style="display:none">กรุณาเลือกปีงบประมาณ</li>
+                <li id="Budget_error" style="display:none">กรุณากรอกงบประมาณ</li>
+                <li id="expenditure_error" style="display:none">กรุณาเลือกประเภทงบรายจ่าย</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    $(function () {
+
+        //ตรวจสอบ ชื่อโครงการ หากมีการกรอกชื่อโครงการ จะปิด error message
+        $("#ProjectName").change(function (e) {
+            e.preventDefault();
+
+            if ($(this).val().length > 0) {
+                $("#ProjectName_error").hide();
+                $("#ErrorDokJan_ProjectName").hide();
+                isProjectName = true;
+            }
+        });
+
+        //ตรวจสอบ ยุทธศาสตร์การจัดสรรงบประมาณ หากมีการเลือก จะปิด error message
+        $("#Strategics").change(function (e) {
+            e.preventDefault();
+
+            if ($(this).val() != "") {
+                $("#Strategic_error").hide();
+                $("#ErrorDokJan_Strategic").hide();
+                isStrategic = true;
+            }
+        });
+
+        //ตรวจสอบ วงเงินงบประมาณทั้งสิ้น (บาท) หากมีการกรอก จะปิด error message
+        $("#Budget").change(function (e) {
+            e.preventDefault();
+
+            if ($(this).val() != "") {
+                $("#Budget_error").hide();
+                $("#ErrorDokJan_Budget").hide();
+                isBudget = true;
+            }
+        });
+
+        $("#submitNext").click(function (e) {
+            e.preventDefault();
+
+            //regular
+            var checkNumber = /^\d+$/;
+            var checkEN = /^[a-zA-Z]+$/;
+            var checkTH = /^[ก-๙]+$/;
+            var check = /^[ก-๙a-zA-Z0-9]+$/;
+
+            var isProjectName = false;
+            var isStrategic = false;
+            var isYear = false;
+            var isBudget = false;
+            var isExpenditure = false;
+
+            //check ชื่อโครงการ
+            if ($("#ProjectName").val() == "") {
+                $("#ProjectName_error").show();
+                $("#ErrorDokJan_ProjectName").show();
+            } else {
+                if (check.test($("#ProjectName").val())) {
+                    $("#ProjectName_error").hide();
+                    $("#ErrorDokJan_ProjectName").hide();
+                    isProjectName = true;
+                }
+                else {
+                    $("#ProjectName_error").show();
+                    $("#ErrorDokJan_ProjectName").show();
+                }
+            }
+
+            //check ยุทธศาสตร์การจัดสรรงบประมาณ
+            if ($("#Strategics").val() == "") {
+                $("#Strategic_error").show();
+                $("#ErrorDokJan_Strategic").show();
+            } else {
+                $("#Strategic_error").hide();
+                $("#ErrorDokJan_Strategic").hide();
+                isStrategic = true;
+            }
+
+            //check ปีงบประมาณ
+            if ($("#Year").val() == "") {
+                $("#Years_error").show();
+                $("#ErrorDokJan_Years").show();
+            } else {
+                $("#Years_error").hide();
+                $("#ErrorDokJan_Years").hide();
+                isYear = true;
+            }
+
+            //check วงเงินงบประมาณทั้งสิ้น (บาท)
+            var reg = /,/gi;
+
+            if ($("#Budget").val() == "0.00" || $("#Budget").val() == "") {
+                $("#Budget_error").show();
+                $("#ErrorDokJan_Budget").show();
+            } else {
+                if ($("#Budget").val() != "0.00") {
+                    $("#Budget_error").hide();
+                    $("#ErrorDokJan_Budget").hide();
+                    isBudget = true;
+                } else {
+                    $("#Budget_error").show();
+                    $("#ErrorDokJan_Budget").show();
+                }
+            }
+
+            //check อยู่ในงบรายจ่ายประเภท
+            if ($("#Expenditure").val() == "") {
+                $("#expenditure_error").show();
+                $("#ErrorDokJan_expenditure").show();
+            } else {
+                $("#expenditure_error").hide();
+                $("#ErrorDokJan_expenditure").hide();
+                isExpenditure = true;
+            }
+
+            var projectName = $("#ProjectName");
+            var strategic = $("#Strategics");
+            var year = $("#Year");
+            var budget = $("#Budget");
+            var expenditure = $("#Expenditure");
+
+            //viewbag to controller
+            if (isProjectName && isStrategic && isYear && isBudget && isExpenditure) {
+                if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: appName + "/EditProject/UpdateDetail/",
+                        data: JSON.stringify({
+                            pId: $("#ID").val(),
+                            projectName: projectName.val(),
+                            strategicId: strategic.val(),
+                            year: $("select[name='Year'] option:selected").val(),
+                            budget: budget.val().replace(reg, ""),
+                            expenditure: expenditure.val()
+                        }),
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.Success) {
+                                $("#message-success").text(data.Message);
+                                $('#modal-success').modal('show');
+
+                                $("#btnOkSuccess").click(function (e) {
+
+                                    e.preventDefault();
+                                    window.location.href = '@Url.Action("ProjectComplete", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+                                });
+                            } else {
+                                $("#message-fail").text(data.Message);
+                                $('#modal-fail').modal('show');
+                            }
+                        }
+                    });
+                }
+            } else {
+
+            }
+        });
+    });
+
+</script>

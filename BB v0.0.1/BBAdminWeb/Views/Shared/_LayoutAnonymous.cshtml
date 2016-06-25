@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="http://www.bb.go.th/bbweb/wp-content/themes/pindol/images/favicon.ico" type="image/x-icon" />
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/layout.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/productiondropdown.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/jquery.dataTables.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/dataTables.bootstrap.css")" rel="stylesheet" />
+
+
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.dataTables.js")"></script>
+    <script src="@Url.Content("~/Scripts/dataTables.bootstrap.js")"></script>
+    <script src="@Url.Content("~/Scripts/angular.min.js")"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //set selected of menu
+            $("#tab" + @ViewBag.TabMenu).addClass("selected");
+
+            //if($("#tab1").children("a").attr("href") == ""){
+            //    $(this).css({"style": "cursor:'default'"});
+            //}
+
+            //open child menu when mouse hever to main menu
+            $("li.mainnav").mouseenter(function(e){
+                $(this).children("li.mainnav ul.dropdown").css({ display:'block' });
+            }).mouseleave(function(e){
+                $(this).children("li.mainnav ul.dropdown").css({ display:'none' });
+            });
+
+
+            $(".numericOnly").bind('keypress', function (e) {
+
+                if ((e.which != 46 || $(this).val().indexOf('.') != -1) &&
+                   ((e.which < 48 || e.which > 57) &&
+                   (e.which != 0 && e.which != 8))) {
+                    e.preventDefault();
+                }
+
+                var text = $(this).val();
+
+                if ((text.indexOf('.') != -1) &&
+                  (text.substring(text.indexOf('.')).length > 2) &&
+                  (e.which != 0 && e.which != 8) &&
+                  ($(this)[0].selectionStart >= text.length - 2)) {
+                    e.preventDefault();
+                }
+            });
+
+            //Disable paste
+            $(".numericOnly").bind("paste", function (e) {
+                e.preventDefault();
+            });
+
+            $(".numericOnly").bind('mouseenter', function (e) {
+                //var val = $(this).val();
+                //if (val != '0') {
+                //    val = val.replace(/[^0-9]+/g, "")
+                //    $(this).val(val);
+                //}
+            });
+
+            $(window).scroll(function(){
+                if ($(this).scrollTop() > 300) {
+                    $('.scrollToTop').fadeIn();
+                } else {
+                    $('.scrollToTop').fadeOut();
+                }
+            });
+
+            //Click event to scroll to top
+            $('.scrollToTop').click(function(){
+                $('html, body').animate({scrollTop : 0},800);
+                return false;
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+
+    <div id="container">
+        <div id="header" style="margin-top:0px">
+            <div id="logo">
+                <div class="dep">สำนักประเมินผล</div>
+                <div class="proj">การวิเคราะห์ความเสี่ยงตามหลักธรรมมาภิบาล ตามแผนงาน/โครงการ</div>
+            </div>
+            <div id="logout-box" class="selected-right">
+            </div>
+            <div class="clearFix"></div>
+        </div>
+
+        <div id="body">
+            <div id="menu-box">
+                <div class="glowingtabs">
+                    <ul class="tabs">
+                        @if (ViewBag.Menus != null)
+                        {
+                            foreach (Budget.Util.Menu m in ViewBag.Menus)
+                            {
+                                if (m.Childs.Count > 0)
+                                {
+                                    <li id='@m.IdTab' class="mainnav">
+                                        <a href='@m.Url'><span> @m.Name</span></a>
+                                        <ul class="dropdown" style="display:none">
+                                            @foreach (Budget.Util.Menu child in m.Childs)
+                                            {
+                                                <li><a href='@child.Url'><span> @child.Name</span></a></li>
+                                            }
+                                        </ul>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li id='@m.IdTab' class="mainnav"><a href='@m.Url'><span> @m.Name</span></a></li>
+                                }
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div id="selected-box">
+                <div class="clearFix">
+                </div>
+                <div class="selected-left">
+                    @if (@ViewBag.PageTitle != null)
+                    {
+                        <h1 style="font-size:25px !important">@ViewBag.PageTitle</h1>
+                    }
+                    else
+                    {
+                        <h1 style="font-size:25px !important">@ViewBag.Title</h1>
+                    }
+                </div>
+            </div>
+            <div class="content">
+                <div id="selected-box">
+                    <div class="clearFix"></div>
+
+                    <div class="clearFix"></div>
+                </div>
+                <div class="clearFix"></div>
+                <div class="content-box">
+                    @RenderBody()
+                    <div class="clearFix"></div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <div class="footer-left">
+                &copy; 2011-2012 <span>สำนักงบประมาณ สำนักนายกรัฐมนตรี</span> All right reserved
+            </div>
+            <div class="footer-right"></div>
+        </div>
+    </div>
+
+
+    <a href="#" class="scrollToTop">Top</a>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal-success" tabindex="-1" role="dialog" aria-labelledby="myModalLabelmessage" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabelmessage-success">เรียบร้อย</h4>
+                </div>
+                <div>
+
+                </div>
+                <div class="modal-body">
+                    <table align="center">
+                        <tr>
+                            <td valign="top" style="padding-right:5px"><img id="icon-message" src="~/Images/icon/_success.png" /></td>
+                            <td id="message-success"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <table align="center">
+                        <tr>
+                            <td><button id="btnOkSuccess" type="button" class="btn btn-default" data-dismiss="modal">ตกลง</button></td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-fail" tabindex="-1" role="dialog" aria-labelledby="myModalLabelmessage-fail" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabelmessage-fail">ผิดพลาด</h4>
+                </div>
+                <div>
+
+                </div>
+                <div class="modal-body">
+                    <table align="center">
+                        <tr>
+                            <td valign="top" style="padding-right:5px"><img id="icon-message" src="~/Images/icon/_warning.png" /></td>
+                            <td id="message-fail"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <table align="center">
+                        <tr>
+                            <td><button id="btnOkFail" type="button" class="btn btn-default" data-dismiss="modal">ตกลง</button></td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

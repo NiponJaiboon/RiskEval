@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "การวิเคราะห์ความเสี่ยงตามหลักธรรมมาภิบาล ตามแผนงาน/โครงการ";
+    ViewBag.PageTitle = "เข้าสู่ระบบ";
+    Layout = "~/Views/Shared/_LayoutAnonymous.cshtml";
+}
+
+@using Budget.General;
+
+<script type="text/javascript" src="~/Scripts/ValidateCharecter.js"></script>
+<script type="text/javascript">
+    function GetFullBowserURL(t)
+    {
+        return window.location.protocol + "//"
+                + window.location.hostname
+                + ((window.location.port === "") ? "" : (":" + window.location.port))
+                + t;
+    }
+
+    function PrepareingSubmiting() {
+        var txtIdCard = document.getElementById("txtIdCard");
+        var validateTxtIdCard = document.getElementById("validateTxtIdCard");
+        var txtName = document.getElementById("txtName");
+        var validateTxtName = document.getElementById("validateTxtName");
+        var ddlStatus = document.getElementById("ddlStatus");
+        var validateDdlStatus = document.getElementById("validateDdlStatus");
+        var btnLogin = document.getElementById("btnLogin");
+        var LoaderBtnLogin = document.getElementById("LoaderBtnLogin");
+
+        //Clear Validate
+        var isPass = true;
+        validateTxtIdCard.style.visibility = "hidden";
+        validateTxtName.style.visibility = "hidden";
+        validateDdlStatus.style.visibility = "hidden";
+
+        //Check Validate
+        if (!txtIdCard.value || txtIdCard.value.length < 13) {
+            isPass = isPass && false;
+            validateTxtIdCard.title = "กรุณาระบุเลขบัตรประชาชน 13 หลัก";
+            validateTxtIdCard.style.visibility = "visible";
+        }
+        if (!txtName.value) {
+            isPass = isPass && false;
+            validateTxtName.title = "กรุณาระบุชื่อภาษาอังกฤษ";
+            validateTxtName.style.visibility = "visible";
+        }
+        if (isNaN(ddlStatus.value)) {
+            isPass = isPass && false;
+            validateDdlStatus.title = "กรุณาเลือกสถานะผู้ใช้";
+            validateDdlStatus.style.visibility = "visible";
+        }
+
+        if (isPass) {
+            btnLogin.style.display = "none";
+            LoaderBtnLogin.style.visibility = "visible";
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: GetFullBowserURL("@ViewBag.LoginActionName"),
+            data: {
+                idCard: txtIdCard.value,
+                nameEng: txtName.value,
+                status: ddlStatus.value
+            },
+            success: function (data) {
+                btnLogin.style.display = "";
+                LoaderBtnLogin.style.visibility = "hidden";
+                if (data.result == 1) {
+                    window.location = data.target;
+                }
+                else {
+                    alert("Failed exception: " + data.message);
+                }
+            }
+        });
+    }
+    }
+</script>
+<div class="content-box">
+    <div class="content-left">
+        <div class="title">ระบุชื่อผู้ใช้ และรหัสผ่าน</div>
+        <div class="separate"></div>
+        <table id="tblogin">
+            <tbody>
+                <tr>
+                    <td class="first" valign="top">
+                        <label> เลขบัตรประชาชน</label>
+                    </td>
+                    <td class="second">
+                        <input id="txtIdCard" name="txtIdCard" type="text" class="form-control col-lg-4" maxlength="13" style="width:200px;" onkeypress="return FillterNumber(event);" onpaste="return FillterNumberOnPaste(event);">
+                        <span id="validateTxtIdCard" style="color:Red; visibility:hidden; cursor:pointer;">
+                            <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="first" valign="top">
+                        <label> ชื่อ (ภาษาอังกฤษ)</label>
+                    </td>
+                    <td class="second">
+                        <input id="txtName" name="txtName" type="text" style="width:200px;" class="form-control col-lg-4" onkeypress="return FillterAlphabet(event);" onpaste="return FillterAlphabetOnPaste(event);">
+                        <span id="validateTxtName" style="color:Red; visibility:hidden; cursor:pointer;">
+                            <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                        </span>
+                        <br />
+
+                        <div style="clear:both" class="comment">กรอกเฉพาะชื่อ(ภาษาอังกฤษ)เท่านั้น</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="first" valign="top">
+                        <label> สถานะผู้ใช้</label>
+                    </td>
+                    <td class="second">
+                        <select name="ddlStatus" id="ddlStatus" class="form-control col-lg-4" style="width:200px;">
+                            @(new HtmlString(ViewBag.StatusLogin))
+                        </select>
+                        <span id="validateDdlStatus" style="color:Red; visibility:hidden; cursor:pointer;">
+                            <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="first"></td>
+                    <td class="second">
+                        <input type="button" id="btnLogin" name="btnLogin" value="เข้าสู่ระบบ" class="btn btn-default" onclick="PrepareingSubmiting();" />
+                        <span id="LoaderBtnLogin" style="visibility:hidden;">
+                            <img alt="" src="~/Images/icon/ajax-loader.gif" style="width:28px; height:28px; vertical-align:middle;" />
+                            <input type="button" class="button" value="เข้าสู่ระบบ" style="visibility:hidden;" />
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="separate"></div>
+        <ul>
+            <li>
+                <a class="link" href="~/Register">
+                    ลงทะเบียน (ส่วนราชการ รัฐวิสาหกิจ หน่วยงานอื่นของรัฐ จังหวัด และกลุ่มจังหวัด)
+                </a>
+            </li>
+            <li>
+                <a class="link" href="~/Register/Staff">ลงทะเบียน (สำนักงบประมาณ)</a>
+            </li>
+        </ul>
+        <div class="help-manual">
+            <p class="title">คู่มือการใช้งานระบบ</p>
+            <ul>
+                <li><a class="link" href="~/Document/1คู่มือการใช้โปรแกรมของส่วนราชการ.pdf">คู่มือการใช้งานการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล</a></li>
+                <li><a class="link" href="~/Document/2คู่มือส่วนราชการ.pdf">คู่มือการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล สำหรับคำของบประมาณ</a></li>
+                <li><a class="link" href="~/Document/3แบบฟอร์มประกอบแนวทางการตอบแบบสอบถาม.docx">แบบฟอร์มประกอบแนวทางการตอบแบบสอบถาม</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content-right">
+        <div class="box">
+            <div class="box-header"></div>
+            <div class="box-body">
+                <div>
+                    <p class="title">ประกาศสำนักประเมินผล</p>
+                    @if ((List<Announce>)ViewBag.Notices != null)
+                    {
+                        for (int i = 0; i < ((List<Announce>)ViewBag.Notices).Count; i++)
+                        {
+    <p style="font-size: 20px !important;">@(i + 1). @(((List<Announce>)ViewBag.Notices)[i].HeadLine)</p>
+    <ul>@(((List<Announce>)ViewBag.Notices)[i].Content)</ul>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="box-footer"></div>
+        </div>
+    </div>
+    <div class="clearFix"></div>
+</div>

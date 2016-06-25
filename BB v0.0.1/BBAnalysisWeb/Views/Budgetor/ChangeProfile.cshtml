@@ -1,0 +1,538 @@
+﻿@{
+    ViewBag.Title = "แก้ไขทะเบียนผู้ใช้งาน(สำนักงบประมาณ)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model BBAnalysisWeb.Models.UserViewModel
+
+<style type="text/css">
+    .spantext-Lable{
+        padding-right:5px;
+    }
+</style>
+<script type="text/javascript">
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    //class department
+    var Department = {
+        id: "",
+        name: "",
+        ministryId: "",
+        ministryName: "",
+
+
+        init: function (id, name, mId, mName) {
+            this.id = id,
+            this.name = name,
+            this.ministryId = mId,
+            this.ministryName = mName
+        },
+
+    };
+
+    var departmentDropdraw = [];
+    var departmentData = [];
+
+    function duplicate(id) {
+        var isDup = false;
+        for (var i = 0; i < departmentData.length; i++) {
+            if (departmentData[i] == id) {
+                //console.log("dup : " + id);
+                isDup = true;
+                break;
+            }
+        }
+
+        return isDup;
+    }
+
+    function deleteDepartment(sender, id) {
+        for (var i = 0; i < departmentData.length; i++) {
+            if (departmentData[i] == id) {
+                console.log("del : " + id);
+                departmentData.splice(i, 1);
+                $("#departments_table").DataTable().row($(sender).parents('tr')).remove().draw();
+                break;
+            }
+        }
+
+        var chkAgencies = $("input[name='chk1']");
+        for (var i = 0; i < departmentDropdraw.length; i++) {
+            if (departmentDropdraw[i].id == id) {
+                chkAgencies[i].checked = false;
+                break;
+            }
+        }
+
+        $("#care").attr('checked', false);
+
+    }
+
+    function check(s, field) {
+
+        var table = $("#departments_table").DataTable({
+            "dom": '<"toolbar">frtip',
+            aaSorting: [],
+            searching: false,
+            bSort: false,
+            ordering: false,
+            bRetrieve: true, //อนุญาติให้เพิ่ม row
+        });
+
+        console.log("check");
+        if (s.checked) {
+            for (i = 0; i < field.length; i++) {
+                field[i].checked = true;
+
+                if (!duplicate(field[i].value)) {
+                    departmentData.push(departmentDropdraw[i].id);
+                    table.row.add([
+                        departmentDropdraw[i].ministryName,
+                        departmentDropdraw[i].name,
+                        //"<a href='#' onclick='deleteDepartment(this," + departmentDropdraw[i].id + ")'>ลบ</a>"
+                    ]).draw();
+                }
+            }
+            //checkflag = "true";
+            return true;
+        } else {
+            for (i = 0; i < field.length; i++) {
+
+                console.log(field[i].value);
+                field[i].checked = false;
+
+                for (var j = 0; j < departmentData.length; j++) {
+                    if (departmentData[j] == field[i].value) {
+                        console.log("del : " + field[i].value);
+                        departmentData.splice(j, 1);
+                        table.row(j).remove().draw();
+                        break;
+                    }
+                }
+            }
+            //checkflag = "false";
+            return false;
+        }
+    }
+    function uncheckall(s) {
+
+        console.log("uncheckall");
+
+        if (s.checked) {
+            return true;
+        }
+        else {
+            document.getElementById("care").checked = false;
+            return false;
+        }
+    }
+    function checkform() {
+        var checkvar = document.form1.Chk1;
+        var check = "";
+        for (i = 0; i < checkvar.length; i++) {
+            if (checkvar[i].checked) {
+                check = "Y";
+                break;
+            }
+        }
+        if (check == "") {
+            alert("กรุณาเลือก CheckBox อย่างน้อย 1 ตัวครับ");
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function validateIssue(sender, errorText, errorSymbol, message, flag) {
+        var msg = ((message) ? message : "");
+        if (flag) {
+            if (errorText) { errorText.hide(); }
+            if (errorSymbol) { errorSymbol.css({ visibility: "hidden" }); }
+        }
+        else {
+            if (errorText) { errorText.text(msg).show(); }
+            if (errorSymbol) { errorSymbol.prop("title", msg).css({ visibility: "visible" }); }
+        }
+        sender.css({ borderColor: ((flag) ? "darkgray" : "red") });
+    }
+
+    function checkHandle(sender) {
+        console.log(sender);
+        console.log(sender.value);
+        console.log(sender.checked);
+        if (!sender.checked) {
+            for (var i = 0; i < departmentData.length; i++) {
+                if (departmentData[i] == sender.value) {
+                    console.log("del : " + sender.value);
+                    departmentData.splice(i, 1);
+                    $("#departments_table").DataTable().row(i).remove().draw();
+                    break;
+                }
+            }
+
+            var chkAgencies = $("input[name='chk1']");
+            for (var i = 0; i < departmentDropdraw.length; i++) {
+                if (departmentDropdraw[i].id == sender.value) {
+                    chkAgencies[i].checked = false;
+                    break;
+                }
+            }
+
+            $("#care").attr('checked', false);
+        } else {
+            var agencies = new Array();
+            var chkAgencies = $("input[name='chk1']");
+            var checkedCount = 0;
+
+            var table = $("#departments_table").DataTable({
+                "dom": '<"toolbar">frtip',
+                aaSorting: [],
+                searching: false,
+                bSort: false,
+                ordering: false,
+                bRetrieve: true, //อนุญาติให้เพิ่ม row
+            });
+
+            for (var i = 0; i < chkAgencies.length; i++) {
+                if (chkAgencies[i].checked) {
+                    checkedCount++;
+                    //clone data
+                    if (!duplicate(departmentDropdraw[i].id)) {
+                        departmentData.push(departmentDropdraw[i].id);
+                        table.row.add([
+                            departmentDropdraw[i].ministryName,
+                            departmentDropdraw[i].name,
+                            //"<a href='#' onclick='deleteDepartment(this," + departmentDropdraw[i].id + ")'>ลบ</a>"
+                        ]).draw();
+                    }
+                }
+            }
+
+            console.log(checkedCount);
+            console.log(departmentDropdraw.length);
+            if (checkedCount == departmentDropdraw.length)
+                $("#care").prop('checked', true);
+        }
+    }
+
+    $(function () {
+
+        var table = $("#departments_table").DataTable({
+            "dom": '<"toolbar">frtip',
+            aaSorting: [],
+            searching: false,
+            bSort: false,
+            ordering: false,
+        });
+
+        $.ajax({
+            cache: false,
+            url: appName + '/Budgetor/GetResponsibleOrgUnits/',
+            dataType: 'json',
+            success: function (data) {
+
+                //Update department temp data
+                for (var i = 0; i < data.length; i++) {
+
+                    console.log(data[i].MinistryName + data[i].Name + data[i].ID);
+                    departmentData.push(data[i].NameID);
+
+                    table.row.add([
+                            data[i].MinistryName,
+                            data[i].Name,
+                            "<a href='#' onclick='deleteDepartment(this," + data[i].NameID + ")'>ลบ</a>"
+                    ]).draw();
+                }
+
+            },
+            type: 'GET'
+        });
+
+        $("#btAddDepartment").click(function () {
+
+            var agencies = new Array();
+            var chkAgencies = $("input[name='chk1']");
+            var checkedCount = 0;
+
+            var table = $("#departments_table").DataTable({
+                "dom": '<"toolbar">frtip',
+                aaSorting: [],
+                searching: false,
+                bSort: false,
+                ordering: false,
+                bRetrieve: true, //อนุญาติให้เพิ่ม row
+            });
+
+            for (var i = 0; i < chkAgencies.length; i++) {
+                if (chkAgencies[i].checked) {
+                    checkedCount++;
+                    //clone data
+                    if (!duplicate(departmentDropdraw[i].id)) {
+                        departmentData.push(departmentDropdraw[i].id);
+                        table.row.add([
+                            departmentDropdraw[i].ministryName,
+                            departmentDropdraw[i].name,
+                            "<a href='#' onclick='deleteDepartment(this," + departmentDropdraw[i].id + ")'>ลบ</a>"
+                        ]).draw();
+                    }
+                }
+            }
+
+            console.log(checkedCount);
+            console.log(departmentDropdraw.length);
+            if (checkedCount == departmentDropdraw.length)
+                $("#care").prop('checked', true);
+        });
+
+        $("#ddlMinistry").change(function (e) {
+
+            e.preventDefault();
+            var t = $("#ddlMinistry option:selected").val();
+
+            departmentDropdraw = [];
+            $.ajax({
+                url: appName + '/Budgetor/GetDepartment/',
+                dataType: 'json',
+                data: { mId: (t == "" ? 0 : t) },
+                success: function (data) {
+                    var a = "<table id='checkbox2column' style='width:100%;'>";
+
+                    for (var i = 0; i < data.length; i++) {
+                        departmentDropdraw.push(new Department.init(
+                               data[i].ID,
+                               data[i].Name,
+                               data[i].Ministry.ID,
+                               data[i].Ministry.Name));
+                    }
+
+                    for (var i = 0; i < data.length; i = i + 2) {
+                        a += "<tr><td style='padding-right: 5px; width: 45%;vertical-align:top'>";
+                        if (data[i]) {
+                            if (duplicate(data[i].ID))
+                                //a += "<span class='spantext-Lable'><input checked='checked' type='checkbox' name='chk1' class='checkboxinput' value='" + data[i].ID + "' onclick = \"this.valed=uncheckall(this)\" /></span>";
+                                a += "<span class='spantext-Lable'><input checked='checked' type='checkbox' name='chk1' class='checkboxinput' value='" + data[i].ID + "' onclick = \"this.valed=uncheckall(this)\" onchange='checkHandle(this)' /></span>";
+                            else
+                                //a += "<span class='spantext-Lable'><input type='checkbox' name='chk1' class='checkboxinput' value='" + data[i].ID + "' onclick = \"this.valed=uncheckall(this)\" /></span>";
+                                a += "<span class='spantext-Lable'><input type='checkbox' name='chk1' class='checkboxinput' value='" + data[i].ID + "' onclick = \"this.valed=uncheckall(this)\" onchange='checkHandle(this)' /></span>";
+                            a += "<span class='spantext-Feild'>" + data[i].Code + " / " + data[i].Name + "</span>";
+                        }
+                        a += "</td><td style='width: 45%;;vertical-align:top'>";
+                        if (data[i + 1]) {
+                            if (duplicate(data[i + 1].ID))
+                                a += "<span class='spantext-Lable'><input checked='checked' type='checkbox' name='chk1' class='checkboxinput' value='" + data[i + 1].ID + "' onclick = \"this.valed=uncheckall(this)\" onchange='checkHandle(this)' /></span>";
+                            else
+                                a += "<span class='spantext-Lable'><input type='checkbox' name='chk1' class='checkboxinput' value='" + data[i + 1].ID + "' onclick = \"this.valed=uncheckall(this)\" onchange='checkHandle(this)' /></span>";
+                            a += "<span class='spantext-Feild'>" + data[i + 1].Code + " / " + data[i + 1].Name + "</span>";
+                        }
+                        a += "</td></tr>";
+                    }
+                    a += "</table>";
+
+                    document.getElementById("care").checked = false;
+                    document.getElementById("abc").innerHTML = "";
+                    $("#abc").append(a);
+                },
+                type: 'GET'
+            });
+        });
+
+        $("#btSubmit").click(function (e) {
+            e.preventDefault();
+
+            var sender, errorText, errorSymbol;
+            var isUnit = false;
+
+            // กระทรวงที่ดูแล
+            //sender = $("#Ministry");
+            //errorText = $("#minis_er");
+            //errorSymbol = $("#validateMinistry");
+            //isminis = ($("#Ministry option:selected").val() > 0);
+            //validateIssue(sender, errorText, errorSymbol
+            //    , ((isminis) ? "" : "กรุณาเลือกกระทรวงที่ดูแล")
+            //    , isminis);
+
+
+            // หน่วยงานที่ดูแล
+            var chk1 = $("input[name='chk1']");
+            var caree_er = $("#caree_er")
+            if (departmentData.length == 0) {
+                caree_er.text("กรุณาเลือกหน่วยงานที่ดูแล").show();
+                $("#validatecare").prop("title", "กรุณาเลือกหน่วยงานที่ดูแล").css({ visibility: "visible" });
+            }
+            else {
+                isUnit = true;
+                caree_er.hide();
+                $("#validatecare").css({ visibility: "hidden" });
+            }
+
+            if (isUnit) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: appName + '/Budgetor/UpdateResponsibleOrgUnits/',
+                    dataType: 'json',
+                    data: {
+                        agencies: departmentData,
+                    },
+                    success: function (data) {
+                        if (data.Success) {
+                            $("#message-success").text(data.Message);
+                            $('#modal-success').modal('show');
+
+
+                            $("#btnOkSuccess").click(function (e) {
+                                e.preventDefault();
+                                window.location = appName + "/Budgetor/ChangeProfile";
+                            });
+                        } else {
+                            $("#message-fail").text(data.Message);
+                            $('#modal-fail').modal('show');
+                        }
+                    }
+                });
+            }
+        });
+    });
+
+</script>
+@*<input type="checkbox" onchange="" />*@
+<table border="0" style="width:100%">
+    <tbody>
+        <tr style="height:50px">
+            <td style="width:150px">เลขที่บัตรประชาชน</td>
+            <td>
+                @Html.TextBoxFor(x => x.IdCard, new { @class = "form-control", @disabled = "disabled", @style = "width:100%" })
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style="height:50px">
+            <td>ชื่อ(ภาษาไทย)</td>
+            <td>
+                @Html.TextBoxFor(x => x.FirstNameTh, new { @class = "form-control", @disabled = "disabled", @style = "width:100%" })
+            </td>
+            <td style="width:150px;padding-left:10px">นามสกุล(ภาษาไทย)</td>
+            <td>
+                @Html.TextBoxFor(x => x.LastNameTh, new { @class = "form-control", @disabled = "disabled", @style = "width:100%" })
+            </td>
+        </tr>
+        <tr style="height:50px">
+            <td>ชื่อ(ภาษาอังกฤษ)</td>
+            <td>
+                @Html.TextBoxFor(x => x.FirstNameEn, new { @class = "form-control", @disabled = "disabled", @style = "width:100%" })
+            </td>
+            <td style="padding-left:10px">นามสกุล(ภาษาอังกฤษ)</td>
+            <td>
+                @Html.TextBoxFor(x => x.LastNameEn, new { @class = "form-control", @disabled = "disabled", @style = "width:100%" })
+            </td>
+        </tr>
+        <tr style="height:50px">
+            <td>ที่อยู่หน่วยงาน</td>
+            <td colspan="3">
+                @Html.TextAreaFor(x => x.Address, new { @class = "form-control", @disabled = "disabled", @style = "width:100%" })
+            </td>
+        </tr>
+        <tr style="height:50px">
+            <td>หมายเลขโทรศัพท์กลาง</td>
+            <td>
+                @Html.TextBoxFor(x => x.PhoneCenter, new { @class = "form-control", @disabled = "disabled", @style = "width:100%" })
+            </td>
+            <td style="padding-left:10px">เบอร์ต่อ</td>
+            <td>
+                @Html.TextBoxFor(x => x.PhoneCenter, new { @class = "form-control", @disabled = "disabled", @style = "width:100%" })
+            </td>
+        </tr>
+        <tr style="height:50px">
+            <td>หมายเลขโทรศัพท์ตรง</td>
+            <td>
+                @Html.TextBoxFor(x => x.PhoneDirect, new { @class = "form-control", @disabled = "disabled", @style = "width:100%" })
+            </td>
+            <td style="padding-left:10px">หมายเลขโทรศัพท์มือถือ</td>
+            <td>
+                @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control", @disabled = "disabled", @style = "width:100%" })
+            </td>
+        </tr>
+        <tr style="height:50px">
+            <td>E-Mail</td>
+            <td>
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @disabled = "disabled", @style = "width:100%" })
+            </td>
+            <td colspan="2"></td>
+        </tr>
+        <tr style="height:50px">
+            <td>
+                สังกัด
+            </td>
+            <td colspan="3">
+                @*@Html.DropDownList("department", new List<SelectListItem> { new SelectListItem { Text = Model.Department } }, new { @class = "form-control aspNetDisabled", @disabled = "disabled" })*@
+            </td>
+        </tr>
+        <tr style="height:50px">
+            <td>
+                สถานะผู้ใช้งาน
+            </td>
+            <td colspan="3">
+                @Html.DropDownList("ddlRoles", null, "", new { @class = "form-control", @disabled = "disabled", @style = "width:100%" })
+            </td>
+        </tr>
+        <tr style="height:50px">
+            <td>
+                กระทรวงที่ดูแล
+            </td>
+            <td colspan="3">
+                @Html.DropDownList("ddlMinistry", null, "กรุณาเลือก", new { @class = "form-control", @style = "width:100%" })
+                <span id="validateMinistry" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+
+        </tr>
+        <tr style="height:50px">
+            <td>
+                หน่วยงานที่ดูแล<span id="ContentPlaceHolder1_uc_register_staff1_CustomValidator_department" style="visibility:hidden;">*</span>
+            </td>
+            <td colspan="3">
+                <input type="checkbox" id="care" name="All1" onclick="this.valed=check(this, document.getElementById('abc').chk1)" style="margin-top: 0px !important;" />
+                <span id="labelselectall">เลือกหน่วยงานทั้งหมด</span>
+                <span id="validatecare" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+        </tr>
+        <tr style="height:50px">
+            <td></td>
+            <td colspan="3">
+                <form id="abc"></form>
+            </td>
+        </tr>
+        <tr style="display:none">
+            <td></td>
+            <td><input id="btAddDepartment" type="button" value="เพิ่มหน่วยงาน" class="btn btn-default" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="4">
+                <table id="departments_table" class="table table-striped table-bordered table-hover" cellspacing="0" data-page-length='100'>
+                    <thead>
+                        <tr>
+                            <th class="center" style="width:40%">กระทรวง</th>
+                            <th class="center" style="width:40%">หน่วยงาน</th>
+                            @*<th style='width:20px' class="center">#</th>*@
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </td>
+        </tr>
+
+
+        <tr style="height:50px">
+            <td colspan="4">
+                <center>
+                    <input value="ลงทะเบียน" id="btSubmit" type="button" class="btn btn-default">
+                </center>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

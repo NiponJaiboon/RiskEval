@@ -1,0 +1,4 @@
+D:\TFS_Kunakorn\BB\BB v0.0.1\BBORM\bin\Debug\BudgetORM.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\BBORM\bin\Debug\BudgetORM.pdb
+D:\TFS_Kunakorn\BB\BB v0.0.1\BBORM\obj\Debug\BudgetORM.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\BBORM\obj\Debug\BudgetORM.pdb

@@ -1,0 +1,203 @@
+﻿@model Budget.Project
+
+<div class="content-box">
+    <div>
+        <div class="box-question">
+            <div style="text-align:left; margin-top:10px;">
+                <div style="color:Red; font-size:20px;" class="QL1">ประเด็นที่ 6 วิเคราะห์ต้นทุนและทบทวน/เปรียบเทียบกับโครงการอื่น จัดลำดับความสำคัญของโครงการ และประเมินความคุ้มค่าและผลประโยชน์ ผลกระทบที่จะได้รับเพื่อจัดทำคำของบประมาณ</div>
+                <div style="margin-left:15px; margin-top:15px;">
+                    คำถามที่ 1 ผู้รับผิดชอบโครงการได้ใช้หลักความคุ้มค่าในการจัดลำดับความสำคัญของโครงการหรือไม่
+                    <span id="questionSetC1Star" class="ErrorDokJan" style="display:none; color:red">*</span><br>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><span>@Html.RadioButton("questionSetC1", "true")<label class="field-content">ใช่</label></span></td>
+                                <td><span>@Html.RadioButton("questionSetC1", "false")<label class="field-content">ไม่ใช่</label></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-left:10px">
+                        ถ้าตอบว่า "ใช่" โปรดให้รายละเอียดเพิ่มเติมต่อไปนี้
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">1.1 ระบุโครงการอื่นที่ใช้เปรียบเทียบกับโครงการนี้ในการจัดลำดับความสำคัญของโครงการ</span><br>
+                            @Html.TextArea("answerSetC11", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetC11Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetC11Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 1.1 เกิน 1500 ตัวอักษร</div>
+                        </p>
+                        
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">1.2 ระบุความสำคัญของโครงการนี้เปรียบเทียบกับโครงการลงทุนอื่นในด้านของความคุ้มค่า</span><br>
+                            @Html.TextArea("answerSetC12", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetC12Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetC12Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 1.2 เกิน 1500 ตัวอักษร</div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin:5px 5px 5px 5px; text-align:center;">
+                <input type="submit" value="บันทึกข้อมูลและดำเนินงานต่อไป" id="btnSaveQuestionSetC1" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var maxLength = 5;
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    var c1 = undefined;
+    var c11 = false;
+    var c12 = false;
+
+    function validateInput() {
+        //1.1 ระบุโครงการอื่นที่ใช้เปรียบเทียบกับโครงการนี้ในการจัดลำดับความสำคัญของโครงการ
+        if ($("#answerSetC11").val() == "") {
+            $("#answerSetC11Star").show();
+        } else {
+            $("#answerSetC11Star").hide();
+            if ($("#answerSetC11").val().length > maxLength)
+                $("#answerSetC11Message").show();
+            else
+                $("#answerSetC11Message").hide();
+        }
+
+        //1.2 ระบุความสำคัญของโครงการนี้เปรียบเทียบกับโครงการลงทุนอื่นในด้านของความคุ้มค่า  
+        if ($("#answerSetC12").val() == "") {
+            $("#answerSetC12Star").show();
+        } else {
+            $("#answerSetC12Star").hide();
+            if ($("#answerSetC12").val().length > maxLength)
+                $("#answerSetC12Message").show();
+            else
+                $("#answerSetC12Message").hide();
+        }
+    }
+
+    function save() {
+        if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: appName + "/Government/SaveAnswerC1/",
+                data: JSON.stringify({
+                    pId: $("#ID").val(),
+                    choice: $("input[name=questionSetC1]:checked").val(),
+                    answer1: $("#answerSetC11").val(),
+                    answer2: $("#answerSetC12").val(),
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        $("#message-success").text(data.Message);
+                        $('#modal-success').modal('show');
+
+                        $("#btnOkSuccess").click(function (e) {
+
+                            e.preventDefault();
+                            window.location.href = '@Url.Action("QuestionC", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+                        });
+                    } else {
+                        $("#message-fail").text(data.Message);
+                        $('#modal-fail').modal('show');
+                    }
+                }
+            });
+        }
+    }
+
+    $(function () {
+
+        $("input[name=questionSetC1]").change(function (e) {
+            e.preventDefault();
+
+            var qSetB6 = $("input[name=questionSetC1]:checked").val();
+            if (qSetB6 != undefined) {
+                $("#questionSetC1Star").hide();
+                if (qSetB6 == "true") {
+                    c1 = true;
+                    $("#answerSetC11").removeAttr('disabled');
+                    $("#answerSetC12").removeAttr('disabled');
+                } else {
+                    c1 = false;
+                    $("#answerSetC11Star").hide();
+                    $("#answerSetC12Star").hide();
+
+                    $("#answerSetC11Message").hide();
+                    $("#answerSetC12Message").hide();
+                    
+                    $("#answerSetC11").val("").attr('disabled', 'disabled');
+                    $("#answerSetC12").val("").attr('disabled', 'disabled');
+                }
+            } else {
+                $("#questionSetC1Star").show();
+            }
+        });
+
+        $("#answerSetC11").change(function (e) {
+            e.preventDefault();
+
+            var answerSetC11 = $("#answerSetC11").val();
+            if (answerSetC11.length > 0) {
+                $("#answerSetC11Star").hide();
+                if (answerSetC11.length > maxLength)
+                    $("#answerSetC11Message").show();
+                else {
+                    c11 = true;
+                    $("#answerSetC11Message").hide();
+                }
+            } else {
+                $("#answerSetC11Star").show();
+            }
+        });
+
+        $("#answerSetC12").change(function (e) {
+            e.preventDefault();
+
+            var answerSetC12 = $("#answerSetC12").val();
+            if (answerSetC12.length > 0) {
+                $("#answerSetC12Star").hide();
+                if (answerSetC12.length > maxLength)
+                    $("#answerSetC12Message").show();
+                else {
+                    c12 = true;
+                    $("#answerSetC12Message").hide();
+                }
+            } else {
+                $("#answerSetC12Star").show();
+            }
+        });
+        
+
+        $("#btnSaveQuestionSetC1").click(function (e) {
+            e.preventDefault();
+
+            //ตรวจสอบ ตำตอบ ข้อ 1.1, 1.2 ไม่มีค่าว่างและไม่เกิน 1500 ตัวอักษร
+            if (c1) {
+                validateInput();
+                if (c11 && c12) {
+                    save();
+                }
+            } else if (c1 == undefined) {
+                $("#questionSetC1Star").show();
+                validateInput();
+            }
+            else {
+                c1 = false;
+                save();
+            }
+
+        });
+
+    });
+
+</script>

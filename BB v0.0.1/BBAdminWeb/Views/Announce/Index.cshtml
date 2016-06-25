@@ -1,0 +1,401 @@
+﻿@{
+    ViewBag.Title = "ประกาศสำนักประเมินผล";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="content">
+    <div class="modal"></div>
+    <input type='hidden' id='idHidden' value=''>
+
+    <div id="announce-summay-container">
+        <div id="menu-top">
+            <div style="float:left">@Html.ActionLink("กลับ", "Index", "Admin", null, new { @id = "openDialog", @class = "btn btn-default" })</div>
+            <div style="float:right" id="add-event-container">
+                <input type="button" value="เพิ่มประกาศ" id="btnAddAnnounce" class="btn btn-default" />
+                @*<a href="#" onclick="addAnnounce()" class="btn btn-default">เพิ่มประกาศ</a>*@
+            </div>
+        </div>
+
+        <div style="clear:both;padding-top:5px">
+
+            <table id="announces_table" class="table table-striped table-bordered table-hover" cellspacing="0" data-page-length='10'>
+                <thead>
+                    <tr>
+                        @*<th style='width:50px' class="center">ลำดับ</th>*@
+                        <th class="center" style='width:150px'>หัวข้อหลัก</th>
+                        <th class="center">รายละเอียด</th>
+                        <th style='width:50px' class="center">#</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="add-announce-container" style="clear:both;display:none;padding-top:15px">
+        <div style="padding-left:10px">
+            <table>
+                <tr>
+                    <td>@Html.Label("หัวข้อหลัก")@Html.Label("*", new { @class = "require" })</td>
+                    <td>
+                        @Html.TextBox("HeadLine", "", new { @style = "width:400px", @class = "form-control" })
+                        <div style="display:none;color:red" data-valmsg-for="HeadLine" data-valmsg-replace="false">กรุณากรอกหัวข้อหลัก</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("รายละเอียด")@Html.Label("*", new { @class = "require" })</td>
+                    <td>
+                        @Html.TextArea("Content", new { @style = "width:400px", @rows = 10, cols = 20, @class = "form-control" })
+                        <div style="display:none;color:red" data-valmsg-for="Content" data-valmsg-replace="false">กรุณากรอกรายละเอียด</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.Label("กรุณากรอกข้อมูลให้ครบก่อนการบันทึกข้อมูล")</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="บันทึก" id="btnSaveAnnounce" class="btn btn-default" />
+                        <input type="button" value="ยกเลิก" class="btn btn-default" onclick="back('#add-announce-container')" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="edit-announce-container" style="clear:both;display:none;padding-top:15px">
+        <div style="padding-left:10px">
+            @Html.Hidden("HiddenId")
+            <table>
+                <tr>
+                    <td>@Html.Label("หัวข้อหลัก")</td>
+                    <td>
+                        @Html.TextBox("HeadLineEt", "", new { @style = "width:400px", @class = "form-control" })
+                        <div style="display:none;color:red" data-valmsg-for="HeadLineEt" data-valmsg-replace="false">กรุณากรอกหัวข้อหลัก</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("รายละเอียด")</td>
+                    <td>
+                        @Html.TextArea("ContentEt", new { @style = "width:400px", @rows = 10, cols = 20, @class = "form-control" })
+                        <div style="display:none;color:red" data-valmsg-for="ContentEt" data-valmsg-replace="false">กรุณากรอกรายละเอียด</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.Label("กรุณากรอกข้อมูลให้ครบก่อนการบันทึกข้อมูล")</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="บันทึก" id="btnSaveEtAnnounce" class="btn btn-default" />
+                        <input type="button" value="ยกเลิก" class="btn btn-default" onclick="back('#edit-announce-container')" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $body = $("body");
+
+    var headLineLength = 500;
+    var contentLength = 4000;
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    $(function () {
+        getAnnounces();
+
+        $("#btnAddAnnounce").click(function (e) {
+            e.preventDefault();
+            $('[data-valmsg-for="HeadLine"]').removeClass("input-validation-error").hide();
+            $('[data-valmsg-for="Content"]').removeClass("input-validation-error").hide();
+            $("#HeadLine").val("");
+            $("#Content").val("");
+            $("#add-announce-container").show();
+            $("#announce-summay-container").hide();
+        });
+
+        $("#btnSaveAnnounce").click(function (e) {
+
+            e.preventDefault();
+
+            var headline = $("#HeadLine");
+            var headline_er = $('[data-valmsg-for="HeadLine"]');
+            var content = $("#Content");
+            var content_er = $('[data-valmsg-for="Content"]');
+
+            if (headline.val() != "" && content.val() != "") {
+                if (headline.val().length <= headLineLength && content.val().length <= contentLength) {
+
+
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: appName + "/Announce/Save/",
+                        data: JSON.stringify({
+                            headLine: headline.val(),
+                            content: content.val(),
+                        }),
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.Success) {
+                                $("#message-success").text(data.Message);
+                                $('#modal-success').modal('show');
+                                
+
+                                $("#btnOkSuccess").click(function (e) {
+                                    e.preventDefault();
+                                    $("#add-announce-container").hide();
+                                    $("#announce-summay-container").show();
+
+                                    getAnnounces();
+                                });
+                            } else {
+                                $("#message-fail").text(data.Message);
+                                $('#modal-fail').modal('show');
+                            }
+                        }
+                    });
+
+                } else {
+                    if (headline.val().length > headLineLength) {
+                        headline_er.text("ความยาวต้องไม่เกิน " + headLineLength + " ตัวอักษร").addClass("input-validation-error").show();
+                    } else {
+                        headline_er.removeClass("input-validation-error").hide();
+                    }
+                    if (content.val().length > contentLength) {
+                        content_er.text("ความยาวต้องไม่เกิน " + contentLength + " ตัวอักษร").addClass("input-validation-error").show();
+                    } else {
+                        headline_er.removeClass("input-validation-error").hide();
+                    }
+                }
+            } else {
+                if (headline.val() == "") {
+                    headline_er.text("กรุณากรอกหัวข้อหลัก").addClass("input-validation-error").show();
+                }
+
+                if (content.val() == "") {
+                    content_er.text("กรุณากรอกรายละเอียด").addClass("input-validation-error").show();
+                }
+            }
+        });
+
+        $("#btnSaveEtAnnounce").click(function (e) {
+
+            e.preventDefault();
+
+            var headline = $("#HeadLineEt");
+            var headline_er = $('[data-valmsg-for="HeadLineEt"]');
+            var content = $("#ContentEt");
+            var content_er = $('[data-valmsg-for="ContentEt"]');
+
+            if (headline.val() != "" && content.val() != "") {
+                console.log(content.val().length);
+                if (headline.val().length <= headLineLength && content.val().length <= contentLength) {
+
+                    headline_er.removeClass("input-validation-error").hide();
+                    content_er.removeClass("input-validation-error").hide();
+
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: appName + "/Announce/Update/",
+                        data: JSON.stringify({
+                            id: $("#idHidden").val(),
+                            headLine: headline.val(),
+                            content: content.val(),
+                        }),
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.Success) {
+                                $("#message-success").text(data.Message);
+                                $('#modal-success').modal('show');
+                               
+
+                                $("#btnOkSuccess").click(function (e) {
+                                    e.preventDefault();
+                                    $("#edit-announce-container").hide();
+                                    $("#announce-summay-container").show();
+                                    getAnnounces();
+                                });
+                            } else {
+                                $("#message-fail").text(data.Message);
+                                $('#modal-fail').modal('show');
+                            }
+                        }
+                    });
+
+
+                } else {
+                    if (headline.val().length > headLineLength) {
+                        headline_er.text("ความยาวต้องไม่เกิน " + headLineLength + " ตัวอักษร").addClass("input-validation-error").show();
+                    } else {
+                        headline_er.removeClass("input-validation-error").hide();
+
+                    }
+                    if (content.val().length > contentLength) {
+                        content_er.text("ความยาวต้องไม่เกิน " + contentLength + " ตัวอักษร").addClass("input-validation-error").show();
+                    } else {
+                        content_er.removeClass("input-validation-error").hide();
+                    }
+                }
+            } else {
+                if (headline.val() == "") {
+                    headline_er.text("กรุณากรอกหัวข้อหลัก").addClass("input-validation-error").show();
+                }
+
+                if (content.val() == "") {
+                    content_er.text("กรุณากรอกรายละเอียด").addClass("input-validation-error").show();
+                }
+            }
+        });
+
+        $("#HeadLine").keypress(function (e) {
+            var headline = $(this);
+            var headline_er = $('[data-valmsg-for="HeadLine"]');
+            if (headline.val() != "" && headline.val().length - 1 <= headLineLength) {
+                headline_er.removeClass("input-validation-error").hide();
+            }
+        });
+
+        $("#Content").keypress(function (e) {
+            var content = $(this);
+            var content_er = $('[data-valmsg-for="Content"]');
+            if (content.val() != "" && content.val().length - 1 <= contentLength) {
+                content_er.removeClass("input-validation-error").hide();
+            }
+        });
+
+        $("#HeadLineEt").keypress(function (e) {
+            var headline = $(this);
+            var headline_er = $('[data-valmsg-for="HeadLineEt"]');
+            if (headline.val() != "" && headline.val().length - 1 <= headLineLength) {
+                headline_er.removeClass("input-validation-error").hide();
+            }
+        });
+
+        $("#ContentEt").keypress(function (e) {
+            var content = $(this);
+            var content_er = $('[data-valmsg-for="ContentEt"]');
+            if (content.val() != "" && content.val().length - 1 <= contentLength) {
+                content_er.removeClass("input-validation-error").hide();
+            }
+        });
+    });
+
+    function getAnnounces() {
+        $.ajax({
+            cache: false,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: appName + "/Announce/GetAnnounces/",
+            dataType: "json",
+            success: function (data) {
+                //debugger
+                $('#announces_table').dataTable({
+                    "bDestroy": true
+                }).fnDestroy();
+
+                $('#announces_table').DataTable({
+                    "dom": '<"toolbar">frtip',
+                    aaSorting: [],
+                    searching: false,
+                    bSort: false,
+                    ordering: true,
+                    data: data,
+                    columns: [
+                        //{ data: 'No', sClass: 'center', bSortable: false },
+                        { data: 'HeadLine', bSortable: false },
+                        { data: 'Content', bSortable: false },
+                        { data: 'Event', sClass: 'center', bSortable: false },
+                    ]
+                });
+
+                if (data.length <= 0)
+                    $("#table_id_paginate").hide();
+            }
+        });
+    }
+
+    function editAnnounce(id) {
+        $('[data-valmsg-for="HeadLineEt"]').removeClass("input-validation-error").hide();
+        $('[data-valmsg-for="ContentEt"]').removeClass("input-validation-error").hide();
+        $("#idHidden").val(id);
+        $.ajax({
+            cache: false,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: appName + "/Announce/GetAnnounce/",
+            data: { id: id },
+            dataType: "json",
+            success: function (data) {
+
+                $("#HeadLineEt").val(data.HeadLine);
+                $("#ContentEt").val(data.Content);
+
+                $("#edit-announce-container").show();
+                $("#announce-summay-container").hide();
+            }
+        });
+    }
+
+    function deleteAnnounce(id) {
+        if (confirm("กรุณายืนยันการลบประกาศ")) {
+            $.ajax({
+                cache: false,
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: appName + "/Announce/Delete/",
+                data: JSON.stringify({ id: id }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        $("#message-success").text(data.Message);
+                        $('#modal-success').modal('show');
+                       
+
+                        $("#btnOkSuccess").click(function (e) {
+                            e.preventDefault();
+                            $("#edit-announce-container").hide();
+                            $("#announce-summay-container").show();
+
+                            getAnnounces();
+                        });
+                    } else {
+                        $("#message-fail").text(data.Message);
+                        $('#modal-fail').modal('show');
+                    }
+                }
+            });
+        }
+    }
+
+    function addAnnounce() {
+        $('[data-valmsg-for="HeadLine"]').removeClass("input-validation-error").hide();
+        $('[data-valmsg-for="Content"]').removeClass("input-validation-error").hide();
+        $("#HeadLine").val("");
+        $("#Content").val("");
+        $("#add-announce-container").show();
+        $("#announce-summay-container").hide();
+    }
+
+    function back(id) {
+        $(id).hide();
+        $("#announce-summay-container").show();
+    }
+
+</script>

@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="iSabaya.PropertyTemplate" Collapsed="true">
+    <Position X="6.75" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CAAAAJAAAAAAAEAAAQAAAAACAABAAAAAQAAQAQAAEAA=</HashCode>
+      <FileName>PropertyTemplate\PropertyTemplate.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ValueType" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="iSabaya.PropertyTemplateGroup" Collapsed="true">
+    <Position X="9" Y="3.5" Width="2" />
+    <AssociationLine Name="children" Type="iSabaya.PropertyTemplateBase" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="11" Y="3.875" />
+        <Point X="11.177" Y="3.875" />
+        <Point X="11.177" Y="2.375" />
+        <Point X="10" Y="2.375" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAEAQIAAAEAAACAAIJAAAAAQQAAAABAAA=</HashCode>
+      <FileName>PropertyTemplate\PropertyTemplateGroup.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="children" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="iSabaya.PropertyTemplateBase" Collapsed="true">
+    <Position X="7.75" Y="2.25" Width="2.25" />
+    <AssociationLine Name="parent" Type="iSabaya.PropertyTemplateGroup" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10" Y="2.688" />
+        <Point X="10.75" Y="2.688" />
+        <Point X="10.75" Y="3.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAIIAAQAAggEBEIIAoQgACqAICAIAAAgAIAAAACCA=</HashCode>
+      <FileName>PropertyTemplate\PropertyTemplateBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="parent" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.PropertyValueContainerBase" Collapsed="true">
+    <Position X="2.75" Y="2.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AgAAAIAACEAAAABAAAAAQAAAAAACAAAAAAAAAAAACAA=</HashCode>
+      <FileName>PropertyTemplate\PropertyValueContainerBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="parent" />
+      <Field Name="template" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.PropertyValueGroup" Collapsed="true">
+    <Position X="1.5" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAEAAIAAAAAAEARAAAAEQAAAAAIAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>PropertyTemplate\PropertyValueGroup.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="parent" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.PropertyValueType" Collapsed="true">
+    <Position X="6.75" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAAJCAIAAAADIAgAACAAAAAAAIAMAACAAwAQAAMAA=</HashCode>
+      <FileName>PropertyTemplate\PropertyValueType.cs</FileName>
+      <NewMemberFileName>PropertyTemplate\PropertyValue.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.PropertyValueContainer" Collapsed="true">
+    <Position X="4" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>CAIAAIAAAEAAAEAAAQAAAAAAAAAAACAAAAAgAAAAAAA=</HashCode>
+      <FileName>PropertyTemplate\PropertyValueContainer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="values" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="iSabaya.PropertyValueGroupContainer" Collapsed="true">
+    <Position X="1.5" Y="3.5" Width="2.25" />
+    <AssociationLine Name="values" Type="iSabaya.PropertyValueContainerBase" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.5" Y="3.75" />
+        <Point X="1.125" Y="3.75" />
+        <Point X="1.125" Y="2.625" />
+        <Point X="2.75" Y="2.625" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAAEAAAAAAAQAEAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>PropertyTemplate\PropertyValueGroupContainer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="values" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="iSabaya.PropertyValue" Collapsed="true">
+    <Position X="4.25" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAIAAAAAAAAAAAAAAAAAAAACgACgAIAAgAQAAAAE=</HashCode>
+      <FileName>PropertyTemplate\PropertyValue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.PartyPropertyValueContainer" Collapsed="true">
+    <Position X="7.75" Y="1" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AABAAIAAAAAAAAAAAAAAAAIAAAAIAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Party\PartyPropertyValueContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

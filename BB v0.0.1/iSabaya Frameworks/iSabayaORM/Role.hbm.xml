@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.Role,iSabaya" table="Role">
+
+    <!-- Primary key-->
+    <id name="Id" column="RoleID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+
+    <bag name="Accessibles" table="RoleAccessibility" inverse="true">
+      <key column="UserID"/>
+      <one-to-many class="iSabaya.RoleAccessibility,iSabaya"/>
+    </bag>
+    <property name="SystemID" type="iSabaya.SystemEnum,iSabaya.Config"/>
+    <property name="Code" />
+    <property name="Description" />
+    <property name="IsAdministrator" />
+    <property name="IsBuiltin" />
+    <bag name="Menus" table="RoleMenu" inverse="true">
+      <key column="RoleID"/>
+      <one-to-many class="iSabaya.RoleMenu,iSabaya"/>
+    </bag>
+    <!--<bag name="Menus" table="RoleMenu">
+      <key column="RoleID"/>
+      <many-to-many column="MenuID" class="iSabaya.DynamicMenu,iSabaya"/>
+    </bag>-->
+    
+    <property name="PrivilegeLevel" />
+    <property name="SeqNo" />
+  </class>
+
+</hibernate-mapping>
+
+

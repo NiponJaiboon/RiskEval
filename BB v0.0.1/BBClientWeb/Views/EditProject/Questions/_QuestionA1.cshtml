@@ -1,0 +1,342 @@
+﻿@model Budget.Project
+
+<div class="content-box">
+    <div>
+        <div class="box-question">
+            <div style="text-align:left; margin-top:10px;">
+                <div style="color:Red; font-size:20px;" class="QL1">ประเด็นที่ 1 พิจารณาที่มาโครงการ กลุ่มเป้าหมาย และผู้มีส่วนได้ส่วนเสีย</div>
+                <div style="margin-left:15px; margin-top:15px;">
+                    คำถามที่ 1 โครงการนี้จัดทำขึ้นเพื่อเป็นการตอบสนองความต้องการและ/หรือแก้ปัญหาของกลุ่มเป้าหมายหรือไม่
+                    <span id="questionSetA1Star" class="ErrorDokJan" style="display:none; color:red">*</span><br>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><span>@Html.RadioButton("questionSetA1", "true")<label class="field-content">ใช่</label></span></td>
+                                <td><span>@Html.RadioButton("questionSetA1", "false")<label class="field-content">ไม่ใช่</label></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-left:10px">
+                        ถ้าตอบว่า "ใช่" โปรดให้รายละเอียดเพิ่มเติมต่อไปนี้
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">1.1 วัตถุประสงค์ของโครงการคือ</span><br>
+                            @Html.TextArea("answerSetA11", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetA11Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetA11Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 1.1 เกิน 1500 ตัวอักษร</div>
+                        </p>
+
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">1.2 กลุ่มเป้าหมายที่ได้รับประโยชน์จากโครงการคือ</span><br>
+                            @Html.TextArea("answerSetA12", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetA12Star" class="ErrorDokJan" style="display: none; color: red">*</span>
+                            <div id="answerSetA12Message" class="question-error" style="display: none;">ไม่สามารถกรอก ข้อ 1.2 เกิน 1500 ตัวอักษร</div>
+                        </p>
+
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">1.3 สรุปปัญหา/ความต้องการของกลุ่มเป้าหมาย</span><br>
+                            @Html.TextArea("answerSetA13", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetA13Star" class="ErrorDokJan" style="display: none; color: red">*</span>
+                            <div id="answerSetA13Message" class="question-error" style="display: none;">ไม่สามารถกรอก ข้อ 1.3 เกิน 1500 ตัวอักษร</div>
+                        </p>
+
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">1.4 ระบุวิธีการเพื่อให้กลุ่มเป้าหมายและผู้มีส่วนได้เสียได้ร่วมแสดงความคิดเห็นพร้อมเอกสารยืนยันว่ามีกิจกรรมจริง</span><br>
+                            @Html.TextArea("answerSetA14", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetA14Star" class="ErrorDokJan" style="display: none; color: red">*</span>
+                            <div id="answerSetA14Message" class="question-error" style="display: none;">ไม่สามารถกรอก ข้อ 1.4 เกิน 1500 ตัวอักษร</div>
+                        </p>
+
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">1.5 มีกลุ่มเป้าหมายใดที่มิได้มีส่วนร่วมในการกำหนดแผนงาน/โครงการ</span><br>
+                            @Html.TextArea("answerSetA15", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetA15Star" class="ErrorDokJan" style="display: none; color: red">*</span>
+                            <div id="answerSetA15Message" class="question-error" style="display: none;">ไม่สามารถกรอก ข้อ 1.5 เกิน 1500 ตัวอักษร</div>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <div style="margin:5px 5px 5px 5px; text-align:center;">
+                <input type="submit" value="บันทึกข้อมูลและดำเนินงานต่อไป" id="btnSaveQuestionSetA1" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var maxLength = 1500;
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    var a1 = undefined;
+    var a11 = false;
+    var a12 = false;
+    var a13 = false;
+    var a14 = false;
+    var a15 = false;
+
+    function validateInput() {
+        //1.1 วัตถุประสงค์ของโครงการคือ
+        if ($("#answerSetA11").val() == "") {
+            $("#answerSetA11Star").show();
+        } else {
+            $("#answerSetA11Star").hide();
+
+            if ($("#answerSetA11").val().length > maxLength) {
+                a11 = false;
+                $("#answerSetA11Message").show();
+            }
+            else {
+                a11 = true;
+                $("#answerSetA11Message").hide();
+            }
+        }
+
+        //1.2 กลุ่มเป้าหมายที่ได้รับประโยชน์จากโครงการคือ
+        if ($("#answerSetA12").val() == "") {
+            $("#answerSetA12Star").show();
+        } else {
+            $("#answerSetA12Star").hide();
+            if ($("#answerSetA12").val().length > maxLength) {
+                a12 = false;
+                $("#answerSetA12Message").show();
+            }
+            else {
+                a12 = true;
+                $("#answerSetA12Message").hide();
+            }
+        }
+
+        //1.3 สรุปปัญหา/ความต้องการของกลุ่มเป้าหมาย
+        if ($("#answerSetA13").val() == "") {
+            $("#answerSetA13Star").show();
+        } else {
+            $("#answerSetA13Star").hide();
+            if ($("#answerSetA13").val().length > maxLength)
+                $("#answerSetA13Message").show();
+            else {
+                a13 = true;
+                $("#answerSetA13Message").hide();
+            }
+        }
+
+        //1.4 ระบุวิธีการเพื่อให้กลุ่มเป้าหมายและผู้มีส่วนได้เสียได้ร่วมแสดงความคิดเห็นพร้อมเอกสารยืนยันว่ามีกิจกรรมจริง
+        if ($("#answerSetA14").val() == "") {
+            $("#answerSetA14Star").show();
+        } else {
+            $("#answerSetA14Star").hide();
+            if ($("#answerSetA14").val().length > maxLength)
+                $("#answerSetA14Message").show();
+            else {
+                a14 = true;
+                $("#answerSetA14Message").hide();
+            }
+        }
+
+        //1.5 มีกลุ่มเป้าหมายใดที่มิได้มีส่วนร่วมในการกำหนดแผนงาน/โครงการ
+        if ($("#answerSetA15").val() == "") {
+            $("#answerSetA15Star").show();
+        } else {
+            $("#answerSetA15Star").hide();
+            if ($("#answerSetA15").val().length > maxLength)
+                $("#answerSetA15Message").show();
+            else {
+                a15 = true;
+                $("#answerSetA15Message").hide();
+            }
+        }
+    }
+
+    function save() {
+        if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: appName + "/EditProject/UpdateAnswerA1/",
+                data: JSON.stringify({
+                    pId: $("#ID").val(),
+                    choice: $("input[name=questionSetA1]:checked").val(),
+                    answer1: $("#answerSetA11").val(),
+                    answer2: $("#answerSetA12").val(),
+                    answer3: $("#answerSetA13").val(),
+                    answer4: $("#answerSetA14").val(),
+                    answer5: $("#answerSetA15").val(),
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        $("#message-success").text(data.Message);
+                        $('#modal-success').modal('show');
+
+                        $("#btnOkSuccess").click(function (e) {
+
+                            e.preventDefault();
+                            window.location.href = '@Url.Action("QuestionA", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+                        });
+                    } else {
+                        $("#message-fail").text(data.Message);
+                        $('#modal-fail').modal('show');
+                    }
+                }
+            });
+        }
+    }
+
+    $(function () {
+
+        $("input[name=questionSetA1]").change(function (e) {
+            e.preventDefault();
+
+            var qSetA1 = $("input[name=questionSetA1]:checked").val();
+            if (qSetA1 != undefined) {
+
+                $("#questionSetA1Star").hide();
+                if (qSetA1 == "true") {
+                    a1 = true;
+                    $("#answerSetA11").removeAttr('disabled');
+                    $("#answerSetA12").removeAttr('disabled');
+                    $("#answerSetA13").removeAttr('disabled');
+                    $("#answerSetA14").removeAttr('disabled');
+                    $("#answerSetA15").removeAttr('disabled');
+                } else {
+                    a1 = false;
+                    $("#answerSetA11Star").hide();
+                    $("#answerSetA12Star").hide();
+                    $("#answerSetA13Star").hide();
+                    $("#answerSetA14Star").hide();
+                    $("#answerSetA15Star").hide();
+
+                    $("#answerSetA11Message").hide(); 
+                    $("#answerSetA12Message").hide();
+                    $("#answerSetA13Message").hide();
+                    $("#answerSetA14Message").hide();
+                    $("#answerSetA15Message").hide();
+
+                    $("#answerSetA11").val("").attr('disabled', 'disabled');
+                    $("#answerSetA12").val("").attr('disabled', 'disabled');
+                    $("#answerSetA13").val("").attr('disabled', 'disabled');
+                    $("#answerSetA14").val("").attr('disabled', 'disabled');
+                    $("#answerSetA15").val("").attr('disabled', 'disabled');
+                }
+            } else {
+                $("#questionSetA1Star").show();
+            }
+        });
+
+        $("#answerSetA11").change(function (e) {
+            e.preventDefault();
+
+            var answerSetA11 = $("#answerSetA11").val();
+            if (answerSetA11.length > 0) {
+                $("#answerSetA11Star").hide();
+                if (answerSetA11.length > maxLength)
+                    $("#answerSetA11Message").show();                
+                else {
+                    a11 = true;
+                    $("#answerSetA11Message").hide();
+                }
+            } else {
+                $("#answerSetA11Star").show();
+            }
+        });
+
+        $("#answerSetA12").change(function (e) {
+            e.preventDefault();
+
+            var answerSetA12 = $("#answerSetA12").val();
+            if (answerSetA12.length > 0) {
+                $("#answerSetA12Star").hide();
+                if (answerSetA11.length > maxLength)
+                    $("#answerSetA12Message").show();
+                else {
+                    a12 = true;
+                    $("#answerSetA12Message").hide();
+                }
+            } else {
+                $("#answerSetA12Star").show();
+            }
+        });
+
+        $("#answerSetA13").change(function (e) {
+            e.preventDefault();
+
+            var answerSetA13 = $("#answerSetA13").val();
+            if (answerSetA13.length > 0) {
+                $("#answerSetA13Star").hide();
+                if (answerSetA11.length > maxLength)
+                    $("#answerSetA13Message").show();
+                else {
+                    a13 = true;
+                    $("#answerSetA13Message").hide();
+                }
+            } else {
+                $("#answerSetA13Star").show();
+            }
+        });
+
+        $("#answerSetA14").change(function (e) {
+            e.preventDefault();
+
+            var answerSetA14 = $("#answerSetA14").val();
+            if (answerSetA14.length > 0) {
+                $("#answerSetA14Star").hide();
+                if (answerSetA11.length > maxLength)
+                    $("#answerSetA14Message").show();
+                else {
+                    a14 = true;
+                    $("#answerSetA14Message").hide();
+                }
+            } else {
+                $("#answerSetA14Star").show();
+            }
+        });
+
+        $("#answerSetA15").change(function (e) {
+            e.preventDefault();
+
+            var answerSetA15 = $("#answerSetA15").val();
+            if (answerSetA15.length > 0) {
+                $("#answerSetA15Star").hide();
+                if (answerSetA11.length > maxLength)
+                    $("#answerSetA15Message").show();
+                else {
+                    a15 = true;
+                    $("#answerSetA15Message").hide();
+                }
+            } else {
+                $("#answerSetA15Star").show();
+            }
+        });
+
+        $("#btnSaveQuestionSetA1").click(function (e) {
+            e.preventDefault();
+
+            //ตรวจสอบ ตำตอบ ข้อ 1.1, 1.2, 1.3, 1.4 และ 1.5 ไม่มีค่าว่างและไม่เกิน 1500 ตัวอักษร
+            if (a1) {
+                validateInput();
+                if (a11 && a12 && a13 && a14 && a15) {
+                    save();
+                }
+            } else if (a1 == undefined) {
+                $("#questionSetA1Star").show();
+                validateInput();
+            }
+            else {
+                a1 = false;
+                save();
+            }
+        });
+
+    });
+
+    
+</script>

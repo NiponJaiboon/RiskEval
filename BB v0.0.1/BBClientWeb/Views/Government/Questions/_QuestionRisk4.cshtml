@@ -1,0 +1,354 @@
+﻿@model Budget.Project
+
+<div class="content-box">
+    <div>
+        <div class="box-question">
+            <div style="text-align:left; margin-top:10px">
+                <table class="tbl_inside_panel">
+                    <tbody>
+                        <tr class="fm">
+                            <td class="desc_head">
+                                <span>4. ความเสี่ยงด้านเทคโนโลยี</span>
+                            </td>
+                            <td class="td_header">
+                                <span class="td_">โอกาส</span>
+                            </td>
+                            <td class="td_header">
+                                <span class="effect_text">ผลกระทบ</span>
+                            </td>
+                            <td class="td_header">
+                                <span class="impact_text">ความรุนแรง</span>
+                            </td>
+                        </tr>
+                        <!--4.1-->
+                        <tr class="fs">
+                            <td class="td_text">
+                                <span>4.1 การเลือกใช้เทคโนโลยีที่ไม่เหมาะสม</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qOppo41" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ต่ำ</option>
+                                    <option value="1">สูง</option>
+                                </select>
+                                <span id="qOppo41Star" class="ErrorDokJan" style="visibility:hidden">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qEffect41" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ยอมรับได้</option>
+                                    <option value="1">ยอมรับไม่ได้</option>
+                                </select>
+                                <span id="qEffect41Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qImpact41" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">จัดการได้</option>
+                                    <option value="1">จัดการไม่ได้</option>
+                                </select>
+                                <span id="qImpact41Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                        </tr>
+                        <!--4.2-->
+                        <tr class="fs">
+                            <td class="td_text">
+                                <span>4.2 การล้าหลังของเทคโนโลยีเนื่องจากมีเทคโนโลยีใหม่เกิดขึ้นอย่างรวดเร็ว</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qOppo42" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ต่ำ</option>
+                                    <option value="1">สูง</option>
+                                </select>
+                                <span id="qOppo42Star" class="ErrorDokJan" style="visibility:hidden">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qEffect42" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ยอมรับได้</option>
+                                    <option value="1">ยอมรับไม่ได้</option>
+                                </select>
+                                <span id="qEffect42Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qImpact42" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">จัดการได้</option>
+                                    <option value="1">จัดการไม่ได้</option>
+                                </select>
+                                <span id="qImpact42Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                        </tr>
+                        <!--4.3-->
+                        <tr class="fs">
+                            <td class="td_text">
+                                <span>4.3 ความผิดพลาดของเทคโนโลยีที่ใหม่จนเกินไป</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qOppo43" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ต่ำ</option>
+                                    <option value="1">สูง</option>
+                                </select>
+                                <span id="qOppo43Star" class="ErrorDokJan" style="visibility:hidden">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qEffect43" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ยอมรับได้</option>
+                                    <option value="1">ยอมรับไม่ได้</option>
+                                </select>
+                                <span id="qEffect43Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qImpact43" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">จัดการได้</option>
+                                    <option value="1">จัดการไม่ได้</option>
+                                </select>
+                                <span id="qImpact43Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                        </tr>
+                        <!--4.4-->
+                        <tr class="fs">
+                            <td class="td_text">
+                                <span>4.4 อื่น ๆ โปรดระบุ</span>
+                                <input type="text" id="tbOthor" class="form-control" value="">
+                                <span id="tb17Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qOppo44" class="form-control" disabled>
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ต่ำ</option>
+                                    <option value="1">สูง</option>
+                                </select>
+                                <span id="qOppo44Star" class="ErrorDokJan" style="visibility:hidden">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qEffect44" class="form-control" disabled>
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ยอมรับได้</option>
+                                    <option value="1">ยอมรับไม่ได้</option>
+                                </select>
+                                <span id="qEffect44Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qImpact44" class="form-control" disabled>
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">จัดการได้</option>
+                                    <option value="1">จัดการไม่ได้</option>
+                                </select>
+                                <span id="qImpact44Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                        </tr>
+                        <tr class="desc_head">
+                            <td colspan="4">
+                                คำอธิบายเพิ่มเติม
+                            </td>
+                        </tr>
+                        <tr class="desc_text">
+                            <td colspan="4">
+                                @Html.TextArea("tbDescription", new { @style = "width:100%", @rows = 2, cols = 20, @class = "form-control" })
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin:5px 5px 5px 5px; text-align:center;">
+                <input type="submit" value="บันทึกข้อมูลและดำเนินงานต่อไป" id="btnSaveQuestionR4" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    var oppo41, effect41, impact41;
+    var oppo42, effect42, impact42;
+    var oppo43, effect43, impact43;
+    var oppo44, effect44, impact44;
+    var othor;
+
+    function validateControl(control, star) {
+        if (control.val() == "") {
+            star.attr("style", "visibility: visible;color: red");
+        } else {
+            star.attr("style", "visibility: hidden");
+        }
+
+        return control.val();
+    }
+
+    function validateInput() {
+        //4.1
+        oppo41 = validateControl($("#qOppo41"), $("#qOppo41Star"));
+        effect41 = validateControl($("#qEffect41"), $("#qEffect41Star"));
+        impact41 = validateControl($("#qImpact41"), $("#qImpact41Star"));
+        //4.2
+        oppo42 = validateControl($("#qOppo42"), $("#qOppo42Star"));
+        effect42 = validateControl($("#qEffect42"), $("#qEffect42Star"));
+        impact42 = validateControl($("#qImpact42"), $("#qImpact42Star"));
+        //4.3
+        oppo43 = validateControl($("#qOppo43"), $("#qOppo43Star"));
+        effect43 = validateControl($("#qEffect43"), $("#qEffect43Star"));
+        impact43 = validateControl($("#qImpact43"), $("#qImpact43Star"));
+
+        if ($("#tbOthor").val() != "") {
+            //4.4
+            oppo44 = validateControl($("#qOppo44"), $("#qOppo44Star"));
+            effect44 = validateControl($("#qEffect44"), $("#qEffect44Star"));
+            impact44 = validateControl($("#qImpact44"), $("#qImpact44Star"));
+        } else {
+            $("#qOppo44Star").attr("style", "visibility: hidden");
+            $("#qEffect44Star").attr("style", "visibility: hidden");
+            $("#qImpact44Star").attr("style", "visibility: hidden");
+        }
+
+    }
+
+    function save() {
+        if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: appName + "/Government/SaveAnswerRiskAnalysis4/",
+                data: JSON.stringify({
+                    pId: $("#ID").val(),
+                    oppo: [oppo41, oppo42, oppo43, oppo44],
+                    effect: [effect41, effect42, effect43, effect44],
+                    impact: [impact41, impact42, impact43, impact44],
+                    othor: othor,
+                    description: $("#tbDescription").val()
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        $("#message-success").text(data.Message);
+                        $('#modal-success').modal('show');
+
+                        $("#btnOkSuccess").click(function (e) {
+
+                            e.preventDefault();
+                            window.location.href = '@Url.Action("QuestionRiskAnalysis", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+                        });
+                    } else {
+                        $("#message-fail").text(data.Message);
+                        $('#modal-fail').modal('show');
+                    }
+                }
+            });
+        }
+    }
+
+    $(function () {
+
+        //4.1
+        $("#qOppo41").change(function (e) {
+            e.preventDefault();
+            oppo41 = validateControl($(this), $("#qOppo41Star"));
+        });
+        $("#qEffect41").change(function (e) {
+            e.preventDefault();
+            effect41 = validateControl($(this), $("#qEffect41Star"));
+        });
+        $("#qImpact41").change(function (e) {
+            e.preventDefault();
+            impact41 = validateControl($(this), $("#qImpact41Star"));
+        });
+
+        //4.2
+        $("#qOppo42").change(function (e) {
+            e.preventDefault();
+            oppo42 = validateControl($(this), $("#qOppo42Star"));
+        });
+        $("#qEffect42").change(function (e) {
+            e.preventDefault();
+            effect42 = validateControl($(this), $("#qEffect42Star"));
+        });
+        $("#qImpact42").change(function (e) {
+            e.preventDefault();
+            impact42 = validateControl($(this), $("#qImpact42Star"));
+        });
+
+        //4.3
+        $("#qOppo43").change(function (e) {
+            e.preventDefault();
+            oppo43 = validateControl($(this), $("#qOppo43Star"));
+        });
+        $("#qEffect43").change(function (e) {
+            e.preventDefault();
+            effect43 = validateControl($(this), $("#qEffect43Star"));
+        });
+        $("#qImpact43").change(function (e) {
+            e.preventDefault();
+            impact43 = validateControl($(this), $("#qImpact43Star"));
+        });
+
+        //4.4
+        $("#qOppo44").change(function (e) {
+            e.preventDefault();
+            oppo44 = validateControl($(this), $("#qOppo44Star"));
+        });
+        $("#qEffect44").change(function (e) {
+            e.preventDefault();
+            effect44 = validateControl($(this), $("#qEffect44Star"));
+        });
+        $("#qImpact44").change(function (e) {
+            e.preventDefault();
+            impact44 = validateControl($(this), $("#qImpact44Star"));
+        });
+
+        $("#tbOthor").change(function (e) {
+            e.preventDefault();
+
+            othor = $(this).val();
+            if (othor == "") {
+                $("#qOppo44").attr('disabled', 'disabled').val("");
+                $("#qEffect44").attr('disabled', 'disabled').val("");
+                $("#qImpact44").attr('disabled', 'disabled').val("");
+
+                $("#qOppo44Star").attr("style", "visibility: hidden");
+                $("#qEffect44Star").attr("style", "visibility: hidden");
+                $("#qImpact44Star").attr("style", "visibility: hidden");
+            } else {
+                $("#qOppo44").removeAttr('disabled');
+                $("#qEffect44").removeAttr('disabled');
+                $("#qImpact44").removeAttr('disabled');
+            }
+        });
+
+        $("#btnSaveQuestionR4").click(function (e) {
+            e.preventDefault();
+
+            validateInput();
+
+            if (valid(oppo41) && valid(effect41) && valid(impact41)
+                && valid(oppo42) && valid(effect42) && valid(impact42)
+                && valid(oppo43) && valid(effect43) && valid(impact43)) {
+
+                if ($("#tbOthor").val() == "") {
+                    save();
+                } else if ($("#tbOthor").val() != "" && valid(oppo44) && valid(effect44) && valid(impact44)) {
+                    save();
+                }
+            }
+        });
+
+    });
+
+    function valid(val) {
+        return val != "";
+    }
+
+</script>

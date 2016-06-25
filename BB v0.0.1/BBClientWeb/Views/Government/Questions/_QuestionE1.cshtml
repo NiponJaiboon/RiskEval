@@ -1,0 +1,200 @@
+﻿@model Budget.Project
+
+<div class="content-box">
+    <div>
+        <div class="box-question">
+            <div style="text-align:left; margin-top:10px;">
+                <div style="color:Red; font-size:20px;" class="QL1">ประเด็นที่ 10 ทบทวน/ตรวจสอบสถานภาพโครงการ</div>
+                <div style="margin-left:15px; margin-top:15px;">
+                    คำถามที่ 1 หน่วยงานมีรายงานประเมินผลการใช้งานโครงการที่ผ่านมาหรือไม่
+                    <span id="questionSetE1Star" class="ErrorDokJan" style="display:none; color:red">*</span><br>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><span>@Html.RadioButton("questionSetE1", "true")<label class="field-content">ใช่</label></span></td>
+                                <td><span>@Html.RadioButton("questionSetE1", "false")<label class="field-content">ไม่ใช่</label></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-left:10px">
+                        ถ้าตอบว่า "ใช่" โปรดให้รายละเอียดเพิ่มเติมต่อไปนี้
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">1.1 ระบุผู้รับผิดชอบในการบริหาร จัดการ / ดูแล / บำรุงรักษาผลผลิตโครงการ</span><br>
+                            @Html.TextArea("answerSetE11", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetE11Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetE11Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 1.1 เกิน 1500 ตัวอักษร</div>
+                        </p>
+
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">1.2 ระบุแนวทางการประเมินผลลัพธ์และความพึงพอใจกลุ่มเป้าหมายและผู้มีส่วนได้ส่วนเสีย</span><br>
+                            @Html.TextArea("answerSetE12", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetE12Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetE12Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 1.2 เกิน 1500 ตัวอักษร</div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin:5px 5px 5px 5px; text-align:center;">
+                <input type="submit" value="บันทึกข้อมูลและดำเนินงานต่อไป" id="btnSaveQuestionSetE1" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var maxLength = 5;
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    var e1 = undefined;
+    var e11 = false;
+    var e12 = false;
+
+    function validateInput() {
+        //1.1 ระบุผู้รับผิดชอบในการบริหาร จัดการ / ดูแล / บำรุงรักษาผลผลิตโครงการ
+        if ($("#answerSetE11").val() == "") {
+            $("#answerSetE11Star").show();
+        } else {
+            $("#answerSetE11Star").hide();
+            if ($("#answerSetE11").val().length > maxLength)
+                $("#answerSetE11Message").show();
+            else
+                $("#answerSetE11Message").hide();
+        }
+
+        //1.2 ระบุแนวทางการประเมินผลลัพธ์และความพึงพอใจกลุ่มเป้าหมายและผู้มีส่วนได้ส่วนเสีย
+        if ($("#answerSetE12").val() == "") {
+            $("#answerSetE12Star").show();
+        } else {
+            $("#answerSetE12Star").hide();
+            if ($("#answerSetE12").val().length > maxLength)
+                $("#answerSetE12Message").show();
+            else
+                $("#answerSetE12Message").hide();
+        }
+    }
+
+    function save() {
+        if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: appName + "/Government/SaveAnswerE1/",
+                data: JSON.stringify({
+                    pId: $("#ID").val(),
+                    choice: $("input[name=questionSetE1]:checked").val(),
+                    answer1: $("#answerSetE11").val(),
+                    answer2: $("#answerSetE12").val(),
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        $("#message-success").text(data.Message);
+                        $('#modal-success').modal('show');
+
+                        $("#btnOkSuccess").click(function (e) {
+
+                            e.preventDefault();
+                            window.location.href = '@Url.Action("QuestionE", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+                        });
+                    } else {
+                        $("#message-fail").text(data.Message);
+                        $('#modal-fail').modal('show');
+                    }
+                }
+            });
+        }
+    }
+
+    $(function () {
+
+        $("input[name=questionSetE1]").change(function (e) {
+            e.preventDefault();
+
+            var qSetE1 = $("input[name=questionSetE1]:checked").val();
+            if (qSetE1 != undefined) {
+                $("#questionSetE1Star").hide();
+                if (qSetE1 == "true") {
+                    e1 = true;
+                    $("#answerSetE11").removeAttr('disabled');
+                    $("#answerSetE12").removeAttr('disabled');
+                } else {
+                    e1 = false;
+                    $("#answerSetE11Star").hide();
+                    $("#answerSetE12Star").hide();
+                    $("#answerSetE11Message").hide();
+                    $("#answerSetE12Message").hide();
+                    $("#answerSetE11").val("").attr('disabled', 'disabled');
+                    $("#answerSetE12").val("").attr('disabled', 'disabled');
+                }
+            } else {
+                $("#questionSetE1Star").show();
+            }
+        });
+
+        $("#answerSetE11").change(function (e) {
+            e.preventDefault();
+
+            var answerSetE11 = $("#answerSetE11").val();
+            if (answerSetE11.length > 0) {
+                $("#answerSetE11Star").hide();
+                if (answerSetE11.length > maxLength)
+                    $("#answerSetE11Message").show();
+                else {
+                    e11 = true;
+                    $("#answerSetE11Message").hide();
+                }
+            } else {
+                $("#answerSetE11Star").show();
+            }
+        });
+
+        $("#answerSetE12").change(function (e) {
+            e.preventDefault();
+
+            var answerSetE12 = $("#answerSetE12").val();
+            if (answerSetE12.length > 0) {
+                $("#answerSetE12Star").hide();
+                if (answerSetE12.length > maxLength)
+                    $("#answerSetE12Message").show();
+                else {
+                    e12 = true;
+                    $("#answerSetE12Message").hide();
+                }
+            } else {
+                $("#answerSetE12Star").show();
+            }
+        });
+
+        $("#btnSaveQuestionSetE1").click(function (e) {
+            e.preventDefault();
+
+            //ตรวจสอบ ตำตอบ ข้อ 1.1, 1.2 ไม่มีค่าว่างและไม่เกิน 1500 ตัวอักษร
+            if (e1) {
+                validateInput();
+                if (e11 && e12) {
+                    save();
+                }
+            } else if (e1 == undefined) {
+                $("#questionSetE1Star").show();
+                validateInput();
+            }
+            else {
+                e1 = false;
+                save();
+            }
+
+        });
+
+    });
+
+</script>

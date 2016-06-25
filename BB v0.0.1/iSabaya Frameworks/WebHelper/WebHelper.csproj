@@ -1,0 +1,653 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build;CopyFile" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BC4D571E-F34F-4C7A-9ACF-F2FDEDDB718A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebHelper</RootNamespace>
+    <AssemblyName>WebHelper</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Printing.v13.1.Core, Version=13.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v13.1, Version=13.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxHtmlEditor.v13.1, Version=13.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxThemes.v13.1, Version=13.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxTreeList.v13.1, Version=13.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Office.v13.1.Core, Version=13.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v13.1.Core, Version=13.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Web.v13.1, Version=13.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v13.1.Core, Version=13.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v13.1, Version=13.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.PivotGrid.v13.1.Core, Version=13.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPivotGrid.v13.1, Version=13.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v13.1.Extensions, Version=13.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Sparkline.v13.1.Core, Version=13.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v13.1, Version=13.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\External Assemblies\NHibernate-4.0.1.GA-src\lib\net\4.0\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.DirectoryServices.Protocols" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Json">
+      <HintPath>..\..\External Assemblies\System.Net.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GridView\ChildTransactionsGridView.cs" />
+    <Compile Include="GridView\DataTextItemTemplate.cs" />
+    <Compile Include="GridView\DescriptionTemplate.cs" />
+    <Compile Include="GridView\HandlerMethod.cs" />
+    <Compile Include="GridView\TitlePanelTemplate.cs" />
+    <Compile Include="GridView\TransitionTemplate.cs" />
+    <Compile Include="GridView\ValueTextTemplate.cs" />
+    <Compile Include="iSabayaControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModelView\ExtensionMappingView.cs" />
+    <Compile Include="ModelView\FundsTransferServiceSystemView.cs" />
+    <Compile Include="ModelView\MemberUserView.cs" />
+    <Compile Include="Node.cs" />
+    <Compile Include="Popup\PopupTransitionTemplate.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\EncryptDecryptQueryString.cs" />
+    <Compile Include="Security\ExceptionMessage.cs" />
+    <Compile Include="Security\LoginManager.cs" />
+    <Compile Include="Security\MenuManager.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Security\MySiteMapProvider.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Security\SiteMapNodeHelper.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="ServiceLayer\AESAlgorithmService.cs" />
+    <Compile Include="ServiceLayer\AuditTrails\AccessLog.cs" />
+    <Compile Include="ServiceLayer\ActionLog.cs" />
+    <Compile Include="ServiceLayer\AuditTrails\ActivityLog.cs" />
+    <Compile Include="ServiceLayer\ApprovalService.cs" />
+    <Compile Include="ServiceLayer\ApprovalTierService.cs" />
+    <Compile Include="ServiceLayer\AuditTrails\AuditTrailsServices.cs" />
+    <Compile Include="ServiceLayer\BankAccountService.cs" />
+    <Compile Include="ServiceLayer\CalendarImageTemplate.cs" />
+    <Compile Include="ServiceLayer\ChequesService.cs" />
+    <Compile Include="ServiceLayer\ClientFunction.cs" />
+    <Compile Include="ServiceLayer\ExtensionMethods.cs" />
+    <Compile Include="ServiceLayer\MenuName.cs" />
+    <Compile Include="ServiceLayer\PolicyService.cs" />
+    <Compile Include="ServiceLayer\MemberBankAccountService.cs" />
+    <Compile Include="ServiceLayer\MemberService.cs" />
+    <Compile Include="ServiceLayer\MemberServiceFeeScheduleService.cs" />
+    <Compile Include="ServiceLayer\Report\BizPortalReport.cs" />
+    <Compile Include="ServiceLayer\TermOfUseService.cs" />
+    <Compile Include="ServiceLayer\ServiceFeeScheduleService.cs" />
+    <Compile Include="ServiceLayer\TransactionFinance.cs" />
+    <Compile Include="ServiceLayer\TransactionService.cs" />
+    <Compile Include="TableBuilder.cs" />
+    <Compile Include="UrlLink.cs" />
+    <Compile Include="UserControls\AddressControl.ascx.cs">
+      <DependentUpon>AddressControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\AddressControl.ascx.designer.cs">
+      <DependentUpon>AddressControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AlertPopup.ascx.cs">
+      <DependentUpon>AlertPopup.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\AlertPopup.ascx.designer.cs">
+      <DependentUpon>AlertPopup.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\BankControl.ascx.cs">
+      <DependentUpon>BankControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\BankControl.ascx.designer.cs">
+      <DependentUpon>BankControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ChequeControl.ascx.cs">
+      <DependentUpon>ChequeControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\ChequeControl.ascx.designer.cs">
+      <DependentUpon>ChequeControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ChequeTextBoxBrowseControl.ascx.cs">
+      <DependentUpon>ChequeTextBoxBrowseControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\ChequeTextBoxBrowseControl.ascx.designer.cs">
+      <DependentUpon>ChequeTextBoxBrowseControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ChequeTextBoxControl.ascx.cs">
+      <DependentUpon>ChequeTextBoxControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\ChequeTextBoxControl.ascx.designer.cs">
+      <DependentUpon>ChequeTextBoxControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ConfirmPopup.ascx.cs">
+      <DependentUpon>ConfirmPopup.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\ConfirmPopup.ascx.designer.cs">
+      <DependentUpon>ConfirmPopup.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MLSMemo.ascx.cs">
+      <DependentUpon>MLSMemo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\MLSMemo.ascx.designer.cs">
+      <DependentUpon>MLSMemo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CountryControl.ascx.cs">
+      <DependentUpon>CountryControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\CountryControl.ascx.designer.cs">
+      <DependentUpon>CountryControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CurrencyControl.ascx.cs">
+      <DependentUpon>CurrencyControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\CurrencyControl.ascx.designer.cs">
+      <DependentUpon>CurrencyControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FlagsControl.ascx.cs">
+      <DependentUpon>FlagsControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\FlagsControl.ascx.designer.cs">
+      <DependentUpon>FlagsControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\IRelatableControl.ascx.cs">
+      <DependentUpon>IRelatableControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\IRelatableControl.ascx.designer.cs">
+      <DependentUpon>IRelatableControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MLSControl.ascx.cs">
+      <DependentUpon>MLSControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\MLSControl.ascx.designer.cs">
+      <DependentUpon>MLSControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MoneyControl.ascx.cs">
+      <DependentUpon>MoneyControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\MoneyControl.ascx.designer.cs">
+      <DependentUpon>MoneyControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MoneyRateSchedule.ascx.cs">
+      <DependentUpon>MoneyRateSchedule.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\MoneyRateSchedule.ascx.designer.cs">
+      <DependentUpon>MoneyRateSchedule.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MultilingualStringTextField.ascx.cs">
+      <DependentUpon>MultilingualStringTextField.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\MultilingualStringTextField.ascx.designer.cs">
+      <DependentUpon>MultilingualStringTextField.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\OrganizationControl.ascx.cs">
+      <DependentUpon>OrganizationControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\OrganizationControl.ascx.designer.cs">
+      <DependentUpon>OrganizationControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\OrganizationOrgUnitControl.ascx.cs">
+      <DependentUpon>OrganizationOrgUnitControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\OrganizationOrgUnitControl.ascx.designer.cs">
+      <DependentUpon>OrganizationOrgUnitControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PartyAttributeControl.ascx.cs">
+      <DependentUpon>PartyAttributeControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\PartyAttributeControl.ascx.designer.cs">
+      <DependentUpon>PartyAttributeControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PartyControl.ascx.cs">
+      <DependentUpon>PartyControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\PartyControl.ascx.designer.cs">
+      <DependentUpon>PartyControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PersonControl.ascx.cs">
+      <DependentUpon>PersonControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\PersonControl.ascx.designer.cs">
+      <DependentUpon>PersonControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\RelationShipControl.ascx.cs">
+      <DependentUpon>RelationShipControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\RelationShipControl.ascx.designer.cs">
+      <DependentUpon>RelationShipControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\RuleControl.ascx.cs">
+      <DependentUpon>RuleControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\RuleControl.ascx.designer.cs">
+      <DependentUpon>RuleControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ScheduleBrowseControl.ascx.cs">
+      <DependentUpon>ScheduleBrowseControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\ScheduleBrowseControl.ascx.designer.cs">
+      <DependentUpon>ScheduleBrowseControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ScheduleControl.ascx.cs">
+      <DependentUpon>ScheduleControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\ScheduleControl.ascx.designer.cs">
+      <DependentUpon>ScheduleControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ServiceFeeScheduleControl.ascx.cs">
+      <DependentUpon>ServiceFeeScheduleControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\ServiceFeeScheduleControl.ascx.designer.cs">
+      <DependentUpon>ServiceFeeScheduleControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\time.ascx.cs">
+      <DependentUpon>time.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\time.ascx.designer.cs">
+      <DependentUpon>time.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TimeControl.ascx.cs">
+      <DependentUpon>TimeControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\TimeControl.ascx.designer.cs">
+      <DependentUpon>TimeControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TimeD.ascx.cs">
+      <DependentUpon>TimeD.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\TimeD.ascx.designer.cs">
+      <DependentUpon>TimeD.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TimeHourMinuteControl.ascx.cs">
+      <DependentUpon>TimeHourMinuteControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\TimeHourMinuteControl.ascx.designer.cs">
+      <DependentUpon>TimeHourMinuteControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TimeIntervalControl.ascx.cs">
+      <DependentUpon>TimeIntervalControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\TimeIntervalControl.ascx.designer.cs">
+      <DependentUpon>TimeIntervalControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ViewScheduleControl.ascx.cs">
+      <DependentUpon>ViewScheduleControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\ViewScheduleControl.ascx.designer.cs">
+      <DependentUpon>ViewScheduleControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Util\Advertise.cs" />
+    <Compile Include="Util\ASPxButtonExtension.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Util\ASPxEditExtension.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Util\ColorUtil.cs" />
+    <Compile Include="Util\HolidayCalendar.cs" />
+    <Compile Include="Util\ImageUtil.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Util\Manage.cs" />
+    <Compile Include="Util\OfficialIDNumber.cs" />
+    <Compile Include="Util\RemarkHelper.cs" />
+    <Compile Include="Util\RemarkTransaction.cs" />
+    <Compile Include="Util\ReportUtil.cs" />
+    <Compile Include="Util\ResponseHelper.cs" />
+    <Compile Include="Util\RowInConfirmPopup.cs" />
+    <Compile Include="ServiceLayer\FunctionWorkflowService.cs" />
+    <Compile Include="ServiceLayer\MemberFunctionService.cs" />
+    <Compile Include="ServiceLayer\MemberUserGroupService.cs" />
+    <Compile Include="ServiceLayer\MemberUserService.cs" />
+    <Compile Include="ServiceLayer\Service.cs" />
+    <Compile Include="ServiceLayer\UserGroupUserService.cs" />
+    <Compile Include="ServiceLayer\UserService.cs" />
+    <Compile Include="ServiceLayer\WorkflowBankAccountService.cs" />
+    <Compile Include="Util\TableExtension.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Util\TransactionHelper.cs" />
+    <Compile Include="Util\UpdateUserProfileActiveDirectoryUser.cs" />
+    <Compile Include="Util\UsersManagementHelper.cs" />
+    <Compile Include="Util\WebConstants.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Util\WebUtil.cs" />
+    <Compile Include="WebControls\BankAccountNumberControl.cs" />
+    <Compile Include="WebControls\Base\iSabayaMasterPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Base\iSabayaWebControlBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\Base\iSabayaWebPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\CategoryControl.cs" />
+    <Compile Include="WebControls\Base\ClientSideEvents.cs" />
+    <Compile Include="WebControls\DateTimeControl.cs" />
+    <Compile Include="WebControls\MLSControl.cs" />
+    <Compile Include="WebControls\MoneyControl.cs" />
+    <Compile Include="WebControls\NameAffixControl.cs" />
+    <Compile Include="WebControls\NameTextBox.cs" />
+    <Compile Include="WebControls\PagerControl.cs" />
+    <Compile Include="WebControls\TreeListNodeComboBox.cs" />
+    <Compile Include="WebControls\TreeListNodeControl.cs" />
+    <Compile Include="WebPage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="obj\Debug\th-TH\" />
+    <Folder Include="Resources\" />
+    <Folder Include="UserControls\iSabaya Controls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Ads.xml" />
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControls\AddressControl.ascx" />
+    <Content Include="UserControls\AlertPopup.ascx" />
+    <Content Include="UserControls\BankControl.ascx" />
+    <Content Include="UserControls\ChequeControl.ascx" />
+    <Content Include="UserControls\ChequeTextBoxBrowseControl.ascx" />
+    <Content Include="UserControls\ChequeTextBoxControl.ascx" />
+    <Content Include="UserControls\ConfirmPopup.ascx" />
+    <Content Include="UserControls\MLSMemo.ascx" />
+    <Content Include="UserControls\CountryControl.ascx" />
+    <Content Include="UserControls\CurrencyControl.ascx" />
+    <Content Include="UserControls\FlagsControl.ascx" />
+    <Content Include="UserControls\IRelatableControl.ascx" />
+    <Content Include="UserControls\MLSControl.ascx" />
+    <Content Include="UserControls\MoneyControl.ascx" />
+    <Content Include="UserControls\MoneyRateSchedule.ascx" />
+    <Content Include="UserControls\MultilingualStringTextField.ascx" />
+    <Content Include="UserControls\OrganizationControl.ascx" />
+    <Content Include="UserControls\OrganizationOrgUnitControl.ascx" />
+    <Content Include="UserControls\PartyAttributeControl.ascx" />
+    <Content Include="UserControls\PartyControl.ascx" />
+    <Content Include="UserControls\PersonControl.ascx" />
+    <Content Include="UserControls\RelationShipControl.ascx" />
+    <Content Include="UserControls\RuleControl.ascx" />
+    <Content Include="UserControls\ScheduleBrowseControl.ascx" />
+    <Content Include="UserControls\ScheduleControl.ascx" />
+    <Content Include="UserControls\ServiceFeeScheduleControl.ascx" />
+    <Content Include="UserControls\time.ascx" />
+    <Content Include="UserControls\TimeControl.ascx" />
+    <Content Include="UserControls\TimeD.ascx" />
+    <Content Include="UserControls\TimeHourMinuteControl.ascx" />
+    <Content Include="UserControls\TimeIntervalControl.ascx" />
+    <Content Include="UserControls\ViewScheduleControl.ascx" />
+    <Content Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BizPortalSolution\Controller\Controller.csproj">
+      <Project>{1C7E48B9-C76D-4956-863E-B16F7CF33393}</Project>
+      <Name>Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BizPortal\Adapters\BizPortalAdapter\CIMBAdapter.csproj">
+      <Project>{786F1208-70C1-44E2-AEE0-7B9610F06E8A}</Project>
+      <Name>CIMBAdapter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BizPortal\Applications\BankTransaction\BankTransaction.csproj">
+      <Project>{EDD6BFE0-C373-4B13-A8CA-D61F27D15526}</Project>
+      <Name>BankTransaction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BizPortal\Applications\BizPortalFunctions\BizPortalFunctions.csproj">
+      <Project>{FDE63BF5-4804-40C3-AE26-41FA234F2327}</Project>
+      <Name>BizPortalFunctions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BizPortal\Frameworks\BizPortal\BizPortal.csproj">
+      <Project>{50D44943-9B99-4DBC-9A10-C9753C8D6910}</Project>
+      <Name>BizPortal %28Frameworks\BizPortal%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iSabaya.Config\iSabaya.Config.csproj">
+      <Project>{E4E75898-CB9F-44DE-AC2A-39692F41C13A}</Project>
+      <Name>iSabaya.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iSabaya\iSabaya.csproj">
+      <Project>{D168C3F8-E236-4BBE-8DE4-86B05B12594F}</Project>
+      <Name>iSabaya</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{C5B57D30-4557-4566-B0E9-2F6967F41142}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>3662</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent />
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+	   -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <Target Name="CopyFile" DependsOnTargets="AfterPublish">
+    <Message Text="Copy ascx file to each web folders..." />
+    <ItemGroup>
+      <ExtensionsExcluded Include="cs" />
+    </ItemGroup>
+    <!-- User Controls -->
+    <CreateItem Include="$(ProjectDir)UserControls\*.ascx">
+      <Output TaskParameter="Include" ItemName="MyUserControls" />
+    </CreateItem>
+    <!-- Admin Web -->
+    <!-- <ItemGroup>
+      <AdminUserControls Include="UserControls\MutualFundControls\BankAccountComboControl.ascx" />
+      <AdminUserControls Include="UserControls\MutualFundControls\BankAccountControl.ascx" />
+    </ItemGroup>
+    <MakeDir Directories="$(ProjectDir)..\adminWeb\UserControls" Condition="!Exists('$(ProjectDir)..\adminWeb\UserControls')" />
+    <MakeDir Directories="$(ProjectDir)..\adminWeb\ctrls" Condition="!Exists('$(ProjectDir)..\adminWeb\ctrls')" />
+    <Copy SourceFiles="@(MyUserControls)" DestinationFolder="$(ProjectDir)..\adminWeb\UserControls" ContinueOnError="true" />
+    <Copy SourceFiles="@(AdminUserControls)" DestinationFolder="$(ProjectDir)..\adminWeb\ctrls" ContinueOnError="true" /> -->
+    <!-- Security Admin Web -->
+    <!--<ItemGroup>
+      <AdminUserControls Include="UserControls\BankAccountComboControl.ascx" />
+      <AdminUserControls Include="UserControls\MutualFundControls\BankAccountControl.ascx" />
+    </ItemGroup>
+    <MakeDir Directories="$(ProjectDir)..\SecurityAdminWeb\UserControls" Condition="!Exists('$(ProjectDir)..\SecurityAdminWeb\UserControls')" />
+    <MakeDir Directories="$(ProjectDir)..\SecurityAdminWeb\Controls" Condition="!Exists('$(ProjectDir)..\SecurityAdminWeb\Controls')" />
+    <Copy SourceFiles="@(MyUserControls)" DestinationFolder="$(ProjectDir)..\SecurityAdminWeb\UserControls" ContinueOnError="true" />
+    <Copy SourceFiles="@(AdminUserControls)" DestinationFolder="$(ProjectDir)..\SecurityAdminWeb\Controls" ContinueOnError="true" />-->
+    <!-- Mutual Fund Web -->
+    <!--<CreateItem Include="$(ProjectDir)UserControls\MutualFundControls\**\*.ascx">
+      <Output TaskParameter="Include" ItemName="MutualFundControls" />
+    </CreateItem>
+    <MakeDir Directories="$(ProjectDir)..\imWeb\UserControls" Condition="!Exists('$(ProjectDir)..\imWeb\UserControls')" />
+    <MakeDir Directories="$(ProjectDir)..\imWeb\ctrls" Condition="!Exists('$(ProjectDir)..\imWeb\ctrls')" />
+    <Copy SourceFiles="@(MyUserControls)" DestinationFolder="$(ProjectDir)..\imWeb\UserControls" ContinueOnError="true" />
+    <Copy SourceFiles="@(MutualFundControls)" DestinationFolder="$(ProjectDir)..\imWeb\ctrls\%(RecursiveDir)" ContinueOnError="true" />-->
+    <!-- Selling Agent Web -->
+    <!--<MakeDir Directories="$(ProjectDir)..\SellingAgentWeb\UserControls" Condition="!Exists('$(ProjectDir)..\SellingAgentWeb\UserControls')" />
+    <MakeDir Directories="$(ProjectDir)..\SellingAgentWeb\Controls" Condition="!Exists('$(ProjectDir)..\SellingAgentWeb\Controls')" />
+    <Copy SourceFiles="@(MyUserControls)" DestinationFolder="$(ProjectDir)..\SellingAgentWeb\UserControls" ContinueOnError="true" />
+    <Copy SourceFiles="@(MutualFundControls)" DestinationFolder="$(ProjectDir)..\SellingAgentWeb\Controls\%(RecursiveDir)" ContinueOnError="true" />-->
+    <!-- Registrar Web-->
+    <!--<MakeDir Directories="$(ProjectDir)..\RegistrarWeb\UserControls" Condition="!Exists('$(ProjectDir)..\RegistrarWeb\UserControls')" />
+    <MakeDir Directories="$(ProjectDir)..\RegistrarWeb\Controls" Condition="!Exists('$(ProjectDir)..\RegistrarWeb\Controls')" />
+    <Copy SourceFiles="@(MyUserControls)" DestinationFolder="$(ProjectDir)..\RegistrarWeb\UserControls" ContinueOnError="true" />
+    <Copy SourceFiles="@(MutualFundControls)" DestinationFolder="$(ProjectDir)..\RegistrarWeb\Controls\%(RecursiveDir)" ContinueOnError="true" />-->
+    <!-- BizPortal Web-->
+    <MakeDir Directories="$(ProjectDir)..\..\BizPortal\Presentations\BizPortalClientWeb\UserControls" Condition="!Exists('$(ProjectDir)..\..\BizPortal\Presentations\BizPortalClientWeb\UserControls')" />
+    <MakeDir Directories="$(ProjectDir)..\..\BizPortal\Presentations\BizPortalClientWeb\Controls" Condition="!Exists('$(ProjectDir)..\..\BizPortal\Presentations\BizPortalClientWeb\Controls')" />
+    <Copy SourceFiles="@(MyUserControls)" DestinationFolder="$(ProjectDir)..\..\BizPortal\Presentations\BizPortalClientWeb\UserControls" ContinueOnError="true" />
+    <!-- <Copy SourceFiles="@(MutualFundControls)" DestinationFolder="$(ProjectDir)..\..\..\BizPortal\Presentations\BizPortalWeb\Controls\%(RecursiveDir)" ContinueOnError="true" /> -->
+    <!-- BizPortal Admin Web-->
+    <MakeDir Directories="$(ProjectDir)..\..\BizPortal\Presentations\BizPortalAdminWeb\UserControls" Condition="!Exists('$(ProjectDir)..\..\BizPortal\Presentations\BizPortalAdminWeb\UserControls')" />
+    <MakeDir Directories="$(ProjectDir)..\..\BizPortal\Presentations\BizPortalAdminWeb\Controls" Condition="!Exists('$(ProjectDir)..\..\BizPortal\Presentations\BizPortalAdminWeb\Controls')" />
+    <Copy SourceFiles="@(MyUserControls)" DestinationFolder="$(ProjectDir)..\..\BizPortal\Presentations\BizPortalAdminWeb\UserControls" ContinueOnError="true" />
+    <!-- Provident Fund Web -->
+    <!--<CreateItem Include="$(ProjectDir)UserControls\ProvidentFundControls\**\*.ascx">
+      <Output TaskParameter="Include" ItemName="ProvidentFundControls" />
+    </CreateItem>
+    <MakeDir Directories="$(ProjectDir)..\pvdWeb\UserControls" Condition="!Exists('$(ProjectDir)..\pvdWeb\UserControls')" />
+    <MakeDir Directories="$(ProjectDir)..\pvdWeb\Controls" Condition="!Exists('$(ProjectDir)..\pvdWeb\Controls')" />
+    <Copy SourceFiles="@(MyUserControls)" DestinationFolder="$(ProjectDir)..\pvdWeb\UserControls" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProvidentFundControls)" DestinationFolder="$(ProjectDir)..\pvdWeb\Controls\%(RecursiveDir)" ContinueOnError="true" />-->
+    <!-- imSabaya WebHelper -->
+    <!--<MakeDir Directories="$(ProjectDir)..\imSabayaWebhelper\UserControls" Condition="!Exists('$(ProjectDir)..\imSabayaWebhelper\UserControls')" />
+    <MakeDir Directories="$(ProjectDir)..\imSabayaWebhelper\Controls" Condition="!Exists('$(ProjectDir)..\imSabayaWebhelper\Controls')" />
+    <Copy SourceFiles="@(MyUserControls)" DestinationFolder="$(ProjectDir)..\imSabayaWebhelper\UserControls" ContinueOnError="true" />-->
+  </Target>
+</Project>

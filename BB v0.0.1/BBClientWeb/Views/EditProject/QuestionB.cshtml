@@ -1,0 +1,62 @@
+﻿@model Budget.Project
+
+@{
+    ViewBag.Title = "ชุด ข: การวิเคราะห์และวางแผนรายละเอียดโครงการ (แก้ไข)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (@ViewBag.ErrorMessage != null)
+{
+    @ViewBag.ErrorMessage
+}
+else
+{
+
+    @Html.HiddenFor(x => x.ID)
+
+    if (@Model.StatusCategory == Budget.StatusCategory.CompleteUnsign ||
+        (@Model.StatusCategory == Budget.StatusCategory.Update &&
+        (@Model.Status != Budget.Status.SaveAnswerSetA2 ||
+            @Model.Status != Budget.Status.SaveAnswerSetB1 ||
+            @Model.Status != Budget.Status.SaveAnswerSetB2 ||
+            @Model.Status != Budget.Status.SaveAnswerSetB3 ||
+            @Model.Status != Budget.Status.SaveAnswerSetB4 ||
+            @Model.Status != Budget.Status.SaveAnswerSetB5)))
+    {
+        <div id="questionB1">
+            @Html.Partial("Questions/_QuestionB1", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetB1 && @Model.StatusCategory == Budget.StatusCategory.Update)
+    {
+        <div id="questionB2">
+            @Html.Partial("Questions/_QuestionB2", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetB2 && @Model.StatusCategory == Budget.StatusCategory.Update)
+    {
+        <div id="questionB3">
+            @Html.Partial("Questions/_QuestionB3", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetB3 && @Model.StatusCategory == Budget.StatusCategory.Update)
+    {
+        <div id="questionB4">
+            @Html.Partial("Questions/_QuestionB4", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetB4 && @Model.StatusCategory == Budget.StatusCategory.Update)
+    {
+        <div id="questionB5">
+            @Html.Partial("Questions/_QuestionB5", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetB5 && @Model.StatusCategory == Budget.StatusCategory.Update)
+    {
+        <div id="questionB6">
+            @Html.Partial("Questions/_QuestionB6", @Model)
+        </div>
+    }
+
+}
+

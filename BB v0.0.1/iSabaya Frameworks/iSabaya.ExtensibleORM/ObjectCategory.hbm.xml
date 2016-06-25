@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  
+  <class name="iSabaya.ObjectCategory,iSabaya" table="ObjectCategory">
+    <id name="ID" column="ObjectCategoryID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <any name="Obj" meta-type="String" id-type="In64" cascade="save-update">
+      <!--<meta-value value="TT" class="imSabaya.TransactionType,imSabaya"/>
+      <meta-value value="MFP" class="imSabaya.MutualFundSystem.MFAccount,imSabaya"/>-->
+      <meta-value value="ORG" class="iSabaya.Organization,iSabaya"/>
+      <column name="ObjectDiscriminator"/>
+      <column name="ObjectID"/>
+    </any>
+    
+    <many-to-one name="Category"  column="CategoryNodeID" />
+
+    <component name="EffectivePeriod" >
+      <property name="From" column="EffectiveFrom"/>
+      <property name="To" column="EffectiveTo"/>
+    </component>
+    
+    <property name="Value" />
+    <property name="Reference" />
+    <property name="Remark" />
+    <property name="UpdatedTS" />
+    <many-to-one name="UpdatedBy" />
+  </class>
+  
+</hibernate-mapping>
+
+

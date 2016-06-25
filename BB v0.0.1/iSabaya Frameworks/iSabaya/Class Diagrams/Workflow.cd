@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="iSabaya.Workflow.WorkflowTemplate" Collapsed="true">
+    <Position X="3" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIEAAAABAAAAAAABAAgAAAAEAEEAAAAAAAAAAAA=</HashCode>
+      <FileName>Workflow\WorkflowTemplate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.Workflow.WorkflowDocument" Collapsed="true">
+    <Position X="5.5" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EBEAAAAQAAAAAAAAAABAAAAAAACAAAAAgABAARAAAAA=</HashCode>
+      <FileName>Workflow\WorkflowDocument.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.Rule" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAACKAAAAAigAQEIAAAAASAAgAMQAIAAgAAAAIAAgo=</HashCode>
+      <FileName>Rule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.State" Collapsed="true">
+    <Position X="3.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAMYCCQDAggEAmIAAgAEIAIAAYAAJAgJIISQAACGs=</HashCode>
+      <FileName>Workflow\EntityTypeState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.TransactionState" Collapsed="true">
+    <Position X="8.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAQA=</HashCode>
+      <FileName>Workflow\TransactionState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.StatefulEntityType" Collapsed="true">
+    <Position X="3.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BgQAMcAAQBAkAFQGoAAgAABAIAAHCMAUBACARAQAgmE=</HashCode>
+      <FileName>Workflow\StatefulEntityType.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="states" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

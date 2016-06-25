@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.RoleAccessibility, iSabaya" table="RoleAccessibility">
+
+    <id name="ID" column="RoleAccessibilityID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+
+    <many-to-one name="Role" column="RoleID" class="iSabaya.Role,iSabaya"  />
+    <any name="AccessibleObject" meta-type="byte" id-type="Int64" >
+      <meta-value value="10" class="iSabaya.Organization,iSabaya"/>
+      <meta-value value="15" class="iSabaya.OrgUnit,iSabaya"/>
+      <meta-value value="20" class="iSabaya.Person,iSabaya"/>
+      <!--<meta-value value="30" class="imSabaya.MutualFund,imSabaya"/>
+      <meta-value value="35" class="imSabaya.ProvidentFund,imSabaya"/>
+      <meta-value value="50" class="imSabaya.MutualFundSystem.MFAccount,imSabaya"/>
+      <meta-value value="60" class="imSabaya.ProvidentFundSystem.Member,imSabaya"/>-->
+      <column name="AccessibleObjectDiscriminator"/>
+      <column name="AccessibleObjectID"/>
+    </any>
+    <many-to-one name="Permission" column="PermissionNodeID" />
+    <property name="Description" />
+    <property name="Reference" />
+    <property name="Remark" />
+    <component name="EffectivePeriod" >
+      <property name="From" column="EffectiveFrom"/>
+      <property name="To" column="EffectiveTo"/>
+    </component>
+    <property name="UpdatedTS" />
+    <many-to-one name="UpdatedBy" />
+  </class>
+</hibernate-mapping>
+
+

@@ -1,0 +1,202 @@
+﻿@model Budget.Project
+
+<div class="content-box">
+    <div>
+        <div class="box-question">
+            <div style="text-align:left; margin-top:10px;">
+                <div style="color:Red; font-size:20px;" class="QL1">ประเด็นที่ 9 สรุปปัญหา อุปสรรค วิธีการแก้ไข และบทเรียนจากการดำเนินโครงการ</div>
+                <div style="margin-left:15px; margin-top:15px;">
+                    คำถามที่ 6 มีรายงานการศึกษาที่สรุปปัญหา อุปสรรค วิธีการแก้ไข และบทเรียนจากการดำเนินโครงการหรือไม่
+                    <span id="questionSetD6Star" class="ErrorDokJan" style="display:none; color:red">*</span><br>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><span>@Html.RadioButton("questionSetD6", "true")<label class="field-content">มี</label></span></td>
+                                <td><span>@Html.RadioButton("questionSetD6", "false")<label class="field-content">ไม่มี</label></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-left:10px">
+                        ถ้าตอบว่า "มี" โปรดให้รายละเอียดเพิ่มเติมต่อไปนี้
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">6.1 เขียนสรุปปัญหา อุปสรรค ที่ต้องตระหนักระหว่างการดำเนินโครงการ ซึ่งถ้าเกิดขึ้นจะกระทบต่อความสำเร็จของโครงการ</span><br>
+                            @Html.TextArea("answerSetD61", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetD61Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetD61Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 6.1 เกิน 1500 ตัวอักษร</div>
+                        </p>
+
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">6.2 เขียนสรุปการวางแนวทางในการแก้ปัญหาที่คาดว่าจะเกิดขึ้นต่อผู้มีส่วนได้ส่วนเสีย</span><br>
+                            @Html.TextArea("answerSetD62", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetD62Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetD62Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 6.2 เกิน 1500 ตัวอักษร</div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin:5px 5px 5px 5px; text-align:center;">
+                <input type="submit" value="บันทึกข้อมูลและดำเนินงานต่อไป" id="btnSaveQuestionSetD6" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var maxLength = 5;
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    var d6 = undefined;
+    var d61 = false;
+    var d62 = false;
+
+    function validateInput() {
+        //6.1 เขียนสรุปปัญหา อุปสรรค ที่ต้องตระหนักระหว่างการดำเนินโครงการ ซึ่งถ้าเกิดขึ้นจะกระทบต่อความสำเร็จของโครงการ
+        if ($("#answerSetD61").val() == "") {
+            $("#answerSetD61Star").show();
+        } else {
+            $("#answerSetD61Star").hide();
+            if ($("#answerSetD61").val().length > maxLength)
+                $("#answerSetD61Message").show();
+            else
+                $("#answerSetD61Message").hide();
+        }
+
+        //6.2 เขียนสรุปการวางแนวทางในการแก้ปัญหาที่คาดว่าจะเกิดขึ้นต่อผู้มีส่วนได้ส่วนเสีย
+        if ($("#answerSetD62").val() == "") {
+            $("#answerSetD62Star").show();
+        } else {
+            $("#answerSetD62Star").hide();
+            if ($("#answerSetD62").val().length > maxLength)
+                $("#answerSetD62Message").show();
+            else
+                $("#answerSetD62Message").hide();
+        }
+    }
+
+    function save() {
+        if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: appName + "/Government/SaveAnswerD6/",
+                data: JSON.stringify({
+                    pId: $("#ID").val(),
+                    choice: $("input[name=questionSetD6]:checked").val(),
+                    answer1: $("#answerSetD61").val(),
+                    answer2: $("#answerSetD62").val(),
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        $("#message-success").text(data.Message);
+                        $('#modal-success').modal('show');
+
+                        $("#btnOkSuccess").click(function (e) {
+
+                            e.preventDefault();
+                            window.location.href = '@Url.Action("QuestionD", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+                        });
+                    } else {
+                        $("#message-fail").text(data.Message);
+                        $('#modal-fail').modal('show');
+                    }
+                }
+            });
+        }
+    }
+
+    $(function () {
+
+        $("input[name=questionSetD6]").change(function (e) {
+            e.preventDefault();
+
+            var qSetD6 = $("input[name=questionSetD6]:checked").val();
+            if (qSetD6 != undefined) {
+                $("#questionSetD6Star").hide();
+                if (qSetD6 == "true") {
+                    d6 = true;
+                    $("#answerSetD61").removeAttr('disabled');
+                    $("#answerSetD62").removeAttr('disabled');
+                } else {
+                    d6 = false;
+                    $("#answerSetD61Star").hide();
+                    $("#answerSetD62Star").hide();
+
+                    $("#answerSetD61Message").hide();
+                    $("#answerSetD62Message").hide();
+                    
+                    $("#answerSetD61").val("").attr('disabled', 'disabled');
+                    $("#answerSetD62").val("").attr('disabled', 'disabled');
+                }
+            } else {
+                $("#questionSetD6Star").show();
+            }
+        });
+
+        $("#answerSetD61").change(function (e) {
+            e.preventDefault();
+
+            var answerSetD61 = $("#answerSetD61").val();
+            if (answerSetD61.length > 0) {
+                $("#answerSetD61Star").hide();
+                if (answerSetD61.length > maxLength)
+                    $("#answerSetD61Message").show();
+                else {
+                    d61 = true;
+                    $("#answerSetD61Message").hide();
+                }
+            } else {
+                $("#answerSetD61Star").show();
+            }
+        });
+
+        $("#answerSetD62").change(function (e) {
+            e.preventDefault();
+
+            var answerSetD62 = $("#answerSetD62").val();
+            if (answerSetD62.length > 0) {
+                $("#answerSetD62Star").hide();
+                if (answerSetD62.length > maxLength)
+                    $("#answerSetD62Message").show();
+                else {
+                    d62 = true;
+                    $("#answerSetD62Message").hide();
+                }
+            } else {
+                $("#answerSetD62Star").show();
+            }
+        });
+
+        $("#btnSaveQuestionSetD6").click(function (e) {
+            e.preventDefault();
+
+            //ตรวจสอบ ตำตอบ ข้อ 6.1, 6.2 ไม่มีค่าว่างและไม่เกิน 1500 ตัวอักษร
+            if (d6) {
+                validateInput();
+                if (d61 && d62) {
+                    save();
+                }
+            } else if (d6 == undefined) {
+                $("#questionSetD6Star").show();
+                validateInput();
+            }
+            else {
+                d6 = false;
+                save();
+            }
+
+        });
+
+    });
+
+</script>

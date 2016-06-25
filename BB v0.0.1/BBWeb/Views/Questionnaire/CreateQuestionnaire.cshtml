@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "CreateQuestionnaire";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    function AddQuestionnaire()
+    {
+        var no = document.getElementsByName("question").length;
+        var currentHTML = document.getElementById("questionArea").innerHTML;
+    }
+</script>
+
+<div style="border:2px solid black; padding:5px;">
+    <table>
+        <tr>
+            <td>
+                <span>ชื่อแบบสอบถาม</span>
+            </td>
+            <td style="width:10px;">
+                <span>:</span>
+            </td>
+            <td>
+                <input type="text" id="questionnaireName" name="questionnaireName" style="width:400px;" />
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="questionArea" style="border:2px solid black; padding:5px; margin-top:5px;">
+    <table id="question1" name="question">
+        <tr>
+            <td>
+                <span>คำถามที่ 1</span>
+            </td>
+            <td style="width:10px;">
+                <span>:</span>
+            </td>
+            <td>
+                <input id="questionLabel1" name="questionLabel1" style="width:400px;" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <input type="button" id="addQuestionnaire" name="addQuestionnaire" value="เพิ่มคำถามย่อย" />
+                <input type="button" id="addQuestionnaire" name="addQuestionnaire" value="เพิ่มตัวเลือกคำตอบ" />
+            </td>
+        </tr>
+    </table>
+
+</div>
+<input type="button" id="addQuestionnaire" name="addQuestionnaire" value="เพิ่มคำถาม" onclick="AddQuestionnaire()" />

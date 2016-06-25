@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  
+  <class name="iSabaya.ObjectCategory,iSabaya" table="ObjectCategory">
+    <id name="ObjectCategoryID" column="ObjectCategoryID" access="field.camelcase" type="Int32" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <any name="Obj" meta-type="String" id-type="Int32" cascade="save-update">
+      <meta-value value="TT" class="imSabaya.TransactionType,imSabaya"/>
+      <meta-value value="MFP" class="imSabaya.MutualFundSystem.MFAccount,imSabaya"/>
+      <meta-value value="ORG" class="iSabaya.Organization,iSabaya"/>
+      <column name="ObjectDiscriminator"/>
+      <column name="ObjectID"/>
+    </any>
+    <many-to-one name="Category"  column="CategoryNodeID" class="iSabaya.TreeListNode,iSabaya"/>
+
+    <component name="EffectivePeriod" class="iSabaya.TimeInterval, iSabaya">
+      <property name="From" column="EffectiveFrom"/>
+      <property name="To" column="EffectiveTo"/>
+    </component>
+    <property name="Value" column="Value" type="String"  not-null="true" />
+    <property name="Reference" column="Reference" type="String"  not-null="true" />
+    <property name="Remark" column="Remark" type="String"  not-null="true" />
+    <property name="UpdatedTS" column="UpdatedTS" type="DateTime"  not-null="true" />
+    <many-to-one name="UpdatedBy" column="UpdatedBy" class="iSabaya.User,iSabaya"  />
+  </class>
+  
+</hibernate-mapping>
+
+

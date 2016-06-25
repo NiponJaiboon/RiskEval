@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "การวิเคราะห์ความเสี่ยงตามหลักธรรมมาภิบาล ตามแผนงาน/โครงการ";
+    Layout = "~/Views/Shared/_LayoutException.cshtml";
+}
+
+<div style="position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -5px;
+    margin-left: -250px;
+    width: 500px;
+    height: 50px">
+    <center><h2>ขออภัย ระบบเกิดข้อผิดพลาด กรุณาติดต่อผู้ดูแลระบบ</h2></center>
+    <center>@Html.ActionLink("กลับหน้าแรก", "Logout", "Exception", null, new { @id = "openDialog", @class = "btn btn-default" })</center>
+</div>
+

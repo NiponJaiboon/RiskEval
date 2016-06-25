@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.Relationship, iSabaya" 
+         table="Relationship">
+
+    <id name="ID" column="RelationshipID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+
+    <property column="Code" type="string" name="Code" />
+    <property column="IsPermanent" type="boolean" name="IsPermanent" />
+    <many-to-one name="ForwardTitle" column="ForwardTitleMLSID" cascade="save-update"/>
+    <many-to-one name="ReverseTitle" column="ReverseTitleMLSID" cascade="save-update"/>
+    <many-to-one name="Description" column="DescriptionMLSID" cascade="save-update"/>
+    <many-to-one name="FirstPartyTitle" column="FirstPartyTitleMLSID" cascade="save-update"/>
+    <property name="FirstPartyTypeName" />
+    <many-to-one name="SecondPartyTitle" column="SecondPartyTitleMLSID" cascade="save-update"/>
+    <property name="SecondPartyTypeName" />
+    <many-to-one name="EnteringEventRule" class="iSabaya.Rule,iSabaya" column="EnteringEventRuleID" />
+    <many-to-one name="ExitingEventRule" class="iSabaya.Rule,iSabaya" column="ExitingEventRuleID" />
+    <many-to-one name="CategoryRoot" class="iSabaya.TreeListNode,iSabaya" column="CategoryRootNodeID" />
+
+    <component name="EffectivePeriod"  >
+      <property name="From" column="EffectiveFrom"/>
+      <property name="To" column="EffectiveTo"/>
+    </component>
+
+    <!--<many-to-one name="RelationPropertyTemplate" class="iSabaya.PropertyTemplate,iSabaya" column="RelationPropertyTemplate" />-->
+    <!--<bag name="Relations" table="HrNetV2_Relation" >
+      <key column="Relationship"/>
+      <one-to-many class="iSabaya.Relation,iSabaya"/>
+    </bag>-->
+    
+  </class>
+</hibernate-mapping>
+
+

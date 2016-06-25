@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+
+  <class name="iSabaya.BracketedDurationRate,iSabaya" table="BracketedDurationRate" >
+    <!-- Primary key-->
+    <id name="BracketedDurationRateID" type="Int32" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <component name="LowerBound" class="iSabaya.TimeDuration,iSabaya">
+      <property name="Years" column="LowerBoundYears"/>
+      <property name="Days" column="LowerBoundDays"/>
+    </component>
+    <!--<property name="LowerBoundIsInclusive" />-->
+    <many-to-one name="MoneyRateSchedule" column="MoneyRateScheduleID" class="iSabaya.MoneyRateSchedule,iSabaya" />
+    <many-to-one name="Schedule" column="DurationRateScheduleID" class="iSabaya.DurationRateSchedule,iSabaya" />
+    <property name="SeqNo" />
+    <component name="UpperBound" class="iSabaya.TimeDuration,iSabaya">
+      <property name="Years" column="UpperBoundYears"/>
+      <property name="Days" column="UpperBoundDays"/>
+    </component>
+  </class>
+
+</hibernate-mapping>
+
+

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.RoleMenu,iSabaya" table="RoleMenu">
+
+    <!-- Primary key-->
+    <id name="RoleMenuID" unsaved-value="0" >
+      <generator class="native"/>
+    </id>
+    <many-to-one name="Role" column="RoleID" class="iSabaya.Role,iSabaya" />
+    <many-to-one name="Menu" column="MenuID" class="iSabaya.DynamicMenu,iSabaya" />
+    <property name="CanDisplay" column="CanDisplay" type="boolean"  not-null="true" />
+    <property name="CanAddData" column="CanAddData" type="boolean"  not-null="true" />
+    <property name="CanChangeData" column="CanChangeData" type="boolean"  not-null="true" />
+    <property name="CanDeleteData" column="CanDeleteData" type="boolean"  not-null="true" />
+    <property name="CanPrintData" column="CanPrintData" type="boolean"  not-null="true" />
+    <property name="SeqNo" />
+  </class>
+</hibernate-mapping>
+
+

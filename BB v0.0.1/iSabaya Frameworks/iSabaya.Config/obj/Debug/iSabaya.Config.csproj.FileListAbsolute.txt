@@ -1,0 +1,4 @@
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.Config\bin\Debug\iSabaya.Config.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.Config\bin\Debug\iSabaya.Config.pdb
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.Config\obj\Debug\iSabaya.Config.dll
+D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.Config\obj\Debug\iSabaya.Config.pdb

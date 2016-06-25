@@ -1,0 +1,208 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="clear:both;padding-top:5px">
+    <div id="search" style="clear:both">
+        <fieldset class="fieldset">
+            <legend class="legend">@Html.Label("", "Search Log")</legend>
+            <table>
+                <tr>
+                    <td style="padding-right:5px">@Html.Label("Application Name", new { @class = "filed-header" })</td>
+                    <td>
+                        @Html.DropDownList("ddlApplication", new List<SelectListItem>
+                        {
+                            new SelectListItem{ Text = "AdminSystem", Value="RiskAssessmentAdminSystem" },
+                            new SelectListItem{ Text = "AnalysisSystem", Value="RiskAssessmentAnalysisSystem" },
+                            new SelectListItem{ Text = "ProjectOwnerSystem", Value="RiskAssessmentProjectOwnerSystem" }
+                        }, "กรุณาเลือก", new { @class = "form-control" })
+                    </td>
+                    <td style="padding-left:20px; padding-right:5px">@Html.Label("User Name", new { @class = "filed-header" })</td>
+                    <td>@Html.TextBox("tbUserName", "", new { @class = "form-control", @maxlength = 13 })</td>
+                    <td style="padding-left:20px; padding-right:5px">@Html.Label("Page", new { @class = "filed-header" })</td>
+                    <td>@Html.TextBox("tbPage", "", new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <td style="padding-right:5px">@Html.Label("Date time interval", new { @class = "filed-header" })</td>
+                    <td colspan="5">
+                        @Html.TextBox("dateFrom", "", new { @class = "form-control" })
+                        ~
+                        @Html.TextBox("dateTo", "", new { @class = "form-control" })
+                    </td>
+                </tr>
+            </table>
+
+            <div style="padding-top:5px">
+                <div style="float:left">
+                    <input type="button" value="ค้นหา" class="btn btn-default" id="btSearch" />
+                    <input type="button" value="เคลียร์" class="btn btn-default" id="btClear" />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div style="clear:both; padding-top:10px">
+        <table id="logs-table" class="table table-bordered" cellspacing="0" data-page-length='100'>
+            <thead>
+                <tr>
+                    <th>SessionID</th>
+                    <th>Applocation Name</th>
+                    @*<th>User ID</th>*@
+                    <th>User Name</th>
+                    <th>IP Address</th>
+                    <th>Page</th>
+                    <th>TimeStamp</th>
+                    <th>Action</th>
+                    <th style="width:200px">Message</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-ui.js"></script>
+<script type="text/javascript">
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    var application = "";
+    var userName = "";
+    var page = "";
+    var dateFrom = "";
+    var dateTo = "";
+
+    $(function () {
+
+        getLog();
+
+        var d = new Date();
+        var toDay = d.getDate() + '/'
+             + (d.getMonth() + 1) + '/'
+            + (d.getFullYear());
+
+        $("#dateFrom").datepicker({
+            showOn: 'button',
+            buttonText: 'Show Date',
+            buttonImageOnly: true,
+            dateFormat: 'dd/mm/yy', isBuddhist: true, defaultDate: toDay, dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+            dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+            monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+            monthNamesShort: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
+            //changeMonth: true,
+            //changeYear: true,
+            buttonImage: 'Images/Calendar_Red.png'
+
+        });
+
+        $("#dateTo").datepicker({
+            showOn: 'button',
+            buttonText: 'Show Date',
+            buttonImageOnly: true,
+            dateFormat: 'dd/mm/yy', isBuddhist: true, defaultDate: toDay, dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+            dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+            monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+            monthNamesShort: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
+            //changeMonth: true,
+            //changeYear: true,
+            buttonImage: 'Images/Calendar_Red.png',
+
+        });
+
+        $(".ui-datepicker-trigger").mouseover(function () {
+            $(this).css('cursor', 'pointer');
+        });
+
+        $("#btClear").click(function (e) {
+            e.preventDefault();
+            $("#ddlApplication").val("");
+            $("#tbUserName").val("");
+            $("#tbPage").val("");
+            $("#dateFrom").val("");
+            $("#dateTo").val("");
+
+            getLog();
+        });
+
+        $("#btSearch").click(function (e) {
+            e.preventDefault();
+
+            application = $("#ddlApplication").val();
+            userName = $("#tbUserName").val();
+            page = $("#tbPage").val();
+            userName = $("#tbUserName").val();
+            dateFrom = $("#dateFrom").val();
+            dateTo = $("#dateTo").val();
+
+            var timeFrom = dateFrom.split('/');
+            var timeTo = dateTo.split('/');
+            var tFrom = new Date(timeFrom[2], timeFrom[1], timeFrom[0]);
+            var tTo = new Date(timeTo[2], timeTo[1], timeTo[0]);
+
+            if (tFrom.getTime() > tTo.getTime()) {
+                alert("Please select Date time interval again.");
+            } else {
+                getLog();
+            }
+        });
+
+    });
+
+    function getLog() {
+        $.ajax({
+            cache: false,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: appName + "/SessionLog/Gets/",
+            data: {
+                application: application,
+                userName: userName,
+                page: page,
+                dateFrom: dateFrom,
+                dateTo: dateTo
+            },
+            dataType: "json",
+            success: function (data) {
+                //debugger
+                $('#logs-table').dataTable({
+                    "bDestroy": true
+                }).fnDestroy();
+
+                $('#logs-table').DataTable({
+                    "dom": '<"toolbar">frtip',
+                    aaSorting: [],
+                    searching: false,
+                    bSort: false,
+                    ordering: true,
+                    //paging: true,
+                    //scrollY: 400,
+                    //"bProcessing": true,
+                    //"bDeferRender": true,
+                    data: data,
+                    columns: [
+                        { data: 'SessionID', sClass: 'center' },
+                        { data: 'ApplocationName' },
+                        //{ data: 'UserID' },
+                        { data: 'UserName' },
+                        { data: 'IPAddress' },
+                        { data: 'Page' },
+                        { data: 'TimeStamp' },
+                        { data: 'Action' },
+                        { data: 'Message' }
+                    ]
+                });
+
+                if (data.length <= 0)
+                    $("#logs-table_paginate").hide();
+            }
+        });
+    }
+
+</script>

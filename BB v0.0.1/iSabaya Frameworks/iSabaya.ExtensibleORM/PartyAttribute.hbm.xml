@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class name="iSabaya.PartyAttribute,iSabaya" table="PartyAttribute">
+	    
+		<!-- Primary key-->
+		<id name="ID" column="PartyAttributeID" unsaved-value="0">
+			<generator class="native"/>
+		</id>
+
+    <!--<many-to-one name="Fund" class="imSabaya.Fund,imSabaya" column="FundID"/>-->
+    <many-to-one name="AttributeKey" column="AttributeKeyNodeID"  />
+    <many-to-one name="AttributeKeyRootNode" column="AttributeKeyRootNodeID"  />
+    <component name="EffectivePeriod" >
+      <property name="From" column="EffectiveFrom"/>
+      <property name="To" column="EffectiveTo"/>
+    </component>
+    <any name="Party" meta-type="byte" id-type="Int64" >
+      <meta-value value="10" class="iSabaya.Organization,iSabaya"/>
+      <meta-value value="11" class="iSabaya.Bank,iSabaya"/>
+      <meta-value value="15" class="iSabaya.OrgUnit,iSabaya"/>
+      <meta-value value="20" class="iSabaya.Person,iSabaya"/>
+      <meta-value value="25" class="iSabaya.Incognito,iSabaya"/>
+      
+      <column name="PartyDiscriminator"/>
+      <column name="PartyID"/>
+    </any>
+    <property name="Reference" />
+    <property name="Remark" />
+    <many-to-one name="ValueNamePrefix" column="ValueNamePrefixID" class="iSabaya.NameAffix,iSabaya" />
+    <property name="ValueImageBytes" column="ValueImage" type="BinaryBlob"/>
+    <property name="ValueDate" />
+    <many-to-one name="ValueMLS" column="ValueMLSID" class="iSabaya.MultilingualString,iSabaya.Config" />
+    <many-to-one name="ValueNode" column="ValueNodeID"  />
+    <many-to-one name="ValueNodeRoot" column="ValueNodeRootNodeID"  />
+    <many-to-one name="UpdatedBy" />
+    <property name="UpdatedTS" />
+    <property name="ValueNumber" />
+    <any name="ValueParty" meta-type="byte" id-type="Int64" >
+      <meta-value value="10" class="iSabaya.Organization,iSabaya"/>
+      <meta-value value="15" class="iSabaya.OrgUnit,iSabaya"/>
+      <meta-value value="20" class="iSabaya.Person,iSabaya"/>
+      <!--<meta-value value="30" class="imSabaya.MutualFund,imSabaya"/>
+      <meta-value value="35" class="imSabaya.ProvidentFund,imSabaya"/>
+      <meta-value value="50" class="imSabaya.MutualFundSystem.MFAccount,imSabaya"/>
+      <meta-value value="60" class="imSabaya.ProvidentFundSystem.Member,imSabaya"/>-->
+      <column name="ValuePartyDiscriminator"/>
+      <column name="ValuePartyID"/>
+    </any><property name="ValueText" />
+  </class>
+</hibernate-mapping>
+
+

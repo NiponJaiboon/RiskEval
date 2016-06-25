@@ -1,0 +1,52 @@
+﻿@model Budget.Project
+
+@{
+    ViewBag.Title = "แก้ไขข้อมูลโครงการการวิเคราะห์ความเสี่ยงตามหลักธรรมาธิบาล";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (@ViewBag.ErrorMessage != null)
+{
+    @ViewBag.ErrorMessage
+}
+else
+{
+    <div>
+        @Html.Partial("_ProjectDetail", @Model)
+    </div>
+
+    <div>
+
+        <p class="title">แก้ไขข้อมูลรายละเอียดโครงการ</p>
+
+        <div style="margin-left:25px">
+            @Html.ActionLink("ข้อมูลรายละเอียดโครงการ", "ProjectDetail", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+            @Html.ActionLink("แก้ไขข้อมูลพื้นฐานโครงการ", "ProjectBasicInfo", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+            @Html.ActionLink("แก้ไขคำถามชุด ก: ขั้นตอนการริเริ่มแผนงาน/โครงการและวิเคราะห์เบื้องต้น", "QuestionA", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+            @Html.ActionLink("แก้ไขคำถามชุด ข: การวิเคราะห์และวางแผนรายละเอียดโครงการ", "QuestionB", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+            @Html.ActionLink("แก้ไขคำถามชุด ค: การจัดลำดับและจัดสรรงบประมาณโครงการ", "QuestionC", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+            @Html.ActionLink("แก้ไขคำถามชุด ง: การเตรียมการเพื่อติดตามความก้าวหน้าของการดำเนินโครงการ", "QuestionD", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+            @Html.ActionLink("แก้ไขคำถามชุด จ: การประเมินผลการดำเนินงานของโครงการต่อเนื่องและโครงการที่ทำเสร็จแล้วและต้องการขยายผลโครงการ", "QuestionE", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+
+            <div class="qGroup">
+                <p class="qTitle">การวิเคราะห์ความเสี่ยงสภาพแวดล้อมภายในภายนอก</p>
+                @Html.ActionLink("แก้ไขคำถามปัจจัยเสี่ยงข้อที่ 1", "QuestionR1", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                @Html.ActionLink("แก้ไขคำถามปัจจัยเสี่ยงข้อที่ 2", "QuestionR2", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                @Html.ActionLink("แก้ไขคำถามปัจจัยเสี่ยงข้อที่ 3", "QuestionR3", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                @Html.ActionLink("แก้ไขคำถามปัจจัยเสี่ยงข้อที่ 4", "QuestionR4", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                @Html.ActionLink("แก้ไขคำถามปัจจัยเสี่ยงข้อที่ 5", "QuestionR5", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })<br />
+                @Html.ActionLink("แก้ไขคำถามปัจจัยเสี่ยงข้อที่ 6", "QuestionR6", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) }, new { @class = "link" })
+            </div>
+        </div>
+    </div>
+
+    <div class="question-button">
+        <div>
+            <input type="submit" value="บันทึกการแก้ไขข้อมูล" id="btnSaveQuestionSetBContinun" class="btn btn-default">
+        </div>
+    </div>
+
+
+}
+
+

@@ -1,0 +1,284 @@
+﻿@model Budget.Project
+
+<div class="content-box">
+    <div>
+        <div class="box-question">
+            <div style="text-align:left; margin-top:10px;">
+                <div style="color:Red; font-size:20px;" class="QL1">ประเด็นที่ 3 พิจารณาขอบเขตของโครงการ</div>
+                <div style="margin-left:15px; margin-top:15px;">
+                    คำถามที่ 4 คาดว่าโครงการจะมีผลกระทบเชิงลบหรือไม่
+                    <span id="questionSetB4Star" class="ErrorDokJan" style="display:none; color:red">*</span><br>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><span>@Html.RadioButton("questionSetB4", "true")<label class="field-content">มี</label></span></td>
+                                <td><span>@Html.RadioButton("questionSetB4", "false")<label class="field-content">ไม่มี</label></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-left:10px">
+                        ถ้าตอบว่า "มี" โปรดให้รายละเอียดเพิ่มเติมต่อไปนี้
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">4.1 ระบุผู้ที่เสี่ยงต่อการได้รับผลกระทบทางลบจากการดำเนินโครงการ</span><br>
+                            @Html.TextArea("answerSetB41", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetB41Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetB41Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 4.1 เกิน 1500 ตัวอักษร</div>
+                        </p>
+
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">4.2 ผู้รับผิดชอบมีแนวทางในการบริหารจัดการผลกระทบเชิงลบอย่างไร</span><br>
+                            @Html.TextArea("answerSetB42", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetB42Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetB42Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 4.2 เกิน 1500 ตัวอักษร</div>
+                        </p>
+
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">4.3 ระบุว่าผู้ที่ได้รับผลกระทบเชิงลบจะได้รับการช่วยเหลือที่เหมาะสมอย่างไร</span><br>
+                            @Html.TextArea("answerSetB43", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetB43Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetB43Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 4.3 เกิน 1500 ตัวอักษร</div>
+                        </p>
+
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">4.4 ระบุว่าผู้ที่ได้รับผลกระทบเชิงลบจะได้รับการช่วยเหลือที่เหมาะสมอย่างไร</span><br>
+                            @Html.TextArea("answerSetB44", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetB44Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetB44Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 4.4 เกิน 1500 ตัวอักษร</div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin:5px 5px 5px 5px; text-align:center;">
+                <input type="submit" value="บันทึกข้อมูลและดำเนินงานต่อไป" id="btnSaveQuestionSetB4" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var maxLength = 5;
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    var b4 = undefined;
+    var b41 = false;
+    var b42 = false;
+    var b43 = false;
+    var b44 = false;
+
+    function validateInput() {
+        //4.1 ระบุผู้ที่เสี่ยงต่อการได้รับผลกระทบทางลบจากการดำเนินโครงการ
+        if ($("#answerSetB41").val() == "") {
+            $("#answerSetB41Star").show();
+        } else {
+            $("#answerSetB41Star").hide();
+            if ($("#answerSetB41").val().length > maxLength)
+                $("#answerSetB41Message").show();
+            else
+                $("#answerSetB41Message").hide();
+        }
+
+        //4.2 ผู้รับผิดชอบมีแนวทางในการบริหารจัดการผลกระทบเชิงลบอย่างไร
+        if ($("#answerSetB42").val() == "") {
+            $("#answerSetB42Star").show();
+        } else {
+            $("#answerSetB42Star").hide();
+            if ($("#answerSetB42").val().length > maxLength)
+                $("#answerSetB42Message").show();
+            else
+                $("#answerSetB42Message").hide();
+        }
+
+        //4.3 ระบุว่าผู้ที่ได้รับผลกระทบเชิงลบจะได้รับการช่วยเหลือที่เหมาะสมอย่างไร
+        if ($("#answerSetB43").val() == "") {
+            $("#answerSetB43Star").show();
+        } else {
+            $("#answerSetB43Star").hide();
+            if ($("#answerSetB43").val().length > maxLength)
+                $("#answerSetB43Message").show();
+            else
+                $("#answerSetB43Message").hide();
+        }
+
+        //4.4 ระบุว่าผู้ที่ได้รับผลกระทบเชิงลบจะได้รับการช่วยเหลือที่เหมาะสมอย่างไร
+        if ($("#answerSetB44").val() == "") {
+            $("#answerSetB44Star").show();
+        } else {
+            $("#answerSetB44Star").hide();
+            if ($("#answerSetB44").val().length > maxLength)
+                $("#answerSetB44Message").show();
+            else
+                $("#answerSetB44Message").hide();
+        }
+    }
+
+    function save() {
+        if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: appName + "/EditProject/SaveAnswerB4/",
+                data: JSON.stringify({
+                    pId: $("#ID").val(),
+                    choice: $("input[name=questionSetB4]:checked").val(),
+                    answer1: $("#answerSetB41").val(),
+                    answer2: $("#answerSetB42").val(),
+                    answer3: $("#answerSetB43").val(),
+                    answer4: $("#answerSetB44").val(),
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        $("#message-success").text(data.Message);
+                        $('#modal-success').modal('show');
+
+                        $("#btnOkSuccess").click(function (e) {
+
+                            e.preventDefault();
+                            window.location.href = '@Url.Action("QuestionB", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+                        });
+                    } else {
+                        $("#message-fail").text(data.Message);
+                        $('#modal-fail').modal('show');
+                    }
+                }
+            });
+        }
+    }
+
+    $(function () {
+
+        $("input[name=questionSetB4]").change(function (e) {
+            e.preventDefault();
+
+            var qSetB4 = $("input[name=questionSetB4]:checked").val();
+            if (qSetB4 != undefined) {
+                $("#questionSetB4Star").hide();
+                if (qSetB4 == "true") {
+                    b4 = true;
+                    $("#answerSetB41").removeAttr('disabled');
+                    $("#answerSetB42").removeAttr('disabled');
+                    $("#answerSetB43").removeAttr('disabled');
+                    $("#answerSetB44").removeAttr('disabled');
+                } else {
+                    b4 = false;
+                    $("#answerSetB41Star").hide();
+                    $("#answerSetB42Star").hide();
+                    $("#answerSetB43Star").hide();
+                    $("#answerSetB44Star").hide();
+
+                    $("#answerSetB41Message").hide();
+                    $("#answerSetB42Message").hide();
+                    $("#answerSetB43Message").hide();
+                    $("#answerSetB44Message").hide();
+                    
+                    $("#answerSetB41").val("").attr('disabled', 'disabled');
+                    $("#answerSetB42").val("").attr('disabled', 'disabled');
+                    $("#answerSetB43").val("").attr('disabled', 'disabled');
+                    $("#answerSetB44").val("").attr('disabled', 'disabled');
+                }
+            } else {
+                $("#questionSetB4Star").show();
+            }
+        });
+
+        $("#answerSetB41").change(function (e) {
+            e.preventDefault();
+
+            var answerSetB41 = $("#answerSetB41").val();
+            if (answerSetB41.length > 0) {
+                $("#answerSetB41Star").hide();
+                if (answerSetB41.length > maxLength)
+                    $("#answerSetB41Message").show();
+                else {
+                    b41 = true;
+                    $("#answerSetB41Message").hide();
+                }
+            } else {
+                $("#answerSetB41Star").show();
+            }
+        });
+
+        $("#answerSetB42").change(function (e) {
+            e.preventDefault();
+
+            var answerSetB42 = $("#answerSetB42").val();
+            if (answerSetB42.length > 0) {
+                $("#answerSetB42Star").hide();
+                if (answerSetB42.length > maxLength)
+                    $("#answerSetB42Message").show();
+                else {
+                    b42 = true;
+                    $("#answerSetB42Message").hide();
+                }
+            } else {
+                $("#answerSetB42Star").show();
+            }
+        });
+
+        $("#answerSetB43").change(function (e) {
+            e.preventDefault();
+
+            var answerSetB43 = $("#answerSetB43").val();
+            if (answerSetB43.length > 0) {
+                $("#answerSetB43Star").hide();
+                if (answerSetB43.length > maxLength)
+                    $("#answerSetB43Message").show();
+                else {
+                    b43 = true;
+                    $("#answerSetB43Message").hide();
+                }
+            } else {
+                $("#answerSetB43Star").show();
+            }
+        });
+
+        $("#answerSetB44").change(function (e) {
+            e.preventDefault();
+
+            var answerSetB44 = $("#answerSetB44").val();
+            if (answerSetB44.length > 0) {
+                $("#answerSetB44Star").hide();
+                if (answerSetB44.length > maxLength)
+                    $("#answerSetB44Message").show();
+                else {
+                    b44 = true;
+                    $("#answerSetB44Message").hide();
+                }
+            } else {
+                $("#answerSetB44Star").show();
+            }
+        });
+
+        $("#btnSaveQuestionSetB4").click(function (e) {
+            e.preventDefault();
+
+            //ตรวจสอบ ตำตอบ ข้อ 4.1, 4.2, 4.3, 4.4 ไม่มีค่าว่างและไม่เกิน 1500 ตัวอักษร
+            if (b4) {
+                validateInput();
+                if (b41 && b42 && b43 && b44) {
+                    save();
+                }
+            } else if (b4 == undefined) {
+                $("#questionSetB4Star").show();
+                validateInput();
+            }
+            else {
+                b4 = false;
+                save();
+            }
+
+        });
+
+    });
+
+</script>

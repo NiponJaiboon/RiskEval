@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class name="iSabaya.MLSValue,iSabaya.Config" table="MLSValue">
+		<!-- Primary key-->
+		<id name="ID" column="MLSValueID" unsaved-value="0">
+			<generator class="native"/>
+		</id>
+
+		<many-to-one name="Owner" column="MLSID"/>
+    <property name="LanguageCode"/>
+		<property name="Value" />
+		<property name="UpdatedTS" access="field.camelcase"/>
+	</class>
+</hibernate-mapping>
+
+
