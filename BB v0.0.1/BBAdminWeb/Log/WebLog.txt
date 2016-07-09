@@ -1,8 +1,8 @@
-2016-06-25 17:30:41,021 [1] WARN  NHibernate.Util.ReflectHelper - Could not load type managed_web. Possible cause: no assembly name specified.
-2016-06-25 17:30:41,052 [1] ERROR NHibernate.Util.ReflectHelper - Could not load type managed_web.
+2016-07-09 13:53:54,997 [1] WARN  NHibernate.Util.ReflectHelper - Could not load type managed_web. Possible cause: no assembly name specified.
+2016-07-09 13:53:55,024 [1] ERROR NHibernate.Util.ReflectHelper - Could not load type managed_web.
 System.TypeLoadException: Could not load type managed_web. Possible cause: no assembly name specified.
    at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
-2016-06-25 17:30:41,052 [1] ERROR NHibernate.Impl.SessionFactoryImpl - Unable to construct current session context [managed_web]
+2016-07-09 13:53:55,028 [1] ERROR NHibernate.Impl.SessionFactoryImpl - Unable to construct current session context [managed_web]
 System.TypeLoadException: Could not load type managed_web. Possible cause: no assembly name specified.
    at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
    at NHibernate.Impl.SessionFactoryImpl.BuildCurrentSessionContext()
