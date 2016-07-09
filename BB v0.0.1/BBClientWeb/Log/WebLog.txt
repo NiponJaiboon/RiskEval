@@ -7,3 +7,4 @@ System.TypeLoadException: Could not load type managed_web. Possible cause: no as
    at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
    at NHibernate.Impl.SessionFactoryImpl.BuildCurrentSessionContext()
 2016-07-09 13:54:16,615 [9] ERROR WebLogger - Object reference not set to an instance of an object.
+2016-07-09 14:32:57,407 [248] ERROR WebLogger - Object reference not set to an instance of an object.
