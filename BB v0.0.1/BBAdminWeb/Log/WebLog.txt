@@ -1,15 +1,17 @@
-2016-07-09 16:53:27,489 [1] WARN  NHibernate.Util.ReflectHelper - Could not load type managed_web. Possible cause: no assembly name specified.
-2016-07-09 16:53:27,503 [1] ERROR NHibernate.Util.ReflectHelper - Could not load type managed_web.
+2016-07-12 18:29:11,709 [1] WARN  NHibernate.Util.ReflectHelper - Could not load type managed_web. Possible cause: no assembly name specified.
+2016-07-12 18:29:11,744 [1] ERROR NHibernate.Util.ReflectHelper - Could not load type managed_web.
 System.TypeLoadException: Could not load type managed_web. Possible cause: no assembly name specified.
    at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
-2016-07-09 16:53:27,507 [1] ERROR NHibernate.Impl.SessionFactoryImpl - Unable to construct current session context [managed_web]
+2016-07-12 18:29:11,746 [1] ERROR NHibernate.Impl.SessionFactoryImpl - Unable to construct current session context [managed_web]
 System.TypeLoadException: Could not load type managed_web. Possible cause: no assembly name specified.
    at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
    at NHibernate.Impl.SessionFactoryImpl.BuildCurrentSessionContext()
-2016-07-09 16:53:27,861 [10] ERROR WebLogger - Object reference not set to an instance of an object.
-2016-07-09 16:53:47,693 [12] WARN  WebLogger - Authenticating
-2016-07-09 16:53:47,702 [12] WARN  NHibernate.Engine.StatefulPersistenceContext.ProxyWarnLog - Narrowing proxy to iSabaya.SelfAuthenticatedUser - this operation breaks ==
-2016-07-09 16:53:47,967 [12] WARN  WebLogger - End Authenticating
-2016-07-09 17:17:39,534 [23] WARN  WebLogger - Authenticating
-2016-07-09 17:17:39,542 [23] WARN  NHibernate.Engine.StatefulPersistenceContext.ProxyWarnLog - Narrowing proxy to iSabaya.SelfAuthenticatedUser - this operation breaks ==
-2016-07-09 17:17:39,577 [23] WARN  WebLogger - End Authenticating
+2016-07-12 18:31:58,389 [12] WARN  WebLogger - Authenticating
+2016-07-12 18:31:58,396 [12] WARN  NHibernate.Engine.StatefulPersistenceContext.ProxyWarnLog - Narrowing proxy to iSabaya.SelfAuthenticatedUser - this operation breaks ==
+2016-07-12 18:31:58,666 [12] WARN  WebLogger - End Authenticating
+2016-07-12 19:17:20,552 [70] WARN  WebLogger - Authenticating
+2016-07-12 19:17:20,555 [70] WARN  NHibernate.Engine.StatefulPersistenceContext.ProxyWarnLog - Narrowing proxy to iSabaya.SelfAuthenticatedUser - this operation breaks ==
+2016-07-12 19:17:20,601 [70] WARN  WebLogger - End Authenticating
+2016-07-12 19:19:23,269 [42] WARN  WebLogger - Authenticating
+2016-07-12 19:19:23,281 [42] WARN  NHibernate.Engine.StatefulPersistenceContext.ProxyWarnLog - Narrowing proxy to iSabaya.SelfAuthenticatedUser - this operation breaks ==
+2016-07-12 19:19:23,301 [42] WARN  WebLogger - End Authenticating

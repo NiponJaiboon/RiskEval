@@ -1,0 +1,213 @@
+2016-07-09 13:54:07,776 [1] WARN  NHibernate.Util.ReflectHelper - Could not load type managed_web. Possible cause: no assembly name specified.
+2016-07-09 13:54:07,805 [1] ERROR NHibernate.Util.ReflectHelper - Could not load type managed_web.
+System.TypeLoadException: Could not load type managed_web. Possible cause: no assembly name specified.
+   at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+2016-07-09 13:54:07,809 [1] ERROR NHibernate.Impl.SessionFactoryImpl - Unable to construct current session context [managed_web]
+System.TypeLoadException: Could not load type managed_web. Possible cause: no assembly name specified.
+   at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+   at NHibernate.Impl.SessionFactoryImpl.BuildCurrentSessionContext()
+2016-07-09 15:13:41,071 [422] ERROR NHibernate.AdoNet.AbstractBatcher - Could not execute query: INSERT INTO Users (SystemID, IsNotFinalized, CreatedBy, CreatedTS, ApprovedBy, ApprovedTS, EffectiveFrom, EffectiveTo, ConsecutiveFailedLoginCount, IsBuiltin, IsDisable, LastLoginTimestamp, LastFailedLoginTimestamp, OrgID, PersonId, LoginName, EMailAddress, MobilePhoneNumber, CurrentPasswordID, OrgUnitID, IsReinstated, MustChangePasswordAfterFirstLogon, MustChangePasswordAtNextLogon, PasswordNeverExpires, PhoneCenter, PhoneCenterTo, PhoneDirect, Address, Discriminator) VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, 1); select SCOPE_IDENTITY()
+System.Data.SqlClient.SqlException (0x80131904): Violation of UNIQUE KEY constraint 'UIX_Users'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (nipon).
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd)
+ClientConnectionId:81579050-ab02-47f0-bedc-edc151f4ff6a
+Error Number:2627,State:1,Class:14
+2016-07-09 15:13:41,082 [422] WARN  NHibernate.Util.ADOExceptionReporter - System.Data.SqlClient.SqlException (0x80131904): Violation of UNIQUE KEY constraint 'UIX_Users'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (nipon).
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Id.IdentityGenerator.InsertSelectDelegate.ExecuteAndExtract(IDbCommand insert, ISessionImplementor session)
+   at NHibernate.Id.Insert.AbstractReturningDelegate.PerformInsert(SqlCommandInfo insertSQL, ISessionImplementor session, IBinder binder)
+ClientConnectionId:81579050-ab02-47f0-bedc-edc151f4ff6a
+Error Number:2627,State:1,Class:14
+2016-07-09 15:13:41,083 [422] ERROR NHibernate.Util.ADOExceptionReporter - Violation of UNIQUE KEY constraint 'UIX_Users'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (nipon).
+The statement has been terminated.
+2016-07-09 15:13:41,130 [422] ERROR NHibernate.AssertionFailure - An AssertionFailure occurred - this may indicate a bug in NHibernate or in your custom types.
+NHibernate.AssertionFailure: null id in iSabaya.SelfAuthenticatedUser entry (don't flush the Session after an exception occurs)
+2016-07-09 15:13:41,135 [422] ERROR NHibernate.AssertionFailure - An AssertionFailure occurred - this may indicate a bug in NHibernate or in your custom types.
+NHibernate.AssertionFailure: null id in iSabaya.SelfAuthenticatedUser entry (don't flush the Session after an exception occurs)
+2016-07-09 15:13:41,161 [419] ERROR NHibernate.AssertionFailure - An AssertionFailure occurred - this may indicate a bug in NHibernate or in your custom types.
+NHibernate.AssertionFailure: null id in iSabaya.SelfAuthenticatedUser entry (don't flush the Session after an exception occurs)
+2016-07-09 15:14:10,705 [398] ERROR NHibernate.AdoNet.AbstractBatcher - Could not execute query: INSERT INTO Users (SystemID, IsNotFinalized, CreatedBy, CreatedTS, ApprovedBy, ApprovedTS, EffectiveFrom, EffectiveTo, ConsecutiveFailedLoginCount, IsBuiltin, IsDisable, LastLoginTimestamp, LastFailedLoginTimestamp, OrgID, PersonId, LoginName, EMailAddress, MobilePhoneNumber, CurrentPasswordID, OrgUnitID, IsReinstated, MustChangePasswordAfterFirstLogon, MustChangePasswordAtNextLogon, PasswordNeverExpires, PhoneCenter, PhoneCenterTo, PhoneDirect, Address, Discriminator) VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, 1); select SCOPE_IDENTITY()
+System.Data.SqlClient.SqlException (0x80131904): Violation of UNIQUE KEY constraint 'UIX_Users'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (nipon).
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd)
+ClientConnectionId:81579050-ab02-47f0-bedc-edc151f4ff6a
+Error Number:2627,State:1,Class:14
+2016-07-09 15:14:10,705 [398] WARN  NHibernate.Util.ADOExceptionReporter - System.Data.SqlClient.SqlException (0x80131904): Violation of UNIQUE KEY constraint 'UIX_Users'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (nipon).
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Id.IdentityGenerator.InsertSelectDelegate.ExecuteAndExtract(IDbCommand insert, ISessionImplementor session)
+   at NHibernate.Id.Insert.AbstractReturningDelegate.PerformInsert(SqlCommandInfo insertSQL, ISessionImplementor session, IBinder binder)
+ClientConnectionId:81579050-ab02-47f0-bedc-edc151f4ff6a
+Error Number:2627,State:1,Class:14
+2016-07-09 15:14:10,706 [398] ERROR NHibernate.Util.ADOExceptionReporter - Violation of UNIQUE KEY constraint 'UIX_Users'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (nipon).
+The statement has been terminated.
+2016-07-09 15:14:10,713 [398] ERROR NHibernate.AssertionFailure - An AssertionFailure occurred - this may indicate a bug in NHibernate or in your custom types.
+NHibernate.AssertionFailure: null id in iSabaya.SelfAuthenticatedUser entry (don't flush the Session after an exception occurs)
+2016-07-09 15:14:10,719 [398] ERROR NHibernate.AssertionFailure - An AssertionFailure occurred - this may indicate a bug in NHibernate or in your custom types.
+NHibernate.AssertionFailure: null id in iSabaya.SelfAuthenticatedUser entry (don't flush the Session after an exception occurs)
+2016-07-09 15:14:10,728 [416] ERROR NHibernate.AssertionFailure - An AssertionFailure occurred - this may indicate a bug in NHibernate or in your custom types.
+NHibernate.AssertionFailure: null id in iSabaya.SelfAuthenticatedUser entry (don't flush the Session after an exception occurs)
+2016-07-09 15:18:33,997 [435] ERROR NHibernate.AdoNet.AbstractBatcher - Could not execute query: INSERT INTO Users (SystemID, IsNotFinalized, CreatedBy, CreatedTS, ApprovedBy, ApprovedTS, EffectiveFrom, EffectiveTo, ConsecutiveFailedLoginCount, IsBuiltin, IsDisable, LastLoginTimestamp, LastFailedLoginTimestamp, OrgID, PersonId, LoginName, EMailAddress, MobilePhoneNumber, CurrentPasswordID, OrgUnitID, IsReinstated, MustChangePasswordAfterFirstLogon, MustChangePasswordAtNextLogon, PasswordNeverExpires, PhoneCenter, PhoneCenterTo, PhoneDirect, Address, Discriminator) VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, 1); select SCOPE_IDENTITY()
+System.Data.SqlClient.SqlException (0x80131904): Violation of UNIQUE KEY constraint 'UIX_Users'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (nipon).
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd)
+ClientConnectionId:17f30d10-533c-49f5-a350-60f6b20a01df
+Error Number:2627,State:1,Class:14
+2016-07-09 15:18:33,998 [435] WARN  NHibernate.Util.ADOExceptionReporter - System.Data.SqlClient.SqlException (0x80131904): Violation of UNIQUE KEY constraint 'UIX_Users'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (nipon).
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Id.IdentityGenerator.InsertSelectDelegate.ExecuteAndExtract(IDbCommand insert, ISessionImplementor session)
+   at NHibernate.Id.Insert.AbstractReturningDelegate.PerformInsert(SqlCommandInfo insertSQL, ISessionImplementor session, IBinder binder)
+ClientConnectionId:17f30d10-533c-49f5-a350-60f6b20a01df
+Error Number:2627,State:1,Class:14
+2016-07-09 15:18:33,999 [435] ERROR NHibernate.Util.ADOExceptionReporter - Violation of UNIQUE KEY constraint 'UIX_Users'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (nipon).
+The statement has been terminated.
+2016-07-09 15:18:34,009 [435] ERROR NHibernate.AssertionFailure - An AssertionFailure occurred - this may indicate a bug in NHibernate or in your custom types.
+NHibernate.AssertionFailure: null id in iSabaya.SelfAuthenticatedUser entry (don't flush the Session after an exception occurs)
+2016-07-09 15:18:34,014 [435] ERROR NHibernate.AssertionFailure - An AssertionFailure occurred - this may indicate a bug in NHibernate or in your custom types.
+NHibernate.AssertionFailure: null id in iSabaya.SelfAuthenticatedUser entry (don't flush the Session after an exception occurs)
+2016-07-09 15:18:34,027 [441] ERROR NHibernate.AssertionFailure - An AssertionFailure occurred - this may indicate a bug in NHibernate or in your custom types.
+NHibernate.AssertionFailure: null id in iSabaya.SelfAuthenticatedUser entry (don't flush the Session after an exception occurs)
+2016-07-09 15:18:36,954 [434] ERROR NHibernate.AdoNet.AbstractBatcher - Could not execute query: INSERT INTO Users (SystemID, IsNotFinalized, CreatedBy, CreatedTS, ApprovedBy, ApprovedTS, EffectiveFrom, EffectiveTo, ConsecutiveFailedLoginCount, IsBuiltin, IsDisable, LastLoginTimestamp, LastFailedLoginTimestamp, OrgID, PersonId, LoginName, EMailAddress, MobilePhoneNumber, CurrentPasswordID, OrgUnitID, IsReinstated, MustChangePasswordAfterFirstLogon, MustChangePasswordAtNextLogon, PasswordNeverExpires, PhoneCenter, PhoneCenterTo, PhoneDirect, Address, Discriminator) VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, 1); select SCOPE_IDENTITY()
+System.Data.SqlClient.SqlException (0x80131904): Violation of UNIQUE KEY constraint 'UIX_Users'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (nipon).
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd)
+ClientConnectionId:17f30d10-533c-49f5-a350-60f6b20a01df
+Error Number:2627,State:1,Class:14
+2016-07-09 15:18:36,955 [434] WARN  NHibernate.Util.ADOExceptionReporter - System.Data.SqlClient.SqlException (0x80131904): Violation of UNIQUE KEY constraint 'UIX_Users'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (nipon).
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Id.IdentityGenerator.InsertSelectDelegate.ExecuteAndExtract(IDbCommand insert, ISessionImplementor session)
+   at NHibernate.Id.Insert.AbstractReturningDelegate.PerformInsert(SqlCommandInfo insertSQL, ISessionImplementor session, IBinder binder)
+ClientConnectionId:17f30d10-533c-49f5-a350-60f6b20a01df
+Error Number:2627,State:1,Class:14
+2016-07-09 15:18:36,955 [434] ERROR NHibernate.Util.ADOExceptionReporter - Violation of UNIQUE KEY constraint 'UIX_Users'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (nipon).
+The statement has been terminated.
+2016-07-09 15:18:36,965 [434] ERROR NHibernate.AssertionFailure - An AssertionFailure occurred - this may indicate a bug in NHibernate or in your custom types.
+NHibernate.AssertionFailure: null id in iSabaya.SelfAuthenticatedUser entry (don't flush the Session after an exception occurs)
+2016-07-09 15:18:37,173 [434] ERROR NHibernate.AssertionFailure - An AssertionFailure occurred - this may indicate a bug in NHibernate or in your custom types.
+NHibernate.AssertionFailure: null id in iSabaya.SelfAuthenticatedUser entry (don't flush the Session after an exception occurs)
+2016-07-09 15:18:37,183 [428] ERROR NHibernate.AssertionFailure - An AssertionFailure occurred - this may indicate a bug in NHibernate or in your custom types.
+NHibernate.AssertionFailure: null id in iSabaya.SelfAuthenticatedUser entry (don't flush the Session after an exception occurs)
+2016-07-09 15:18:37,737 [441] ERROR NHibernate.AdoNet.AbstractBatcher - Could not execute query: INSERT INTO Users (SystemID, IsNotFinalized, CreatedBy, CreatedTS, ApprovedBy, ApprovedTS, EffectiveFrom, EffectiveTo, ConsecutiveFailedLoginCount, IsBuiltin, IsDisable, LastLoginTimestamp, LastFailedLoginTimestamp, OrgID, PersonId, LoginName, EMailAddress, MobilePhoneNumber, CurrentPasswordID, OrgUnitID, IsReinstated, MustChangePasswordAfterFirstLogon, MustChangePasswordAtNextLogon, PasswordNeverExpires, PhoneCenter, PhoneCenterTo, PhoneDirect, Address, Discriminator) VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26, @p27, 1); select SCOPE_IDENTITY()
+System.Data.SqlClient.SqlException (0x80131904): Violation of UNIQUE KEY constraint 'UIX_Users'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (nipon).
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd)
+ClientConnectionId:17f30d10-533c-49f5-a350-60f6b20a01df
+Error Number:2627,State:1,Class:14
+2016-07-09 15:18:37,738 [441] WARN  NHibernate.Util.ADOExceptionReporter - System.Data.SqlClient.SqlException (0x80131904): Violation of UNIQUE KEY constraint 'UIX_Users'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (nipon).
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd)
+   at NHibernate.Id.IdentityGenerator.InsertSelectDelegate.ExecuteAndExtract(IDbCommand insert, ISessionImplementor session)
+   at NHibernate.Id.Insert.AbstractReturningDelegate.PerformInsert(SqlCommandInfo insertSQL, ISessionImplementor session, IBinder binder)
+ClientConnectionId:17f30d10-533c-49f5-a350-60f6b20a01df
+Error Number:2627,State:1,Class:14
+2016-07-09 15:18:37,740 [441] ERROR NHibernate.Util.ADOExceptionReporter - Violation of UNIQUE KEY constraint 'UIX_Users'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (nipon).
+The statement has been terminated.
+2016-07-09 15:18:37,749 [441] ERROR NHibernate.AssertionFailure - An AssertionFailure occurred - this may indicate a bug in NHibernate or in your custom types.
+NHibernate.AssertionFailure: null id in iSabaya.SelfAuthenticatedUser entry (don't flush the Session after an exception occurs)
+2016-07-09 15:18:37,753 [441] ERROR NHibernate.AssertionFailure - An AssertionFailure occurred - this may indicate a bug in NHibernate or in your custom types.
+NHibernate.AssertionFailure: null id in iSabaya.SelfAuthenticatedUser entry (don't flush the Session after an exception occurs)
+2016-07-09 15:18:37,763 [435] ERROR NHibernate.AssertionFailure - An AssertionFailure occurred - this may indicate a bug in NHibernate or in your custom types.
+NHibernate.AssertionFailure: null id in iSabaya.SelfAuthenticatedUser entry (don't flush the Session after an exception occurs)
