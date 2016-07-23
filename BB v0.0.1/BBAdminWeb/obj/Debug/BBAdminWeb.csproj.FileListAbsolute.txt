@@ -68,7 +68,9 @@ D:\Work\iSabaya\RiskEval\BB v0.0.1\BBAdminWeb\bin\System.Web.Helpers.xml
 D:\Work\iSabaya\RiskEval\BB v0.0.1\BBAdminWeb\bin\System.Web.Mvc.xml
 D:\Work\iSabaya\RiskEval\BB v0.0.1\BBAdminWeb\bin\iSabaya.Questionnaire.pdb
 D:\Work\iSabaya\RiskEval\BB v0.0.1\BBAdminWeb\obj\Debug\BBAdminWeb.csprojResolveAssemblyReference.cache
-D:\Work\iSabaya\RiskEval\BB v0.0.1\BBAdminWeb\obj\Debug\RdlCompile.cache
-D:\Work\iSabaya\RiskEval\BB v0.0.1\BBAdminWeb\obj\Debug\RdlCompile.compiled
 D:\Work\iSabaya\RiskEval\BB v0.0.1\BBAdminWeb\obj\Debug\BBAdminWeb.dll
 D:\Work\iSabaya\RiskEval\BB v0.0.1\BBAdminWeb\obj\Debug\BBAdminWeb.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BBAdminWeb\bin\Microsoft.ReportViewer.WebForms.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BBAdminWeb\bin\Microsoft.Web.Infrastructure.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BBAdminWeb\bin\Microsoft.ReportViewer.Common.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BBAdminWeb\bin\Microsoft.ReportViewer.WebForms.xml

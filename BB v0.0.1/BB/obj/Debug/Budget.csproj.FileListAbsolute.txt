@@ -10,3 +10,15 @@ D:\TFS_Kunakorn\BB\BB v0.0.1\BB\bin\Debug\iSabaya.pdb
 D:\TFS_Kunakorn\BB\BB v0.0.1\BB\obj\Debug\Budget.csprojResolveAssemblyReference.cache
 D:\TFS_Kunakorn\BB\BB v0.0.1\BB\obj\Debug\Budget.dll
 D:\TFS_Kunakorn\BB\BB v0.0.1\BB\obj\Debug\Budget.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BB\bin\Debug\Budget.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BB\bin\Debug\Budget.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BB\bin\Debug\iSabaya.Config.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BB\bin\Debug\iSabaya.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BB\bin\Debug\iSabaya.Questionnaire.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BB\bin\Debug\NHibernate.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BB\bin\Debug\iSabaya.Config.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BB\bin\Debug\iSabaya.Questionnaire.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BB\bin\Debug\iSabaya.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BB\obj\Debug\Budget.csprojResolveAssemblyReference.cache
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BB\obj\Debug\Budget.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BB\obj\Debug\Budget.pdb

@@ -1,4 +1,6 @@
-﻿using iSabaya;
+﻿using BBAnalysisWeb.Models;
+using iSabaya;
+using log4net;
 using NHibernate;
 using System;
 using System.Collections.Generic;
@@ -47,14 +49,31 @@ namespace BBAnalysisWeb
             }
         }
 
+        ILog WebLogger = LogManager.GetLogger("WebLogger");
+        protected void Session_End()
+        {
+            {
+                try
+                {
+                    if (null != Session["Session"])
+                    {
+                        var sessionContext = (WebSessionContext)Session["Session"];
+                        sessionContext.LogOut();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    WebLogger.Error(ex.GetAllMessages());
+                }
+
+                Session.Clear();
+                Session.Abandon();
+            }
+        }
+
         protected void Session_Start()
         {
             Session["Dummy"] = 1;
-        }
-        protected void Session_End()
-        {
-            Session.Clear();
-            Session.Abandon();
         }
     }
 }

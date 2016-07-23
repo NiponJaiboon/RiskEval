@@ -1,33 +1,49 @@
 ﻿using Budget;
 using Budget.General;
+using Budget.Util;
 using iSabaya;
 using NHibernate;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 
 namespace BBAdminWeb.Models
 {
     public class WebSessionContext : SessionContext
     {
-        public HttpSessionStateBase WebSessionState { get; set; }
-
-        public WebSessionContext(iSystem system, HttpSessionStateBase session ,ISessionFactory sessionFactory, string fromIPAddress)
+        public WebSessionContext(iSystem system, HttpSessionStateBase session, ISessionFactory sessionFactory, string fromIPAddress)
             : base(system, sessionFactory)
         {
             this.WebSessionState = session;
             this.FromIPAddress = fromIPAddress;
         }
 
+        public HttpSessionStateBase WebSessionState { get; set; }
+
         #region Overrides
-        public override long UserID
+
+        public override BudgetConfiguration Configuration { get { return BudgetConfiguration.CurrentConfiguration; } }
+
+        public override Language CurrentLanguage
+        {
+            set
+            {
+                WebSessionState["LanguageCode"] = value.Code;
+                base.currentLanguage = value;
+            }
+        }
+
+        public virtual int TempID
         {
             get
             {
-                if (0 == this.userID && null != WebSessionState["UserID"])
-                    base.userID = (long)WebSessionState["UserID"];
-                return this.userID;
+                if (null == WebSessionState["TempID"])
+                    return 0;
+                else
+                    return (int)WebSessionState["TempID"];
+            }
+            set
+            {
+                WebSessionState["TempID"] = value;
             }
         }
 
@@ -40,6 +56,28 @@ namespace BBAdminWeb.Models
                 base.User = value;
                 this.WebSessionState["UserID"] = value.ID;
                 this.UserID = value.ID;
+            }
+        }
+
+        public override long UserID
+        {
+            get
+            {
+                if (0 == this.userID && null != WebSessionState["UserID"])
+                    base.userID = (long)WebSessionState["UserID"];
+                return this.userID;
+            }
+        }
+        public override BudgetUserSession UserSession
+        {
+            //get
+            //{
+            //    return base.UserSession;
+            //}
+            protected set
+            {
+                base.UserSession = value;
+                UserSessionID = value.ID;
             }
         }
 
@@ -56,50 +94,36 @@ namespace BBAdminWeb.Models
                 this.WebSessionState["UserSessionID"] = base.UserSessionID = value;
             }
         }
-
-        public override Language CurrentLanguage
-        {
-            set
-            {
-                WebSessionState["LanguageCode"] = value.Code;
-                base.currentLanguage = value;
-            }
-        }
         public override void Close()
         {
             base.Close();
             this.WebSessionState.Clear();
         }
-        public virtual int TempID
+        #endregion Overrides
+
+        public void LogOut(int pageId = 0)
         {
-            get
+            if (null != UserSession)
             {
-                if (null == WebSessionState["TempID"])
-                    return 0;
-                else
-                    return (int)WebSessionState["TempID"];
+                using (ITransaction tx = PersistenceSession.BeginTransaction())
+                {
+                    try
+                    {
+                        UserSession.SessionPeriod.To = DateTime.Now;
+                        UserSession.LogoutMessage = "Logout";
+                        UserSession.Save(this);
+
+                        Log(0, pageId, 0, MessageException.AuthenMessage.Logout, MessageException.Success(User.ID.ToString()));
+                        tx.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        Log(0, pageId, 0, MessageException.AuthenMessage.Logout, MessageException.Fail(ex.Message));
+                        throw;
+                    }
+                }
             }
-            set
-            {
-                WebSessionState["TempID"] = value;
-            }
+
         }
-
-        public override BudgetUserSession UserSession
-        {
-            //get
-            //{
-            //    return base.UserSession;
-            //}
-            protected set
-            {
-                base.UserSession = value;
-                UserSessionID = value.ID;
-            }
-        }
-
-        public override BudgetConfiguration Configuration { get { return BudgetConfiguration.CurrentConfiguration; } }
-        #endregion
-
     }
 }

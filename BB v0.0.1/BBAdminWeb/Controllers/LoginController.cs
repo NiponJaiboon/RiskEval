@@ -1,74 +1,32 @@
 ﻿using Budget;
 using Budget.General;
+using Budget.Security;
+using Budget.Util;
 using iSabaya;
-using NHibernate.Criterion;
+using NHibernate;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using NHibernate;
-using Budget.Util;
-using Budget.Security;
 
 namespace BBAdminWeb.Controllers
 {
     public class LoginController : BaseController
     {
-        public override string TabIndex
-        {
-            get { return "0"; }
-        }
-
         public LoginController()
         {
             GetAnonymousMenu();
         }
 
-        public ActionResult Index()
+        public override int pageID
         {
-            Tab = "0";
-            ViewBag.LoginActionName = FullUrl("Login/Authentication");
-            ViewBag.Notices = Announce.GetAll(SessionContext);
-
-            return View();
+            get { return PageID.Login; }
         }
 
-        public ActionResult LogOut()
+        public override string TabIndex
         {
-
-            if (SessionContext != null)
-            {
-                using (ITransaction tx = SessionContext.PersistenceSession.BeginTransaction())
-                {
-
-                    try
-                    {
-                        SessionContext.UserSession.SessionPeriod.To = DateTime.Now;
-                        SessionContext.UserSession.LogoutMessage = MessageException.AuthenMessage.Logout;
-                        SessionContext.UserSession.Save(SessionContext);
-
-                        SessionContext.Log(0, pageID, 0, MessageException.AuthenMessage.Logout, MessageException.Success(SessionContext.User.ID.ToString()));
-
-                        tx.Commit();
-                    }
-                    catch (Exception ex)
-                    {
-                        WebLogger.Error(ex.GetAllMessages());
-                        SessionContext.Log(0, pageID, 0, MessageException.AuthenMessage.Logout, MessageException.Fail(ex.Message));
-                        tx.Rollback();
-                    }
-                }
-            }
-
-            Session.Clear();
-            Session.Abandon();
-
-            return RedirectToAction("Index", "Login");
+            get { return "0"; }
         }
-
         public string Authentication(string idCard, string nameEng)
         {
             try
@@ -81,7 +39,6 @@ namespace BBAdminWeb.Controllers
 
                 switch (AuthenticateManager.Authenticate(SessionContext, SystemEnum.RiskAssessmentAdminSystem, idCard, nameEng, ref user))
                 {
-
                     case AuthenticateManager.AuthenState.AuthenticationSuccess:
 
                         BudgetConfiguration.CurrentConfiguration = GetConfiguration(SessionContext, SessionContext.MySystem.SystemID);
@@ -93,15 +50,19 @@ namespace BBAdminWeb.Controllers
                             case 1:
                                 targetPath = FullUrl("Government");//ส่วนราชการ
                                 break;
+
                             case 2:
                                 targetPath = FullUrl("Budgetor");//ทำงบประมาณ
                                 break;
+
                             case 3:
                                 targetPath = FullUrl("Evaluation");//เจ้าหน้าที่ประเมินงบ
                                 break;
+
                             case 4:
                                 targetPath = FullUrl("Admin");//ผู้ดูแลระบบ
                                 break;
+
                             default:
                                 throw new Exception("User Role Invalid.");
                         }
@@ -111,18 +72,21 @@ namespace BBAdminWeb.Controllers
                         jsonResult.Add("message", "");
                         SessionContext.Log(0, pageID, 0, MessageException.AuthenMessage.Login, MessageException.Success(SessionContext.User.ID.ToString()));
                         break;
+
                     case AuthenticateManager.AuthenState.AuthenticationFail:
                         jsonResult.Add("result", 0);
                         jsonResult.Add("target", "");
                         jsonResult.Add("message", "Login Failed.");
                         SessionContext.Log(0, pageID, (int)SystemEnum.RiskAssessmentAdminSystem, MessageException.AuthenMessage.Login, MessageException.Fail(string.Format("{0} : {1}", idCard, nameEng)));
                         break;
+
                     case AuthenticateManager.AuthenState.AlreadyLogin:
                         jsonResult.Add("result", 0);
                         jsonResult.Add("target", "");
                         jsonResult.Add("message", "Login Failed.");
                         SessionContext.Log(0, pageID, (int)SystemEnum.RiskAssessmentAdminSystem, MessageException.AuthenMessage.Login, MessageException.Fail(user.ID.ToString() + " : Login Attemp."));
                         break;
+
                     default:
                         break;
                 }
@@ -130,7 +94,9 @@ namespace BBAdminWeb.Controllers
                 WebLogger.Warn("End Authenticating");
 
                 return new JavaScriptSerializer().Serialize(jsonResult);
+
                 #region Old
+
                 //switch (AuthenManager.Authenticate(SessionContext, ))
                 //{
                 //case LoginResult.AlreadyLogin:
@@ -210,7 +176,6 @@ namespace BBAdminWeb.Controllers
                 //            throw new Exception("User Role Invalid.");
                 //    }
 
-
                 //    jsonResult.Add("result", 1);
                 //    jsonResult.Add("target", targetPath);
                 //    jsonResult.Add("message", "");
@@ -227,7 +192,8 @@ namespace BBAdminWeb.Controllers
 
                 //WebLogger.Warn("End Authenticating");
                 //return new JavaScriptSerializer().Serialize(jsonResult);
-                #endregion
+
+                #endregion Old
             }
             catch (Exception ex)
             {
@@ -246,6 +212,28 @@ namespace BBAdminWeb.Controllers
             }
         }
 
+        public ActionResult Index()
+        {
+            Tab = "0";
+            ViewBag.LoginActionName = FullUrl("Login/Authentication");
+            ViewBag.Notices = Announce.GetAll(SessionContext);
+
+            return View();
+        }
+
+        public ActionResult LogOut()
+        {
+            try
+            {
+                SessionContext.LogOut(pageID);
+            }
+            catch (Exception ex)
+            {
+                WebLogger.Error(ex.GetAllMessages());
+            }
+
+            return RedirectToAction("Index", "Login");
+        }
         private static BudgetConfiguration GetConfiguration(SessionContext context, SystemEnum systemID)
         {
             DateTime today = DateTime.Now;
@@ -255,11 +243,6 @@ namespace BBAdminWeb.Controllers
                 .SingleOrDefault();
             config.Session = context.PersistenceSession;
             return config;
-        }
-
-        public override int pageID
-        {
-            get { return PageID.Login; }
         }
     }
 }

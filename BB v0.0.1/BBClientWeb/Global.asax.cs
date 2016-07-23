@@ -7,6 +7,7 @@ using System.Web.Routing;
 using iSabaya;
 using NHibernate;
 using log4net;
+using BBClientWeb.Models;
 
 namespace BBClientWeb
 {
@@ -58,8 +59,22 @@ namespace BBClientWeb
         {
             Session["Dummy"] = 1;
         }
+
         protected void Session_End()
         {
+            try
+            {
+                if (null != Session["Session"])
+                {
+                    var sessionContext = (WebSessionContext)Session["Session"];
+                    sessionContext.LogOut();
+                }
+            }
+            catch (Exception ex)
+            {
+                WebLogger.Error(ex.GetAllMessages());
+            }
+
             Session.Clear();
             Session.Abandon();
         }

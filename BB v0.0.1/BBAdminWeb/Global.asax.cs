@@ -1,4 +1,6 @@
-﻿using iSabaya;
+﻿using BBAdminWeb.Models;
+using iSabaya;
+using log4net;
 using NHibernate;
 using System;
 using System.Collections.Generic;
@@ -52,8 +54,23 @@ namespace BBAdminWeb
         {
             Session["Dummy"] = 1;
         }
+
+        ILog WebLogger = LogManager.GetLogger("WebLogger");
         protected void Session_End()
         {
+            try
+            {
+                if (null != Session["Session"])
+                {
+                    var sessionContext = (WebSessionContext)Session["Session"];
+                    sessionContext.LogOut();
+                }
+            }
+            catch (Exception ex)
+            {
+                WebLogger.Error(ex.GetAllMessages());
+            }
+
             Session.Clear();
             Session.Abandon();
         }
