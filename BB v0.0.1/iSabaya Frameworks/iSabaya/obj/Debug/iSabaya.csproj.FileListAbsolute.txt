@@ -7,3 +7,12 @@ D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya\bin\Debug\iSabaya.Config
 D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya\obj\Debug\iSabaya.csprojResolveAssemblyReference.cache
 D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya\obj\Debug\iSabaya.dll
 D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya\obj\Debug\iSabaya.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabaya\bin\Debug\iSabaya.dll.config
+D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabaya\bin\Debug\iSabaya.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabaya\bin\Debug\iSabaya.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabaya\bin\Debug\iSabaya.Config.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabaya\bin\Debug\NHibernate.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabaya\bin\Debug\iSabaya.Config.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabaya\obj\Debug\iSabaya.csprojResolveAssemblyReference.cache
+D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabaya\obj\Debug\iSabaya.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabaya\obj\Debug\iSabaya.pdb

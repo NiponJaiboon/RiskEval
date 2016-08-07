@@ -79,15 +79,26 @@ namespace BBAdminWeb.Controllers
             {
                 IList<Organization> organizations = Organization.List(SessionContext);
 
-                if (string.IsNullOrEmpty(code) || string.IsNullOrEmpty(name))
+                if (IsMinistryValid(code, name))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.MinistryMessage.Save, MessageException.Null("The code or name is emptry."));
+                    SessionContext.Log(0,
+                                    this.pageID,
+                                    0,
+                                    MessageException.MinistryMessage.Save,
+                                    MessageException.Null("The code or name is emptry."));
+
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
-                if (organizations.Any(x => x.Code == code) || organizations.Any(x => x.CurrentName.Name.GetValue(Formetter.LanguageTh) == name))
+                if (IsMinitryCodeAlreadyExist(code, organizations)
+                    || IsMinitryNameAlreadyExist(name, organizations))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.MinistryMessage.Save, MessageException.Fail("The ministry is existing in database."));
+                    SessionContext.Log(0,
+                                    this.pageID,
+                                    0,
+                                    MessageException.MinistryMessage.Save,
+                                    MessageException.Fail("The ministry is existing in database."));
+
                     return Json(new { Success = false, Message = "ไม่สามารถเพิ่มกระทรวงได้ เนื่องจากมีอยู่ในระบบแล้ว" }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -95,7 +106,7 @@ namespace BBAdminWeb.Controllers
                 {
                     try
                     {
-                        Organization org = new Organization
+                        var org = new Organization
                         {
                             Code = code.Trim(),
                             CurrentName = new OrgName
@@ -103,6 +114,7 @@ namespace BBAdminWeb.Controllers
                                 Name = new MultilingualString(Formetter.LanguageTh, name.Trim(), Formetter.LanguageEn, name.Trim()),
                             }
                         };
+
                         org.Persist(SessionContext);
 
                         tx.Commit();
@@ -126,6 +138,21 @@ namespace BBAdminWeb.Controllers
             return Json(new { Success = true, Message = "เพิ่มกระทรวง เรียบร้อย" }, JsonRequestBehavior.AllowGet);
         }
 
+        private static bool IsMinistryValid(string code, string name)
+        {
+            return string.IsNullOrEmpty(code) || string.IsNullOrEmpty(name);
+        }
+
+        private static bool IsMinitryCodeAlreadyExist(string code, IList<Organization> organizations)
+        {
+            return organizations.Any(org => org.Code == code);
+        }
+
+        private static bool IsMinitryNameAlreadyExist(string name, IList<Organization> organizations)
+        {
+            return organizations.Any(org => org.CurrentName.Name.GetValue(Formetter.LanguageTh) == name);
+        }
+
         [HttpPost]
         public JsonResult Update(long id, string code, string name)
         {
@@ -133,7 +160,7 @@ namespace BBAdminWeb.Controllers
             {
                 IList<Organization> organizations = Organization.List(SessionContext);
 
-                if (string.IsNullOrEmpty(code) || string.IsNullOrEmpty(name))
+                if (IsMinistryValid(code, name))
                 {
                     SessionContext.Log(0, this.pageID, 0, MessageException.MinistryMessage.Update, MessageException.Null("The code or name is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
@@ -144,8 +171,9 @@ namespace BBAdminWeb.Controllers
                 if (org == null)
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
 
-                IList<Organization> orgTemps = organizations.Where(x => x.ID != org.ID).ToList();
-                if (orgTemps.Any(x => x.Code == code) || orgTemps.Any(x => x.CurrentName.Name.GetValue(Formetter.LanguageTh) == name))
+
+                if ((IsMinistryCodeChanged(code, org) && IsMinitryCodeAlreadyExist(code, organizations))
+                    || (IsMinistryNameChanged(name, org) && IsMinitryNameAlreadyExist(name, organizations)))
                 {
                     SessionContext.Log(0, this.pageID, 0, MessageException.MinistryMessage.Save, MessageException.Fail("The ministry is existing in database."));
                     return Json(new { Success = false, Message = "ไม่สามารถแก้ไขกระทรวงได้ เนื่องจากมีอยู่ในระบบแล้ว" }, JsonRequestBehavior.AllowGet);
@@ -179,6 +207,17 @@ namespace BBAdminWeb.Controllers
             }
             return Json(new { Success = true, Message = "แก้ไขกระทรวง เรียบร้อย" }, JsonRequestBehavior.AllowGet);
         }
+
+        private static bool IsMinistryCodeChanged(string code, Organization org)
+        {
+            return code != org.Code;
+        }
+
+        private static bool IsMinistryNameChanged(string code, Organization org)
+        {
+            return code != org.CurrentName.Name.GetValue(Formetter.LanguageTh);
+        }
+
         #endregion
 
         public override string TabIndex { get { return "1"; } }
