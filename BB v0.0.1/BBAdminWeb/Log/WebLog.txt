@@ -6,3 +6,5 @@ System.TypeLoadException: Could not load type managed_web. Possible cause: no as
 System.TypeLoadException: Could not load type managed_web. Possible cause: no assembly name specified.
    at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
    at NHibernate.Impl.SessionFactoryImpl.BuildCurrentSessionContext()
+2016-08-20 11:13:15,199 [69] WARN  WebLogger - Authenticating
+2016-08-20 11:13:15,475 [69] WARN  WebLogger - End Authenticating
