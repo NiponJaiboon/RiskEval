@@ -1,0 +1,20 @@
+2016-06-18 14:00:00,427 [1] WARN  NHibernate.Util.ReflectHelper - Could not load type managed_web. Possible cause: no assembly name specified.
+2016-06-18 14:00:00,546 [1] ERROR NHibernate.Util.ReflectHelper - Could not load type managed_web.
+System.TypeLoadException: Could not load type managed_web. Possible cause: no assembly name specified.
+   at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+2016-06-18 14:00:00,548 [1] ERROR NHibernate.Impl.SessionFactoryImpl - Unable to construct current session context [managed_web]
+System.TypeLoadException: Could not load type managed_web. Possible cause: no assembly name specified.
+   at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+   at NHibernate.Impl.SessionFactoryImpl.BuildCurrentSessionContext()
+2016-06-18 14:53:28,988 [54] WARN  WebLogger - Authenticating
+2016-06-18 14:53:29,033 [54] WARN  NHibernate.Engine.StatefulPersistenceContext.ProxyWarnLog - Narrowing proxy to iSabaya.SelfAuthenticatedUser - this operation breaks ==
+2016-06-18 14:53:29,524 [54] WARN  WebLogger - End Authenticating
+2016-06-18 15:13:59,768 [64] WARN  WebLogger - Authenticating
+2016-06-18 15:13:59,772 [64] WARN  NHibernate.Engine.StatefulPersistenceContext.ProxyWarnLog - Narrowing proxy to iSabaya.SelfAuthenticatedUser - this operation breaks ==
+2016-06-18 15:13:59,829 [64] WARN  WebLogger - End Authenticating
+2016-06-18 15:47:16,723 [11] ERROR WebLogger - Object reference not set to an instance of an object.
+2016-06-18 15:47:23,699 [76] WARN  WebLogger - Authenticating
+2016-06-18 15:47:23,705 [76] WARN  NHibernate.Engine.StatefulPersistenceContext.ProxyWarnLog - Narrowing proxy to iSabaya.SelfAuthenticatedUser - this operation breaks ==
+2016-06-18 15:47:23,743 [76] WARN  WebLogger - End Authenticating
+2016-06-18 18:04:14,909 [34] WARN  WebLogger - Authenticating
+2016-06-18 18:04:14,992 [34] WARN  WebLogger - End Authenticating

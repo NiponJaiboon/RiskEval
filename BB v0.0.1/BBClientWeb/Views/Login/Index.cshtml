@@ -87,6 +87,9 @@
                     </td>
                     <td class="second">
                         <input id="txtIdCard" name="txtIdCard" type="text" class="form-control col-lg-4" maxlength="13" style="width:200px;" onkeypress="return FillterNumber(event);" onpaste="return FillterNumberOnPaste(event);">
+                        <script type="text/javascript">
+                            $("#txtIdCard").focus();
+                        </script>
                         <span id="validateTxtIdCard" style="color:Red; visibility:hidden; cursor:pointer;">
                             <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
                         </span>

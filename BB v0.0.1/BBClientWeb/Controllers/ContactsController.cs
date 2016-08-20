@@ -57,7 +57,7 @@ namespace BBClientWeb.Controllers
             get { return "10"; }
         }
 
-        public override int pageID
+        public override int PageID
         {
             get { throw new NotImplementedException(); }
         }

@@ -299,7 +299,6 @@
     <None Include="Class Diagrams\Workflow.cd" />
     <None Include="Class Diagrams\Property.cd" />
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />

@@ -13,6 +13,7 @@ function FillterNumber(e) {
     if (48 <= code && code <= 57) { return true; }
     else {
         alert("กรุณาระบุเป็นตัวเลข");
+        setTimeout(function () { $(e.target).focus(); }, 10);
         return false;
     }
 }
@@ -37,13 +38,19 @@ function FillterNumberOnPaste(e) {
                 break;
             }
         }
-        if (!isPass) { alert("กรุณาระบุเป็นตัวเลข"); }
+        if (!isPass) {
+            alert("กรุณาระบุเป็นตัวเลข");
+            setTimeout(function () { $(e.target).focus(); }, 10);
+        }
         return isPass;
     }
 
     alert("กรุณาระบุเป็นตัวเลข");
+    setTimeout(function () { $(e.target).focus(); }, 10);
+
     return false;
 }
+
 function FillterAlphabet(e) {
     var code = ((e.keyCode) ? e.keyCode : e.which)
 
@@ -54,6 +61,7 @@ function FillterAlphabet(e) {
     if ((65 <= code && code <= 90) || (97 <= code && code <= 122)) { return true; }
     else {
         alert("กรุณาระบุเป็นภาษาอังกฤษ");
+        setTimeout(function () { $(e.target).focus(); }, 10);
         return false;
     }
 }
@@ -79,15 +87,19 @@ function FillterAlphabetOnPaste(e) {
                 break;
             }
         }
-        if (!isPass) { alert("กรุณาระบุเป็นภาษาอังกฤษ"); }
+        if (!isPass) {
+            alert("กรุณาระบุเป็นภาษาอังกฤษ");
+            setTimeout(function () { $(e.target).focus(); }, 10);
+        }
         return isPass;
     }
 
     alert("กรุณาระบุเป็นภาษาอังกฤษ");
+    setTimeout(function () { $(e.target).focus(); }, 10);
     return false;
 }
+
 function FillterThaiAlphabet(e) {
-    debugger;
     var code = ((e.keyCode) ? e.keyCode : e.which)
 
     // Exception Key
@@ -99,9 +111,11 @@ function FillterThaiAlphabet(e) {
 		 || 3674 == code || 3675 == code) { return true; }
     else {
         alert("กรุณาระบุเป็นภาษาไทย");
+        setTimeout(function () { $(e.target).focus(); }, 10);
         return false;
     }
 }
+
 function FillterThaiAlphabetOnPaste(e) {
     var pastedText = undefined;
     // IE
@@ -126,10 +140,14 @@ function FillterThaiAlphabetOnPaste(e) {
             }
         }
 
-        if (!isPass) { alert("กรุณาระบุเป็นภาษาไทย"); }
+        if (!isPass) {
+            alert("กรุณาระบุเป็นภาษาไทย");
+            setTimeout(function () { $(e.target).focus(); }, 10);
+        }
         return isPass;
     }
 
     alert("กรุณาระบุเป็นภาษาไทย");
+    setTimeout(function () { $(e.target).focus(); }, 10);
     return false;
 }

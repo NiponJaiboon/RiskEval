@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using BBClientWeb.Models.ViewModels;
+﻿using BBClientWeb.Models.ViewModels;
 using Budget;
 using Budget.Util;
-using BBClientWeb.Util;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace BBClientWeb.Controllers.Government
 {
-    [SessionTimeoutFilter]
+    [Filters.SessionExpireFilter]
     public class ProjectsController : BaseController
     {
         //โครงการที่ยังไม่สมบูรณ์
@@ -46,14 +44,15 @@ namespace BBClientWeb.Controllers.Government
         {
             try
             {
-                IList<ProjectViewModel> model = null;
                 IList<Project> projects = null;
+                var model = new List<ProjectViewModel>();
 
-                projects = SessionContext.PersistenceSession
-                                    .QueryOver<Project>()
-                                    .Where(x => x.OrgUnit.ID == SessionContext.User.OrgUnit.ID).List();
+                projects = SessionContext
+                            .PersistenceSession
+                            .QueryOver<Project>()
+                            .Where(x => x.OrgUnit.ID == SessionContext.User.OrgUnit.ID).List();
 
-                if (projects.Count > 0)
+                if (projects.Any())
                 {
                     if (!string.IsNullOrEmpty(year))
                         projects = projects.Where(x => x.BudgetYear == year).ToList();
@@ -63,85 +62,87 @@ namespace BBClientWeb.Controllers.Government
                     switch (status)
                     {
                         case "Incomplete":
-                            projects = projects.Where(x => x.StatusCategory <= StatusCategory.IncompleteAnswerR).ToList();
-
                             model = projects
-                                .Select(p => new ProjectViewModel
-                                {
-                                    ID = p.ID,
-                                    Name = p.Name,
-                                    NameLink = p.ProjectIncompleteUrl(ApplicationName),
-                                    BudgetType = p.BudgetTypeName,
-                                    ProjectType = p.ProjectCategoryName,
-                                    Budget = p.BudgetAmount.ToString(Formetter.MoneyFormat),
-                                    Year = p.BudgetYear,
-                                    LastUpdate = p.CreateAction.Timestamp.ToString(Formetter.DateTimeFormat),
-                                }).ToList();
+                                    .Where(x => x.StatusCategory <= StatusCategory.IncompleteAnswerR)
+                                    .ToList()
+                                    .Select(p => new ProjectViewModel
+                                    {
+                                        ID = p.ID,
+                                        Name = p.Name,
+                                        NameLink = p.ProjectIncompleteUrl(ApplicationName),
+                                        BudgetType = p.BudgetTypeName,
+                                        ProjectType = p.ProjectCategoryName,
+                                        Budget = p.BudgetAmount.ToString(Formetter.MoneyFormat),
+                                        Year = p.BudgetYear,
+                                        LastUpdate = p.CreateAction.Timestamp.ToString(Formetter.DateTimeFormat),
+                                    }).ToList();
                             break;
                         case "completeUnsign":
-                            projects = projects.Where(x => x.StatusCategory == StatusCategory.CompleteUnsign || x.StatusCategory == StatusCategory.Update).ToList();
-
                             model = projects
-                                .Select(p => new ProjectViewModel
-                                {
-                                    ID = p.ID,
-                                    Name = p.Name,
-                                    NameLink = p.ProjectCompleteUnsignUrl(ApplicationName),
-                                    BudgetType = p.BudgetTypeName,
-                                    ProjectType = p.ProjectCategoryName,
-                                    Budget = p.BudgetAmount.ToString(Formetter.MoneyFormat),
-                                    Year = p.BudgetYear,
-                                    LastUpdate = p.CreateAction.Timestamp.ToString(Formetter.DateTimeFormat),
-                                }).ToList();
+                                    .Where(x => x.StatusCategory == StatusCategory.CompleteUnsign || x.StatusCategory == StatusCategory.Update)
+                                    .ToList()
+                                    .Select(p => new ProjectViewModel
+                                    {
+                                        ID = p.ID,
+                                        Name = p.Name,
+                                        NameLink = p.ProjectCompleteUnsignUrl(ApplicationName),
+                                        BudgetType = p.BudgetTypeName,
+                                        ProjectType = p.ProjectCategoryName,
+                                        Budget = p.BudgetAmount.ToString(Formetter.MoneyFormat),
+                                        Year = p.BudgetYear,
+                                        LastUpdate = p.CreateAction.Timestamp.ToString(Formetter.DateTimeFormat),
+                                    }).ToList();
                             break;
                         case "completeSign":
-                            projects = projects.Where(x => x.StatusCategory == StatusCategory.CompleteSign).ToList();
-
                             model = projects
-                                .Select(p => new ProjectViewModel
-                                {
-                                    ID = p.ID,
-                                    Name = p.Name,
-                                    NameLink = p.ProjectCompleteSignUrl(ApplicationName),
-                                    BudgetType = p.BudgetTypeName,
-                                    ProjectType = p.ProjectCategoryName,
-                                    Budget = p.BudgetAmount.ToString(Formetter.MoneyFormat),
-                                    Year = p.BudgetYear,
-                                    LastUpdate = p.CreateAction.Timestamp.ToString(Formetter.DateTimeFormat),
-                                    RiskResult = p.RiskBox
-                                }).ToList();
+                                    .Where(x => x.StatusCategory == StatusCategory.CompleteSign)
+                                    .ToList()
+                                    .Select(p => new ProjectViewModel
+                                    {
+                                        ID = p.ID,
+                                        Name = p.Name,
+                                        NameLink = p.ProjectCompleteSignUrl(ApplicationName),
+                                        BudgetType = p.BudgetTypeName,
+                                        ProjectType = p.ProjectCategoryName,
+                                        Budget = p.BudgetAmount.ToString(Formetter.MoneyFormat),
+                                        Year = p.BudgetYear,
+                                        LastUpdate = p.CreateAction.Timestamp.ToString(Formetter.DateTimeFormat),
+                                        RiskResult = p.RiskBox
+                                    }).ToList();
                             break;
 
                         case "unRisk":
-                            projects = projects.Where(x => x.StatusCategory == StatusCategory.UnRisk).ToList();
 
                             model = projects
-                                .Select(p => new ProjectViewModel
-                                {
-                                    ID = p.ID,
-                                    Name = p.Name,
-                                    NameLink = p.ProjectUnRiskUrl(ApplicationName),
-                                    BudgetType = p.BudgetTypeName,
-                                    ProjectType = p.ProjectCategoryName,
-                                    Budget = p.BudgetAmount.ToString(Formetter.MoneyFormat),
-                                    Year = p.BudgetYear,
-                                    LastUpdate = p.CreateAction.Timestamp.ToString(Formetter.DateTimeFormat),
-                                }).ToList();
+                                    .Where(x => x.StatusCategory == StatusCategory.UnRisk)
+                                    .ToList()
+                                    .Select(p => new ProjectViewModel
+                                    {
+                                        ID = p.ID,
+                                        Name = p.Name,
+                                        NameLink = p.ProjectUnRiskUrl(ApplicationName),
+                                        BudgetType = p.BudgetTypeName,
+                                        ProjectType = p.ProjectCategoryName,
+                                        Budget = p.BudgetAmount.ToString(Formetter.MoneyFormat),
+                                        Year = p.BudgetYear,
+                                        LastUpdate = p.CreateAction.Timestamp.ToString(Formetter.DateTimeFormat),
+                                    }).ToList();
                             break;
                         default:
-                            model = new List<ProjectViewModel>();
                             break;
                     }
                 }
-                else
-                {
-                    model = new List<ProjectViewModel>();
-                }
+
                 return Json(new { Success = true, model }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetIncomplete, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(
+                                0, 
+                                this.PageID, 
+                                0, 
+                                MessageException.ProjectMessage.GetIncomplete, 
+                                MessageException.Fail(ex.Message));
 
                 return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
             }
@@ -151,6 +152,6 @@ namespace BBClientWeb.Controllers.Government
 
         public override string TabIndex { get { return "0"; } }
 
-        public override int pageID { get { return PageID.projectQuery; } }
+        public override int PageID { get { return Budget.Util.PageID.projectQuery; } }
     }
 }

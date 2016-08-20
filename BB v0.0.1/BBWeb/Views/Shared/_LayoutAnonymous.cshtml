@@ -92,14 +92,14 @@
                     <ul class="tabs">
                         @if (ViewBag.Menus != null)
                         {
-                            foreach (BBWeb.Models.Menu m in ViewBag.Menus)
+                            foreach (var m in ViewBag.Menus)
                             {
                                 if (m.Childs.Count > 0)
                                 {
                                     <li id='@m.IdTab' class="mainnav">
                                         <a href='@m.Url'><span> @m.Name</span></a>
                                         <ul class="dropdown" style="display:none">
-                                            @foreach (BBWeb.Models.Menu child in m.Childs)
+                                            @foreach (var child in m.Childs)
                                             {
                                                 <li><a href='@child.Url'><span> @child.Name</span></a></li>
                                             }

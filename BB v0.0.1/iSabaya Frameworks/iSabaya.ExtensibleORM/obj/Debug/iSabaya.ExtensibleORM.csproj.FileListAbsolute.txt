@@ -1,9 +1,9 @@
-D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.ExtensibleORM\bin\Debug\iSabaya.ExtensibleORM.dll
-D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.ExtensibleORM\bin\Debug\iSabaya.ExtensibleORM.pdb
-D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.dll
-D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.pdb
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\bin\Debug\iSabaya.ExtensibleORM.dll
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\bin\Debug\iSabaya.ExtensibleORM.pdb
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.dll
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.pdb
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.csprojResolveAssemblyReference.cache
 D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabaya.ExtensibleORM\bin\Debug\iSabaya.ExtensibleORM.dll
 D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabaya.ExtensibleORM\bin\Debug\iSabaya.ExtensibleORM.pdb
-D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.csprojResolveAssemblyReference.cache
 D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.dll
 D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.pdb

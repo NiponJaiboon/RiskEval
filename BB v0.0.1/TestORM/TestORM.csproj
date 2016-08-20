@@ -61,7 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Projects\Microsofts\BB\BBORM\BudgetORM.csproj">
+    <ProjectReference Include="..\BBORM\BudgetORM.csproj">
       <Project>{af0cd22a-1c1a-439f-b4d6-6f9013acb18b}</Project>
       <Name>BudgetORM</Name>
     </ProjectReference>

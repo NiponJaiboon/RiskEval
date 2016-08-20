@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace BBClientWeb.Controllers.Government
 {
-    [SessionTimeoutFilter]
+    [Filters.SessionExpireFilter]
     public class EditProjectController : BaseController
     {
 
@@ -25,7 +25,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetProjectComplete, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetProjectComplete, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -35,7 +35,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetProjectComplete, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetProjectComplete, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -52,7 +52,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetDetail, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetDetail, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -94,7 +94,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetDetail, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetDetail, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -110,7 +110,7 @@ namespace BBClientWeb.Controllers.Government
             if (string.IsNullOrEmpty(projectName) || strategicId <= 0
                 || string.IsNullOrEmpty(year) || string.IsNullOrEmpty(budget) || string.IsNullOrEmpty(expenditure))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateDetail, MessageException.Null("There are input project detail emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateDetail, MessageException.Null("There are input project detail emptry."));
                 return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
             }
 
@@ -134,13 +134,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateDetail, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateDetail, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.UpdateDetail, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.UpdateDetail, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -158,7 +158,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetBasicInfo, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetBasicInfo, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -168,7 +168,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetBasicInfo, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetBasicInfo, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -183,7 +183,7 @@ namespace BBClientWeb.Controllers.Government
             if (string.IsNullOrEmpty(original)
                 || string.IsNullOrEmpty(urgency))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateBasicInfo, MessageException.Null("The original or urgency emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateBasicInfo, MessageException.Null("The original or urgency emptry."));
                 return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
             }
 
@@ -202,13 +202,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateBasicInfo, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateBasicInfo, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.UpdateBasicInfo, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.UpdateBasicInfo, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -225,7 +225,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionA, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionA, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -235,7 +235,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionA, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionA, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -255,7 +255,7 @@ namespace BBClientWeb.Controllers.Government
                     string.IsNullOrEmpty(answer4) ||
                     string.IsNullOrEmpty(answer5))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerA1, MessageException.Null("The answer of Question A1 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerA1, MessageException.Null("The answer of Question A1 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -272,13 +272,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerA1, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerA1, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerA1, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerA1, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -296,7 +296,7 @@ namespace BBClientWeb.Controllers.Government
                     string.IsNullOrEmpty(answer2) ||
                     string.IsNullOrEmpty(answer3))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerA2, MessageException.Null("The answer of Question A2 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerA2, MessageException.Null("The answer of Question A2 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -313,13 +313,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerA2, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerA2, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerA2, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerA2, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -337,7 +337,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionB, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionB, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -347,7 +347,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionB, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionB, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -365,7 +365,7 @@ namespace BBClientWeb.Controllers.Government
                     string.IsNullOrEmpty(answer2) ||
                     string.IsNullOrEmpty(answer3))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB1, MessageException.Null("The answer of Question B1 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB1, MessageException.Null("The answer of Question B1 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -382,13 +382,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB1, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB1, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB1, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB1, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -404,7 +404,7 @@ namespace BBClientWeb.Controllers.Government
             if (choice)
                 if (string.IsNullOrEmpty(answer1))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB2, MessageException.Null("The answer of Question B2 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB2, MessageException.Null("The answer of Question B2 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -421,13 +421,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB2, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB2, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB2, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB2, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -443,7 +443,7 @@ namespace BBClientWeb.Controllers.Government
             if (choice)
                 if (string.IsNullOrEmpty(answer1))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB3, MessageException.Null("The answer of Question B3 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB3, MessageException.Null("The answer of Question B3 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -460,13 +460,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB3, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB3, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB3, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB3, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -485,7 +485,7 @@ namespace BBClientWeb.Controllers.Government
                     string.IsNullOrEmpty(answer3) ||
                     string.IsNullOrEmpty(answer4))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB4, MessageException.Null("The answer of Question B4 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB4, MessageException.Null("The answer of Question B4 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -502,13 +502,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB4, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB4, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB4, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB4, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -524,7 +524,7 @@ namespace BBClientWeb.Controllers.Government
             if (choice)
                 if (string.IsNullOrEmpty(answer1))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB5, MessageException.Null("The answer of Question B5 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB5, MessageException.Null("The answer of Question B5 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -541,13 +541,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB5, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB5, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB5, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB5, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -564,7 +564,7 @@ namespace BBClientWeb.Controllers.Government
                 if (string.IsNullOrEmpty(answer1) ||
                     string.IsNullOrEmpty(answer2))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB6, MessageException.Null("The answer of Question B6 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB6, MessageException.Null("The answer of Question B6 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -581,13 +581,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB6, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB6, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.UpdateAnswerB6, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.UpdateAnswerB6, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -605,7 +605,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionC, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionC, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -615,7 +615,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionC, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionC, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -632,7 +632,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionD, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionD, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -642,7 +642,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionD, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionD, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -659,7 +659,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionE, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionE, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -669,7 +669,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionE, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionE, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -688,7 +688,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionR1, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionR1, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -698,7 +698,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionR1, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionR1, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -715,7 +715,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionR2, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionR2, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -725,7 +725,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionR2, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionR2, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -742,7 +742,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionR3, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionR3, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -752,7 +752,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionR3, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionR3, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -769,7 +769,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionR4, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionR4, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -779,7 +779,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionR4, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionR4, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -796,7 +796,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionR5, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionR5, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -806,7 +806,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionR5, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionR5, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -823,7 +823,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionR6, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionR6, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -833,7 +833,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionR6, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionR6, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -848,9 +848,9 @@ namespace BBClientWeb.Controllers.Government
             get { return "2"; }
         }
 
-        public override int pageID
+        public override int PageID
         {
-            get { return PageID.projectEdit; }
+            get { return Budget.Util.PageID.projectEdit; }
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Budget;
 using Budget.General;
 using iSabaya;
-//using NHibernate;
+using NHibernate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace BBAdminWebTest
 {
     public class BaseContext
     {
-        //public ISessionFactory sessionFactory { get; set; }
+        public ISessionFactory sessionFactory { get; set; }
         public Budget.SessionContext context;
         public iSabaya.iSystem mySystem = new iSystem(SystemEnum.RiskAssessmentAdminSystem);
 
@@ -22,7 +22,7 @@ namespace BBAdminWebTest
         {
             try
             {
-                //var hConfiguration = new NHibernate.Cfg.Configuration();
+                var hConfiguration = new NHibernate.Cfg.Configuration();
                 hConfiguration.AddAssembly("BudgetORM");
                 hConfiguration.AddAssembly("iSabayaORM");
                 hConfiguration.AddAssembly("iSabaya.ExtensibleORM");

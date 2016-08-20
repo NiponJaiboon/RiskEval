@@ -1,4 +1,9 @@
-D:\TFS_Kunakorn\BB\BB v0.0.1\BBORM\bin\Debug\BudgetORM.dll
-D:\TFS_Kunakorn\BB\BB v0.0.1\BBORM\bin\Debug\BudgetORM.pdb
-D:\TFS_Kunakorn\BB\BB v0.0.1\BBORM\obj\Debug\BudgetORM.dll
-D:\TFS_Kunakorn\BB\BB v0.0.1\BBORM\obj\Debug\BudgetORM.pdb
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\BBORM\bin\Debug\BudgetORM.dll
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\BBORM\bin\Debug\BudgetORM.pdb
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\BBORM\obj\Debug\BudgetORM.dll
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\BBORM\obj\Debug\BudgetORM.pdb
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\BBORM\obj\Debug\BudgetORM.csprojResolveAssemblyReference.cache
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BBORM\bin\Debug\BudgetORM.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BBORM\bin\Debug\BudgetORM.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BBORM\obj\Debug\BudgetORM.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\BBORM\obj\Debug\BudgetORM.pdb

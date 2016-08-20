@@ -18,7 +18,7 @@ namespace BBClientWeb.Controllers
             GetAnonymousMenu();
         }
 
-        public override int pageID
+        public override int PageID
         {
             get { return Budget.Util.PageID.Login; }
         }
@@ -77,21 +77,21 @@ namespace BBClientWeb.Controllers
                         jsonResult.Add("result", 1);
                         jsonResult.Add("target", targetPath);
                         jsonResult.Add("message", "");
-                        SessionContext.Log(0, pageID, 0, MessageException.AuthenMessage.Login, MessageException.Success(SessionContext.User.ID.ToString()));
+                        SessionContext.Log(0, PageID, 0, MessageException.AuthenMessage.Login, MessageException.Success(SessionContext.User.ID.ToString()));
                         break;
 
                     case AuthenticateManager.AuthenState.AuthenticationFail:
                         jsonResult.Add("result", 0);
                         jsonResult.Add("target", "");
                         jsonResult.Add("message", "Login Failed.");
-                        SessionContext.Log(0, pageID, 0, MessageException.AuthenMessage.Login, MessageException.Fail(string.Format("{0} : {1}", idCard, nameEng)));
+                        SessionContext.Log(0, PageID, 0, MessageException.AuthenMessage.Login, MessageException.Fail(string.Format("{0} : {1}", idCard, nameEng)));
                         break;
 
                     case AuthenticateManager.AuthenState.AlreadyLogin:
                         jsonResult.Add("result", 0);
                         jsonResult.Add("target", "");
                         jsonResult.Add("message", "Login Failed.");
-                        SessionContext.Log(0, pageID, 0, MessageException.AuthenMessage.Login, MessageException.Fail(user.ID.ToString() + " : Login Attemp."));
+                        SessionContext.Log(0, PageID, 0, MessageException.AuthenMessage.Login, MessageException.Fail(user.ID.ToString() + " : Login Attemp."));
                         break;
 
                     default:
@@ -112,7 +112,7 @@ namespace BBClientWeb.Controllers
                 jsonResult.Add("message", ex.ToString());
 
                 SessionContext.StartFailedSession(null, idCard, Session.SessionID, ex.Message);
-                SessionContext.Log(0, pageID, 0, "Login", "Fail : " + ex.Message);
+                SessionContext.Log(0, this.PageID, 0, "Login", "Fail : " + ex.Message);
 
                 return new JavaScriptSerializer().Serialize(jsonResult);
             }
@@ -162,6 +162,9 @@ namespace BBClientWeb.Controllers
             {
                 WebLogger.Error(ex.GetAllMessages());
             }
+
+            Session.Clear();
+            Session.Abandon();
 
             return RedirectToAction("Index", "Login");
         }

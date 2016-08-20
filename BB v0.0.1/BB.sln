@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Budget", "BB\Budget.csproj", "{BC3C5331-6F3F-4CD4-8259-1D2978312918}"
 EndProject
@@ -25,9 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentations", "Presentati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitializeDatabase", "InitializeDatabase\InitializeDatabase.csproj", "{49547EAD-545E-4962-85A7-4258B482EE89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBWeb", "BBWeb\BBWeb.csproj", "{92108523-AC89-4B81-8C17-ED597A0564EF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetORM", "..\..\..\Projects\Microsofts\BB\BBORM\BudgetORM.csproj", "{AF0CD22A-1C1A-439F-B4D6-6F9013ACB18B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetORM", "BBORM\BudgetORM.csproj", "{AF0CD22A-1C1A-439F-B4D6-6F9013ACB18B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSabaya.Questionnaire", "iSabaya Frameworks\iSabaya.Questionnaire\iSabaya.Questionnaire.csproj", "{D404CAE7-DA1D-45D5-BF0B-C980012699ED}"
 EndProject
@@ -41,76 +39,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBClientWeb", "BBClientWeb\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetTest", "BudgetTest\BudgetTest.csproj", "{5552564A-F2E8-4942-AFEF-E8AC0F590000}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Budget.Questionnaire", "Budget.Questionnaire\Budget.Questionnaire.csproj", "{6837615E-56E5-411B-A619-796EE0EA51B2}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 17
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://isabaya01:8080/tfs/isabayacollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = iSabaya\u0020Frameworks\\iSabaya.Config\\iSabaya.Config.csproj
-		SccProjectTopLevelParentUniqueName1 = BB.sln
-		SccProjectName1 = iSabaya\u0020Frameworks/iSabaya.Config
-		SccLocalPath1 = iSabaya\u0020Frameworks\\iSabaya.Config
-		SccProjectUniqueName2 = iSabaya\u0020Frameworks\\iSabaya\\iSabaya.csproj
-		SccProjectTopLevelParentUniqueName2 = BB.sln
-		SccProjectName2 = iSabaya\u0020Frameworks/iSabaya
-		SccLocalPath2 = iSabaya\u0020Frameworks\\iSabaya
-		SccProjectUniqueName3 = iSabaya\u0020Frameworks\\iSabayaORM\\iSabayaORM.csproj
-		SccProjectTopLevelParentUniqueName3 = BB.sln
-		SccProjectName3 = iSabaya\u0020Frameworks/iSabayaORM
-		SccLocalPath3 = iSabaya\u0020Frameworks\\iSabayaORM
-		SccProjectUniqueName4 = iSabaya\u0020Frameworks\\iSabaya.ExtensibleORM\\iSabaya.ExtensibleORM.csproj
-		SccProjectTopLevelParentUniqueName4 = BB.sln
-		SccProjectName4 = iSabaya\u0020Frameworks/iSabaya.ExtensibleORM
-		SccLocalPath4 = iSabaya\u0020Frameworks\\iSabaya.ExtensibleORM
-		SccProjectUniqueName5 = BB\\Budget.csproj
-		SccProjectTopLevelParentUniqueName5 = BB.sln
-		SccProjectName5 = BB
-		SccLocalPath5 = BB
-		SccProjectUniqueName6 = BBWeb\\BBWeb.csproj
-		SccProjectTopLevelParentUniqueName6 = BB.sln
-		SccProjectName6 = BBWeb
-		SccLocalPath6 = BBWeb
-		SccProjectUniqueName7 = InitializeDatabase\\InitializeDatabase.csproj
-		SccProjectName7 = InitializeDatabase
-		SccLocalPath7 = InitializeDatabase
-		SccProjectUniqueName8 = TestORM\\TestORM.csproj
-		SccProjectTopLevelParentUniqueName8 = BB.sln
-		SccProjectName8 = TestORM
-		SccLocalPath8 = TestORM
-		SccProjectUniqueName9 = ..\\..\\..\\Projects\\Microsofts\\BB\\BBORM\\BudgetORM.csproj
-		SccProjectTopLevelParentUniqueName9 = BB.sln
-		SccProjectName9 = BBORM
-		SccLocalPath9 = ..\\..\\..\\Projects\\Microsofts\\BB\\BBORM
-		SccProjectUniqueName10 = iSabaya\u0020Frameworks\\iSabaya.Questionnaire\\iSabaya.Questionnaire.csproj
-		SccProjectTopLevelParentUniqueName10 = BB.sln
-		SccProjectName10 = iSabaya\u0020Frameworks/iSabaya.Questionnaire
-		SccLocalPath10 = iSabaya\u0020Frameworks\\iSabaya.Questionnaire
-		SccProjectUniqueName11 = BBAdminWeb\\BBAdminWeb.csproj
-		SccProjectTopLevelParentUniqueName11 = BB.sln
-		SccProjectName11 = BBAdminWeb
-		SccLocalPath11 = BBAdminWeb
-		SccProjectUniqueName12 = BBAdminWebTest\\BBAdminWebTest.csproj
-		SccProjectTopLevelParentUniqueName12 = BB.sln
-		SccProjectName12 = BBAdminWebTest
-		SccLocalPath12 = BBAdminWebTest
-		SccProjectUniqueName13 = BBAnalysisWeb\\BBAnalysisWeb.csproj
-		SccProjectTopLevelParentUniqueName13 = BB.sln
-		SccProjectName13 = BBAnalysisWeb
-		SccLocalPath13 = BBAnalysisWeb
-		SccProjectUniqueName14 = BBClientWeb\\BBClientWeb.csproj
-		SccProjectTopLevelParentUniqueName14 = BB.sln
-		SccProjectName14 = BBClientWeb
-		SccLocalPath14 = BBClientWeb
-		SccProjectUniqueName15 = Budget.DataAccess\\Budget.DataBase.csproj
-		SccProjectTopLevelParentUniqueName15 = BB.sln
-		SccProjectName15 = Budget.DataAccess
-		SccLocalPath15 = Budget.DataAccess
-		SccProjectUniqueName16 = BudgetTest\\BudgetTest.csproj
-		SccProjectTopLevelParentUniqueName16 = BB.sln
-		SccProjectName16 = BudgetTest
-		SccLocalPath16 = BudgetTest
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -148,10 +79,6 @@ Global
 		{49547EAD-545E-4962-85A7-4258B482EE89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49547EAD-545E-4962-85A7-4258B482EE89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49547EAD-545E-4962-85A7-4258B482EE89}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92108523-AC89-4B81-8C17-ED597A0564EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92108523-AC89-4B81-8C17-ED597A0564EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92108523-AC89-4B81-8C17-ED597A0564EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92108523-AC89-4B81-8C17-ED597A0564EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AF0CD22A-1C1A-439F-B4D6-6F9013ACB18B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AF0CD22A-1C1A-439F-B4D6-6F9013ACB18B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF0CD22A-1C1A-439F-B4D6-6F9013ACB18B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -180,6 +107,10 @@ Global
 		{5552564A-F2E8-4942-AFEF-E8AC0F590000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5552564A-F2E8-4942-AFEF-E8AC0F590000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5552564A-F2E8-4942-AFEF-E8AC0F590000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6837615E-56E5-411B-A619-796EE0EA51B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6837615E-56E5-411B-A619-796EE0EA51B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6837615E-56E5-411B-A619-796EE0EA51B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6837615E-56E5-411B-A619-796EE0EA51B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -192,7 +123,6 @@ Global
 		{E4E75898-CB9F-44DE-AC2A-39692F41C13A} = {DB30C3BE-A135-4186-A56D-F9F64720DA61}
 		{D5297398-620A-41BF-B9A5-93E276A8510F} = {DB30C3BE-A135-4186-A56D-F9F64720DA61}
 		{D7C1915D-6F21-4A57-9BFB-F1F936CB9DAB} = {B4E47BC6-75AB-4E85-B2A6-B91F55266CCE}
-		{92108523-AC89-4B81-8C17-ED597A0564EF} = {29626B64-ED18-4954-AB37-3770894F7AD8}
 		{AF0CD22A-1C1A-439F-B4D6-6F9013ACB18B} = {DB30C3BE-A135-4186-A56D-F9F64720DA61}
 		{D404CAE7-DA1D-45D5-BF0B-C980012699ED} = {DB30C3BE-A135-4186-A56D-F9F64720DA61}
 		{0637F793-7519-4F86-8C43-006C0C73F743} = {29626B64-ED18-4954-AB37-3770894F7AD8}
@@ -200,5 +130,75 @@ Global
 		{D8A85E26-13D8-4E51-A619-45009738DB38} = {29626B64-ED18-4954-AB37-3770894F7AD8}
 		{FEF139F1-548C-497D-B56E-366AF531E98C} = {29626B64-ED18-4954-AB37-3770894F7AD8}
 		{5552564A-F2E8-4942-AFEF-E8AC0F590000} = {B4E47BC6-75AB-4E85-B2A6-B91F55266CCE}
+		{6837615E-56E5-411B-A619-796EE0EA51B2} = {DB30C3BE-A135-4186-A56D-F9F64720DA61}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 17
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://supoj:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = iSabaya\u0020Frameworks\\iSabaya.Config\\iSabaya.Config.csproj
+		SccProjectTopLevelParentUniqueName1 = BB.sln
+		SccProjectName1 = iSabaya\u0020Frameworks/iSabaya.Config
+		SccLocalPath1 = iSabaya\u0020Frameworks\\iSabaya.Config
+		SccProjectUniqueName2 = iSabaya\u0020Frameworks\\iSabaya\\iSabaya.csproj
+		SccProjectTopLevelParentUniqueName2 = BB.sln
+		SccProjectName2 = iSabaya\u0020Frameworks/iSabaya
+		SccLocalPath2 = iSabaya\u0020Frameworks\\iSabaya
+		SccProjectUniqueName3 = iSabaya\u0020Frameworks\\iSabayaORM\\iSabayaORM.csproj
+		SccProjectTopLevelParentUniqueName3 = BB.sln
+		SccProjectName3 = iSabaya\u0020Frameworks/iSabayaORM
+		SccLocalPath3 = iSabaya\u0020Frameworks\\iSabayaORM
+		SccProjectUniqueName4 = iSabaya\u0020Frameworks\\iSabaya.ExtensibleORM\\iSabaya.ExtensibleORM.csproj
+		SccProjectTopLevelParentUniqueName4 = BB.sln
+		SccProjectName4 = iSabaya\u0020Frameworks/iSabaya.ExtensibleORM
+		SccLocalPath4 = iSabaya\u0020Frameworks\\iSabaya.ExtensibleORM
+		SccProjectUniqueName5 = BB\\Budget.csproj
+		SccProjectTopLevelParentUniqueName5 = BB.sln
+		SccProjectName5 = BB
+		SccLocalPath5 = BB
+		SccProjectUniqueName6 = InitializeDatabase\\InitializeDatabase.csproj
+		SccProjectName6 = InitializeDatabase
+		SccLocalPath6 = InitializeDatabase
+		SccProjectUniqueName7 = TestORM\\TestORM.csproj
+		SccProjectTopLevelParentUniqueName7 = BB.sln
+		SccProjectName7 = TestORM
+		SccLocalPath7 = TestORM
+		SccProjectUniqueName8 = BBORM\\BudgetORM.csproj
+		SccProjectTopLevelParentUniqueName8 = BB.sln
+		SccProjectName8 = BBORM
+		SccLocalPath8 = BBORM
+		SccProjectUniqueName9 = iSabaya\u0020Frameworks\\iSabaya.Questionnaire\\iSabaya.Questionnaire.csproj
+		SccProjectTopLevelParentUniqueName9 = BB.sln
+		SccProjectName9 = iSabaya\u0020Frameworks/iSabaya.Questionnaire
+		SccLocalPath9 = iSabaya\u0020Frameworks\\iSabaya.Questionnaire
+		SccProjectUniqueName10 = BBAdminWeb\\BBAdminWeb.csproj
+		SccProjectTopLevelParentUniqueName10 = BB.sln
+		SccProjectName10 = BBAdminWeb
+		SccLocalPath10 = BBAdminWeb
+		SccProjectUniqueName11 = BBAdminWebTest\\BBAdminWebTest.csproj
+		SccProjectTopLevelParentUniqueName11 = BB.sln
+		SccProjectName11 = BBAdminWebTest
+		SccLocalPath11 = BBAdminWebTest
+		SccProjectUniqueName12 = BBAnalysisWeb\\BBAnalysisWeb.csproj
+		SccProjectTopLevelParentUniqueName12 = BB.sln
+		SccProjectName12 = BBAnalysisWeb
+		SccLocalPath12 = BBAnalysisWeb
+		SccProjectUniqueName13 = BBClientWeb\\BBClientWeb.csproj
+		SccProjectTopLevelParentUniqueName13 = BB.sln
+		SccProjectName13 = BBClientWeb
+		SccLocalPath13 = BBClientWeb
+		SccProjectUniqueName14 = Budget.DataAccess\\Budget.DataBase.csproj
+		SccProjectTopLevelParentUniqueName14 = BB.sln
+		SccProjectName14 = Budget.DataAccess
+		SccLocalPath14 = Budget.DataAccess
+		SccProjectUniqueName15 = BudgetTest\\BudgetTest.csproj
+		SccProjectTopLevelParentUniqueName15 = BB.sln
+		SccProjectName15 = BudgetTest
+		SccLocalPath15 = BudgetTest
+		SccProjectUniqueName16 = Budget.Questionnaire\\Budget.Questionnaire.csproj
+		SccProjectTopLevelParentUniqueName16 = BB.sln
+		SccProjectName16 = Budget.Questionnaire
+		SccLocalPath16 = Budget.Questionnaire
 	EndGlobalSection
 EndGlobal

@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NHibernate">
-      <HintPath>..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
+      <HintPath>..\External Assemblies\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,7 +56,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Projects\Microsofts\BB\BBORM\BudgetORM.csproj">
+    <ProjectReference Include="..\BBORM\BudgetORM.csproj">
       <Project>{af0cd22a-1c1a-439f-b4d6-6f9013acb18b}</Project>
       <Name>BudgetORM</Name>
     </ProjectReference>

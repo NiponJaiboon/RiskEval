@@ -1,38 +1,42 @@
-﻿using System;
+﻿using Budget;
+using Budget.General;
+using Budget.Security;
+using Budget.Util;
+using NHibernate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BBClientWeb.Models.ViewModels;
-using BBClientWeb.Util;
-using Budget;
-using Budget.General;
-using Budget.Util;
-using NHibernate;
-using Budget.Security;
 
 namespace BBClientWeb.Controllers.Government
 {
-    [SessionTimeoutFilter]
+    [Filters.SessionExpireFilter]
     public class GovernmentController : BaseController
     {
+        public override int PageID { get { return Budget.Util.PageID.survey; } }
+
+        public override string TabIndex { get { return "0"; } }
+
         public ActionResult Index()
         {
             return View();
         }
 
         #region ขั้นตอนการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล
+
         public ActionResult ProjectIntro()
         {
             Tab = "1";
             return View();
         }
+
         #endregion ขั้นตอนการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล
 
         #region ระบุข้อมูลรายละเอียดโครงการ
+
         public ActionResult ProjectDetail()
         {
-
             try
             {
                 Tab = "1";
@@ -75,11 +79,10 @@ namespace BBClientWeb.Controllers.Government
                 budgetTypes.Add(new SelectListItem { Text = Project.BudgetTypeString(BudgetType.Contribute), Value = ((int)BudgetType.Contribute).ToString() });
                 budgetTypes.Add(new SelectListItem { Text = Project.BudgetTypeString(BudgetType.OtherExpenses), Value = ((int)BudgetType.OtherExpenses).ToString() });
                 ViewBag.Expenditure = budgetTypes;
-
             }
             catch (Exception ex)
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetDetail, MessageException.Fail(ex.Message));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetDetail, MessageException.Fail(ex.Message));
             }
 
             return View();
@@ -94,7 +97,7 @@ namespace BBClientWeb.Controllers.Government
             if (string.IsNullOrEmpty(projectName) || strategicId <= 0
                 || string.IsNullOrEmpty(year) || string.IsNullOrEmpty(budget) || string.IsNullOrEmpty(expenditure))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveDetail, MessageException.Null("There are input project detail emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveDetail, MessageException.Null("There are input project detail emptry."));
                 return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
             }
 
@@ -102,7 +105,6 @@ namespace BBClientWeb.Controllers.Government
             {
                 try
                 {
-
                     project = new Project();
                     project.ProjectNo = string.Format("{0}-{1}", SessionContext.User.OrgUnit.Code, "001");
                     project.Name = projectName;
@@ -120,7 +122,7 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveDetail, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveDetail, MessageException.Success());
 
                     projectIdEncryp = MapCipher.Encrypt(HttpUtility.UrlEncode(project.ID.ToString()));
                 }
@@ -128,16 +130,18 @@ namespace BBClientWeb.Controllers.Government
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveDetail, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveDetail, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
 
             return Json(new { Success = true, Message = "บันทึก ข้อมูลรายละเอียดโครงการ เรียบร้อย", ProjectID = projectIdEncryp }, JsonRequestBehavior.AllowGet);
         }
+
         #endregion ระบุข้อมูลรายละเอียดโครงการ
 
         #region กลั่นกรองโครงการ
+
         public ActionResult ProjectFilter()
         {
             Tab = "1";
@@ -147,7 +151,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetFilter, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetFilter, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -158,7 +162,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetFilter, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetFilter, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -189,21 +193,23 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveFilter, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveFilter, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveFilter, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveFilter, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { Success = true, Message = "บันทึก กลั่นกรองโครงการ เรียบร้อย", isRisk = project.GetRisk() }, JsonRequestBehavior.AllowGet);
         }
+
         #endregion กลั่นกรองโครงการ
 
         #region กรอกข้อมูลพื้นฐานโครงการ
+
         public ActionResult ProjectBasicInfo()
         {
             Tab = "1";
@@ -212,7 +218,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetFilter, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetFilter, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -222,7 +228,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetBasicInfo, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetBasicInfo, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
             return View(project);
@@ -236,7 +242,7 @@ namespace BBClientWeb.Controllers.Government
             if (string.IsNullOrEmpty(original)
                 || string.IsNullOrEmpty(urgency))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveBasicInfo, MessageException.Null("The original or urgency emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveBasicInfo, MessageException.Null("The original or urgency emptry."));
                 return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
             }
 
@@ -254,21 +260,23 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveBasicInfo, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveBasicInfo, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveBasicInfo, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveBasicInfo, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { Success = true, Message = "บันทึก ข้อมูลพื้นฐานโครงการ เรียบร้อย" }, JsonRequestBehavior.AllowGet);
         }
+
         #endregion กรอกข้อมูลพื้นฐานโครงการ
 
         #region ระบุลักษณะโครงการ
+
         public ActionResult ProjectCategory()
         {
             Tab = "1";
@@ -277,7 +285,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetCategory, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetCategory, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -287,7 +295,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetCategory, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetCategory, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -301,7 +309,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(category))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveCategory, MessageException.Null("The category emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveCategory, MessageException.Null("The category emptry."));
                 return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
             }
 
@@ -318,21 +326,23 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveCategory, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveCategory, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveCategory, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveCategory, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { Success = true, Message = "บันทึก ลักษณะโครงการ เรียบร้อย" }, JsonRequestBehavior.AllowGet);
         }
+
         #endregion ระบุลักษณะโครงการ
 
         #region ระบุประเภทโครงการ
+
         public ActionResult ProjectType()
         {
             Tab = "1";
@@ -341,7 +351,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetType, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetType, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -351,7 +361,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetType, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetType, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -365,7 +375,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(type))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveType, MessageException.Null("The type emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveType, MessageException.Null("The type emptry."));
                 return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
             }
 
@@ -382,21 +392,23 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveType, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveType, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveType, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveType, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { Success = true, Message = "บันทึก ประเภทโครงการ เรียบร้อย" }, JsonRequestBehavior.AllowGet);
         }
+
         #endregion ระบุประเภทโครงการ
 
         #region เลือกชุดคำถาม ก ข ค ง จ
+
         public ActionResult QuestionChoice()
         {
             Tab = "1";
@@ -405,7 +417,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetType, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetType, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -415,7 +427,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetType, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetType, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -423,6 +435,7 @@ namespace BBClientWeb.Controllers.Government
         }
 
         #region คำถามชุด ก
+
         public ActionResult QuestionA()
         {
             Tab = "1";
@@ -431,7 +444,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionA, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionA, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -441,7 +454,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionA, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionA, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -461,7 +474,7 @@ namespace BBClientWeb.Controllers.Government
                     string.IsNullOrEmpty(answer4) ||
                     string.IsNullOrEmpty(answer5))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerA1, MessageException.Null("The answer of Question A1 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerA1, MessageException.Null("The answer of Question A1 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -478,13 +491,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerA1, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerA1, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerA1, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerA1, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -502,7 +515,7 @@ namespace BBClientWeb.Controllers.Government
                     string.IsNullOrEmpty(answer2) ||
                     string.IsNullOrEmpty(answer3))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerA2, MessageException.Null("The answer of Question A2 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerA2, MessageException.Null("The answer of Question A2 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -518,13 +531,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerA2, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerA2, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerA2, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerA2, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -534,6 +547,7 @@ namespace BBClientWeb.Controllers.Government
         #endregion คำถามชุด ก
 
         #region คำถามชุด ข
+
         public ActionResult QuestionB()
         {
             Tab = "1";
@@ -542,7 +556,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionB, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionB, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -552,7 +566,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionB, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionB, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -570,7 +584,7 @@ namespace BBClientWeb.Controllers.Government
                     string.IsNullOrEmpty(answer2) ||
                     string.IsNullOrEmpty(answer3))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB1, MessageException.Null("The answer of Question B1 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB1, MessageException.Null("The answer of Question B1 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -587,13 +601,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB1, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB1, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB1, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB1, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -609,7 +623,7 @@ namespace BBClientWeb.Controllers.Government
             if (choice)
                 if (string.IsNullOrEmpty(answer1))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB2, MessageException.Null("The answer of Question B2 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB2, MessageException.Null("The answer of Question B2 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -625,13 +639,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB2, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB2, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB2, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB2, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -647,7 +661,7 @@ namespace BBClientWeb.Controllers.Government
             if (choice)
                 if (string.IsNullOrEmpty(answer1))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB3, MessageException.Null("The answer of Question B3 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB3, MessageException.Null("The answer of Question B3 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -663,13 +677,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB3, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB3, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB3, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB3, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -688,7 +702,7 @@ namespace BBClientWeb.Controllers.Government
                     string.IsNullOrEmpty(answer3) ||
                     string.IsNullOrEmpty(answer4))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB4, MessageException.Null("The answer of Question B4 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB4, MessageException.Null("The answer of Question B4 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -704,13 +718,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB4, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB4, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB4, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB4, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -726,7 +740,7 @@ namespace BBClientWeb.Controllers.Government
             if (choice)
                 if (string.IsNullOrEmpty(answer1))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB5, MessageException.Null("The answer of Question B5 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB5, MessageException.Null("The answer of Question B5 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -742,13 +756,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB5, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB5, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB5, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB5, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -765,7 +779,7 @@ namespace BBClientWeb.Controllers.Government
                 if (string.IsNullOrEmpty(answer1) ||
                     string.IsNullOrEmpty(answer2))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB6, MessageException.Null("The answer of Question B6 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB6, MessageException.Null("The answer of Question B6 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -781,13 +795,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB6, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB6, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerB6, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerB6, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -797,6 +811,7 @@ namespace BBClientWeb.Controllers.Government
         #endregion คำถามชุด ข
 
         #region คำถามชุด ค
+
         public ActionResult QuestionC()
         {
             Tab = "1";
@@ -805,7 +820,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionC, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionC, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -815,7 +830,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionC, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionC, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -832,7 +847,7 @@ namespace BBClientWeb.Controllers.Government
                 if (string.IsNullOrEmpty(answer1) ||
                     string.IsNullOrEmpty(answer2))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerC1, MessageException.Null("The answer of Question B6 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerC1, MessageException.Null("The answer of Question B6 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -849,21 +864,23 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerC1, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerC1, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerC1, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerC1, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { Success = true, Message = "บันทึก คำถามที่ 1 เรียบร้อย" }, JsonRequestBehavior.AllowGet);
         }
+
         #endregion คำถามชุด ค
 
         #region คำถามชุด ง
+
         public ActionResult QuestionD()
         {
             Tab = "1";
@@ -872,7 +889,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionD, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionD, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -882,7 +899,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionD, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionD, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -898,7 +915,7 @@ namespace BBClientWeb.Controllers.Government
             if (choice)
                 if (string.IsNullOrEmpty(answer1))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD1, MessageException.Null("The answer of Question D1 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD1, MessageException.Null("The answer of Question D1 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -915,13 +932,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD1, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD1, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD1, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD1, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -937,7 +954,7 @@ namespace BBClientWeb.Controllers.Government
             if (choice)
                 if (string.IsNullOrEmpty(answer1))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD2, MessageException.Null("The answer of Question D2 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD2, MessageException.Null("The answer of Question D2 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -953,13 +970,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD2, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD2, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD2, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD2, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -975,7 +992,7 @@ namespace BBClientWeb.Controllers.Government
             if (choice)
                 if (string.IsNullOrEmpty(answer1))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD3, MessageException.Null("The answer of Question D3 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD3, MessageException.Null("The answer of Question D3 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -991,13 +1008,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD3, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD3, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD3, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD3, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -1013,7 +1030,7 @@ namespace BBClientWeb.Controllers.Government
             if (choice)
                 if (string.IsNullOrEmpty(answer1))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD4, MessageException.Null("The answer of Question D4 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD4, MessageException.Null("The answer of Question D4 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -1029,13 +1046,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD4, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD4, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD4, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD4, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -1051,7 +1068,7 @@ namespace BBClientWeb.Controllers.Government
             if (choice)
                 if (string.IsNullOrEmpty(answer1))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD5, MessageException.Null("The answer of Question D5 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD5, MessageException.Null("The answer of Question D5 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -1067,13 +1084,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD5, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD5, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD5, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD5, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -1090,7 +1107,7 @@ namespace BBClientWeb.Controllers.Government
                 if (string.IsNullOrEmpty(answer1) ||
                     string.IsNullOrEmpty(answer2))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD6, MessageException.Null("The answer of Question D6 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD6, MessageException.Null("The answer of Question D6 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -1106,21 +1123,23 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD6, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD6, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerD6, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerD6, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { Success = true, Message = "บันทึก คำถามที่ 6 เรียบร้อย" }, JsonRequestBehavior.AllowGet);
         }
+
         #endregion คำถามชุด ง
 
         #region คำถามชุด จ
+
         public ActionResult QuestionE()
         {
             Tab = "1";
@@ -1129,7 +1148,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionE, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionE, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -1139,7 +1158,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionE, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionE, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -1158,7 +1177,7 @@ namespace BBClientWeb.Controllers.Government
                 if (string.IsNullOrEmpty(answer1) ||
                     string.IsNullOrEmpty(answer2))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerE1, MessageException.Null("The answer of Question E1 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerE1, MessageException.Null("The answer of Question E1 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -1175,23 +1194,25 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerE1, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerE1, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerE1, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerE1, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { Success = true, Message = "บันทึก คำถามที่ 1 เรียบร้อย" }, JsonRequestBehavior.AllowGet);
         }
+
         #endregion คำถามชุด จ
 
-        #endregion เลือกชุดคำถาม
+        #endregion เลือกชุดคำถาม ก ข ค ง จ
 
         #region เลือกชุดคำถาม วิเคราะห์ความเสี่ยงสภาพแวดล้อมภายในภายนอก
+
         public ActionResult QuestionRiskAnalysis()
         {
             Tab = "1";
@@ -1200,7 +1221,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionRiskAnalysis, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionRiskAnalysis, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -1210,7 +1231,7 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetQuestionRiskAnalysis, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetQuestionRiskAnalysis, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -1222,7 +1243,6 @@ namespace BBClientWeb.Controllers.Government
         public JsonResult SaveAnswerRiskAnalysis1(long pId, string[] oppo, string[] effect, string[] impact, string othor, string description)
         {
             Project project = null;
-
 
             if (string.IsNullOrEmpty(oppo[0])
                 || string.IsNullOrEmpty(oppo[1])
@@ -1245,7 +1265,7 @@ namespace BBClientWeb.Controllers.Government
                 || string.IsNullOrEmpty(impact[4])
                 || string.IsNullOrEmpty(impact[5]))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR1, MessageException.Null("The answer of Question RisAnalysis1 is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR1, MessageException.Null("The answer of Question RisAnalysis1 is emptry."));
                 return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
             }
             else
@@ -1255,7 +1275,7 @@ namespace BBClientWeb.Controllers.Government
                     || string.IsNullOrEmpty(effect[6])
                     || string.IsNullOrEmpty(impact[6])))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR1, MessageException.Null("The answer of Question RisAnalysis1 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR1, MessageException.Null("The answer of Question RisAnalysis1 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -1273,13 +1293,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR1, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR1, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR1, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR1, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -1291,7 +1311,6 @@ namespace BBClientWeb.Controllers.Government
         public JsonResult SaveAnswerRiskAnalysis2(long pId, string[] oppo, string[] effect, string[] impact, string othor, string description)
         {
             Project project = null;
-
 
             if (string.IsNullOrEmpty(oppo[0])
                 || string.IsNullOrEmpty(oppo[1])
@@ -1308,7 +1327,7 @@ namespace BBClientWeb.Controllers.Government
                 || string.IsNullOrEmpty(impact[2])
                 || string.IsNullOrEmpty(impact[3]))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR2, MessageException.Null("The answer of Question RisAnalysis2 is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR2, MessageException.Null("The answer of Question RisAnalysis2 is emptry."));
                 return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
             }
             else
@@ -1318,7 +1337,7 @@ namespace BBClientWeb.Controllers.Government
                     || string.IsNullOrEmpty(effect[4])
                     || string.IsNullOrEmpty(impact[4])))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR2, MessageException.Null("The answer of Question RisAnalysis2 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR2, MessageException.Null("The answer of Question RisAnalysis2 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -1335,13 +1354,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR2, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR2, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR2, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR2, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -1353,7 +1372,6 @@ namespace BBClientWeb.Controllers.Government
         public JsonResult SaveAnswerRiskAnalysis3(long pId, string[] oppo, string[] effect, string[] impact, string othor, string description)
         {
             Project project = null;
-
 
             if (string.IsNullOrEmpty(oppo[0])
                 || string.IsNullOrEmpty(oppo[1])
@@ -1376,7 +1394,7 @@ namespace BBClientWeb.Controllers.Government
                 || string.IsNullOrEmpty(impact[4])
                 || string.IsNullOrEmpty(impact[5]))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR3, MessageException.Null("The answer of Question RisAnalysis3 is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR3, MessageException.Null("The answer of Question RisAnalysis3 is emptry."));
                 return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
             }
             else
@@ -1386,7 +1404,7 @@ namespace BBClientWeb.Controllers.Government
                     || string.IsNullOrEmpty(effect[6])
                     || string.IsNullOrEmpty(impact[6])))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR3, MessageException.Null("The answer of Question RisAnalysis3 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR3, MessageException.Null("The answer of Question RisAnalysis3 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -1403,20 +1421,20 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR3, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR3, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR3, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR3, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { Success = true, Message = "บันทึก ความเสี่ยงด้านกฎหมาย เรียบร้อย" }, JsonRequestBehavior.AllowGet);
         }
 
-        //4. ความเสี่ยงด้านเทคโนโลยี 
+        //4. ความเสี่ยงด้านเทคโนโลยี
         [HttpPost]
         public JsonResult SaveAnswerRiskAnalysis4(long pId, string[] oppo, string[] effect, string[] impact, string othor, string description)
         {
@@ -1434,7 +1452,7 @@ namespace BBClientWeb.Controllers.Government
                 || string.IsNullOrEmpty(impact[1])
                 || string.IsNullOrEmpty(impact[2]))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR4, MessageException.Null("The answer of Question RisAnalysis4 is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR4, MessageException.Null("The answer of Question RisAnalysis4 is emptry."));
                 return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
             }
             else
@@ -1444,7 +1462,7 @@ namespace BBClientWeb.Controllers.Government
                     || string.IsNullOrEmpty(effect[3])
                     || string.IsNullOrEmpty(impact[3])))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR4, MessageException.Null("The answer of Question RisAnalysis4 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR4, MessageException.Null("The answer of Question RisAnalysis4 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -1461,13 +1479,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR4, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR4, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR4, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR4, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -1507,7 +1525,7 @@ namespace BBClientWeb.Controllers.Government
                 || string.IsNullOrEmpty(impact[6])
                 || string.IsNullOrEmpty(impact[7]))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR5, MessageException.Null("The answer of Question RisAnalysis5 is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR5, MessageException.Null("The answer of Question RisAnalysis5 is emptry."));
                 return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
             }
             else
@@ -1517,7 +1535,7 @@ namespace BBClientWeb.Controllers.Government
                     || string.IsNullOrEmpty(effect[8])
                     || string.IsNullOrEmpty(impact[8])))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR5, MessageException.Null("The answer of Question RisAnalysis5 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR5, MessageException.Null("The answer of Question RisAnalysis5 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -1534,13 +1552,13 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR5, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR5, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR5, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR5, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -1580,7 +1598,7 @@ namespace BBClientWeb.Controllers.Government
                 || string.IsNullOrEmpty(impact[6])
                 || string.IsNullOrEmpty(impact[7]))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR6, MessageException.Null("The answer of Question RisAnalysis6 is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR6, MessageException.Null("The answer of Question RisAnalysis6 is emptry."));
                 return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
             }
             else
@@ -1590,7 +1608,7 @@ namespace BBClientWeb.Controllers.Government
                     || string.IsNullOrEmpty(effect[8])
                     || string.IsNullOrEmpty(impact[8])))
                 {
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR6, MessageException.Null("The answer of Question RisAnalysis6 is emptry."));
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR6, MessageException.Null("The answer of Question RisAnalysis6 is emptry."));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -1608,21 +1626,23 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR6, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR6, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.SaveAnswerR6, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.SaveAnswerR6, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { Success = true, Message = "บันทึก ความเสี่ยงด้านสิ่งแวดล้อม/ภัยธรรมชาติ เรียบร้อย" }, JsonRequestBehavior.AllowGet);
         }
+
         #endregion เลือกชุดคำถาม วิเคราะห์ความเสี่ยงสภาพแวดล้อมภายในภายนอก
 
         #region รายงานวิเคราะห์ความเสี่ยงตามหลักธรรมาธิบาล (กรณีที่ยังไม่ส่งผล)
+
         public ActionResult ProjectSummary()
         {
             Tab = "2";
@@ -1631,7 +1651,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetProjectSummary, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetProjectSummary, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -1641,15 +1661,17 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetProjectSummary, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetProjectSummary, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
             return View(project);
         }
+
         #endregion รายงานวิเคราะห์ความเสี่ยงตามหลักธรรมาธิบาล (กรณีที่ยังไม่ส่งผล)
 
         #region รายงานวิเคราะห์ความเสี่ยงตามหลักธรรมาธิบาล (กรณีส่งผล)
+
         public ActionResult ProjectSignSummary()
         {
             Tab = "2";
@@ -1658,7 +1680,7 @@ namespace BBClientWeb.Controllers.Government
 
             if (string.IsNullOrEmpty(projectId))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.GetProjectSignSummary, MessageException.Null("The project id is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.GetProjectSignSummary, MessageException.Null("The project id is emptry."));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
@@ -1668,15 +1690,17 @@ namespace BBClientWeb.Controllers.Government
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.GetProjectSignSummary, MessageException.Fail(ex.Message));
+                SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.GetProjectSignSummary, MessageException.Fail(ex.Message));
                 ViewBag.ErrorMessage = MessageException.Error;
             }
 
             return View(project);
         }
+
         #endregion รายงานวิเคราะห์ความเสี่ยงตามหลักธรรมาธิบาล (กรณีส่งผล)
 
         #region Sign
+
         [HttpPost]
         public JsonResult Sign(long pId, string number, string date)
         {
@@ -1686,7 +1710,7 @@ namespace BBClientWeb.Controllers.Government
             if (string.IsNullOrEmpty(number) ||
                 string.IsNullOrEmpty(date))
             {
-                SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.Sign, MessageException.Null("The number of date is emptry."));
+                SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.Sign, MessageException.Null("The number of date is emptry."));
                 return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
             }
 
@@ -1707,21 +1731,19 @@ namespace BBClientWeb.Controllers.Government
 
                     tx.Commit();
 
-                    SessionContext.Log(0, this.pageID, 0, MessageException.ProjectMessage.Sign, MessageException.Success());
+                    SessionContext.Log(0, this.PageID, 0, MessageException.ProjectMessage.Sign, MessageException.Success());
                 }
                 catch (Exception ex)
                 {
                     tx.Rollback();
 
-                    SessionContext.LogButNotFlush(0, this.pageID, 0, MessageException.ProjectMessage.Sign, MessageException.Fail(ex.Message));
+                    SessionContext.LogButNotFlush(0, this.PageID, 0, MessageException.ProjectMessage.Sign, MessageException.Fail(ex.Message));
                     return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { Success = true, Message = "ส่งผลโครงการวิเคราะห์ความเสี่ยง เรียบร้อย" }, JsonRequestBehavior.AllowGet);
         }
-        #endregion Sign
 
-        public override string TabIndex { get { return "0"; } }
-        public override int pageID { get { return PageID.survey; } }
+        #endregion Sign
     }
 }

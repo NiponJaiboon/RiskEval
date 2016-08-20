@@ -120,12 +120,18 @@
             </tr>
             <tr style="height:40px">
                 <td>@Html.Label("", "งบประมาณ")</td>
-                <td>@Html.TextBox("tbBudget", null, new { @class = "form-control numericOnly" })</td>
-            </tr>
-        </table>
-        <input type="button" value="ค้นหา" class="btn btn-default" id="btSearch" />
-        <input type="button" value="เคลียร์" class="btn btn-default" id="btClear" />
-    </fieldset>
+                <td>
+                    @Html.TextBox("tbBudget", null,
+                    new
+                    {
+                        @class = "form-control numericOnly",
+                    })
+            </td>
+        </tr>
+    </table>
+    <input type="button" value="ค้นหา" class="btn btn-default" id="btSearch" />
+    <input type="button" value="เคลียร์" class="btn btn-default" id="btClear" />
+</fieldset>
 </div>
 
 <div style="padding-top:5px">

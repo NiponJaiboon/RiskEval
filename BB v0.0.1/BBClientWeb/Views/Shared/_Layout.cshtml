@@ -18,7 +18,7 @@
     <script src="@Url.Content("~/Scripts/bootstrap.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.dataTables.js")"></script>
     <script src="@Url.Content("~/Scripts/dataTables.bootstrap.js")"></script>
-    <script src="@Url.Content("~/Scripts/angular.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/app.js")"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -113,8 +113,6 @@
                 ผู้เข้าใช้งานระบบ: @ViewBag.UserName<br>
                 หน่วยงาน: @ViewBag.DepartmentName<br>
                 @Html.ActionLink("ออกจากระบบ", "LogOut", "Login", null, new { @class = "logout" })
-                @*<a id="lkbLogout" class="logout" href="#">ออกจากระบบ</a>*@
-
             </div>
             <div class="clearFix"></div>
         </div>

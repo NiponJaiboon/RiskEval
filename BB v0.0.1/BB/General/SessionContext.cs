@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Budget.General;
 using iSabaya;
 using NHibernate;
-using Budget.General;
-
+using System;
 
 namespace Budget
 {
@@ -21,8 +16,8 @@ namespace Budget
         public SessionContext(iSystem iSystem, ISessionFactory sessionFactory, string fromIPAddress)
             : base(iSystem, sessionFactory)
         {
+            BudgetConfiguration.SessionFactory = sessionFactory;
             base.FromIPAddress = fromIPAddress;
-            
         }
 
         public virtual new BudgetConfiguration Configuration
@@ -30,6 +25,7 @@ namespace Budget
             get { return (BudgetConfiguration)BudgetConfiguration.CurrentConfiguration; }
         }
 
+        public virtual DateTime LastLoginTimestamp { get; set; }
 
         public virtual new SelfAuthenticatedUser User
         {
@@ -51,26 +47,6 @@ namespace Budget
             {
                 base.UserSession = value;
             }
-        }
-
-        public override void StartNewSession(User user, string applicationSessionID)
-        {
-            this.User = (SelfAuthenticatedUser)user;
-
-            BudgetUserSession us = new BudgetUserSession
-            {
-                System = this.MySystem,
-                User = this.User,
-                FromIPAddress = this.FromIPAddress,
-                ApplicationSessionID = applicationSessionID,
-                LoginFailed = false,
-                UserName = user.LoginName,
-                SessionPeriod = new TimeInterval(DateTime.Now),
-            };
-
-            us.Save(this);
-            this.PersistenceSession.Flush();
-            this.UserSession = us;
         }
 
         public override void StartFailedSession(User user, string userName, string applicationSessionID, string message)
@@ -98,9 +74,24 @@ namespace Budget
             this.UserSession = us;
         }
 
+        public override void StartNewSession(User user, string applicationSessionID)
+        {
+            this.User = (SelfAuthenticatedUser)user;
 
+            BudgetUserSession us = new BudgetUserSession
+            {
+                System = this.MySystem,
+                User = this.User,
+                FromIPAddress = this.FromIPAddress,
+                ApplicationSessionID = applicationSessionID,
+                LoginFailed = false,
+                UserName = user.LoginName,
+                SessionPeriod = new TimeInterval(DateTime.Now),
+            };
 
-        public virtual DateTime LastLoginTimestamp { get; set; }
-
+            us.Save(this);
+            this.PersistenceSession.Flush();
+            this.UserSession = us;
+        }
     }
 }

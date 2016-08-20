@@ -17,7 +17,7 @@ else
 
         @Html.Label("ระบุข้อมูลรายละเอียดโครงการ", new { @class = "field-header-project" })
 
-        @Html.HiddenFor(x => x.ID)
+        @Html.HiddenFor(project => project.ID)
 
         <table class="table table-bordered">
             <tbody>
@@ -84,12 +84,14 @@ else
                 <input type="submit" value="พิมพ์เพื่อเป็นหลักฐาน" id="btPrintFilter" class="btn btn-default" onclick="return window.print();">
             </div>
         </div>
+
         <div id="Success" style="color:White; display:none">
             <span style="background-color:green;font-weight:bold">เกณฑ์การประเมิน:  แผนงาน / โครงการ อยู่ในเกณฑ์ที่ต้องวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล</span>
             <div>
                 <input type="submit" value="โปรดดำเนินงานต่อ" id="btContinueFilter" class="btn btn-default">
             </div>
         </div>
+
         <div>
             <input type="submit" value="บันทึกข้อมูลและดำเนินการต่อไป" id="btSaveFilter" class="btn btn-default">
         </div>

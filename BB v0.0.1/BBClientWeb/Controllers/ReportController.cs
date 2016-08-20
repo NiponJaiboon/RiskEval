@@ -9,7 +9,6 @@ using System.Web.Mvc;
 
 namespace BBClientWeb.Controllers
 {
-    [SessionTimeoutFilter]
     public class ReportController : BaseController
     {
         //รายงานที่ 1 รายงานการกลั่นกรองโครงการ
@@ -73,6 +72,6 @@ namespace BBClientWeb.Controllers
         //}
 
         public override string TabIndex { get { return "1"; } }
-        public override int pageID { get { return PageID.Report; } }
+        public override int PageID { get { return Budget.Util.PageID.Report; } }
     }
 }

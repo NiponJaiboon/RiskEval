@@ -1,9 +1,9 @@
-D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabayaORM\bin\Debug\iSabayaORM.dll
-D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabayaORM\bin\Debug\iSabayaORM.pdb
-D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabayaORM\obj\Debug\iSabayaORM.dll
-D:\TFS_Kunakorn\BB\BB v0.0.1\iSabaya Frameworks\iSabayaORM\obj\Debug\iSabayaORM.pdb
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabayaORM\bin\Debug\iSabayaORM.dll
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabayaORM\bin\Debug\iSabayaORM.pdb
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabayaORM\obj\Debug\iSabayaORM.dll
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabayaORM\obj\Debug\iSabayaORM.pdb
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabayaORM\obj\Debug\iSabayaORM.csprojResolveAssemblyReference.cache
 D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabayaORM\bin\Debug\iSabayaORM.dll
 D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabayaORM\bin\Debug\iSabayaORM.pdb
-D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabayaORM\obj\Debug\iSabayaORM.csprojResolveAssemblyReference.cache
 D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabayaORM\obj\Debug\iSabayaORM.dll
 D:\Work\iSabaya\RiskEval\BB v0.0.1\iSabaya Frameworks\iSabayaORM\obj\Debug\iSabayaORM.pdb

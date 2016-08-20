@@ -3,6 +3,41 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div style="padding-top:5px">
+
+    <fieldset class="fieldset">
+        <legend class="legend">@Html.Label("", "ค้นหาโครงการ")</legend>
+        <table>
+            <tr style="height:40px">
+                <td>@Html.Label("", "ปีงบประมาณ")</td>
+                <td>
+                    @Html.DropDownList(
+                            "ddlYear",
+                            new List<SelectListItem>(),
+                            "กรุณาเลือก",
+                            new { @class = "form-control" })
+                </td>
+                <td style="padding-left:15px">@Html.Label("", "งบประมาณ")</td>
+                <td>@Html.TextBox("tbBudget", null, new { @class = "form-control numericOnly" })</td>
+                <td style="padding-left:15px"><input type="button" value="ค้นหา" class="btn btn-default" id="btSearch" /></td>
+                <td><input type="button" value="เคลียร์" class="btn btn-default" id="btClear" /></td>
+            </tr>
+        </table>
+    </fieldset>
+    <table id="project-incomplete-table" class="table table-bordered table-striped table-hover" cellpadding="0" cellspacing="0" data-order='[[ 1, "asc" ]]' data-page-length='10'>
+        <thead>
+            <tr>
+                <th class="center" style="width:360px;vertical-align:middle">ชื่อโครงการ</th>
+                <th class="center" style="width:114px;vertical-align:middle">ลักษณะโครงการ</th>
+                <th class="center" style="width:114px;vertical-align:middle">ปีงบประมาณ</th>
+                <th class="center" style="width:129px;vertical-align:middle">วงเงินงบประมาณ</th>
+                <th class="center" style="width:158px;vertical-align:middle">วันที่แก้ไขครั้งสุดท้าย</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
 <script type="text/javascript">
 
     var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
@@ -24,7 +59,7 @@
 
         $("#btClear").click(function (e) {
             e.preventDefault();
-            $("#tbYear").val("");
+            $("#ddlYear").val("");
             $("#tbBudget").val("");
             getProjects();
         });
@@ -38,7 +73,7 @@
             contentType: "application/json; charset=utf-8",
             url: appName + "/Projects/GetProjects/",
             data: {
-                year: $("#tbYear").val(),
+                year: $("#ddlYear").val(),
                 budget: $("#tbBudget").val(),
                 status: "Incomplete"
             },
@@ -85,33 +120,3 @@
     }
 
 </script>
-
-<div style="padding-top:5px">
-
-    <fieldset class="fieldset">
-        <legend class="legend">@Html.Label("", "ค้นหาโครงการ")</legend>
-        <table>
-            <tr style="height:40px">
-                <td>@Html.Label("", "ปีงบประมาณ")</td>
-                <td>@Html.TextBox("tbYear", null, new { @class = "form-control" })</td>
-                <td style="padding-left:15px">@Html.Label("", "งบประมาณ")</td>
-                <td>@Html.TextBox("tbBudget", null, new { @class = "form-control numericOnly" })</td>
-                <td style="padding-left:15px"><input type="button" value="ค้นหา" class="btn btn-default" id="btSearch" /></td>
-                <td><input type="button" value="เคลียร์" class="btn btn-default" id="btClear" /></td>
-            </tr>
-        </table>
-    </fieldset>
-    <table id="project-incomplete-table" class="table table-bordered table-striped table-hover" cellpadding="0" cellspacing="0" data-order='[[ 1, "asc" ]]' data-page-length='10'>
-        <thead>
-            <tr>
-                <th class="center" style="width:360px;vertical-align:middle">ชื่อโครงการ</th>
-                <th class="center" style="width:114px;vertical-align:middle">ลักษณะโครงการ</th>
-                <th class="center" style="width:114px;vertical-align:middle">ปีงบประมาณ</th>
-                <th class="center" style="width:129px;vertical-align:middle">วงเงินงบประมาณ</th>
-                <th class="center" style="width:158px;vertical-align:middle">วันที่แก้ไขครั้งสุดท้าย</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</div>
-

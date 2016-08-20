@@ -74,13 +74,13 @@ namespace BBClientWeb.Controllers
                         user.Persist(SessionContext);
                         tx.Commit();
 
-                        SessionContext.Log(0, pageID, 0, "User Register : " + user.LoginName, "Success");
+                        SessionContext.Log(0, PageID, 0, "User Register : " + user.LoginName, "Success");
                     }
                     catch (Exception ex)
                     {
                         tx.Rollback();
 
-                        SessionContext.LogButNotFlush(0, pageID, 0, "User Register : " + user.LoginName, "Fail : " + ex.Message);
+                        SessionContext.LogButNotFlush(0, PageID, 0, "User Register : " + user.LoginName, "Fail : " + ex.Message);
                         return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
                     }
                 }
@@ -89,7 +89,7 @@ namespace BBClientWeb.Controllers
             }
             catch (Exception ex)
             {
-                SessionContext.LogButNotFlush(0, pageID, 0, "User Register", "Fail : " + ex.Message);
+                SessionContext.LogButNotFlush(0, PageID, 0, "User Register", "Fail : " + ex.Message);
                 return Json(new { Success = false, Message = MessageException.Error }, JsonRequestBehavior.AllowGet);
             }
         }
@@ -124,6 +124,6 @@ namespace BBClientWeb.Controllers
         #endregion
 
         public override string TabIndex { get { return "0"; } }
-        public override int pageID { get { return PageID.Register; } }
+        public override int PageID { get { return Budget.Util.PageID.Register; } }
     }
 }

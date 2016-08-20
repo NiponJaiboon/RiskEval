@@ -211,6 +211,9 @@ namespace BBAnalysisWeb.Controllers
                 WebLogger.Error(ex.GetAllMessages());
             }
 
+            Session.Clear();
+            Session.Abandon();
+
             return RedirectToAction("Index", "Login");
         }
 

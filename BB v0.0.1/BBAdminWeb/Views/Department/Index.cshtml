@@ -145,8 +145,12 @@
                 $("#departments_table").hide();
                 $("#departments_table_wrapper").hide();
             }
-        })
-        .change();
+        });
+
+        setTimeout(function () {
+            $("#Ministries").val("1");
+            $("#Ministries").trigger("change");
+        }, 100)
 
         $("#btnSave").click(function (e) {
             e.preventDefault();

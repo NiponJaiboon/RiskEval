@@ -18,11 +18,11 @@ namespace BBClientWeb.Controllers
         {
             if (SessionContext.User != null)
             {
-                SessionContext.Log(0, pageID, 0, MessageException.InvalidPageMessage.Error404, MessageException.Fail(SessionContext.User.ID.ToString()));
+                SessionContext.Log(0, PageID, 0, MessageException.InvalidPageMessage.Error404, MessageException.Fail(SessionContext.User.ID.ToString()));
             }
             else
             {
-                SessionContext.Log(0, pageID, 0, MessageException.InvalidPageMessage.Error404, MessageException.Fail("Anonymous user"));
+                SessionContext.Log(0, PageID, 0, MessageException.InvalidPageMessage.Error404, MessageException.Fail("Anonymous user"));
             }
 
             Response.StatusCode = 200;
@@ -33,11 +33,11 @@ namespace BBClientWeb.Controllers
         {
             if (SessionContext.User != null)
             {
-                SessionContext.Log(0, pageID, 0, MessageException.InvalidPageMessage.Error500, MessageException.Fail(SessionContext.User.ID.ToString()));
+                SessionContext.Log(0, PageID, 0, MessageException.InvalidPageMessage.Error500, MessageException.Fail(SessionContext.User.ID.ToString()));
             }
             else
             {
-                SessionContext.Log(0, pageID, 0, MessageException.InvalidPageMessage.Error500, MessageException.Fail("Anonymous user"));
+                SessionContext.Log(0, PageID, 0, MessageException.InvalidPageMessage.Error500, MessageException.Fail("Anonymous user"));
             }
             Response.StatusCode = 200;
             return View("Error500");
@@ -56,14 +56,14 @@ namespace BBClientWeb.Controllers
                         SessionContext.UserSession.LogoutMessage = MessageException.AuthenMessage.Logout;
                         SessionContext.UserSession.Save(SessionContext);
 
-                        SessionContext.Log(0, pageID, 0, MessageException.AuthenMessage.Logout, MessageException.Success(SessionContext.User.ID.ToString()));
+                        SessionContext.Log(0, PageID, 0, MessageException.AuthenMessage.Logout, MessageException.Success(SessionContext.User.ID.ToString()));
 
                         tx.Commit();
                     }
                     catch (Exception ex)
                     {
                         WebLogger.Error(ex.Message);
-                        SessionContext.Log(0, pageID, 0, MessageException.AuthenMessage.Logout, MessageException.Fail(ex.Message));
+                        SessionContext.Log(0, PageID, 0, MessageException.AuthenMessage.Logout, MessageException.Fail(ex.Message));
                         tx.Rollback();
                     }
                 }
@@ -80,9 +80,9 @@ namespace BBClientWeb.Controllers
             get { return "0"; }
         }
 
-        public override int pageID
+        public override int PageID
         {
-            get { return PageID.Exception; }
+            get { return Budget.Util.PageID.Exception; }
         }
     }
 }
