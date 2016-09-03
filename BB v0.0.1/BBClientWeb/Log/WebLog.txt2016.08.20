@@ -1,0 +1,25 @@
+2016-08-20 16:01:39,420 [30] WARN  NHibernate.Util.ReflectHelper - Could not load type managed_web. Possible cause: no assembly name specified.
+2016-08-20 16:01:39,442 [30] ERROR NHibernate.Util.ReflectHelper - Could not load type managed_web.
+System.TypeLoadException: Could not load type managed_web. Possible cause: no assembly name specified.
+   at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+2016-08-20 16:01:39,446 [30] ERROR NHibernate.Impl.SessionFactoryImpl - Unable to construct current session context [managed_web]
+System.TypeLoadException: Could not load type managed_web. Possible cause: no assembly name specified.
+   at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+   at NHibernate.Impl.SessionFactoryImpl.BuildCurrentSessionContext()
+2016-08-20 16:02:00,677 [6] WARN  WebLogger - Authenticating
+2016-08-20 16:02:00,690 [6] WARN  NHibernate.Engine.StatefulPersistenceContext.ProxyWarnLog - Narrowing proxy to iSabaya.SelfAuthenticatedUser - this operation breaks ==
+2016-08-20 16:02:00,917 [6] WARN  WebLogger - End Authenticating
+2016-08-20 16:02:05,557 [34] WARN  WebLogger - Authenticating
+2016-08-20 16:02:05,572 [34] WARN  WebLogger - End Authenticating
+2016-08-20 16:02:25,147 [24] WARN  WebLogger - Authenticating
+2016-08-20 16:02:25,159 [24] WARN  WebLogger - End Authenticating
+2016-08-20 16:02:46,491 [50] WARN  WebLogger - Authenticating
+2016-08-20 16:02:46,506 [50] WARN  WebLogger - End Authenticating
+2016-08-20 16:03:07,698 [50] WARN  WebLogger - Authenticating
+2016-08-20 16:03:07,735 [50] WARN  WebLogger - End Authenticating
+2016-08-20 16:06:57,510 [24] WARN  WebLogger - Authenticating
+2016-08-20 16:06:57,518 [24] WARN  NHibernate.Engine.StatefulPersistenceContext.ProxyWarnLog - Narrowing proxy to iSabaya.SelfAuthenticatedUser - this operation breaks ==
+2016-08-20 16:06:57,547 [24] WARN  WebLogger - End Authenticating
+2016-08-20 16:23:58,681 [99] WARN  WebLogger - Authenticating
+2016-08-20 16:23:58,698 [99] WARN  NHibernate.Engine.StatefulPersistenceContext.ProxyWarnLog - Narrowing proxy to iSabaya.SelfAuthenticatedUser - this operation breaks ==
+2016-08-20 16:23:58,725 [99] WARN  WebLogger - End Authenticating
