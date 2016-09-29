@@ -1,0 +1,326 @@
+﻿@{
+    ViewBag.Title = "นโยบายเชิงยุทธศาสตร์";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="content">
+
+    <div class="modal"></div>
+    <input type='hidden' id='idHidden' value=''>
+
+    <div id="strategic-summay-container">
+        <div id="menu-top">
+            <div style="float:left">@Html.ActionLink("กลับ", "Index", "Admin", null, new { @id = "openDialog", @class = "btn btn-default" })</div>
+            <div style="float:right" id="add-event-container">
+                <input type="button" value="เพิ่มนโยบายเชิงยุทธศาสตร์" id="btnAddStrategic" class="btn btn-default" />
+                @*<a href="#" class="btn btn-default" onclick="addStrategic()">เพิ่มนโยบายเชิงยุทธศาสตร์</a>*@
+            </div>
+        </div>
+
+        <div style="clear:both;padding-top:5px">
+            <table id="strategics-table" class="table table-bordered table-striped table-hover" cellspacing="0" data-page-length='10'>
+                <thead>
+                    <tr>
+                        <th style="width:50px">หัวข้อ</th>
+                        <th class="center">รายละเอียด</th>
+                        <th style="width:80px">#</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="add-strategic-container" style="clear:both;display:none;padding-top:15px">
+        <div style="padding-left:10px">
+            <table>
+                <tr>
+                    <td>@Html.Label("รายละเอียด")@Html.Label("*", new { @class = "require" })</td>
+                    <td>
+                        @Html.TextArea("Name", "", new { @style = "width:400px", @rows = 10, cols = 20, @class = "form-control" })
+                        <div style="display:none;color:red" data-valmsg-for="Name" data-valmsg-replace="false">กรุณากรอกชื่อยุทธศาสตร์</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.Label("กรุณากรอกข้อมูลให้ครบก่อนการบันทึกข้อมูล")</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="บันทึก" id="btnSave" class="btn btn-default" />
+                        <input type="button" value="ยกเลิก" class="btn btn-default" onclick="back('#add-strategic-container')" />
+                        @*<input type="button" value="ยกเลิก" onclick="location.href='@Url.Action("Index", "Strategic")'" />*@
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="edit-strategic-container" style="clear:both;display:none;padding-top:15px">
+        <div style="padding-left:10px">
+            <table>
+                <tr>
+                    <td>@Html.Label("รายละเอียด")@Html.Label("*", new { @class = "require" })</td>
+                    <td>
+                        @Html.TextArea("NameEt", "", new { @style = "width:400px", @rows = 10, cols = 20, @class = "form-control" })
+                        <div style="display:none;color:red" data-valmsg-for="NameEt" data-valmsg-replace="false">กรุณากรอกชื่อยุทธศาสตร์x</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.Label("กรุณากรอกข้อมูลให้ครบก่อนการบันทึกข้อมูล")</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="บันทึก" id="btnSaveEdit" class="btn btn-default" />
+                        <input type="button" value="ยกเลิก" class="btn btn-default" onclick="back('#edit-strategic-container')" />
+                        @*<input type="button" value="ยกเลิก" onclick="location.href='@Url.Action("Index", "Strategic")'" />*@
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    $body = $("body");
+
+    var nameLength = 800;
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    $(function () {
+        getStrategics();
+
+        $("#btnAddStrategic").click(function (e) {
+            $('[data-valmsg-for="Name"]').removeClass("input-validation-error").hide();
+            $("#Name").val("");
+            $("#add-strategic-container").show();
+            $("#strategic-summay-container").hide();
+        });
+
+        $("#btnSave").click(function (e) {
+            e.preventDefault();
+
+            var name = $("#Name");
+            var name_er = $('[data-valmsg-for="Name"]');
+
+
+            if (name.val() == "") {
+                name_er.text("กรุณากรอกชื่อยุทธศาสตร์");
+                name_er.addClass("input-validation-error").show();
+            } else {
+                if (name.val().length > nameLength) {
+                    name_er.text("ความยาวต้องไม่เกิน " + nameLength + " ตัวอักษร")
+                    name_er.addClass("input-validation-error").show();
+                }
+                else {
+                    name_er.removeClass("input-validation-error").hide();
+
+                    //send data
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: appName + "/Strategic/Save/",
+                        data: JSON.stringify({
+                            name: name.val(),
+                        }),
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.Success) {
+                                $("#message-success").text(data.Message);
+                                $('#modal-success').modal('show');
+
+                                $("#btnOkSuccess").click(function (e) {
+                                    e.preventDefault();
+                                    $("#add-strategic-container").hide();
+                                    $("#strategic-summay-container").show();
+                                    getStrategics();
+                                });
+                            } else {
+                                $("#message-fail").text(data.Message);
+                                $('#modal-fail').modal('show');
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        $("#btnSaveEdit").click(function (e) {
+            e.preventDefault();
+
+            var name = $("#NameEt");
+            var name_er = $('[data-valmsg-for="NameEt"]');
+
+
+            if (name.val() == "") {
+                name_er.text("กรุณากรอกชื่อยุทธศาสตร์");
+                name_er.addClass("input-validation-error").show();
+            } else {
+                if (name.val().length > nameLength) {
+                    name_er.text("ความยาวต้องไม่เกิน " + nameLength + " ตัวอักษร")
+                    name_er.addClass("input-validation-error").show();
+                }
+                else {
+                    name_er.removeClass("input-validation-error").hide();
+
+                    //send data
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: appName + "/Strategic/Update/",
+                        data: JSON.stringify({
+                            id: $("#idHidden").val(),
+                            name: name.val(),
+                        }),
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.Success) {
+                                $("#message-success").text(data.Message);
+                                $('#modal-success').modal('show');
+
+                                $("#btnOkSuccess").click(function (e) {
+                                    e.preventDefault();
+                                    $("#edit-strategic-container").hide();
+                                    $("#strategic-summay-container").show();
+
+                                    getStrategics();
+                                });
+                            } else {
+                                $("#message-fail").text(data.Message);
+                                $('#modal-fail').modal('show');
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        $("#Name").keypress(function (e) {
+            var name = $(this);
+            if (name.val() != "" && name.val().length - 1 <= nameLength) {
+                $('[data-valmsg-for="Name"]').removeClass("input-validation-error").hide();
+            }
+        });
+
+        $("#NameEt").keypress(function (e) {
+            var name = $(this);
+            if (name.val() != "" && name.val().length - 1 <= nameLength) {
+                $('[data-valmsg-for="NameEt"]').removeClass("input-validation-error").hide();
+            }
+        });
+    });
+
+    function getStrategics() {
+        $.ajax({
+            cache: false,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: appName + "/Strategic/GetStrategics/",
+            dataType: "json",
+            success: function (data) {
+                //debugger
+                $('#strategics-table').dataTable({
+                    "bDestroy": true
+                }).fnDestroy();
+
+                $('#strategics-table').DataTable({
+                    "dom": '<"toolbar">frtip',
+                    aaSorting: [],
+                    searching: false,
+                    bSort: false,
+                    ordering: true,
+                    //paging: true,
+                    //scrollY: 400,
+                    //"bProcessing": true,
+                    //"bDeferRender": true,
+                    data: data,
+                    columns: [
+                        { data: 'ID', sClass: 'center', bSortable: false },
+                        { data: 'Name', bSortable: false },
+                        { data: 'Event', sClass: 'center', bSortable: false },
+                    ]
+                });
+
+                if (data.length <= 0)
+                    $("#table_id_paginate").hide();
+            }
+        });
+    }
+
+    function addStrategic() {
+        $('[data-valmsg-for="Name"]').removeClass("input-validation-error").hide();
+        $("#Name").val("");
+        $("#add-strategic-container").show();
+        $("#strategic-summay-container").hide();
+    }
+
+    function editStrategic(id) {
+        $("#idHidden").val(id);
+        $('[data-valmsg-for="NameEt"]').removeClass("input-validation-error").hide();
+
+
+        $.ajax({
+            cache: false,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: appName + "/Strategic/GetStrategic/",
+            data: { id: id },
+            dataType: "json",
+            success: function (data) {
+
+                $("#NameEt").val(data.strategicViewModel.Name);
+
+                $("#edit-strategic-container").show();
+                $("#strategic-summay-container").hide();
+
+            }
+        });
+    }
+
+    function deleteStrategic(id) {
+        if (confirm("กรุณายืนยันการลบยุทธศาสตร์")) {
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: appName + "/Strategic/Delete/",
+                data: JSON.stringify({ id: id, }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        $("#message-success").text(data.Message);
+                        $('#modal-success').modal('show');
+
+                        $("#btnOkSuccess").click(function (e) {
+                            e.preventDefault();
+                            getStrategics();
+                        });
+                    } else {
+                        $("#message-fail").text(data.Message);
+                        $('#modal-fail').modal('show');
+                    }
+                }
+            });
+        }
+    }
+    function back(id) {
+        $(id).hide();
+        $("#strategic-summay-container").show();
+    }
+</script>

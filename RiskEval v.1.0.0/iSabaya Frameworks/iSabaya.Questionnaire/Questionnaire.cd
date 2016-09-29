@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="iSabaya.Questionnaire.CommonChoiceList" Collapsed="true">
+    <Position X="5.75" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAEAAAABAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CommonChoiceList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.QuestionBase" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAJAAAAAAgEAUAIAAQAABAGAGAAEgAgAAAAAAIDA=</HashCode>
+      <FileName>QuestionBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.QuestionItem" Collapsed="true">
+    <Position X="16.75" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>QuestionItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.Questionnaire" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <AssociationLine Name="questions" Type="iSabaya.Questionnaire.QuestionGroup" FixedFromPoint="true">
+      <Path>
+        <Point X="2" Y="3.136" />
+        <Point X="3" Y="3.136" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAJAAAAAAAAEAAEAAAAAAAAQMAAAEBAAAIAIAJBI=</HashCode>
+      <FileName>Questionnaire.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="questions" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.LikertItem" Collapsed="true">
+    <Position X="17" Y="5.25" Width="1.75" />
+    <AssociationLine Name="Choices" Type="iSabaya.Questionnaire.RubricCommonChoice" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="17.375" Y="5.88" />
+        <Point X="17.375" Y="7.446" />
+        <Point X="8.625" Y="7.446" />
+        <Point X="8.625" Y="7.13" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Parent" Type="iSabaya.Questionnaire.LikertItemList" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="18.438" Y="5.88" />
+        <Point X="18.438" Y="8.198" />
+        <Point X="4.438" Y="8.198" />
+        <Point X="4.438" Y="4.63" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.29" Y="0.212" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAQAAAAAAAAACAAAAAAAAAABA=</HashCode>
+      <FileName>LikertItem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Parent" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Choices" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.QuestionChoice" Collapsed="true">
+    <Position X="7.75" Y="4" Width="1.75" />
+    <AssociationLine Name="FurtherQuestion" Type="iSabaya.Questionnaire.QuestionBase" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.625" Y="4" />
+        <Point X="8.625" Y="1.875" />
+        <Point X="10" Y="1.875" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="ParentQuestion" Type="iSabaya.Questionnaire.ChoiceQuestion" FixedToPoint="true">
+      <Path>
+        <Point X="9.5" Y="4.125" />
+        <Point X="15.25" Y="4.125" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAABAJAAAAAAgEgIAAAAAAAAAAAEAAAAAAAAAABEADA=</HashCode>
+      <FileName>QuestionChoice.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FurtherQuestion" />
+      <Property Name="ParentQuestion" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="iSabaya.Questionnaire.Comment" Collapsed="true">
+    <Position X="10" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAIBA=</HashCode>
+      <FileName>Comment.cs</FileName>
+      <NewMemberFileName>Questionnaire\ValueQuestion.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.CustomChoiceQuestion" Collapsed="true">
+    <Position X="13" Y="5.25" Width="2" />
+    <AssociationLine Name="Choices" Type="iSabaya.Questionnaire.CustomChoice" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13" Y="5.5" />
+        <Point X="12.375" Y="5.5" />
+        <Point X="12.375" Y="5.5" />
+        <Point X="11.25" Y="5.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAIBA=</HashCode>
+      <FileName>CustomChoiceQuestion.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Choices" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.LikertItemList" Collapsed="true">
+    <Position X="4" Y="4" Width="1.75" />
+    <AssociationLine Name="RatingScale" Type="iSabaya.Questionnaire.CommonChoiceList" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.25" Y="4.63" />
+        <Point X="5.25" Y="6.812" />
+        <Point X="5.75" Y="6.812" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.081" Y="0.235" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Items" Type="iSabaya.Questionnaire.LikertItem" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.875" Y="4.63" />
+        <Point X="4.875" Y="7.831" />
+        <Point X="17.875" Y="7.831" />
+        <Point X="17.875" Y="5.88" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>ACAAAIAAAAAAGAAACAAAAAAAAAIAAAQAAAAAAAAAABA=</HashCode>
+      <FileName>LikertItemList.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RatingScale" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Items" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.RubricCommonChoice" Collapsed="true">
+    <Position X="7.75" Y="6.5" Width="1.75" />
+    <AssociationLine Name="CommonChoice" Type="iSabaya.Questionnaire.CommonChoice" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.969" Y="6.5" />
+        <Point X="7.969" Y="5.565" />
+        <Point X="7.5" Y="5.565" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAJAAAAIAAEAAAAAAAAAAAAIAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>RubricCommonChoice.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CommonChoice" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.CustomChoice" Collapsed="true">
+    <Position X="9.5" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAJAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAEABA=</HashCode>
+      <FileName>CustomChoice.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ParentQuestion" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.ChoiceQuestion" Collapsed="true">
+    <Position X="15.25" Y="4" Width="1.5" />
+    <AssociationLine Name="Choices" Type="iSabaya.Questionnaire.QuestionChoice" FixedFromPoint="true">
+      <Path>
+        <Point X="15.25" Y="4.437" />
+        <Point X="9.5" Y="4.437" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AABAAIAAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>ChoiceQuestion.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Choices" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.ValueQuestion&lt;T&gt;" Collapsed="true">
+    <Position X="21.25" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAABAAAAAAAAAAFAAAAAACAAIAAAAAA=</HashCode>
+      <FileName>ValueQuestion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.QuestionGroup" Collapsed="true">
+    <Position X="3" Y="2.75" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Children" Type="iSabaya.Questionnaire.QuestionBase" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.625" Y="2.75" />
+        <Point X="3.625" Y="1.625" />
+        <Point X="10" Y="1.625" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAQAAAAEAAAAAAAAAAQEAgAAAAAAIBA=</HashCode>
+      <FileName>QuestionGroup.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Children" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="1.399" />
+  </Class>
+  <Class Name="iSabaya.Questionnaire.DiverseQuestionGroup" Collapsed="true">
+    <Position X="2" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAIAAAQAAAAAAAAAIBA=</HashCode>
+      <FileName>DiverseQuestionGroup.cs</FileName>
+      <NewMemberFileName>Questionnaire\QuestionGroup.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.CommonChoiceQuestion" Collapsed="true">
+    <Position X="15" Y="6.5" Width="2" />
+    <AssociationLine Name="Choices" Type="iSabaya.Questionnaire.RubricCommonChoice" FixedFromPoint="true">
+      <Path>
+        <Point X="15" Y="6.812" />
+        <Point X="9.5" Y="6.812" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>CommonChoiceQuestion.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Choices" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.DateValueQuestion" Collapsed="true">
+    <Position X="19.25" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIBA=</HashCode>
+      <FileName>DateValueQuestion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.MoneyValueQuestion" Collapsed="true">
+    <Position X="20.25" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAIAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIBA=</HashCode>
+      <FileName>MoneyValueQuestion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.TextValueQuestion" Collapsed="true">
+    <Position X="21.25" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAIAAAIBA=</HashCode>
+      <FileName>TextValueQuestion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.RealValueQuestion" Collapsed="true">
+    <Position X="22.25" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIBA=</HashCode>
+      <FileName>RealValueQuestion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.IntegerValueQuestion" Collapsed="true">
+    <Position X="23.25" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIBA=</HashCode>
+      <FileName>IntegerValueQuestion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.Questionnaire.CommonChoice" Collapsed="true">
+    <Position X="5.75" Y="5.25" Width="1.75" />
+    <AssociationLine Name="ChoiceList" Type="iSabaya.Questionnaire.CommonChoiceList" FixedToPoint="true">
+      <Path>
+        <Point X="6.625" Y="5.88" />
+        <Point X="6.625" Y="6.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAQAAAEEAAAAAAAAAAAAAAAAAAAAAAAEAAABA=</HashCode>
+      <FileName>CommonChoice.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ChoiceList" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

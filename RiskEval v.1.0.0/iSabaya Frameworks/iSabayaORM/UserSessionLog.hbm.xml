@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.UserSessionLog,iSabaya" table="UserSessionLog">
+
+    <!-- Primary key-->
+    <id name="ID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <property name="FunctionID" />
+    <property name="PageID" />
+    <property name="MenuID" />
+    <!--<property name="UserSessionID" />-->
+    <property name="Timestamp" />
+    <property name="Message" type="StringClob"/>
+    <property name="Action" />
+
+    <many-to-one name="UserSession" class="Budget.General.BudgetUserSession,Budget" column="UserSessionID" />
+
+  </class>
+</hibernate-mapping>
+
+

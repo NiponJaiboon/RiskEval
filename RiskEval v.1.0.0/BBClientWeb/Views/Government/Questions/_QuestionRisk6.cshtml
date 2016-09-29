@@ -1,0 +1,606 @@
+﻿@model Budget.Project
+
+<div class="content-box">
+    <div>
+        <div class="box-question">
+            <div style="text-align:left; margin-top:10px">
+                <table class="tbl_inside_panel">
+                    <tbody>
+                        <tr class="fm">
+                            <td class="desc_head">
+                                <span>6. ความเสี่ยงด้านสิ่งแวดล้อม/ภัยธรรมชาติ</span>
+                            </td>
+                            <td class="td_header">
+                                <span class="td_">โอกาส</span>
+                            </td>
+                            <td class="td_header">
+                                <span class="effect_text">ผลกระทบ</span>
+                            </td>
+                            <td class="td_header">
+                                <span class="impact_text">ความรุนแรง</span>
+                            </td>
+                        </tr>
+                        <!--6.1-->
+                        <tr class="fs">
+                            <td class="td_text">
+                                <span>6.1 การก่อความไม่สงบ</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qOppo61" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ต่ำ</option>
+                                    <option value="1">สูง</option>
+                                </select>
+                                <span id="qOppo61Star" class="ErrorDokJan" style="visibility:hidden">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qEffect61" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ยอมรับได้</option>
+                                    <option value="1">ยอมรับไม่ได้</option>
+                                </select>
+                                <span id="qEffect61Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qImpact61" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">จัดการได้</option>
+                                    <option value="1">จัดการไม่ได้</option>
+                                </select>
+                                <span id="qImpact61Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                        </tr>
+                        <!--6.2-->
+                        <tr class="fs">
+                            <td class="td_text">
+                                <span>6.2 สงคราม</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qOppo62" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ต่ำ</option>
+                                    <option value="1">สูง</option>
+                                </select>
+                                <span id="qOppo62Star" class="ErrorDokJan" style="visibility:hidden">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qEffect62" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ยอมรับได้</option>
+                                    <option value="1">ยอมรับไม่ได้</option>
+                                </select>
+                                <span id="qEffect62Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qImpact62" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">จัดการได้</option>
+                                    <option value="1">จัดการไม่ได้</option>
+                                </select>
+                                <span id="qImpact62Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                        </tr>
+                        <!--6.3-->
+                        <tr class="fs">
+                            <td class="td_text">
+                                <span>6.3 น้ำท่วม</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qOppo63" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ต่ำ</option>
+                                    <option value="1">สูง</option>
+                                </select>
+                                <span id="qOppo63Star" class="ErrorDokJan" style="visibility:hidden">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qEffect63" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ยอมรับได้</option>
+                                    <option value="1">ยอมรับไม่ได้</option>
+                                </select>
+                                <span id="qEffect63Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qImpact63" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">จัดการได้</option>
+                                    <option value="1">จัดการไม่ได้</option>
+                                </select>
+                                <span id="qImpact63Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                        </tr>
+                        <!--6.4-->
+                        <tr class="fs">
+                            <td class="td_text">
+                                <span>6.4 พายุไต้ฝุ่น</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qOppo64" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ต่ำ</option>
+                                    <option value="1">สูง</option>
+                                </select>
+                                <span id="qOppo64Star" class="ErrorDokJan" style="visibility:hidden">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qEffect64" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ยอมรับได้</option>
+                                    <option value="1">ยอมรับไม่ได้</option>
+                                </select>
+                                <span id="qEffect64Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qImpact64" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">จัดการได้</option>
+                                    <option value="1">จัดการไม่ได้</option>
+                                </select>
+                                <span id="qImpact64Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                        </tr>
+                        <!--6.5-->
+                        <tr class="fs">
+                            <td class="td_text">
+                                <span>6.5 โคลนถล่ม</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qOppo65" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ต่ำ</option>
+                                    <option value="1">สูง</option>
+                                </select>
+                                <span id="qOppo65Star" class="ErrorDokJan" style="visibility:hidden">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qEffect65" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ยอมรับได้</option>
+                                    <option value="1">ยอมรับไม่ได้</option>
+                                </select>
+                                <span id="qEffect65Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qImpact65" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">จัดการได้</option>
+                                    <option value="1">จัดการไม่ได้</option>
+                                </select>
+                                <span id="qImpact65Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                        </tr>
+                        <!--6.6-->
+                        <tr class="fs">
+                            <td class="td_text">
+                                <span>6.6 แผ่นดินไหว</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qOppo66" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ต่ำ</option>
+                                    <option value="1">สูง</option>
+                                </select>
+                                <span id="qOppo66Star" class="ErrorDokJan" style="visibility:hidden">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qEffect66" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ยอมรับได้</option>
+                                    <option value="1">ยอมรับไม่ได้</option>
+                                </select>
+                                <span id="qEffect66Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qImpact66" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">จัดการได้</option>
+                                    <option value="1">จัดการไม่ได้</option>
+                                </select>
+                                <span id="qImpact66Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                        </tr>
+                        <!--6.7-->
+                        <tr class="fs">
+                            <td class="td_text">
+                                <span>6.7 ภัยแล้ง</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qOppo67" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ต่ำ</option>
+                                    <option value="1">สูง</option>
+                                </select>
+                                <span id="qOppo67Star" class="ErrorDokJan" style="visibility:hidden">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qEffect67" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ยอมรับได้</option>
+                                    <option value="1">ยอมรับไม่ได้</option>
+                                </select>
+                                <span id="qEffect67Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qImpact67" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">จัดการได้</option>
+                                    <option value="1">จัดการไม่ได้</option>
+                                </select>
+                                <span id="qImpact67Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                        </tr>
+                        <!--6.8-->
+                        <tr class="fs">
+                            <td class="td_text">
+                                <span>6.8 โรคระบาด</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qOppo68" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ต่ำ</option>
+                                    <option value="1">สูง</option>
+                                </select>
+                                <span id="qOppo68Star" class="ErrorDokJan" style="visibility:hidden">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qEffect68" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ยอมรับได้</option>
+                                    <option value="1">ยอมรับไม่ได้</option>
+                                </select>
+                                <span id="qEffect68Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qImpact68" class="form-control">
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">จัดการได้</option>
+                                    <option value="1">จัดการไม่ได้</option>
+                                </select>
+                                <span id="qImpact68Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                        </tr>
+                        <!--6.9-->
+                        <tr class="fs">
+                            <td class="td_text">
+                                <span>6.9 อื่น ๆ โปรดระบุ</span>
+                                <input type="text" id="tbOthor" class="form-control" value="">
+                                <span id="tb19Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qOppo69" class="form-control" disabled>
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ต่ำ</option>
+                                    <option value="1">สูง</option>
+                                </select>
+                                <span id="qOppo69Star" class="ErrorDokJan" style="visibility:hidden">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qEffect69" class="form-control" disabled>
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">ยอมรับได้</option>
+                                    <option value="1">ยอมรับไม่ได้</option>
+                                </select>
+                                <span id="qEffect69Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                            <td class="td_choice">
+                                <select id="qImpact69" class="form-control" disabled>
+                                    <option selected="selected" value="">กรุณาเลือก</option>
+                                    <option value="0">จัดการได้</option>
+                                    <option value="1">จัดการไม่ได้</option>
+                                </select>
+                                <span id="qImpact69Star" class="ErrorDokJan" style="visibility: hidden; color: red">*</span>
+                            </td>
+                        </tr>
+                        <tr class="desc_head">
+                            <td colspan="4">
+                                คำอธิบายเพิ่มเติม
+                            </td>
+                        </tr>
+                        <tr class="desc_text">
+                            <td colspan="4">
+                                @Html.TextArea("tbDescription", new { @style = "width:100%", @rows = 2, cols = 20, @class = "form-control" })
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin:5px 5px 5px 5px; text-align:center;">
+                <input type="submit" value="บันทึกข้อมูลและดำเนินงานต่อไป" id="btnSaveQuestionR6" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    var oppo61, effect61, impact61;
+    var oppo62, effect62, impact62;
+    var oppo63, effect63, impact63;
+    var oppo64, effect64, impact64;
+    var oppo65, effect65, impact65;
+    var oppo66, effect66, impact66;
+    var oppo67, effect67, impact67;
+    var oppo68, effect68, impact68;
+    var oppo69, effect69, impact69;
+    var othor;
+
+    function validateControl(control, star) {
+        if (control.val() == "") {
+            star.attr("style", "visibility: visible;color: red");
+        } else {
+            star.attr("style", "visibility: hidden");
+        }
+
+        return control.val();
+    }
+
+    function validateInput() {
+        //6.1
+        oppo61 = validateControl($("#qOppo61"), $("#qOppo61Star"));
+        effect61 = validateControl($("#qEffect61"), $("#qEffect61Star"));
+        impact61 = validateControl($("#qImpact61"), $("#qImpact61Star"));
+        //6.2
+        oppo62 = validateControl($("#qOppo62"), $("#qOppo62Star"));
+        effect62 = validateControl($("#qEffect62"), $("#qEffect62Star"));
+        impact62 = validateControl($("#qImpact62"), $("#qImpact62Star"));
+        //6.3
+        oppo63 = validateControl($("#qOppo63"), $("#qOppo63Star"));
+        effect63 = validateControl($("#qEffect63"), $("#qEffect63Star"));
+        impact63 = validateControl($("#qImpact63"), $("#qImpact63Star"));
+        //6.4
+        oppo64 = validateControl($("#qOppo64"), $("#qOppo64Star"));
+        effect64 = validateControl($("#qEffect64"), $("#qEffect64Star"));
+        impact64 = validateControl($("#qImpact64"), $("#qImpact64Star"));
+        //6.5
+        oppo65 = validateControl($("#qOppo65"), $("#qOppo65Star"));
+        effect65 = validateControl($("#qEffect65"), $("#qEffect65Star"));
+        impact65 = validateControl($("#qImpact65"), $("#qImpact65Star"));
+        //6.6
+        oppo66 = validateControl($("#qOppo66"), $("#qOppo66Star"));
+        effect66 = validateControl($("#qEffect66"), $("#qEffect66Star"));
+        impact66 = validateControl($("#qImpact66"), $("#qImpact66Star"));
+
+        //6.7
+        oppo67 = validateControl($("#qOppo67"), $("#qOppo67Star"));
+        effect67 = validateControl($("#qEffect67"), $("#qEffect67Star"));
+        impact67 = validateControl($("#qImpact67"), $("#qImpact67Star"));
+
+        //6.8
+        oppo68 = validateControl($("#qOppo68"), $("#qOppo68Star"));
+        effect68 = validateControl($("#qEffect68"), $("#qEffect68Star"));
+        impact68 = validateControl($("#qImpact68"), $("#qImpact68Star"));
+
+        if ($("#tbOthor").val() != "") {
+            //6.9
+            oppo69 = validateControl($("#qOppo69"), $("#qOppo69Star"));
+            effect69 = validateControl($("#qEffect69"), $("#qEffect69Star"));
+            impact69 = validateControl($("#qImpact69"), $("#qImpact69Star"));
+        } else {
+            $("#qOppo69Star").attr("style", "visibility: hidden");
+            $("#qEffect69Star").attr("style", "visibility: hidden");
+            $("#qImpact69Star").attr("style", "visibility: hidden");
+        }
+
+    }
+
+    function save() {
+        if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: appName + "/Government/SaveAnswerRiskAnalysis6/",
+                data: JSON.stringify({
+                    pId: $("#ID").val(),
+                    oppo: [oppo61, oppo62, oppo63, oppo64, oppo65, oppo66, oppo67, oppo68, oppo69],
+                    effect: [effect61, effect62, effect63, effect64, effect65, effect66, effect67, effect68, effect69],
+                    impact: [impact61, impact62, impact63, impact64, impact65, impact66, impact67, impact68, impact69],
+                    othor: othor,
+                    description : $("#tbDescription").val()
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        $("#message-success").text(data.Message);
+                        $('#modal-success').modal('show');
+
+                        $("#btnOkSuccess").click(function (e) {
+
+                            e.preventDefault();
+                            window.location.href = '@Url.Action("ProjectSummary", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+                        });
+                    } else {
+                        $("#message-fail").text(data.Message);
+                        $('#modal-fail').modal('show');
+                    }
+                }
+            });
+        }
+    }
+
+    $(function () {
+
+        //6.1
+        $("#qOppo61").change(function (e) {
+            e.preventDefault();
+            oppo61 = validateControl($(this), $("#qOppo61Star"));
+        });
+        $("#qEffect61").change(function (e) {
+            e.preventDefault();
+            effect61 = validateControl($(this), $("#qEffect61Star"));
+        });
+        $("#qImpact61").change(function (e) {
+            e.preventDefault();
+            impact61 = validateControl($(this), $("#qImpact61Star"));
+        });
+
+        //6.2
+        $("#qOppo62").change(function (e) {
+            e.preventDefault();
+            oppo62 = validateControl($(this), $("#qOppo62Star"));
+        });
+        $("#qEffect62").change(function (e) {
+            e.preventDefault();
+            effect62 = validateControl($(this), $("#qEffect62Star"));
+        });
+        $("#qImpact62").change(function (e) {
+            e.preventDefault();
+            impact62 = validateControl($(this), $("#qImpact62Star"));
+        });
+
+        //6.3
+        $("#qOppo63").change(function (e) {
+            e.preventDefault();
+            oppo63 = validateControl($(this), $("#qOppo63Star"));
+        });
+        $("#qEffect63").change(function (e) {
+            e.preventDefault();
+            effect63 = validateControl($(this), $("#qEffect63Star"));
+        });
+        $("#qImpact63").change(function (e) {
+            e.preventDefault();
+            impact63 = validateControl($(this), $("#qImpact63Star"));
+        });
+
+        //6.4
+        $("#qOppo64").change(function (e) {
+            e.preventDefault();
+            oppo64 = validateControl($(this), $("#qOppo64Star"));
+        });
+        $("#qEffect64").change(function (e) {
+            e.preventDefault();
+            effect64 = validateControl($(this), $("#qEffect64Star"));
+        });
+        $("#qImpact64").change(function (e) {
+            e.preventDefault();
+            impact64 = validateControl($(this), $("#qImpact64Star"));
+        });
+
+        //6.5
+        $("#qOppo65").change(function (e) {
+            e.preventDefault();
+            oppo65 = validateControl($(this), $("#qOppo65Star"));
+        });
+        $("#qEffect65").change(function (e) {
+            e.preventDefault();
+            effect65 = validateControl($(this), $("#qEffect65Star"));
+        });
+        $("#qImpact65").change(function (e) {
+            e.preventDefault();
+            impact65 = validateControl($(this), $("#qImpact65Star"));
+        });
+
+        //6.6
+        $("#qOppo66").change(function (e) {
+            e.preventDefault();
+            oppo616 = validateControl($(this), $("#qOppo66Star"));
+        });
+        $("#qEffect66").change(function (e) {
+            e.preventDefault();
+            effect66 = validateControl($(this), $("#qEffect66Star"));
+        });
+        $("#qImpact66").change(function (e) {
+            e.preventDefault();
+            impact66 = validateControl($(this), $("#qImpact66Star"));
+        });
+
+        //6.7
+        $("#qOppo67").change(function (e) {
+            e.preventDefault();
+            oppo67 = validateControl($(this), $("#qOppo67Star"));
+        });
+        $("#qEffect67").change(function (e) {
+            e.preventDefault();
+            effect67 = validateControl($(this), $("#qEffect67Star"));
+        });
+        $("#qImpact67").change(function (e) {
+            e.preventDefault();
+            impact67 = validateControl($(this), $("#qImpact67Star"));
+        });
+
+        //6.8
+        $("#qOppo68").change(function (e) {
+            e.preventDefault();
+            oppo68 = validateControl($(this), $("#qOppo68Star"));
+        });
+        $("#qEffect68").change(function (e) {
+            e.preventDefault();
+            effect68 = validateControl($(this), $("#qEffect68Star"));
+        });
+        $("#qImpact68").change(function (e) {
+            e.preventDefault();
+            impact68 = validateControl($(this), $("#qImpact68Star"));
+        });
+
+        //6.9
+        $("#qOppo69").change(function (e) {
+            e.preventDefault();
+            oppo69 = validateControl($(this), $("#qOppo69Star"));
+        });
+        $("#qEffect69").change(function (e) {
+            e.preventDefault();
+            effect69 = validateControl($(this), $("#qEffect69Star"));
+        });
+        $("#qImpact69").change(function (e) {
+            e.preventDefault();
+            impact69 = validateControl($(this), $("#qImpact69Star"));
+        });
+
+        $("#tbOthor").change(function (e) {
+            e.preventDefault();
+
+            othor = $(this).val();
+            if (othor == "") {
+                $("#qOppo69").attr('disabled', 'disabled').val("");
+                $("#qEffect69").attr('disabled', 'disabled').val("");
+                $("#qImpact69").attr('disabled', 'disabled').val("");
+
+                $("#qOppo69Star").attr("style", "visibility: hidden");
+                $("#qEffect69Star").attr("style", "visibility: hidden");
+                $("#qImpact69Star").attr("style", "visibility: hidden");
+            } else {
+                $("#qOppo69").removeAttr('disabled');
+                $("#qEffect69").removeAttr('disabled');
+                $("#qImpact69").removeAttr('disabled');                
+            }
+        });
+
+        $("#btnSaveQuestionR6").click(function (e) {
+            e.preventDefault();
+
+            validateInput();
+
+            if (valid(oppo61) && valid(effect61) && valid(impact61)
+                && valid(oppo62) && valid(effect62) && valid(impact62)
+                && valid(oppo63) && valid(effect63) && valid(impact63)
+                && valid(oppo64) && valid(effect64) && valid(impact64)
+                && valid(oppo65) && valid(effect65) && valid(impact65)
+                && valid(oppo66) && valid(effect66) && valid(impact66)
+                && valid(oppo67) && valid(effect67) && valid(impact67)
+                && valid(oppo68) && valid(effect68) && valid(impact68)) {
+
+                if ($("#tbOthor").val() == "") {
+                    save();
+                } else if ($("#tbOthor").val() != "" && valid(oppo69) && valid(effect69) && valid(impact69)) {
+                    save();
+                }
+            }
+        });
+
+    });
+
+    function valid(val) {
+        return val != "";
+    }
+
+</script>

@@ -1,0 +1,24 @@
+2016-09-14 22:14:56,673 [1] WARN  NHibernate.Util.ReflectHelper - Could not load type managed_web. Possible cause: no assembly name specified.
+2016-09-14 22:14:56,711 [1] ERROR NHibernate.Util.ReflectHelper - Could not load type managed_web.
+System.TypeLoadException: Could not load type managed_web. Possible cause: no assembly name specified.
+   at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+2016-09-14 22:14:56,713 [1] ERROR NHibernate.Impl.SessionFactoryImpl - Unable to construct current session context [managed_web]
+System.TypeLoadException: Could not load type managed_web. Possible cause: no assembly name specified.
+   at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+   at NHibernate.Impl.SessionFactoryImpl.BuildCurrentSessionContext()
+2016-09-14 22:15:56,142 [12] WARN  WebLogger - Authenticating
+2016-09-14 22:15:56,530 [12] WARN  WebLogger - End Authenticating
+2016-09-14 22:29:23,112 [17] WARN  WebLogger - Authenticating
+2016-09-14 22:29:23,139 [17] WARN  WebLogger - End Authenticating
+2016-09-14 22:33:20,849 [11] WARN  WebLogger - Authenticating
+2016-09-14 22:33:20,894 [11] WARN  WebLogger - End Authenticating
+2016-09-14 22:36:12,905 [26] WARN  WebLogger - Authenticating
+2016-09-14 22:36:12,938 [26] WARN  WebLogger - End Authenticating
+2016-09-14 22:45:47,555 [38] WARN  WebLogger - Authenticating
+2016-09-14 22:45:47,584 [38] WARN  WebLogger - End Authenticating
+2016-09-14 22:47:51,135 [35] WARN  WebLogger - Authenticating
+2016-09-14 22:47:51,194 [35] WARN  WebLogger - End Authenticating
+2016-09-14 23:05:03,271 [5] WARN  WebLogger - Authenticating
+2016-09-14 23:05:03,303 [5] WARN  WebLogger - End Authenticating
+2016-09-14 23:06:42,686 [11] WARN  WebLogger - Authenticating
+2016-09-14 23:06:42,715 [11] WARN  WebLogger - End Authenticating

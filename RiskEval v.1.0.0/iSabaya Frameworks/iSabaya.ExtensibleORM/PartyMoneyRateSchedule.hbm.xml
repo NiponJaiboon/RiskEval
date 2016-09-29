@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.PartyMoneyRateSchedule,iSabaya" table="PartyMoneyRateSchedule">
+    <!-- Primary key-->
+    <id name="ID" column="PartyMoneyRateScheduleID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+
+    <any name="Party" meta-type="byte" id-type="Int64" >
+      <meta-value value="10" class="iSabaya.Organization,iSabaya"/>
+      <meta-value value="11" class="iSabaya.Bank,iSabaya"/>
+      <meta-value value="15" class="iSabaya.OrgUnit,iSabaya"/>
+      <meta-value value="20" class="iSabaya.Person,iSabaya"/>
+      <meta-value value="25" class="iSabaya.Incognito,iSabaya"/>
+
+      <column name="PartyDiscriminator"/>
+      <column name="PartyID"/>
+    </any>    
+    <!--<many-to-one name="MoneyRateSchedule" column="MoneyRateScheduleID" class="iSabaya.MultiMoneyBracketPercentageOfMoneyRateSchedule,iSabaya" />-->
+    <many-to-one name="CategoryRoot" column="CategoryRootNodeID" />
+    <many-to-one name="CategoryParent" column="CategoryParentNodeID" />
+    <many-to-one name="Category" column="CategoryNodeID" />
+    <property name="SeqNo" />
+    <property name="IsDefault" />
+    <property name="Description" />
+    <property name="OrderedDate" />
+    <property name="Reference" />
+    <property name="Remark" />
+    <component name="EffectivePeriod" >
+      <property name="From" column="EffectiveFrom"/>
+      <property name="To" column="EffectiveTo"/>
+    </component>
+    <property name="UpdatedTS" />
+    <many-to-one name="UpdatedBy" />
+    <property name="ValueDate" />
+    <many-to-one name="ValueNodeRoot" column="ValueNodeRootNodeID" />
+    <many-to-one name="ValueNode" column="ValueNodeID" />
+    <property name="ValueNumber" />
+    <property name="ValueString" />
+
+  </class>
+</hibernate-mapping>
+
+

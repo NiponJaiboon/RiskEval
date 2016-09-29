@@ -1,0 +1,329 @@
+﻿@{
+    ViewBag.Title = "หลักธรรมาภิบาล";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    $body = $("body");
+
+    var nameLength = 800;
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    $(function () {
+        getGoodGovernances();
+
+        $("#btnGoodGovernance").click(function (e) {
+            $('[data-valmsg-for="Name"]').removeClass("input-validation-error").hide();
+            $("#Name").val("");
+            $("#add-goodGovernance-container").show();
+            $("#goodGovernance-summay-container").hide();
+        });
+
+        $("#btnSave").click(function (e) {
+            e.preventDefault();
+
+            var name = $("#Name");
+            var name_er = $('[data-valmsg-for="Name"]');
+
+
+            if (name.val() == "") {
+                name_er.text("กรุณากรอกชื่อหลักธรรมาภิบาล");
+                name_er.addClass("input-validation-error").show();
+            } else {
+                if (name.val().length > nameLength) {
+                    name_er.text("ความยาวต้องไม่เกิน " + nameLength + " ตัวอักษร")
+                    name_er.addClass("input-validation-error").show();
+                }
+                else {
+                    name_er.removeClass("input-validation-error").hide();
+
+                    //send data
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "GoodGovernance/Save/",
+                        data: JSON.stringify({
+                            name: name.val(),
+                        }),
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.Success) {
+                                $("#message-success").text(data.Message);
+                                $('#modal-success').modal('show');
+
+
+                                $("#btnOkSuccess").click(function (e) {
+                                    e.preventDefault();
+                                    $("#add-goodGovernance-container").hide();
+                                    $("#goodGovernance-summay-container").show();
+
+                                    getGoodGovernances();
+                                });
+                            } else {
+                                $("#message-fail").text(data.Message);
+                                $('#modal-fail').modal('show');
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        $("#btnSaveEdit").click(function (e) {
+            e.preventDefault();
+
+            var name = $("#NameEt");
+            var name_er = $('[data-valmsg-for="NameEt"]');
+
+            console.log(name.val());
+            if (name.val() == "") {
+                name_er.text("กรุณากรอกชื่อหลักธรรมาภิบาล");
+                name_er.addClass("input-validation-error").show();
+            } else {
+                if (name.val().length > nameLength) {
+                    name_er.text("ความยาวต้องไม่เกิน " + nameLength + " ตัวอักษร")
+                    name_er.addClass("input-validation-error").show();
+                }
+                else {
+                    name_er.removeClass("input-validation-error").hide();
+
+                    //send data
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "GoodGovernance/Update/",
+                        data: JSON.stringify({
+                            id: $("#idHidden").val(),
+                            name: name.val(),
+                        }),
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.Success) {
+
+                                $("#message-success").text(data.Message);
+                                $('#modal-success').modal('show');
+
+
+                                $("#btnOkSuccess").click(function (e) {
+                                    e.preventDefault();
+                                    $("#edit-goodGovernance-container").hide();
+                                    $("#goodGovernance-summay-container").show();
+
+                                    getGoodGovernances();
+                                });
+                            } else {
+                                $("#message-fail").text(data.Message);
+                                $('#modal-fail').modal('show');
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        $("#Name").keypress(function (e) {
+            var name = $(this);
+            if (name.val() != "" && name.val().length - 1 <= nameLength) {
+                $('[data-valmsg-for="Name"]').removeClass("input-validation-error").hide();
+            }
+        });
+
+        $("#NameEt").keypress(function (e) {
+            var name = $(this);
+            if (name.val() != "" && name.val().length - 1 <= nameLength) {
+                $('[data-valmsg-for="NameEt"]').removeClass("input-validation-error").hide();
+            }
+        });
+    });
+
+    function getGoodGovernances() {
+
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: appName + "/GoodGovernance/GetGoodGovernances/",
+            dataType: "json",
+            success: function (data) {
+                //debugger
+                $('#goodGovernances-table').dataTable({
+                    "bDestroy": true
+                }).fnDestroy();
+
+                $('#goodGovernances-table').DataTable({
+                    "dom": '<"toolbar">frtip',
+                    aaSorting: [],
+                    searching: false,
+                    bSort: false,
+                    ordering: true,
+                    //paging: true,
+                    //scrollY: 400,
+                    //"bProcessing": true,
+                    //"bDeferRender": true,
+                    data: data,
+                    columns: [
+                        //{ data: 'No', sClass: 'center', bSortable: false },
+                        { data: 'ID', sClass: 'center', bSortable: false },
+                        { data: 'Name', bSortable: false },
+                        { data: 'Event', sClass: 'center', bSortable: false },
+                    ]
+                });
+
+                if (data.length <= 0)
+                    $("#table_id_paginate").hide();
+            }
+        });
+    }
+
+
+    function addGoodGovernance() {
+        $('[data-valmsg-for="Name"]').removeClass("input-validation-error").hide();
+        $("#Name").val("");
+        $("#add-goodGovernance-container").show();
+        $("#goodGovernance-summay-container").hide();
+    }
+
+    function editGoodGovernance(id) {
+        $("#idHidden").val(id);
+        $('[data-valmsg-for="NameEt"]').removeClass("input-validation-error").hide();
+
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: "GoodGovernance/GetGoodGovernance/",
+            data: { id: id },
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                if (data.Success) {
+                    $("#NameEt").val(data.goodGovernance.Name);
+                    $("#edit-goodGovernance-container").show();
+                    $("#goodGovernance-summay-container").hide();
+                } else {
+                    $("#message-fail").text(data.Message);
+                    $('#modal-fail').modal('show');
+                }
+            }
+        });
+    }
+
+    function deleteGoodGovernance(id) {
+        if (confirm("กรุรายืนยันการลบหลักธรรมาภิบาล")) {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "GoodGovernance/Delete/",
+                data: JSON.stringify({
+                    id: id,
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        $("#message-success").text(data.Message);
+                        $('#modal-success').modal('show');
+                        getGoodGovernances();
+
+                        $("#btnOkSuccess").click(function (e) {
+                            e.preventDefault();
+                        });
+                    } else {
+                        $("#message-fail").text(data.Message);
+                        $('#modal-fail').modal('show');
+                    }
+                }
+            });
+        }
+    }
+
+    function back(id) {
+        $(id).hide();
+        $("#goodGovernance-summay-container").show();
+    }
+</script>
+
+<div class="content">
+    <div class="modal"></div>
+    <input type='hidden' id='idHidden' value=''>
+
+    <div id="goodGovernance-summay-container">
+        <div id="menu-top">
+            <div style="float:left">@Html.ActionLink("กลับ", "Index", "Admin", null, new { @id = "openDialog", @class = "btn btn-default" })</div>
+            <div style="float:right" id="add-event-container">
+                <input type="button" value="เพิ่มหลักธรรมาภิบาล" id="btnGoodGovernance" class="btn btn-default" />
+                @*<a href="#" class="btn btn-default" onclick="addGoodGovernance()">เพิ่มหลักธรรมาภิบาล</a>*@
+            </div>
+        </div>
+
+        <div style="clear:both;padding-top:5px">
+            <table id="goodGovernances-table" class="table table-bordered" cellspacing="0" data-page-length='10'>
+                <thead>
+                    <tr>
+                        @*<th style="width:50px">ลำดับ</th>*@
+                        <th style="width:50px">หัวข้อ</th>
+                        <th>รายละเอียด</th>
+                        @*<th class="center" style="width:50px">สถานะ</th>*@
+                        <th style="width:80px">#</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="add-goodGovernance-container" style="clear:both;display:none;padding-top:15px">
+        <div style="padding-left:10px">
+            <table>
+                <tr>
+                    <td>@Html.Label("รายละเอียด")@Html.Label("*", new { @class = "require" })</td>
+                    <td>
+                        @Html.TextArea("Name", "", new { @style = "width:400px", @rows = 10, cols = 20, @class = "form-control" })
+                        <div style="display:none;color:red" data-valmsg-for="Name" data-valmsg-replace="false">กรุณากรอกชื่อหลักธรรมาภิบาล</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.Label("กรุณากรอกข้อมูลให้ครบก่อนการบันทึกข้อมูล")</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="บันทึก" id="btnSave" name="cmd" class="btn btn-default" />
+                        <input type="button" value="ยกเลิก" class="btn btn-default" onclick="back('#add-goodGovernance-container')" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="edit-goodGovernance-container" style="clear:both;display:none;padding-top:15px">
+        <div style="padding-left:10px">
+            <table>
+                <tr>
+                    <td>@Html.Label("รายละเอียด")@Html.Label("*", new { @class = "require" })</td>
+                    <td>
+                        @Html.TextArea("NameEt", "", new { @style = "width:400px", @rows = 10, cols = 20, @class = "form-control" })
+                        <div style="display:none;color:red" data-valmsg-for="NameEt" data-valmsg-replace="false">กรุณากรอกชื่อหลักธรรมาภิบาล</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.Label("กรุณากรอกข้อมูลให้ครบก่อนการบันทึกข้อมูล")</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="บันทึก" id="btnSaveEdit" name="cmd" class="btn btn-default" />
+                        <input type="button" value="ยกเลิก" class="btn btn-default" onclick="back('#edit-goodGovernance-container')" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

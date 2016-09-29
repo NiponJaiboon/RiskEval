@@ -1,0 +1,17 @@
+﻿@model IEnumerable<BBWeb.Models.Project>
+
+@{
+    ViewBag.Title = "GetProject";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"> </script>
+<link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/gridmvc.min.js")" type="text/javascript"> </script>
+<h2>GetProject</h2>
+
+
+@using GridMvc.Html
+
+@Html.Grid(Model).AutoGenerateColumns().WithPaging(10)
+

@@ -1,0 +1,122 @@
+﻿@model Budget.Project
+
+@{
+    ViewBag.Title = "ระบุลักษณะโครงการ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (@ViewBag.ErrorMessage != null)
+{
+    @ViewBag.ErrorMessage
+}
+else
+{
+    <div>
+        @Html.Partial("_ProjectDetail", @Model)
+        @Html.HiddenFor(x => x.ID)
+
+
+        <div style="padding-top:10px;margin-left:-5px;">
+            <div class="box">
+                <div class="box-header"></div>
+                <div class="box-body">
+                    <div>
+                        <label style="margin-left:5px" class="field-header-project">ลักษณะโครงการ</label>
+                        <table style="margin-left:20px">
+                            <tbody>
+                                <tr>
+                                    <td><span>@Html.RadioButton("category", "GeneralManagement")<label class="field-content">บริหารทั่วไป</label></span></td>
+                                </tr>
+                                <tr>
+                                    <td><span>@Html.RadioButton("category", "CommunitySocialServices")<label class="field-content">บริการชุมชนและสังคม</label></span></td>
+                                </tr>
+                                <tr>
+                                    <td><span>@Html.RadioButton("category", "Economy")<label class="field-content">เศรษฐกิจ</label></span></td>
+                                </tr>
+                                <tr>
+                                    <td><span>@Html.RadioButton("category", "Other")<label class="field-content">อื่นๆ</label></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="box-footer"></div>
+            </div>
+        </div>
+
+        <div>
+            <span id="categoryMessage" class="ErrorDokJan" style="display:none; color:red">กรุณาเลือกลักษณะโครงการ</span>
+        </div>
+        <div>
+            <input type="submit" value="บันทึกข้อมูลและดำเนินการต่อไป" id="btSaveCategory" class="btn btn-default">
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    $(function () {
+
+        $("input[name=category]").change(function (e) {
+            e.preventDefault();
+            if ($("input[name=category]:checked").val() == undefined)
+                $("#categoryMessage").show();
+            else
+                $("#categoryMessage").hide();
+        });
+
+        $("#btSaveCategory").click(function (e) {
+            e.preventDefault();
+
+            var category = $("input[name=category]:checked").val();
+
+            if (category == undefined)
+                $("#categoryMessage").show();
+            else
+                $("#categoryMessage").hide();
+
+            if (category != undefined) {
+
+                if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: appName + "/Government/SaveCategory/",
+                        data: JSON.stringify({
+                            pId: $("#ID").val(),
+                            category: category,
+                        }),
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.Success) {
+                                $("#message-success").text(data.Message);
+                                $('#modal-success').modal('show');
+
+                                $("#btnOkSuccess").click(function (e) {
+
+                                    e.preventDefault();
+                                    window.location.href = '@Url.Action("ProjectType", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+                                });
+                            } else {
+                                $("#message-fail").text(data.Message);
+                                $('#modal-fail').modal('show');
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+    });
+
+</script>

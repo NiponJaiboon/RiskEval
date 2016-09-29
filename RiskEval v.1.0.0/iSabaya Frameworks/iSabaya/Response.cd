@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="iSabaya.Response" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <AssociationLine Name="Responses" Type="iSabaya.ResponseGroup" FixedFromPoint="true">
+      <Path>
+        <Point X="1.188" Y="2.259" />
+        <Point X="1.188" Y="4.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAEoAAAABIBIgQAACAQABAAAAIAAACAAAACAEAAEs=</HashCode>
+      <FileName>Questionnaire\Response.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="questionnaire" />
+      <Property Name="Respondent" />
+      <Property Name="Responses" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.ResponseBase" Collapsed="true">
+    <Position X="4.25" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAABAhggQAAAIQABAAAAAAAAEAEAAAAAAAAA=</HashCode>
+      <FileName>Questionnaire\ResponseBase.cs</FileName>
+      <NewMemberFileName>Questionnaire\ResponseChoice.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ResponseGroup" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <InheritanceLine Type="iSabaya.ResponseBase" FixedToPoint="true">
+      <Path>
+        <Point X="5.125" Y="3.259" />
+        <Point X="5.125" Y="3.875" />
+        <Point X="1.5" Y="3.875" />
+        <Point X="1.5" Y="4.25" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="children" Type="iSabaya.ResponseBase" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.312" Y="4.25" />
+        <Point X="1.312" Y="3" />
+        <Point X="4.25" Y="3" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAABgQAAAAEAABAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Questionnaire\ResponseGroup.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="children" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="iSabaya.Questionnaire" Collapsed="true">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAEJCAQAAgBEAAIAAgAAAAIAQOAAAEBAAAAAIAJUE=</HashCode>
+      <FileName>Questionnaire\Questionnaire.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.Person" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>xAJIgIQIACAMAICkhBAAgAYSAGAMEMAhARAIYAkCDIA=</HashCode>
+      <FileName>Person.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="iSabaya.ChoiceResponse" Collapsed="true">
+    <Position X="7.75" Y="4.25" Width="1.5" />
+    <AssociationLine Name="choices" Type="iSabaya.ResponseChoice" FixedToPoint="true">
+      <Path>
+        <Point X="8.5" Y="4.88" />
+        <Point X="8.5" Y="5.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAEBgAABAAAAABAAAAAAAAEAAAAAAAABAA=</HashCode>
+      <FileName>Questionnaire\ChoiceResponse.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="choices" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="iSabaya.DateValueResponse" Collapsed="true">
+    <Position X="2.25" Y="5.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>IQAAAAAAAAAAQgAgAEAAAABAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Questionnaire\DateValueResponse.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Question" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.ResponseChoice" Collapsed="true">
+    <Position X="7.75" Y="5.75" Width="1.5" />
+    <AssociationLine Name="Parent" Type="iSabaya.ChoiceResponse" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.25" Y="6" />
+        <Point X="9.625" Y="6" />
+        <Point X="9.625" Y="4.562" />
+        <Point X="9.25" Y="4.562" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAIIAAAAAAlAgAAAAAQAAAAAAAAAAIAEAAAAAAAAA=</HashCode>
+      <FileName>Questionnaire\ResponseChoice.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Parent" />
+      <Property Name="QuestionChoice" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.IntegerValueResponse" Collapsed="true">
+    <Position X="3.5" Y="6.5" Width="1.75" />
+    <AssociationLine Name="Question" Type="iSabaya.IntegerValueQuestion" FixedToPoint="true">
+      <Path>
+        <Point X="4.375" Y="7.13" />
+        <Point X="4.375" Y="8.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>IQAAAAAAAAAAQgAgAEAAAABAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Questionnaire\IntegerValueResponse.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Question" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.EmptyResponse" Collapsed="true">
+    <Position X="5.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABggAAAAAAABAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Questionnaire\EmptyResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.RealValueResponse" Collapsed="true">
+    <Position X="5" Y="5.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>IQAAAAAAAAAAQgAgAEAAAABAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Questionnaire\RealValueResponse.cs</FileName>
+      <NewMemberFileName>Questionnaire\IntegerValueResponse.cs</NewMemberFileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Question" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="iSabaya.QuestionChoice" Collapsed="true">
+    <Position X="7.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABIJAAAAAAgEgIAAAIAAAAAAAEAAAAAAAAAABEACA=</HashCode>
+      <FileName>Questionnaire\QuestionChoice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.TextValueQuestion" Collapsed="true">
+    <Position X="0.75" Y="8.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAIAAAIAA=</HashCode>
+      <FileName>Questionnaire\TextValueQuestion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.DateValueQuestion" Collapsed="true">
+    <Position X="2.25" Y="7.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIAA=</HashCode>
+      <FileName>Questionnaire\DateValueQuestion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.IntegerValueQuestion" Collapsed="true">
+    <Position X="3.5" Y="8.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIAA=</HashCode>
+      <FileName>Questionnaire\IntegerValueQuestion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.RealValueQuestion" Collapsed="true">
+    <Position X="5" Y="7.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIAA=</HashCode>
+      <FileName>Questionnaire\RealValueQuestion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.ValueResponse&lt;T&gt;" Collapsed="true">
+    <Position X="3" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>IQAAAAAAAAAABAAhAEAAAAAAAAEAAAAEACAAAAAAAAA=</HashCode>
+      <FileName>Questionnaire\ValueResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.TextValueResponse" Collapsed="true">
+    <Position X="0.75" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>IQAAAAAAAAAAQgAgAEAAAABAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Questionnaire\TextValueResponse.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Question" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

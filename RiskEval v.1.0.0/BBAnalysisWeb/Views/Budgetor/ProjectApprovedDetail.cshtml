@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "รายงานการวิเคราะห์ความเสี่ยงฯ ที่ผ่านการพิจารณาจากรัฐสภา";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model Budget.Project
+
+@Html.Partial("_ProjectDetail", @Model)
+
+<input type='hidden' id='idHidden' value=''>
+
+<div style="padding-top:20px">
+    <p>@Html.ActionLink("รายงานที่ 1 รายงานการกลั่นกรองโครงการ", "ScreeningProject", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่ 2 รายงานการวิเคราะห์ความเสี่ยงตามหลักธรรมาธิบาล", "RiskAnalysisGoodGovernance", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่่ 3 รายงานการวิเคราะห์ความเสี่ยงด้านสภาพแวดล้อมภายในและภายนอก", "RiskAnalysisEnvironment", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่ 4 รายงานสรุปผลการประเมินการวิเคราะห์ความเสี่ยงตามหลักธรรมภิบาล", "SummaryRiskAnalysisGoodGovernance", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่ 5 รายงานความคิดเห็นเพิ่มเติมจากเจ้าหน้าที่สำนักงบประมาณ", "CommentProjectByBudgetor", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่ 6 รายงานการพิจารณาจากรัฐสภา", "ApprovedProjectByBudgetor", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>    
+</div>

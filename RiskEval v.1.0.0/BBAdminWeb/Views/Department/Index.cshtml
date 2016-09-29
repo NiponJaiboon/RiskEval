@@ -1,0 +1,374 @@
+﻿@{
+    ViewBag.Title = "จัดการข้อมูลหน่วยงาน";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="modal"></div>
+
+    <div id="department-summay">
+        <div id="menu-top">
+            <div style="float:left">@Html.ActionLink("กลับ", "Index", "Admin", null, new { @id = "openDialog", @class = "btn btn-default" })</div>
+            <div style="float:right" id="add-event-container">
+                <input type="button" value="เพิ่มหน่วยงาน" id="btnDepartment" class="btn btn-default" />
+                @*<a href="#" class="btn btn-default" onclick="add()">เพิ่มหน่วยงาน</a>*@
+            </div>
+        </div>
+
+
+        <div style="clear:both;padding-top:10px">
+            <table>
+                <tr>
+                    <td>@Html.Label("เลือกกระทรวง : ", new { @class = "field-header" })</td>
+                    <td>@Html.DropDownList("Ministries", null, "กรุณาเลือก", new { @style = "width:200px", @class = "form-control" })</td>
+                </tr>
+            </table>
+            <input type='hidden' id='myhidden' value=''>
+
+            <table id="departments_table" class="table table-striped table-bordered" cellspacing="0" data-page-length='10'>
+                <thead>
+                    <tr>
+                        <th style="width:110px">รหัสกระทรวง</th>
+                        <th style="width:180px">ชื่อกระทรวง</th>
+                        <th style="width:120px">รหัสหน่วยงาน</th>
+                        <th>ชื่อหน่วยงาน</th>
+                        <th style="width:50px" class="center">#</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="add-department-container" style="clear:both;display:none;padding-top:15px">
+        <div style="padding-left:10px">
+            <table>
+                <tr>
+                    <td>@Html.Label("รหัสหน่วยงาน")@Html.Label("*", new { @class = "require" })</td>
+                    <td>
+                        @Html.TextBox("Code", "", new { @style = "width:100px", @class = "form-control" })
+                        <div style="display:none;color:red" data-valmsg-for="Code" data-valmsg-replace="false">กรุณากรอกรหัสหน่วยงาน</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("ชื่อหน่วยงาน")@Html.Label("*", new { @class = "require" })</td>
+                    <td>
+                        @Html.TextBox("Name", "", new { @style = "width:400px", @class = "form-control" })
+                        <div style="display:none;color:red" data-valmsg-for="Name" data-valmsg-replace="false">กรุณากรอกชื่อหน่วยงาน</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.Label("กรุณากรอกข้อมูลให้ครบก่อนการบันทึกข้อมูล")</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="บันทึก" id="btnSave" name="cmd" class="btn btn-default" />
+                        <input type="button" value="ยกเลิก" class="btn btn-default" onclick="back('#add-department-container')" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="edit-department-container" style="clear:both;display:none;padding-top:15px">
+        <div style="padding-left:10px">
+            <table>
+                <tr>
+                    <td>@Html.Label("รหัสหน่วยงาน")@Html.Label("*", new { @class = "require" })</td>
+                    <td>
+                        @Html.TextBox("CodeEt", "", new { @style = "width:100px", @class = "form-control" })
+                        <div style="display:none;color:red" data-valmsg-for="CodeEt" data-valmsg-replace="false">กรุณากรอกรหัสหน่วยงาน</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("ชื่อหน่วยงาน")@Html.Label("*", new { @class = "require" })</td>
+                    <td>
+                        @Html.TextBox("NameEt", "", new { @style = "width:400px", @class = "form-control" })
+                        <div style="display:none;color:red" data-valmsg-for="NameEt" data-valmsg-replace="false">กรุณากรอกชื่อหน่วยงาน</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.Label("กรุณากรอกข้อมูลให้ครบก่อนการบันทึกข้อมูล")</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type='hidden' id='idhidden' value=''>
+                        <input type="button" value="บันทึก" id="btnSaveChange" name="cmd" class="btn btn-default" />
+                        <input type="button" value="ยกเลิก" class="btn btn-default" onclick="back('#edit-department-container')" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    $(function () {
+
+        $("#btnDepartment").click(function (e) {
+            $('[data-valmsg-for="Code"]').removeClass("input-validation-error").hide();
+            $('[data-valmsg-for="Name"]').removeClass("input-validation-error").hide();
+            $("#Code").val("");
+            $("#Name").val("");
+            $("#add-department-container").show();
+            $("#department-summay").hide();
+        });
+
+
+        $("#Ministries").change(function () {
+            var selectedId = $("select option:selected").val();
+            $('#myhidden').val(selectedId);
+            if (selectedId > 0)
+                $("#add-event-container").show();
+            else
+                $("#add-event-container").hide();
+            if (selectedId != "") {
+                //ajaxDepartment(selectedId);
+                $("#departments_table").show();
+                getDepartment(selectedId);
+            }
+            else {
+                $("#departments_table").hide();
+                $("#departments_table_wrapper").hide();
+            }
+        });
+
+        setTimeout(function () {
+            $("#Ministries").val("1");
+            $("#Ministries").trigger("change");
+        }, 100)
+
+        $("#btnSave").click(function (e) {
+            e.preventDefault();
+            var code = $("#Code").val();
+            var name = $("#Name").val();
+            var code_er = $('[data-valmsg-for="Code"]');
+            var code_ele = $('#Code');
+            var name_er = $('[data-valmsg-for="Name"]');
+            var name_ele = $('#Name');
+
+            if (code != "" && name != "") {
+
+                if (code.length <= 25 && name.length <= 450) {
+
+                    var mId = $('#myhidden').val();
+
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: appName + "/Department/Save/",
+                        data: JSON.stringify({ ministryId: mId, code: code, name: name }),
+                        dataType: "json",
+                        success: function (data) {
+                            //debugger
+                            if (data.Success) {
+                                $("#message-success").text(data.Message);
+                                $('#modal-success').modal('show');
+
+
+                                $("#btnOkSuccess").click(function (e) {
+                                    e.preventDefault();
+                                    $("#add-department-container").hide();
+                                    $("#department-summay").show();
+
+                                    getDepartment(mId);
+                                });
+                            } else {
+                                $("#message-fail").text(data.Message);
+                                $('#modal-fail').modal('show');
+                            }
+                        }
+                    });
+                } else {
+                    validateLangth(code, code_er, code_ele, name, name_er, name_ele);
+                }
+            } else {
+                validateEmptry(code, code_er, code_ele, name, name_er, name_ele);
+            }
+        });
+
+        $("#btnSaveChange").click(function (e) {
+            e.preventDefault();
+            var code = $("#CodeEt").val();
+            var name = $("#NameEt").val();
+            var code_er = $('[data-valmsg-for="CodeEt"]');
+            var code_ele = $('#CodeEt');
+            var name_er = $('[data-valmsg-for="NameEt"]');
+            var name_ele = $('#NameEt');
+
+            console.log(code);
+            console.log(name);
+
+            if (code != "" && name != "") {
+
+                if (code.length <= 25 && name.length <= 450) {
+
+                    var mId = $('#myhidden').val();
+                    var dId = $('#idhidden').val();
+
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: appName + "/Department/Update/",
+                        data: JSON.stringify({ id: dId, code: code, name: name }),
+                        dataType: "json",
+                        success: function (data) {
+                            //debugger
+                            if (data.Success) {
+                                $("#message-success").text(data.Message);
+                                $('#modal-success').modal('show');
+
+
+                                $("#btnOkSuccess").click(function (e) {
+                                    e.preventDefault();
+                                    $("#add-event-container").show();
+                                    $("#edit-department-container").hide();
+                                    $("#department-summay").show();
+                                    getDepartment(mId);
+                                });
+                            } else {
+                                $("#message-fail").text(data.Message);
+                                $('#modal-fail').modal('show');
+                            }
+                        }
+                    });
+                } else {
+                    validateLangth(code, code_er, code_ele, name, name_er, name_ele);
+                }
+            } else {
+                validateEmptry(code, code_er, code_ele, name, name_er, name_ele);
+            }
+        });
+
+    });
+
+
+    function getDepartment(ministryId) {
+        $.ajax({
+            cache: false,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: appName + "/Department/GetDepartments/",
+            data: { ministryId: ministryId },
+            dataType: "json",
+            success: function (data) {
+                //debugger
+                $('#departments_table').dataTable({
+                    "bDestroy": true
+                }).fnDestroy();
+
+                $('#departments_table').DataTable({
+                    "dom": '<"toolbar">frtip',
+                    aaSorting: [],
+                    searching: false,
+                    bSort: false,
+                    ordering: true,
+                    //paging: true,
+                    //scrollY: 400,
+                    //"bProcessing": true,
+                    //"bDeferRender": true,
+                    data: data,
+                    columns: [
+                        { data: 'MinistryCode', sClass: 'center', bSortable: false },
+                        { data: 'MinistryName', bSortable: false },
+                        { data: 'Code', sClass: 'center', bSortable: false },
+                        { data: 'Name', bSortable: false },
+                        { data: 'Edit', sClass: 'center', bSortable: false },
+                    ]
+                });
+
+                if (data.length <= 0)
+                    $("#table_id_paginate").hide();
+            }
+        });
+    }
+
+
+    function add() {
+        $("#Code").val("");
+        $("#Name").val("");
+        $("#add-department-container").show();
+        $("#department-summay").hide();
+    }
+
+    function edit(id) {
+
+        $.ajax({
+            cache: false,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: appName + "/Department/Get/",
+            data: { id: id },
+            dataType: "json",
+            success: function (data) {
+
+                $("#idhidden").val(data.ID);
+                $("#CodeEt").val(data.Code);
+                $("#NameEt").val(data.Name);
+
+                $("#add-event-container").hide();
+                $("#edit-department-container").show();
+                $("#department-summay").hide();
+
+            }
+        });
+    }
+
+
+    function validateEmptry(code, code_er, code_ele, name, name_er, name_ele) {
+        if (code == "") {
+            code_er.show();
+            code_ele.addClass("input-validation-error");
+        } else {
+            code_er.hide();
+            code_ele.removeClass("input-validation-error");
+        }
+
+        if (name == "") {
+            name_er.show();
+            name_ele.addClass("input-validation-error");
+        } else {
+            name_er.hide();
+            name_ele.removeClass("input-validation-error");
+        }
+    }
+
+    function validateLangth(code, code_er, code_ele, name, name_er, name_ele) {
+        if (code.length > 25) {
+            code_er.text("ความยาวต้องไม่เกิน 25 ตัวอักษร").show();
+            code_ele.addClass("input-validation-error");
+        } else {
+            code_er.hide();
+            code_ele.removeClass("input-validation-error");
+        }
+        if (name.length > 450) {
+            name_er.text("ความยาวต้องไม่เกิน 450 ตัวอักษร").show();
+            name_ele.addClass("input-validation-error");
+        } else {
+            name_er.hide();
+            name_ele.removeClass("input-validation-error");
+        }
+    }
+
+    function back(id) {
+        $(id).hide();
+        $("#department-summay").show();
+    }
+
+</script>

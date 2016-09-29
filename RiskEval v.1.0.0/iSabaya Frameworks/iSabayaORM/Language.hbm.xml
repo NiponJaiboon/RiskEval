@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.Language,iSabaya" table="Language" lazy="false">
+    <id name="Code" column="LanguageCode" type="string" unsaved-value="null" access="field.camelcase">
+      <generator class="assigned" />
+    </id>
+    <property name="SeqNo" access="field.camelcase"/>
+    <property name="ShortTitle" access="field.camelcase"/>
+    <property name="SmallImageBytes" column="SmallImageBytes" type="BinaryBlob" lazy="false"/>
+    <property name="Title" access="field.camelcase"/>
+  </class>
+</hibernate-mapping>

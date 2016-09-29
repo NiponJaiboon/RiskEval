@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "บันทึกผลการพิจารณาจากรัฐสภา";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script type="text/javascript">
+
+    $body = $("body");
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    $(function () {
+
+        var selectedId = $("select option:selected").val();
+
+        console.log(selectedId);
+
+        if (selectedId != "0") {
+            $("#project-save-result-table").show();
+            getProjects();
+        }
+        else {
+            $("#project-save-result-table").hide();
+        }
+
+        $("#btSearch").click(function (e) {
+            e.preventDefault();
+            getProjects();
+        });
+    });
+
+    function getProjects() {
+
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: "/Budgetor/GetProjectByDepartment/",
+            data: { id: $("#Department option:selected").val(), status: "comment" },
+            dataType: "json",
+            success: function (data) {
+                if (data.Success) {
+                    //debugger
+                    //clear datatable
+                    $('#project-save-result-table').dataTable({
+                        "bDestroy": true
+                    }).fnDestroy();
+
+
+                    $('#project-save-result-table').DataTable({
+                        "dom": '<"toolbar">frtip',
+                        searching: false,
+                        ordering: true,
+                        paging: true,
+                        //scrollY: 400,
+                        //"bProcessing": true,
+                        //"bDeferRender": true,
+                        data: data.model,
+                        columns: [
+                            { data: 'Link' },
+                            { data: 'ProjectType' },
+                            { data: 'Department' },
+                            { data: 'Budget', sClass: "right" },
+                            { data: 'LastUpdate' },
+                            { data: 'RiskBox', sClass: "risk" },
+                        ]
+                    });
+
+
+                    if (data.model.length <= 0) {
+                        $("#table_id_paginate").hide();
+                    } else {
+                        $("#project-save-result-table").show();
+                    }
+
+                } else {
+                    $("#message-fail").text(data.Message);
+                    $('#modal-fail').modal('show');
+                }
+            }
+        });
+    }
+</script>
+
+<div>
+    <div class="modal"></div>
+    <fieldset class="fieldset">
+        <legend class="legend">@Html.Label("", "ค้นหาโครงการ")</legend>
+        <table>
+            <tr>
+                <td>@Html.Label("", "ค้นหาโครงการแยกตามหน่วยงาน")</td>
+                <td>@Html.DropDownList("Department", null, new { @class = "form-control" })</td>
+            </tr>
+        </table>
+        <input type="button" value="ค้นหา" class="btn btn-default" id="btSearch" />
+    </fieldset>
+</div>
+
+<div style="padding-top:5px">
+    <table id="project-save-result-table" class="table table-hover" cellpadding="0" cellspacing="0" data-order='[[ 1, "asc" ]]' data-page-length='10'>
+        <thead>
+            <tr>
+                <th style="width:360px">ชื่อโครงการ</th>
+                <th style="width:114px">ลักษณะโครงการ</th>
+                <th style="width:129px">รหัสหน่วยงาน</th>
+                <th style="width:129px">งบประมาณ (บาท)</th>
+                <th style="width:158px">วันที่แก้ไขครั้งสุดท้าย</th>
+                <th style="width:205px">ผลการการวิเคราะห์ความเสี่ยง</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>

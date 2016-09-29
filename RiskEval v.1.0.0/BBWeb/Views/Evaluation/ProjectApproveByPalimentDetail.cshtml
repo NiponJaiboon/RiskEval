@@ -1,0 +1,58 @@
+﻿@model BBWeb.Models.Project
+
+@{
+    ViewBag.Title = "โครงการที่ผ่านการพิจารณาจากรัฐสภา";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<fieldset class="fieldset">
+    <legend class="legend">ข้อมูลโครงการ</legend>
+
+    <table>
+        <tr>
+            <td>@Html.Label("", "รหัสกระทรวง:", new { @class = "bold1" })</td>
+            <td>@Model.Department.Ministry.Code</td>
+            <td>@Html.Label("", "ชื่อกระทรวง:")</td>
+            <td>@Model.Department.Ministry.Name</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("", "รหัสหน่วยงาน:", new { @class = "bold1" })</td>
+            <td>@Model.Department.Code</td>
+            <td>@Html.Label("", "ชื่อหน่วยงาน:", new { @class = "bold1" })</td>
+            <td>@Model.Department.Name</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("", "รหัสโครงการ:", new { @class = "bold1" })</td>
+            <td>@Model.ProjectCode</td>
+            <td>@Html.Label("", "ชื่อโครงการ:", new { @class = "bold1" })</td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td colspan="2">@Html.Label("", "ยุทธศาสตร์การจัดสรรงบประมาณ:", new { @class = "bold1" })</td>
+            <td colspan="2">@Model.StrategicName</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("", "ปีงบประมาณ:", new { @class = "bold1" })</td>
+            <td>@Model.Year</td>
+            <td>@Html.Label("", "วงเงินงบประมาณทั้งสิ้น (บาท):", new { @class = "bold1" })</td>
+            <td>@Model.Budget</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("", "เลขที่นำส่ง:", new { @class = "bold1" })</td>
+            <td>@Model.NumberOfSend</td>
+            <td>@Html.Label("", "วันที่นำส่ง", new { @class = "bold1" })</td>
+            <td>@Model.DateOfSend</td>
+        </tr>
+    </table>
+</fieldset>
+
+<div class="submit-box">
+
+    <p>@Html.ActionLink("รายงานที่ 1 รายงานการกลั่นกรองโครงการ", "ScreeningProject", "Report", new { projectId = @Model.Id }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่ 2 รายงานการวิเคราะห์ความเสี่ยงตามหลักธรรมาธิบาล", "RiskAnalysisGoodGovernance", "Report", new { projectId = @Model.Id }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่่ 3 รายงานการวิเคราะห์ความเสี่ยงด้านสภาพแวดล้อมภายในและภายนอก", "RiskAnalysisEnvironment", "Report", new { projectId = @Model.Id }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่ 4 รายงานสรุปผลการประเมินการวิเคราะห์ความเสี่ยงตามหลักธรรมภิบาล", "RiskAnalysisEnvironment", "Report", new { projectId = @Model.Id }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่ 5 รายงานความคิดเห็นเพิ่มเติมจากเจ้าหน้าที่สำนักงบประมาณ", "RiskAnalysisEnvironment", "Report", new { projectId = @Model.Id }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่ 6 รายงานการพิจารณาจากรัฐสภา", "RiskAnalysisEnvironment", "Report", new { projectId = @Model.Id }, new { @class = "link" })</p>
+</div>
+

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.Payment,iSabaya" table="Payment" discriminator-value="0">
+
+    <id name="PaymentID" access="field.camelcase" column="PaymentID" type="Int32" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <discriminator column="PaymentDiscriminator" type="byte"/>
+
+    <component name="Amount" access="field.camelcase" class="iSabaya.Money,iSabaya">
+      <property name="Amount" access="field.camelcase" column="Amount"/>
+      <property name="CurrencyID" column="AmountCurrencyID"  />
+    </component>
+
+    <property name="DueDate" access="field.camelcase" />
+    <property name="IsPaymentToCustomer" access="field.camelcase" />
+
+    <any name="Payer" meta-type="byte" id-type="Int32" >
+      <meta-value value="10" class="iSabaya.Organization,iSabaya"/>
+      <meta-value value="20" class="iSabaya.Person,iSabaya"/>
+      <meta-value value="30" class="imSabaya.MutualFund,imSabaya"/>
+      <meta-value value="35" class="imSabaya.ProvidentFund,imSabaya"/>
+      <meta-value value="50" class="imSabaya.MutualFundSystem.MFAccount,imSabaya"/>
+      <meta-value value="60" class="imSabaya.ProvidentFundSystem.Member,imSabaya"/>
+      <column name="PayerDiscriminator"/>
+      <column name="PayerID"/>
+    </any>
+    
+    <any name="Payee" meta-type="byte" id-type="Int32" >
+      <meta-value value="10" class="iSabaya.Organization,iSabaya"/>
+      <meta-value value="20" class="iSabaya.Person,iSabaya"/>
+      <meta-value value="30" class="imSabaya.MutualFund,imSabaya"/>
+      <meta-value value="35" class="imSabaya.ProvidentFund,imSabaya"/>
+      <meta-value value="50" class="imSabaya.MutualFundSystem.MFAccount,imSabaya"/>
+      <meta-value value="60" class="imSabaya.ProvidentFundSystem.Member,imSabaya"/>
+      <column name="PayeeDiscriminator"/>
+      <column name="PayeeID"/>
+    </any>
+
+    <property name="PaymentDate" access="field.camelcase" />
+    <many-to-one name="Receipt" class="iSabaya.Receipt,iSabaya" access="field.camelcase" column="ReceiptID" />
+    <property name="RecipientName" access="field.camelcase" />
+    <property name="Reference" access="field.camelcase" />
+    <property name="Remark" access="field.camelcase" />
+    <property name="StatusDate" access="field.camelcase" />
+    <many-to-one name="StatusUpdatedBy" class="iSabaya.User,iSabaya" column="StatusUpdatedBy" />
+    <property name="StatusUpdatedTS" access="field.camelcase" />
+
+    <subclass name="iSabaya.Cheque, iSabaya" discriminator-value="1">
+      <property name="ChequeNo" access="field.camelcase" />
+      <property name="ChequeDate" access="field.camelcase" column="Date" />
+      <property name="PayableTo" access="field.camelcase" />
+      <property name="Constraint" access="field.camelcase" type="iSabaya.EnumChequeConstraint,iSabaya" column="[Constraint]" />
+      <property name="Status" access="field.camelcase" type="iSabaya.EnumChequeStatus,iSabaya" column="Status" />
+      <property name="PrintChequeDate" access="field.camelcase" />
+      <many-to-one name="ReplacementCheque" column="ChequeID" class="iSabaya.Cheque,iSabaya"/>
+      <many-to-one name="BatchItem" access="field.camelcase" class="iSabaya.ChequeBatchItem,iSabaya" column="ChequeBatchItemID" />
+      <many-to-one name="Bank" class="iSabaya.Organization,iSabaya" column="BankID" />
+      <many-to-one name="BankAccount" access="field.camelcase" class="iSabaya.BankAccount,iSabaya" column="BankAccountID" />
+      <many-to-one name="Branch" class="iSabaya.OrgUnit,iSabaya" column="BranchID" />
+      <property name="BranchNo" />
+      <!--<many-to-one  name="ToBankAccount" access="field.camelcase" column="ToBankAccountID" class="iSabaya.BankAccount,iSabaya"/>-->
+    </subclass>
+
+    <subclass name="iSabaya.Cash, iSabaya" discriminator-value="2">
+      <many-to-one  name="DestinationBankAccount" access="field.camelcase" class="iSabaya.BankAccount,iSabaya" column="ToBankAccountID" />
+    </subclass>
+
+    <subclass name="iSabaya.BankDeposit, iSabaya" discriminator-value="3">
+      <property name="TransactionNo" access="field.camelcase" />
+      <many-to-one name="Cheque" access="field.camelcase" class="iSabaya.Cheque,iSabaya" column="ChequeID" />
+      <many-to-one name="BankAccount" access="field.camelcase" class="iSabaya.BankAccount,iSabaya" column="BankAccountID" />
+    </subclass>
+
+    <!-- FundTransfer (direct debit, direct credit, BOT media clearing) -->
+    <subclass name="iSabaya.FundTransfer, iSabaya" discriminator-value="4">
+      <property name="BankTransactionNo" access="field.camelcase" />
+      <property name="Status" access="field.camelcase" type="iSabaya.EnumFundTransferStatus,iSabaya" />
+      <many-to-one name="FromBankAccount" access="field.camelcase" class="iSabaya.BankAccount,iSabaya" column="BankAccountID" />
+      <many-to-one name="ToBankAccount" access="field.camelcase" class="iSabaya.BankAccount,iSabaya" column="ToBankAccountID" />
+    </subclass>
+
+    <subclass name="iSabaya.BillPayment, iSabaya" discriminator-value="5">
+      <property name="TransactionNo" access="field.camelcase" />
+      <many-to-one name="Cheque" access="field.camelcase" column="ChequeID" class="iSabaya.Cheque,iSabaya"/>
+      <many-to-one name="Bank" class="iSabaya.Organization,iSabaya" column="BankID" />
+      <many-to-one name="BankAccount" access="field.camelcase" class="iSabaya.BankAccount,iSabaya" column="BankAccountID" />
+      <property name="BranchNo" access="field.camelcase" />
+      <property name="PaidBy" access="field.camelcase" />
+      <property name="Status" access="field.camelcase" type="iSabaya.EnumBillPaymentStatus,iSabaya" />
+    </subclass>
+  </class>
+
+</hibernate-mapping>

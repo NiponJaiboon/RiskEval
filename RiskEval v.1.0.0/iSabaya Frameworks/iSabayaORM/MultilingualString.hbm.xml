@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class name="iSabaya.MultilingualString,iSabaya.Config" table="MultilingualString">
+
+		<!-- Primary key-->
+		<id name="MLSID" column="MLSID" unsaved-value="0">
+			<generator class="native"/>
+		</id>
+
+		<property name="Description" />
+    <property name="Code" />
+    <!--<property name="Category" type="iSabaya.MLSCategory,iSabaya" />-->
+
+		<bag name="Values" table="MLSValue" inverse="true" >
+			<key column="MLSID"/>
+			<one-to-many class="iSabaya.MLSValue,iSabaya.Config"/>
+		</bag>
+
+	</class>
+</hibernate-mapping>
+
+

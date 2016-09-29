@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{49547EAD-545E-4962-85A7-4258B482EE89}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InitializeDatabase</RootNamespace>
+    <AssemblyName>InitializeDatabase</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NHibernate">
+      <HintPath>..\External Assemblies\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="InitialOrganization.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BBORM\BudgetORM.csproj">
+      <Project>{af0cd22a-1c1a-439f-b4d6-6f9013acb18b}</Project>
+      <Name>BudgetORM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BB\Budget.csproj">
+      <Project>{bc3c5331-6f3f-4cd4-8259-1d2978312918}</Project>
+      <Name>Budget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iSabaya Frameworks\iSabaya.Config\iSabaya.Config.csproj">
+      <Project>{e4e75898-cb9f-44de-ac2a-39692f41c13a}</Project>
+      <Name>iSabaya.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iSabaya Frameworks\iSabaya.ExtensibleORM\iSabaya.ExtensibleORM.csproj">
+      <Project>{04e88657-e0dd-435c-8879-429c1210e27d}</Project>
+      <Name>iSabaya.ExtensibleORM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iSabaya Frameworks\iSabayaORM\iSabayaORM.csproj">
+      <Project>{f8965a6d-6c8c-4cba-9dbf-85459f9e61b2}</Project>
+      <Name>iSabayaORM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iSabaya Frameworks\iSabaya\iSabaya.csproj">
+      <Project>{d168c3f8-e236-4bbe-8de4-86b05b12594f}</Project>
+      <Name>iSabaya</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

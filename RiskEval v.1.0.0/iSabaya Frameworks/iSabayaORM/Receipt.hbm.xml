@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.Receipt,iSabaya" table="Receipt">
+    <!-- Primary key-->
+    <id name="ReceiptID" column="ReceiptID" type="Int32" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+
+    <many-to-one name="CancelledBy" class="iSabaya.User,iSabaya" access="field.camelcase"/>
+    <property name="CancelledTS" access="field.camelcase"/>
+    <property name="CancelRemark" access="field.camelcase"/>
+    <many-to-one name="Category" column="CategoryNodeID" class="iSabaya.TreeListNode,iSabaya"/>
+
+    <any name="Payer" meta-type="byte" id-type="Int32" >
+      <meta-value value="10" class="iSabaya.Organization,iSabaya"/>
+      <meta-value value="15" class="iSabaya.OrgUnit,iSabaya"/>
+      <meta-value value="20" class="iSabaya.Person,iSabaya"/>
+      <meta-value value="30" class="imSabaya.MutualFund,imSabaya"/>
+      <meta-value value="35" class="imSabaya.ProvidentFund,imSabaya"/>
+      <meta-value value="50" class="imSabaya.MutualFundSystem.MFAccount,imSabaya"/>
+      <meta-value value="60" class="imSabaya.ProvidentFundSystem.Member,imSabaya"/>
+      <column name="PayerDiscriminator"/>
+      <column name="PayerID"/>
+    </any>
+    <property name="PayerAddress" />
+    <property name="PayerName" />
+    <bag name="Payments" table="ReceiptPayment" >
+      <key column="ReceiptID"/>
+      <one-to-many class="iSabaya.ReceiptPayment,iSabaya"/>
+    </bag>
+    <property name="PrintedDate" />
+
+    <property name="ReceiptDate" />
+    <bag name="Items" table="ReceiptItem" >
+      <key column="ReceiptID"/>
+      <one-to-many class="iSabaya.ReceiptItem,iSabaya"/>
+    </bag>
+    <property name="ReceiptNo" />
+    <any name="Recipient" meta-type="byte" id-type="Int32" >
+      <meta-value value="10" class="iSabaya.Organization,iSabaya"/>
+      <meta-value value="15" class="iSabaya.OrgUnit,iSabaya"/>
+      <meta-value value="20" class="iSabaya.Person,iSabaya"/>
+      <meta-value value="30" class="imSabaya.MutualFund,imSabaya"/>
+      <meta-value value="35" class="imSabaya.ProvidentFund,imSabaya"/>
+      <meta-value value="50" class="imSabaya.MutualFundSystem.MFAccount,imSabaya"/>
+      <meta-value value="60" class="imSabaya.ProvidentFundSystem.Member,imSabaya"/>
+      <column name="RecipientDiscriminator"/>
+      <column name="RecipientID"/>
+    </any>
+    <property name="RecipientAddress" />
+    <property name="RecipientName" />
+    <property name="Reference" />
+    <property name="Remark" />
+
+    <component name="Tax" class="iSabaya.Money, iSabaya">
+      <property name="Amount" column="TaxAmount"/>
+      <property name="CurrencyID" column="TaxCurrencyID" />
+    </component>
+    <component name="TotalAmount" class="iSabaya.Money, iSabaya">
+      <property name="Amount" column="TotalAmount"/>
+      <property name="CurrencyID" column="TotalAmountCurrencyID" />
+    </component>
+
+    <many-to-one name="UpdatedBy" column="UpdatedBy" class="iSabaya.User,iSabaya" not-null="false"/>
+    <property name="UpdatedTS" />
+
+  </class>
+</hibernate-mapping>
+
+

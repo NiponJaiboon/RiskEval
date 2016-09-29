@@ -1,0 +1,154 @@
+/* tabs
+*************************/
+
+ul.tabs
+{
+	display: table;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	position: relative;
+	
+}
+
+ul.tabs .mainnav
+{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: table-cell;
+	float: left;
+	position: relative;
+}
+
+ul.tabs .mainnav a
+{
+	position: relative;
+	display: block;
+	
+ /* ADDED */
+    background:url(../images/tab_01.png) no-repeat left top;
+    margin:0;
+    margin-right: 5px; /*spacing between each tab*/
+    padding:0 0 0 9px;
+    text-decoration:none;
+}
+
+ul.tabs .mainnav a:hover
+{
+	position: relative;
+	display: block;
+	
+ /* ADDED 
+    background-color: #fef8c8;*/
+}
+
+
+ul.tabs .mainnav a span{
+    /*float:left;*/
+    display:block;
+    background:url(../images/tab_03.png) no-repeat right top;
+    padding: 4px 12px 2px 3px;
+    font-weight:bold;
+    color:#3B3B3B;
+    height:30px;
+}
+
+
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+.glowingtabs ul .mainnav a span {float:none;}
+/* End IE5-Mac hack */
+
+.glowingtabs ul .mainnav a:hover span {
+color: black;
+}
+
+.glowingtabs ul li.selected a{ /*Selected Tab style*/
+background-position:0 -82px; /*Shift background image up to start of 2nd tab image*/
+}
+
+.glowingtabs ul li.selected a span{ /*Selected Tab style*/
+background-position:100% -82px; /*Shift background image up to start of 2nd tab image*/
+}
+
+.glowingtabs ul .mainnav a:hover, .glowingtabs ul li.selected a:hover{ /*onMouseover style*/
+background-position:0% -82px; /*Shift background image up to start of 2nd tab image*/
+}
+
+.glowingtabs ul .mainnav a:hover span, .glowingtabs ul li.selected a:hover span{ /*onMouseover style*/
+background-position:100% -82px; /*Shift background image up to start of 2nd tab image*/
+}
+
+/* dropdowns
+*************************/
+ul.tabs li.mainnav .dropdown li a span
+{
+    background-color:transparent;
+}
+
+ul.tabs li.mainnav .dropdown a span
+{background-image:none;}
+
+ul.tabs .mainnav .dropdown a
+{
+	background-image:none;
+}
+
+
+ul.dropdown
+{
+	margin: 0;
+	padding: 0;
+	display: block;
+	position: absolute;
+	z-index: 999;
+	top: 100%;
+	/*width: 250px;*/
+	width: 280px;
+	display: none;
+	left: 0;
+	background-color: #fef8c8;
+	border-top: 1px solid #dcc208; 
+}
+
+ul.dropdown ul.dropdown
+{
+	top: 0;
+	left: 95%;
+}
+
+ul.dropdown li
+{
+	margin: 0;
+	padding: 0;
+	float: none;
+	position: relative;
+	list-style: none;
+	display: block;
+	border-bottom: 1px solid #dcc208; 
+	border-left: 1px solid #dcc208; 
+	border-right: 1px solid #dcc208; 
+	font-size:15px;
+	
+}
+
+ul.dropdown li a
+{
+	display: block;
+}
+
+ul.dropdown li a:hover
+{
+    background-color:#d0e298;
+}
+
+ul.tabs .mainnav .dropdown li a
+{
+	position: relative;
+	display: block;
+	
+    margin:0;
+  
+    text-decoration:none;
+    /*background-color:#d0e298;*/
+}

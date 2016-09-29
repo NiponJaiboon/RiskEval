@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="iSabaya.Party" Collapsed="true">
+    <Position X="4.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JoBAlBSgUgQAAIBAgQAAAAYSA4AEkIkCASQAQAIgCsA=</HashCode>
+      <FileName>Party\Party.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Addresses" />
+      <Property Name="Identities" />
+      <Property Name="Categories" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="iSabaya.OrgBase" Collapsed="true">
+    <Position X="1.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAQAAAAAAIAEEAAgAAIAICAMQAAgAAAAIAAEAIA=</HashCode>
+      <FileName>Organization\OrgBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="iSabaya.Organization" Collapsed="true">
+    <Position X="2.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAEAACACACEAgCAlkoAgAAICACAIAIAxAADLFCABDiI=</HashCode>
+      <FileName>Organization\Organization.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.002" />
+  </Class>
+  <Class Name="iSabaya.OrgUnit" Collapsed="true">
+    <Position X="0.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAACAAAAAAAAQAgAAAAAMAAAAKAIAAAgACAAAAAAI=</HashCode>
+      <FileName>Organization\OrgUnit.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="iSabaya.PartyAddress" Collapsed="true">
+    <Position X="4.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAACAAAAAEAAAAAAoAAAIIAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Party\PartyAddress.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="iSabaya.PartyIdentity" Collapsed="true">
+    <Position X="6.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAIAEAAAAAABEAAAAAAIAIAAIAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Party\PartyIdentity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="iSabaya.PartyCategory" Collapsed="true">
+    <Position X="1.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAIAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Party\PartyCategory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="iSabaya.Person" Collapsed="true">
+    <Position X="4.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>xAJIgIQIACAEAIDkhBAAgAYQAGAMEMAhARAIYAkGDIA=</HashCode>
+      <FileName>Person.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="iSabaya.Incognito" Collapsed="true">
+    <Position X="6.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hABAAoQAACIEAYAkhAEAAAYAAEAMEMAgAQAIIAEACAA=</HashCode>
+      <FileName>Incognito.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.877" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

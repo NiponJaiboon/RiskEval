@@ -1,0 +1,142 @@
+﻿
+
+@{
+    ViewBag.Title = "บันทึกผลการพิจารณาจากรัฐสภา";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Budget.Project
+
+@Html.Partial("_ProjectDetail", @Model)
+
+<div class="submit-box">
+    <table align="center">
+        <tbody>
+            <tr>
+                <td class="td_appr_text">
+                    ผลการพิจารณา
+                </td>
+                <td class="td_appr_result">
+                    รอการพิจารณาจากรัฐสภา
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table align="center" id="tb-submit" style="margin-top:10px" cellpadding="2" cellspacing="0">
+        <tr class="tr-submit">
+            <td class="td-text">สรุปผลคะแนนการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล อยู่ในเกณฑ์ที่มีระดับความเสี่ยง</td>
+            <td style="border-style:solid; width:100px; text-align:center; border-color:#666600;" class='@Model.RiskResultClass'>
+                <div style="background-color:red; font-weight:bold; font-size:23px;">@Model.RiskResultName</div>
+            </td>
+        </tr>
+        <tr class="tr-submit">
+            <td class="td-text">ผลคะแนนการวิเคราะห์ความเสี่ยงด้านสภาพแวดล้อมภายในและภายนอก อยู่ในระดับที่มีความเสี่ยง</td>
+            <td style="border-style:solid; width:100px; text-align:center; border-color:#666600;" class='@Model.RiskResultClass'>
+                <div style="background-color:red; font-weight:bold; font-size:23px;">@Model.RiskResultName</div>
+            </td>
+        </tr>
+    </table>
+    <input type='hidden' id='idHidden' value=''>
+
+    <div style="padding-top:20px">
+        <p>@Html.ActionLink("รายงานที่ 1 รายงานการกลั่นกรองโครงการ", "ScreeningProject", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+        <p>@Html.ActionLink("รายงานที่ 2 รายงานการวิเคราะห์ความเสี่ยงตามหลักธรรมาธิบาล", "RiskAnalysisGoodGovernance", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+        <p>@Html.ActionLink("รายงานที่่ 3 รายงานการวิเคราะห์ความเสี่ยงด้านสภาพแวดล้อมภายในและภายนอก", "RiskAnalysisEnvironment", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+        <p>@Html.ActionLink("รายงานที่ 4 รายงานสรุปผลการประเมินการวิเคราะห์ความเสี่ยงตามหลักธรรมภิบาล", "SummaryRiskAnalysisGoodGovernance", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+        <p>@Html.ActionLink("รายงานที่ 5 รายงานความคิดเห็นเพิ่มเติมจากเจ้าหน้าที่สำนักงบประมาณ", "CommentProjectByBudgetor", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+
+        <div style="margin-top:10px">
+            <fieldset class="fieldset">
+                <legend class="legend">ผลการพิจารณาจากรัฐสภา</legend>
+                <div style="padding-left:5px;padding-top:10px">
+                    <span>
+                        @Html.RadioButton("has", "0") ผ่านการอนุมัติจากรัฐสภา
+                    </span>
+                    <span>
+                        @Html.RadioButton("has", "1") ไม่ผ่านการอนุมัติจากรัฐสภา
+                    </span>
+                    <span>
+                        @Html.RadioButton("has", "2") ไม่ผ่านการพิจารณาในระดับสำนักงบประมาณ
+                    </span>
+                    <div style="padding-top:10px">
+                        งบประมาณอนุมัติจากสภา
+                        @Html.TextBoxFor(model => model.BudgetAmount, new { @class = "numericOnly form-control", @style = "width:400px", id = "budgetAmount", Value = "", @maxlength = 14 })
+                    </div>
+                    <div style="display:none;color:red" data-valmsg-for="budgetAmount" data-valmsg-replace="false">กรุณาเลือก ผลการพิจารณาจากรัฐสภา</div>
+                </div>
+                <div style="margin-top:10px">
+                    <input type="button" id="saveBudgetapproved" value="บันทึกข้อมูลการอนุมัติงบประมาณ" class="btn btn-default" />
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(function () {
+
+        var comment_er = $('[data-valmsg-for="budgetAmount"]');
+
+        $("#idHidden").val(@Model.ID);
+
+        $("#saveBudgetapproved").click(function (e) {
+            e.preventDefault();
+
+            console.log($("#idHidden").val());
+
+            if ($("input[name=has]:checked").val() == undefined)
+                comment_er.text("กรุณาเลือก ผลการพิจารณาจากรัฐสภา").addClass("input-validation-error").show();
+            else {
+                //comment_er.removeClass("input-validation-error").hide();
+                if ($("input[name=has]:checked").val() == "0" && $("#budgetAmount").val() == "") {
+                    comment_er.text("กรุณาระบุงบประมาณ").addClass("input-validation-error").show();
+                } else {
+                    comment_er.removeClass("input-validation-error").hide();
+                    if (confirm("คุณต้องการบันทึกและดำเนินการต่อไป หรือไม่")) {
+                        //post comment and show page โครงการที่ผ่านการพิจารณาจากรัฐสภา (table projects)
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: appName + "/Budgetor/SaveBudgetApproved/",
+                            data: JSON.stringify({
+                                projectId: $("#idHidden").val(),
+                                budgetResult:$("input[name=has]:checked").val(),
+                                budgetAmount: $("#budgetAmount").val(),
+                            }),
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.Success) {
+                                    $("#message-success").text(data.Message);
+                                    $('#modal-success').modal('show');
+
+                                    $("#btnOkSuccess").click(function (e) {
+                                        e.preventDefault();
+                                        document.location.href = appName + "/Budgetor/ProjectApproved";
+                                    });
+                                } else {
+                                    $("#message-fail").text(data.Message);
+                                    $('#modal-fail').modal('show');
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
+        $("input[name=has]").change(function (e) {
+            e.preventDefault();
+
+            var check = $("input[name=has]:checked").val();
+
+            if (check == "0")
+                $("#budgetAmount").removeAttr('disabled');//.val('@Model.BudgetAmount.ToString(Budget.Util.Formetter.MoneyFormat)');
+            else
+                $("#budgetAmount").attr('disabled', 'disabled').val("");
+
+            comment_er.removeClass("input-validation-error").hide();
+        });
+    });
+</script>

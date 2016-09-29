@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.DynamicMenu,iSabaya" table="Menu">
+
+    <!-- Primary key-->
+    <id name="Id" column="MenuID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+
+    <bag name="Children" table="Menu" inverse="true">
+      <key column="ParentID"/>
+      <one-to-many class="iSabaya.DynamicMenu,iSabaya"/>
+      <loader query-ref="LoadChildMenus"/>
+    </bag>
+
+    <property name="Code" />
+    <property name="Comment" />
+    <property name="IsObsolete" />
+    <!--<property name="UsecaseNumber" />-->
+    <property name="IsTop" />
+    <property name="LinkURL" />
+    <property name="PageCode" />
+    <many-to-one name="Parent" column="ParentID"/>
+    <property name="SeqNo" />
+    <property name="SystemID" type="iSabaya.SystemEnum,iSabaya.Config"/>
+    <many-to-one name="Title" column="TitleMLSID"/>
+
+  </class>
+
+
+  <sql-query name="LoadChildMenus">
+    <load-collection alias="e" role="iSabaya.DynamicMenu.Children"/>
+    SELECT * FROM Menu where ParentID = :MenuID and IsObsolete = 0 order by SeqNo
+  </sql-query>
+
+</hibernate-mapping>

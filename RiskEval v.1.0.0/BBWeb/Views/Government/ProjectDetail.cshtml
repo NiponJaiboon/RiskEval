@@ -1,0 +1,260 @@
+﻿@model BBWeb.Models.User
+
+@{
+    ViewBag.Title = "ระบุข้อมูลรายละเอียดโครงการ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/priceFormat.js"></script>
+<script src="~/Scripts/numeral.js"></script>
+<script type="text/javascript">
+
+    $body = $("body");
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    $(function () {
+        //var numeral = require('numeral');
+
+        $("#Budget").focusout(function () {
+            //console.log($(this).val());
+            //numeral($(this).val()).format('0,0.00');
+            //console.log($(this).val());
+        }).focus(function () {
+        });
+
+        $("#submitNext").click(function (e) {
+            e.preventDefault();
+
+            //regular
+            var checkNumber = /^\d+$/;
+            var checkEN = /^[a-zA-Z]+$/;
+            var checkTH = /^[ก-๙]+$/;
+            var check = /^[ก-๙a-zA-Z0-9]+$/;
+
+            var isProjectName = false;
+            var isStrategic = false;
+            var isYear = false;
+            var isBudget = false;
+            var isExpenditure = false;
+
+            //check ชื่อโครงการ
+            console.log($("#ProjectName").val());
+
+            if ($("#ProjectName").val() == "") {
+                $("#ProjectName_error").show();
+                $("#ErrorDokJan_ProjectName").show();
+            } else {
+                if (check.test($("#ProjectName").val())) {
+                    $("#ProjectName_error").hide();
+                    $("#ErrorDokJan_ProjectName").hide();
+                    isProjectName = true;
+                }
+                else {
+                    $("#ProjectName_error").show();
+                    $("#ErrorDokJan_ProjectName").show();
+                }
+            }
+
+            //check ยุทธศาสตร์การจัดสรรงบประมาณ
+            console.log($("#Strategic").val());
+
+            if ($("#Strategic").val() == "") {
+                $("#Strategic_error").show();
+                $("#ErrorDokJan_Strategic").show();
+            } else {
+                $("#Strategic_error").hide();
+                $("#ErrorDokJan_Strategic").hide();
+                isStrategic = true;
+            }
+
+            //check ปีงบประมาณ
+            console.log($("#Years").val());
+
+            if ($("#Years").val() == "") {
+                $("#Years_error").show();
+                $("#ErrorDokJan_Years").show();
+            } else {
+                $("#Years_error").hide();
+                $("#ErrorDokJan_Years").hide();
+                isYear = true;
+            }
+
+            //check วงเงินงบประมาณทั้งสิ้น (บาท)
+            var reg = /,/gi;
+            console.log($("#Budget").val().replace(reg, ""));
+
+            if ($("#Budget").val() == "0.00" || $("#Budget").val() == "") {
+                $("#Budget_error").show();
+                $("#ErrorDokJan_Budget").show();
+            } else {
+                if ($("#Budget").val() != "0.00") {
+                    $("#Budget_error").hide();
+                    $("#ErrorDokJan_Budget").hide();
+                    isBudget = true;
+                } else {
+                    $("#Budget_error").show();
+                    $("#ErrorDokJan_Budget").show();
+                }
+            }
+
+            //check อยู่ในงบรายจ่ายประเภท
+            console.log($("#Expenditure").val());
+
+            if ($("#Expenditure").val() == "") {
+                $("#expenditure_error").show();
+                $("#ErrorDokJan_expenditure").show();
+            } else {
+                $("#expenditure_error").hide();
+                $("#ErrorDokJan_expenditure").hide();
+                isExpenditure = true;
+            }
+
+            var projectName = $("#ProjectName");
+            var strategic = $("#Strategic");
+            var year = $("#Years");
+            var budget = $("#Budget");
+            var expenditure = $("#Expenditure");
+
+            //viewbag to controller
+            if (isProjectName && isStrategic && isYear && isBudget && isExpenditure) {
+                if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+                    $.ajax({
+                        url: '/Government/SaveProjectDetail/',
+                        dataType: 'json',
+                        type: 'POST',
+                        data: {
+                            projectName: projectName.val(),
+                            strategicId: strategic.val(),
+                            year: $("select[name='Year'] option:selected").val(),
+                            budget: budget.val().replace(reg, ""),
+                            expenditure: expenditure.val()
+                        },
+                        success: function (data) {
+
+                            if (data.Success) {
+                                $("#message-success").text(data.Message);
+                                $('#modal-success').modal('show');
+
+                                $("#btnOkSuccess").click(function (e) {
+                                    e.preventDefault();
+                                    window.location.href = "/Government/ProjectFilter";
+                                });
+                            } else {
+                                $("#message-fail").text(data.Message);
+                                $('#modal-fail').modal('show');
+                            }
+                        },
+                    });
+                }
+            } else {
+
+            }
+        });
+    });
+
+</script>
+
+<div>
+    <div class="modal"></div>
+
+    <fieldset class="fieldset">
+        <legend class="legend">ข้อมูลโครงการ</legend>
+        <table style="margin:0px 0px 0px 0px;">
+            <tbody>
+                <tr>
+                    <td class="bold1">รหัสกระทรวง:</td>
+                    <td><span id="DeptCode">@Model.MinistryCode</span></td>
+                    <td class="bold1">กระทรวง:</td>
+                    <td><span id="DeptName">@Model.MinistryName</span></td>
+                </tr>
+                <tr>
+                    <td class="bold1">รหัสหน่วยงาน:</td>
+                    <td><span id="DivisionCode">@Model.DepartmentCode</span></td>
+                    <td class="bold1">หน่วยงาน:</td>
+                    <td><span id="DivisionName">@Model.DepartmentName</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<div class="title"><bdo dir="ltr">ระบุข้อมูลรายละเอียดโครงการ</bdo></div>
+<div>
+    <table>
+        <tr>
+            <td class="bold1"><div class="form-group">รหัสโครงการ:</div></td>
+            <td>
+                <div class="form-group">
+                    <span id="ProjectCode">@ViewBag.ProjectCode</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="bold1"><div class="form-group">ชื่อโครงการ:</div></td>
+            <td>
+                <div class="form-group">
+                    <input type="text" maxlength="500" id="ProjectName" class="form-control" style="width:500px">
+                    <span id="ErrorDokJan_ProjectName" class="ErrorDokJan" style="clear:both; color:red; display:none">*</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="bold1"><div class="form-group">ยุทธศาสตร์การจัดสรรงบประมาณ:</div></td>
+            <td>
+                <div class="form-group">
+                    @Html.DropDownList("Strategic", null, new { @class = "form-control" })
+                    <span id="ErrorDokJan_Strategic" class="ErrorDokJan" style="color:red; display:none">*</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="bold1"><div class="form-group">ปีงบประมาณ:</div></td>
+            <td>
+                <div class="form-group">
+                    @Html.DropDownList("Year", null, new { @class = "form-control" })
+                    <span id="ErrorDokJan_Years" class="ErrorDokJan" style="color:red; display:none">*</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="bold1"><div class="form-group">วงเงินงบประมาณทั้งสิ้น (บาท):</div></td>
+            <td>
+                <div class="form-group">
+                    <input type="text" maxlength="50" id="Budget" class="numericOnly form-control">
+                    <span id="ErrorDokJan_Budget" class="ErrorDokJan" style="color:red; display:none">*</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="bold1"><div class="form-group">อยู่ในงบรายจ่ายประเภท:</div></td>
+            <td>
+                <div class="form-group">
+                    @Html.DropDownList("Expenditure", new List<SelectListItem>
+                        {
+                            new SelectListItem { Text = "งบดำเนินการ" , Value = "1" },
+                            new SelectListItem { Text = "งบลงทุน" , Value = "2" },
+                            new SelectListItem { Text = "งบเงินอุดหนุน" , Value = "3" },
+                            new SelectListItem { Text = "งบรายจ่ายอื่น" , Value = "4" },
+                        }, "กรุณาเลือก", new { @class = "form-control" })
+                    <span id="ErrorDokJan_expenditure" class="ErrorDokJan" style="color:red; display:none">*</span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div>
+    <div class="form-group">
+        <input type="submit" name="ctl00$ContentPlaceHolder1$btnNext" value="บันทึกข้อมูลและดำเนินการต่อไป" id="submitNext" class="btn btn-default">
+    </div>
+    <div id="ContentPlaceHolder1_sumErr" class="question-error">
+        <ul>
+            <li id="ProjectName_error" style="display:none">กรุณากรอกชื่อโครงกการ</li>
+            <li id="Strategic_error" style="display:none">กรุณาเลือกยุทธศาสตร์การจัดสรรงบประมาณ</li>
+            <li id="Years_error" style="display:none">กรุณาเลือกปีงบประมาณ</li>
+            <li id="Budget_error" style="display:none">กรุณากรอกงบประมาณ</li>
+            <li id="expenditure_error" style="display:none">กรุณาเลือกประเภทงบรายจ่าย</li>
+        </ul>
+    </div>
+</div>

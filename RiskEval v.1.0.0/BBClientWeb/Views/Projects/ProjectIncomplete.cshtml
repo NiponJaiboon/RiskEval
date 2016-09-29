@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "โครงการที่ยังไม่สมบูรณ์ โครงการบันทึกการวิเคราะห์";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="padding-top:5px">
+
+    <fieldset class="fieldset">
+        <legend class="legend">@Html.Label("", "ค้นหาโครงการ")</legend>
+        <table>
+            <tr style="height:40px">
+                <td>@Html.Label("", "ปีงบประมาณ")</td>
+                <td>
+                    @Html.DropDownList(
+                            "ddlYear",
+                            new List<SelectListItem>(),
+                            "กรุณาเลือก",
+                            new { @class = "form-control" })
+                </td>
+                <td style="padding-left:15px">@Html.Label("", "งบประมาณ")</td>
+                <td>@Html.TextBox("tbBudget", null, new { @class = "form-control numericOnly" })</td>
+                <td style="padding-left:15px"><input type="button" value="ค้นหา" class="btn btn-default" id="btSearch" /></td>
+                <td><input type="button" value="เคลียร์" class="btn btn-default" id="btClear" /></td>
+            </tr>
+        </table>
+    </fieldset>
+    <table id="project-incomplete-table" class="table table-bordered table-striped table-hover" cellpadding="0" cellspacing="0" data-order='[[ 1, "asc" ]]' data-page-length='10'>
+        <thead>
+            <tr>
+                <th class="center" style="width:360px;vertical-align:middle">ชื่อโครงการ</th>
+                <th class="center" style="width:114px;vertical-align:middle">ลักษณะโครงการ</th>
+                <th class="center" style="width:114px;vertical-align:middle">ปีงบประมาณ</th>
+                <th class="center" style="width:129px;vertical-align:middle">วงเงินงบประมาณ</th>
+                <th class="center" style="width:158px;vertical-align:middle">วันที่แก้ไขครั้งสุดท้าย</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $body = $("body");
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    $(function () {
+        getProjects();
+
+        $("#btSearch").click(function (e) {
+            e.preventDefault();
+            getProjects();
+        });
+
+        $("#btClear").click(function (e) {
+            e.preventDefault();
+            $("#ddlYear").val("");
+            $("#tbBudget").val("");
+            getProjects();
+        });
+    });
+
+    function getProjects() {
+
+        $.ajax({
+            cache: false,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: appName + "/Projects/GetProjects/",
+            data: {
+                year: $("#ddlYear").val(),
+                budget: $("#tbBudget").val(),
+                status: "Incomplete"
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.Success) {
+                    //debugger
+                    //clear datatable
+                    $('#project-incomplete-table').dataTable({
+                        "bDestroy": true
+                    }).fnDestroy();
+
+
+                    $('#project-incomplete-table').DataTable({
+                        "dom": '<"toolbar">frtip',
+                        searching: false,
+                        ordering: true,
+                        paging: true,
+                        //scrollY: 400,
+                        //"bProcessing": true,
+                        //"bDeferRender": true,
+                        data: data.model,
+                        columns: [
+                            { data: 'NameLink' },
+                            { data: 'ProjectType' },
+                            { data: 'Year' },
+                            { data: 'Budget', sClass: "right" },
+                            { data: 'LastUpdate' },
+                        ]
+                    });
+
+                    if (data.model.length <= 0) {
+                        $("#project-incomplete-table_paginate").hide();
+                    } else {
+                        $("#project-incomplete-table").show();
+                    }
+
+                } else {
+                    $("#message-fail").text(data.Message);
+                    $('#modal-fail').modal('show');
+                }
+            }
+        });
+    }
+
+</script>

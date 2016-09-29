@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Budget.Project, Budget" table="Project">
+    <id name="ID" column="ID" type="long">
+      <generator class="native" />
+    </id>
+    
+    <property name="ProjectNo" />
+    <property name="Name" />
+    <property name="BudgetType" />
+    <property name="BudgetAmount" />
+    <property name="BudgetYear" />
+    <property name="StatusCategory" />
+    <property name="Status" />
+    
+    <property name="IsNewProject" />
+    <property name="IsInvestment" />
+    <property name="IsImportant" />
+    <property name="IsRiskAnalysis" />
+    <property name="OriginOfProject" />
+    <property name="UrgencyOfProject" />
+    <property name="ProjectCategory" />
+    <property name="ProjectType" />
+    <property name="RiskResult" />
+
+    <property name="BookNo" />
+    <property name="BookDate" type="Date" />
+
+    <property name="BudgetResult" />
+    <property name="BudgetApprovalAmount" />
+
+
+    <component name="EffectivePeriod" >
+      <property name="From" column="EffectiveFrom"/>
+      <property name="To" column="EffectiveTo"/>
+    </component>
+
+    <component name="CreateAction" >
+      <many-to-one name="ByUser" column="CreatedBy" />
+      <property name="Timestamp" column="CreatedTS" />
+    </component>
+
+    <component name="ApproveAction"  >
+      <many-to-one name="ByUser" column="ApprovedBy" />
+      <property name="Timestamp" column="ApprovedTS" />
+    </component>
+
+    <component name="UpdateAction" >
+      <many-to-one name="ByUser" column="UpdatedBy" />
+      <property name="Timestamp" column="UpdatedTS" />
+    </component>
+
+    <component name="CommentAction" >
+      <many-to-one name="ByUser" column="CommentedBy" />
+      <property name="Timestamp" column="CommentedTS" />
+      <property name="Remark" column="CommentedRemark" />
+    </component>
+    
+    <many-to-one name="OrgUnit" column="OrgUnitID" />
+    <many-to-one name="Strategic" column="StrategicID" />
+    
+  
+
+  </class>
+</hibernate-mapping>

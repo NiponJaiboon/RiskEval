@@ -1,0 +1,203 @@
+﻿@model Budget.Project
+
+<div class="content-box">
+    <div>
+        <div class="box-question">
+            <div style="text-align:left; margin-top:10px;">
+                <div style="color:Red; font-size:20px;" class="QL1">ประเด็นที่ 5 การวิเคราะห์ความคุ้มค่าและผลประโยชน์ของโครงการ</div>
+                <div style="margin-left:15px; margin-top:15px;">
+                    คำถามที่ 6 มีการวิเคราะห์ความคุ้มค่าของโครงการหรือไม่
+                    <span id="questionSetB6Star" class="ErrorDokJan" style="display:none; color:red">*</span><br>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><span>@Html.RadioButton("questionSetB6", "true")<label class="field-content">มี</label></span></td>
+                                <td><span>@Html.RadioButton("questionSetB6", "false")<label class="field-content">ไม่มี</label></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-left:10px">
+                        ถ้าตอบว่า "มี" โปรดให้รายละเอียดกิจกรรมที่ดำเนินการต่อไปนี้ 
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">6.1 ระบุผลประโยชน์ที่คาดว่าจะได้รับจากการดำเนินโครงการนี้ *กรณีโครงการด้านเศรษฐกิจ ระบุผลประโยชน์ที่คาดว่าจะได้รับจากการดำเนินโครงการนี้ในรูปของตัวเงินและ/หรือไม่เป็นตัวเงิน *กรณีโครงการอื่นที่ไม่ใช่ด้านเศรษฐกิจ ระบุผลประโยชน์ที่คาดว่าจะได้รับจากการดำเนินโครงการนี้ทั้งทางตรงและทางอ้อม</span><br>
+                            @Html.TextArea("answerSetB61", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetB61Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetB61Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 6.1 เกิน 1500 ตัวอักษร</div>
+                        </p>
+                        
+                        <p style="padding-bottom:15px">
+                            <span class="QL3">6.2 ระบุความคุ้มค่าของโครงการ *กรณีโครงการด้านเศรษฐกิจ ระบุความคุ้มค่าของโครงการในเชิงประสิทธิภาพและประสิทธิผล *กรณีโครงการอื่นที่ไม่ใช่ด้านเศรษฐกิจ ระบุต้นทุนประสิทธิภาพ (Cost Effectiveness) ที่คาดว่าจะต้องจ่ายในการดำเนินโครงการนี้</span><br>
+                            @Html.TextArea("answerSetB62", new { @style = "width:95%", @rows = 5, cols = 20, @class = "form-control" })
+                            <span id="answerSetB62Star" class="ErrorDokJan" style="display: none; color: red; ">*</span>
+                            <div id="answerSetB62Message" class="question-error" style="display: none; ">ไม่สามารถกรอก ข้อ 6.2 เกิน 1500 ตัวอักษร</div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin:5px 5px 5px 5px; text-align:center;">
+                <input type="submit" value="บันทึกข้อมูลและดำเนินงานต่อไป" id="btnSaveQuestionSetB6" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var maxLength = 5;
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    var b6 = undefined;
+    var b61 = false;
+    var b62 = false;
+
+    function validateInput() {
+        //6.1 ระบุผลประโยชน์ที่คาดว่าจะได้รับจากการดำเนินโครงการนี้ *กรณีโครงการด้านเศรษฐกิจ ระบุผลประโยชน์ที่คาดว่าจะได้รับจากการดำเนินโครงการนี้ในรูปของตัวเงินและ/หรือไม่เป็นตัวเงิน *กรณีโครงการอื่นที่ไม่ใช่ด้านเศรษฐกิจ ระบุผลประโยชน์ที่คาดว่าจะได้รับจากการดำเนินโครงการนี้ทั้งทางตรงและทางอ้อม
+        if ($("#answerSetB61").val() == "") {
+            $("#answerSetB61Star").show();
+        } else {
+            $("#answerSetB61Star").hide();
+            if ($("#answerSetB61").val().length > maxLength)
+                $("#answerSetB61Message").show();
+            else
+                $("#answerSetB61Message").hide();
+        }
+
+        //6.2 ระบุความคุ้มค่าของโครงการ *กรณีโครงการด้านเศรษฐกิจ ระบุความคุ้มค่าของโครงการในเชิงประสิทธิภาพและประสิทธิผล *กรณีโครงการอื่นที่ไม่ใช่ด้านเศรษฐกิจ ระบุต้นทุนประสิทธิภาพ (Cost Effectiveness) ที่คาดว่าจะต้องจ่ายในการดำเนินโครงการนี้  
+        if ($("#answerSetB62").val() == "") {
+            $("#answerSetB62Star").show();
+        } else {
+            $("#answerSetB62Star").hide();
+            if ($("#answerSetB62").val().length > maxLength)
+                $("#answerSetB62Message").show();
+            else
+                $("#answerSetB62Message").hide();
+        }
+    }
+
+    function save() {
+        if (confirm("ต้องการบันทึกและดำเนินการต่อไป")) {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: appName + "/EditProject/SaveAnswerB6/",
+                data: JSON.stringify({
+                    pId: $("#ID").val(),
+                    choice: $("input[name=questionSetB6]:checked").val(),
+                    answer1: $("#answerSetB61").val(),
+                    answer2: $("#answerSetB62").val(),
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.Success) {
+                        $("#message-success").text(data.Message);
+                        $('#modal-success').modal('show');
+
+                        $("#btnOkSuccess").click(function (e) {
+
+                            e.preventDefault();
+                            window.location.href = '@Url.Action("ProjectComplete", "EditProject", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+                        });
+                    } else {
+                        $("#message-fail").text(data.Message);
+                        $('#modal-fail').modal('show');
+                    }
+                }
+            });
+        }
+    }
+
+    $(function () {
+
+        $("input[name=questionSetB6]").change(function (e) {
+            e.preventDefault();
+
+            var qSetB6 = $("input[name=questionSetB6]:checked").val();
+            if (qSetB6 != undefined) {
+                $("#questionSetB6Star").hide();
+                if (qSetB6 == "true") {
+                    b6 = true;
+                    $("#answerSetB61").removeAttr('disabled');
+                    $("#answerSetB62").removeAttr('disabled');
+                } else {
+                    b6 = false;
+                    $("#answerSetB61Star").hide();
+                    $("#answerSetB62Star").hide();
+
+                    $("#answerSetB61Message").hide();
+                    $("#answerSetB62Message").hide();
+                    
+                    $("#answerSetB61").val("").attr('disabled', 'disabled');
+                    $("#answerSetB62").val("").attr('disabled', 'disabled');
+                }
+            } else {
+                $("#questionSetB6Star").show();
+            }
+        });
+
+        $("#answerSetB61").change(function (e) {
+            e.preventDefault();
+
+            var answerSetB61 = $("#answerSetB61").val();
+            if (answerSetB61.length > 0) {
+                $("#answerSetB61Star").hide();
+                if (answerSetB61.length > maxLength)
+                    $("#answerSetB61Message").show();
+                else {
+                    b61 = true;
+                    $("#answerSetB61Message").hide();
+                }
+            } else {
+                $("#answerSetB61Star").show();
+            }
+        });
+
+        $("#answerSetB62").change(function (e) {
+            e.preventDefault();
+
+            var answerSetB62 = $("#answerSetB62").val();
+            if (answerSetB62.length > 0) {
+                $("#answerSetB62Star").hide();
+                if (answerSetB62.length > maxLength)
+                    $("#answerSetB62Message").show();
+                else {
+                    b62 = true;
+                    $("#answerSetB62Message").hide();
+                }
+            } else {
+                $("#answerSetB62Star").show();
+            }
+        });
+        
+
+        $("#btnSaveQuestionSetB6").click(function (e) {
+            e.preventDefault();
+
+            //ตรวจสอบ ตำตอบ ข้อ 6.1, 6.2 ไม่มีค่าว่างและไม่เกิน 1500 ตัวอักษร
+            if (b6) {
+                validateInput();
+                if (b61 && b62) {
+                    save();
+                }
+            } else if (b6 == undefined) {
+                $("#questionSetB6Star").show();
+                validateInput();
+            }
+            else {
+                b6 = false;
+                save();
+            }
+
+        });
+
+    });
+
+</script>

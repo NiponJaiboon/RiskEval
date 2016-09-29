@@ -1,0 +1,51 @@
+﻿@model Budget.Project
+
+@{
+    ViewBag.Title = "คำถามชุด ก: ขั้นตอนการริเริ่มแผนงาน/โครงการและวิเคราะห์เบื้องต้น";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (@ViewBag.ErrorMessage != null)
+{
+    @ViewBag.ErrorMessage
+}
+else
+{
+
+    @Html.HiddenFor(x => x.ID)
+
+    if (@Model.Status == Budget.Status.SaveType && @Model.StatusCategory == Budget.StatusCategory.Incomplete)
+    {
+        <div id="questionA1">
+            @Html.Partial("Questions/_QuestionA1", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetA1 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerA)
+    {
+        <div id="questionA2">
+            @Html.Partial("Questions/_QuestionA2", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetA2 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerA)
+    {
+        <div id="questionASuccess">
+            เสร็จสิ้นการประเมินชุด ก: ขั้นตอนการริเริ่มแผนงาน/โครงการและวิเคราะห์เบื้องต้น โปรดดำเนินการต่อ
+            <div>
+                <input type="submit" value="ดำเนินงานต่อไป" id="btnSaveQuestionSetA1Continun" class="btn btn-default">
+            </div>
+        </div>
+    }
+
+}
+
+<script type="text/javascript">
+
+    $(function () {
+
+        $("#btnSaveQuestionSetA1Continun").click(function (e) {
+            e.preventDefault();
+
+            window.location.href = '@Url.Action("QuestionChoice", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+        });
+    });
+</script>

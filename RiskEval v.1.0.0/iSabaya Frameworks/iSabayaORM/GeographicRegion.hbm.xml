@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.GeographicRegion,iSabaya" table="GeographicRegion">
+
+    <!-- Primary key-->
+    <id name="GeographicRegionID" column="GeographicRegionID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+
+    <component name="EffectivePeriod"  >
+      <property name="From" column="EffectiveFrom"/>
+      <property name="To" column="EffectiveTo"/>
+    </component>
+    <property name="SeqNo" />
+    <property name="LevelNo" />
+    <property name="Code" />
+    <property name="InternalCode" />
+    <property name="IsActive" />
+    <property name="Remark" />
+
+    <many-to-one name="MultilingualName" column="MultilingualNameId" />
+    <many-to-one name="AbbreviatedName" column="AbbreviatedNameId" />
+    <many-to-one name="SuperRegion" class="iSabaya.GeographicRegion,iSabaya" column="SuperRegionID" />
+    <many-to-one name="Country" class="iSabaya.Country,iSabaya" column="CountryID" />
+    
+    <bag name="Subregions" table="GeographicRegion" inverse="true">
+      <key column="SuperRegionID"/>
+      <one-to-many class="iSabaya.GeographicRegion,iSabaya"/>
+    </bag>
+
+
+  </class>
+</hibernate-mapping>
+
+

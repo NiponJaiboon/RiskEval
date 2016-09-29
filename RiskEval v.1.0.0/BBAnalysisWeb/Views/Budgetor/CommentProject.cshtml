@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "รายงานสรุปการวิเคราะห์ความเสี่ยงตามหลักธรรมภิบาล ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Budget.Project
+
+@Html.Partial("_ProjectDetail", @Model)
+
+<label class="appr_part2_blue_text" style="padding-top:20px">
+    ส่วนที่ 2 รายงานสรุปการวิเคราะห์ความเสี่ยงตามหลักธรรมภิบาล
+</label>
+<fieldset class="fieldset">
+    <legend class="legend">ส่วนความคิดเห็นเพิ่มเติม</legend>
+
+    <div style="padding-left:5px;padding-top:10px">
+        <label class="">แสดงความคิดเห็นคำของบประมาณ</label>
+        <div style="padding:10px">
+            <div>@Html.RadioButton("has", "0") มีความคิดเห็นเพิ่มเติม</div>
+            <div>
+                @Html.RadioButton("has", "1") ไม่มีความคิดเห็นเพิ่มเติม
+            </div>
+            <div>
+                @Html.TextArea("comment", new { @cols = "0", @rows = "3", @maxlength = "400", @style = "width:100%;", @class = "form-control" })
+            </div>
+            <div style="display:none;color:red" data-valmsg-for="comment" data-valmsg-replace="false">กรุณาเลือก มี/ไม่มีความเห็นเพิ่มเติม</div>
+        </div>
+    </div>
+    <div style="margin-top:10px">
+        <input type="button" id="saveComment" value="ยืนยันการบันทึกความคิดเห็น" class="btn btn-default" />
+    </div>
+</fieldset>
+<input type='hidden' id='idHidden' value=''>
+
+
+<script type="text/javascript">
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(function () {
+
+        var comment_er = $('[data-valmsg-for="comment"]');
+
+        $("#idHidden").val(@Model.ID);
+
+        $("#saveComment").click(function (e) {
+            e.preventDefault();
+
+            if ($("input[name=has]:checked").val() == undefined)
+                comment_er.text("กรุณาเลือก มี/ไม่มีความเห็นเพิ่มเติม").addClass("input-validation-error").show();
+            else {
+                //comment_er.removeClass("input-validation-error").hide();
+                if ($("input[name=has]:checked").val() == "0" && $("#comment").val() == "") {
+                    comment_er.text("กรุณาระบุความเห็นเพิ่มเติม").addClass("input-validation-error").show();
+                } else {
+                    comment_er.removeClass("input-validation-error").hide();
+                    if (confirm("คุณต้องการบันทึกและดำเนินการต่อไป หรือไม่")) {
+                        //post comment and show page บันทึกผลการพิจารณาจากรัฐสภา (table projects)
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            url: appName + "/Budgetor/SaveComment/",
+                            data: JSON.stringify({
+                                projectId: $("#idHidden").val(),
+                                comment: $("#comment").val(),
+                            }),
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.Success) {
+                                    $("#message-success").text(data.Message);
+                                    $('#modal-success').modal('show');
+
+                                    $("#btnOkSuccess").click(function (e) {
+                                        e.preventDefault();
+                                        document.location.href = appName + "/Budgetor/ProjectCommentted";
+                                    });
+                                } else {
+                                    $("#message-fail").text(data.Message);
+                                    $('#modal-fail').modal('show');
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
+        $("#comment").change(function (e) {
+            e.preventDefault();
+
+            if($(this).val() != "")
+                comment_er.removeClass("input-validation-error").hide();
+
+        });
+
+        $("input[name=has]").change(function (e) {
+            e.preventDefault();
+
+            var check = $("input[name=has]:checked").val();
+
+            if (check == "0")
+                $("#comment").removeAttr('disabled');
+            else
+                $("#comment").attr('disabled', 'disabled');
+
+            comment_er.removeClass("input-validation-error").hide();
+        });
+    });
+</script>

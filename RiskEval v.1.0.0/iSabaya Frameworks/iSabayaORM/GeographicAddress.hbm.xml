@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.GeographicAddress,iSabaya" table="GeographicAddress">
+
+    <!-- Primary key-->
+    <id name="ID" column="AddressID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <property name="PostalCode" />
+    <property name="Phones" />
+    <property name="MobilePhones" />
+    <property name="Faxes" />
+
+    <many-to-one name="Building" column="BuildingMLSID" />
+    <property name="Floor" />
+    <many-to-one name="AddressNo" column="AddressNoMLSID" />
+    <many-to-one name="Street1" column="Street1MLSID" />
+    <many-to-one name="Street2" column="Street2MLSID" />
+    <many-to-one name="RegionLevel1Name" column="RegionLevel1NameMLSID" />
+    <many-to-one name="RegionLevel2Name" column="RegionLevel2NameMLSID" />
+    <many-to-one name="RegionLevel3Name" column="RegionLevel3NameMLSID" />
+    <many-to-one name="Country" column="CountryId" />
+    <many-to-one name="RegionLevel1" column="Level1RegionID" />
+    <many-to-one name="RegionLevel2" column="Level2RegionID" />
+    <many-to-one name="RegionLevel3" column="Level3RegionID" />
+
+    <many-to-one name="Category" column="CategoryID" />
+
+    <property name="RoomNo" />
+    <property name="Reference" />
+    <property name="Remark" />
+    <many-to-one name="UpdatedBy" />
+    <property name="UpdatedTS" />
+  </class>
+</hibernate-mapping>
+
+

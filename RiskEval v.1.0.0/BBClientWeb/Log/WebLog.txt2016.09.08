@@ -1,0 +1,21 @@
+2016-09-08 00:57:06,479 [1] WARN  NHibernate.Cfg.Configuration - No mapped documents found in assembly: iSabaya.Questionnaire, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2016-09-08 00:57:06,961 [1] WARN  NHibernate.Util.ReflectHelper - Could not load type managed_web. Possible cause: no assembly name specified.
+2016-09-08 00:57:06,962 [1] ERROR NHibernate.Util.ReflectHelper - Could not load type managed_web.
+System.TypeLoadException: Could not load type managed_web. Possible cause: no assembly name specified.
+   at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+2016-09-08 00:57:06,965 [1] ERROR NHibernate.Impl.SessionFactoryImpl - Unable to construct current session context [managed_web]
+System.TypeLoadException: Could not load type managed_web. Possible cause: no assembly name specified.
+   at NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+   at NHibernate.Impl.SessionFactoryImpl.BuildCurrentSessionContext()
+2016-09-08 00:57:21,204 [11] WARN  WebLogger - Authenticating
+2016-09-08 00:57:21,679 [11] WARN  WebLogger - End Authenticating
+2016-09-08 00:57:27,974 [10] WARN  WebLogger - Authenticating
+2016-09-08 00:57:28,090 [10] WARN  WebLogger - End Authenticating
+2016-09-08 00:57:29,725 [10] WARN  WebLogger - Authenticating
+2016-09-08 00:57:29,844 [10] WARN  WebLogger - End Authenticating
+2016-09-08 00:57:31,457 [10] WARN  WebLogger - Authenticating
+2016-09-08 00:57:31,573 [10] WARN  WebLogger - End Authenticating
+2016-09-08 00:57:32,978 [10] WARN  WebLogger - Authenticating
+2016-09-08 00:57:33,096 [10] WARN  WebLogger - End Authenticating
+2016-09-08 00:58:44,016 [11] WARN  WebLogger - Authenticating
+2016-09-08 00:58:44,229 [11] WARN  WebLogger - End Authenticating

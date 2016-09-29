@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "โครงการที่เข้าข่ายการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model BBWeb.Models.ViewModels.ProjectViewModel
+
+@*<div style="padding:10px">*@
+@*<div class="panel panel-default">
+    <div class="panel-heading">@Html.Label("", "ข้อมูลโครงการ")</div>
+    <div class="panel-body">*@
+<fieldset class="fieldset">
+    <legend class="legend">ข้อมูลโครงการ</legend>
+
+    <table>
+        <tr>
+            <td>@Html.Label("", "รหัสกระทรวง:", new { @class = "bold1" })</td>
+            <td>@Model.Department.Ministry.Code</td>
+            <td>@Html.Label("", "กระทรวง:")</td>
+            <td>@Model.Department.Ministry.Name</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("", "รหัสหน่วยงาน:", new { @class = "bold1" })</td>
+            <td>@Model.Department.Code</td>
+            <td>@Html.Label("", "หน่วยงาน:", new { @class = "bold1" })</td>
+            <td>@Model.Department.Name</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("", "รหัสโครงการ:", new { @class = "bold1" })</td>
+            <td>@Model.ProjectNo</td>
+            <td>@Html.Label("", "ชื่อโครงการ:", new { @class = "bold1" })</td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td colspan="2">@Html.Label("", "ยุทธศาสตร์การจัดสรรงบประมาณ:", new { @class = "bold1" })</td>
+            <td colspan="2">@Model.StrategicName</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("", "ปีงบประมาณ:", new { @class = "bold1" })</td>
+            <td>@Model.Year</td>
+            <td>@Html.Label("", "วงเงินงบประมาณทั้งสิ้น (บาท):", new { @class = "bold1" })</td>
+            <td>@Model.Budget</td>
+        </tr>
+    </table>
+</fieldset>
+@*</div>
+    </div>*@
+
+<table id="tb-submit" style="margin-top:10px" cellpadding="2" cellspacing="0">
+    <tr class="tr-submit">
+        <td class="td-text">สรุปผลคะแนนการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล อยู่ในเกณฑ์ที่มีระดับความเสี่ยง</td>
+        <td style="border-style:solid; width:100px; text-align:center; border-color:#666600;" class='@Model.RiskResultClass'>
+            <div style="background-color:red; font-weight:bold; font-size:23px;">@Model.RiskResult</div>
+        </td>
+    </tr>
+    <tr class="tr-submit">
+        <td class="td-text">ผลคะแนนการวิเคราะห์ความเสี่ยงด้านสภาพแวดล้อมภายในและภายนอก อยู่ในระดับที่มีความเสี่ยง</td>
+        <td style="border-style:solid; width:100px; text-align:center; border-color:#666600;" class='@Model.RiskResultClass'>
+            <div style="background-color:red; font-weight:bold; font-size:23px;">@Model.RiskResult</div>
+        </td>
+    </tr>
+</table>
+
+@*role="button" onclick="location.href = '@Url.Action("Index", "Report")'"*@
+<div class="submit-box">
+
+    <p>@Html.ActionLink("รายงานที่ 1 รายงานการกลั่นกรองโครงการ", "ScreeningProject", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่ 2 รายงานการวิเคราะห์ความเสี่ยงตามหลักธรรมาธิบาล", "RiskAnalysisGoodGovernance", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่่ 3 รายงานการวิเคราะห์ความเสี่ยงด้านสภาพแวดล้อมภายในและภายนอก", "RiskAnalysisEnvironment", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+</div>
+
+@*</div>*@
+

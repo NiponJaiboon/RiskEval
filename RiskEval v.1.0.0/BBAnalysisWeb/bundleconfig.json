@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "Scripts/jquery.number.min.js",
+    "inputFiles": [
+      "Scripts/jquery.number.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/jquery.autonumeric.min.js",
+    "inputFiles": [
+      "Scripts/jquery.autonumeric.js"
+    ]
+  }
+]

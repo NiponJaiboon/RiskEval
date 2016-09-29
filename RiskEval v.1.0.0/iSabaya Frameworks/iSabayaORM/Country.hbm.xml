@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.Country,iSabaya" table="Country">
+
+    <!-- Primary key-->
+    <id name="ID" column="CountryID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <property name="LevelCount" type="int" />
+    <property name="Code" type="String" />
+    <property name="ISOCode2" column="ISO2CharCode" type="String"/> 
+    <property name="ISOCode3" column="ISO3CharCode" type="String"/>
+    <property name="Remark" type="String"/>
+    <property name="IsActive" type="boolean"/> 
+
+    <many-to-one name="OfficialLanguage" class="iSabaya.Language,iSabaya" column="OfficialLanguage" />
+    <many-to-one name="AltOfficialLanguage" class="iSabaya.Language,iSabaya" column="AltOfficialLanguage" />
+    
+    <!--<many-to-one name="RegionLevel1Title" column="Level1RegionTitleID" not-null="true"/>-->
+    <many-to-one name="Name" column="NameMLSId" not-null="true" />
+    <many-to-one name="AbbreviatedName" column="AbbreviatedNameMLSID" />
+    <many-to-one name="NationalityName" column="NationalityNameMLSID" />
+    <many-to-one name="RegionLevel1Title" column="Level1RegionTitleID" />
+    <many-to-one name="RegionLevel2Title" column="Level2RegionTitleID" />
+    <many-to-one name="RegionLevel3Title" column="Level3RegionTitleID" />
+    <many-to-one name="RegionLevel4Title" column="Level4RegionTitleID" />
+    <many-to-one name="Level1RegionRootNode" class="iSabaya.TreeListNode,iSabaya" column="Level1RegionRootNodeID" />
+    <bag name="Level1Regions" table="GeographicRegion" inverse="true" cascade="delete" where="LevelNo=1">
+      <key column="CountryID"/>
+      <one-to-many class="iSabaya.GeographicRegion,iSabaya"/>
+    </bag>
+
+  </class>
+</hibernate-mapping>
+
+

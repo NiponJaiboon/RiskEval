@@ -1,0 +1,12 @@
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\bin\Debug\iSabaya.ExtensibleORM.dll
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\bin\Debug\iSabaya.ExtensibleORM.pdb
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.dll
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.pdb
+D:\Work\iSabaya\20160911\drive-download-20160912T070037Z\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\bin\Debug\iSabaya.ExtensibleORM.dll
+D:\Work\iSabaya\20160911\drive-download-20160912T070037Z\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\bin\Debug\iSabaya.ExtensibleORM.pdb
+D:\Work\iSabaya\20160911\drive-download-20160912T070037Z\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.dll
+D:\Work\iSabaya\20160911\drive-download-20160912T070037Z\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.pdb
+D:\Work\iSabaya\RiskEval\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\bin\Debug\iSabaya.ExtensibleORM.dll
+D:\Work\iSabaya\RiskEval\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\bin\Debug\iSabaya.ExtensibleORM.pdb
+D:\Work\iSabaya\RiskEval\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.dll
+D:\Work\iSabaya\RiskEval\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.ExtensibleORM\obj\Debug\iSabaya.ExtensibleORM.pdb

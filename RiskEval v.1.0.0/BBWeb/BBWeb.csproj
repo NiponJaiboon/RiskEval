@@ -1,0 +1,536 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{92108523-AC89-4B81-8C17-ED597A0564EF}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BBWeb</RootNamespace>
+    <AssemblyName>BBWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>C:\Users\Itsada\Downloads\NHibernate-4.0.3.GA-bin\Required_Bins\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Grid.css" />
+    <Content Include="Content\jquery.dataTables.css" />
+    <Content Include="Content\layout.css" />
+    <Content Include="Content\productiondropdown.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\bg-new.jpg" />
+    <Content Include="Images\bg-new2.jpg" />
+    <Content Include="Images\bg.jpg" />
+    <Content Include="Images\bg1.jpg" />
+    <Content Include="Images\box-middle.gif" />
+    <Content Include="Images\box2.png" />
+    <Content Include="Images\box_002.gif" />
+    <Content Include="Images\box_01.gif" />
+    <Content Include="Images\box_01.png" />
+    <Content Include="Images\box_02.gif" />
+    <Content Include="Images\box_02.png" />
+    <Content Include="Images\box_03.gif" />
+    <Content Include="Images\box_03.png" />
+    <Content Include="Images\box_04.png" />
+    <Content Include="Images\box_body.png" />
+    <Content Include="Images\box_footer.png" />
+    <Content Include="Images\box_header.png" />
+    <Content Include="Images\ex_bg.png" />
+    <Content Include="Images\ex_bgall.jpg" />
+    <Content Include="Images\gov-logo.jpg" />
+    <Content Include="Images\help.png" />
+    <Content Include="Images\horizon.gif" />
+    <Content Include="Images\hr.gif" />
+    <Content Include="Images\icon\AddChoice.png" />
+    <Content Include="Images\icon\AddQuestion.png" />
+    <Content Include="Images\icon\ajax-loader.gif" />
+    <Content Include="Images\icon\arrowDown.png" />
+    <Content Include="Images\icon\arrowUp.png" />
+    <Content Include="Images\icon\config.png" />
+    <Content Include="Images\icon\icon_01.gif" />
+    <Content Include="Images\icon\icon_02.gif" />
+    <Content Include="Images\icon\icon_03.gif" />
+    <Content Include="Images\icon\icon_04.gif" />
+    <Content Include="Images\icon\icon_05.gif" />
+    <Content Include="Images\icon\icon_06.gif" />
+    <Content Include="Images\icon\icon_07.gif" />
+    <Content Include="Images\icon\icon_08.gif" />
+    <Content Include="Images\icon\icon_09.gif" />
+    <Content Include="Images\icon\icon_10.gif" />
+    <Content Include="Images\icon\icon_11_on.gif" />
+    <Content Include="Images\icon\icon_13.gif" />
+    <Content Include="Images\icon\icon_14.gif" />
+    <Content Include="Images\icon\icon_15.gif" />
+    <Content Include="Images\icon\icon_16.gif" />
+    <Content Include="Images\icon\icon_18.gif" />
+    <Content Include="Images\icon\icon_19.gif" />
+    <Content Include="Images\icon\icon_20.gif" />
+    <Content Include="Images\icon\icon_21.gif" />
+    <Content Include="Images\icon\icon_22.gif" />
+    <Content Include="Images\icon\icon_23.gif" />
+    <Content Include="Images\icon\icon_24.gif" />
+    <Content Include="Images\icon\icon_25.gif" />
+    <Content Include="Images\icon\icon_26.gif" />
+    <Content Include="Images\icon\icon_27.gif" />
+    <Content Include="Images\icon\icon_28.gif" />
+    <Content Include="Images\icon\icon_29.gif" />
+    <Content Include="Images\icon\icon_30.gif" />
+    <Content Include="Images\icon\icon_31.gif" />
+    <Content Include="Images\icon\icon_32.gif" />
+    <Content Include="Images\icon\icon_35.gif" />
+    <Content Include="Images\icon\icon_36.gif" />
+    <Content Include="Images\icon\icon_active_off.gif" />
+    <Content Include="Images\icon\icon_active_on.gif" />
+    <Content Include="Images\icon\icon_del_off.gif" />
+    <Content Include="Images\icon\icon_del_on.gif" />
+    <Content Include="Images\icon\icon_inactive_off.gif" />
+    <Content Include="Images\icon\icon_inactive_on.gif" />
+    <Content Include="Images\icon\icon_is_online_off.gif" />
+    <Content Include="Images\icon\icon_is_online_on.gif" />
+    <Content Include="Images\icon\icon_save_off.gif" />
+    <Content Include="Images\icon\icon_save_on.gif" />
+    <Content Include="Images\icon\icon_unlock_off.gif" />
+    <Content Include="Images\icon\icon_unlock_on.gif" />
+    <Content Include="Images\icon\menu.png" />
+    <Content Include="Images\icon\quality-free-icon-set.jpg" />
+    <Content Include="Images\icon\remove.png" />
+    <Content Include="Images\icon\rightArrow.png" />
+    <Content Include="Images\icon\sort.png" />
+    <Content Include="Images\icon\_success.png" />
+    <Content Include="Images\icon\_warning.png" />
+    <Content Include="Images\line.gif" />
+    <Content Include="Images\line01.gif" />
+    <Content Include="Images\logo-new.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\logo2.png" />
+    <Content Include="Images\logout.png" />
+    <Content Include="Images\space.png" />
+    <Content Include="Images\tab-green.gif" />
+    <Content Include="Images\tab-green1.gif" />
+    <Content Include="Images\tab-green2.gif" />
+    <Content Include="Images\tabs-green.gif" />
+    <Content Include="Images\tabs.gif" />
+    <Content Include="Images\tabs01.gif" />
+    <Content Include="Images\tab_01.png" />
+    <Content Include="Images\tab_03.png" />
+    <Content Include="Images\top_header.jpg" />
+    <Content Include="Images\top_header.png" />
+    <Content Include="Images\Untitled-3.jpg" />
+    <Content Include="Reports\ProjectsReport.aspx" />
+    <Content Include="Reports\check_project_report.aspx" />
+    <Content Include="Reports\RiskAnalysisEnvironment.aspx" />
+    <Content Include="Reports\ScreeningProjectReport.aspx" />
+    <Content Include="Reports\UserReport.aspx" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Content\dataTables.bootstrap.css" />
+    <Content Include="Document\1คู่มือการใช้โปรแกรมของส่วนราชการ.pdf" />
+    <Content Include="Document\2คู่มือส่วนราชการ.pdf" />
+    <Content Include="Document\3แบบฟอร์มประกอบแนวทางการตอบแบบสอบถาม.docx" />
+    <Content Include="Document\คู่มือเจ้าหน้าที่สำนักงบประมาณ.pdf" />
+    <Content Include="XML\Contacts.xml" />
+    <None Include="Scripts\angular.intellisense.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js">
+      <DependentUpon>angular.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\angular.min.js.map">
+      <DependentUpon>angular.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\dataTables.bootstrap.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js">
+      <DependentUpon>jquery-1.10.2.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.dataTables.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js">
+      <DependentUpon>jquery.validate.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\numeral.js" />
+    <Content Include="Scripts\priceFormat.js" />
+    <Content Include="Scripts\site.js" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Scripts\ValidateCharecter.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\jquery-1.10.2.min.map">
+      <DependentUpon>jquery-1.10.2.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Admin\AnnounceController.cs" />
+    <Compile Include="Controllers\Admin\DepartmentController.cs" />
+    <Compile Include="Controllers\Admin\GoodGovernanceController.cs" />
+    <Compile Include="Controllers\Admin\MinistryController.cs" />
+    <Compile Include="Controllers\Budgetor\BudgetorController.cs" />
+    <Compile Include="Controllers\ContactsController.cs" />
+    <Compile Include="Controllers\QuestionnaireController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\Evaluation\EvaluationController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\Government\GovernmentController.cs" />
+    <Compile Include="Controllers\UserPageController.cs" />
+    <Compile Include="Models\CommonConstant.cs" />
+    <Compile Include="Models\Contacts.cs" />
+    <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Formetter.cs" />
+    <Compile Include="Models\HtmlHelpers\InputHelpers.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\ViewModels\DepartmentViewModel.cs" />
+    <Compile Include="Models\ViewModels\GenaralListViewModel.cs" />
+    <Compile Include="Controllers\Admin\StrategicController.cs" />
+    <Compile Include="Controllers\Admin\UserController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModels\AnnounceViewModel.cs" />
+    <Compile Include="Models\HtmlHelpers\PageingHelpers.cs" />
+    <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\ViewModels\MinistryViewModel.cs" />
+    <Compile Include="Models\PageInfo.cs" />
+    <Compile Include="Models\GoodGovernance.cs" />
+    <Compile Include="Models\ViewModels\StrategicViewModel.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\ViewModels\ProjectViewModel.cs" />
+    <Compile Include="Models\ViewModels\UserViewModel.cs" />
+    <Compile Include="Models\WebSessionContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\ProjectsReport.aspx.cs">
+      <DependentUpon>ProjectsReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ProjectsReport.aspx.designer.cs">
+      <DependentUpon>ProjectsReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\check_project_report.aspx.cs">
+      <DependentUpon>check_project_report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\check_project_report.aspx.designer.cs">
+      <DependentUpon>check_project_report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\RiskAnalysisEnvironment.aspx.cs">
+      <DependentUpon>RiskAnalysisEnvironment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\RiskAnalysisEnvironment.aspx.designer.cs">
+      <DependentUpon>RiskAnalysisEnvironment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ScreeningProjectReport.aspx.cs">
+      <DependentUpon>ScreeningProjectReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ScreeningProjectReport.aspx.designer.cs">
+      <DependentUpon>ScreeningProjectReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\UserReport.aspx.cs">
+      <DependentUpon>UserReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\UserReport.aspx.designer.cs">
+      <DependentUpon>UserReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Util\MessageException.cs" />
+    <Compile Include="Util\PageID.cs" />
+    <Compile Include="Util\SessionTimeoutFilterAttribute.cs" />
+    <Compile Include="Util\WebLogger.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Views\Announce\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Strategic\Index.cshtml" />
+    <Content Include="Views\GoodGovernance\Index.cshtml" />
+    <Content Include="Views\Ministry\Index.cshtml" />
+    <Content Include="Views\Department\Index.cshtml" />
+    <Content Include="Views\Report\UserReport.cshtml" />
+    <Content Include="Views\Evaluation\Index.cshtml" />
+    <Content Include="Views\Evaluation\ProjectSubmitted.cshtml" />
+    <Content Include="Views\Evaluation\GetProject.cshtml" />
+    <Content Include="Views\Evaluation\ProjectSubmittedDetail.cshtml" />
+    <Content Include="Views\Evaluation\ProjectApprovedReport.cshtml" />
+    <Content Include="Views\Evaluation\ProjectNotSubmitted.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Report\ScreeningProject.cshtml" />
+    <Content Include="Views\Report\RiskAnalysisEnvironment.cshtml" />
+    <Content Include="Views\Report\RiskAnalysisGoodGovernance.cshtml" />
+    <Content Include="Views\Evaluation\ProjectNotSubmittedDetail.cshtml" />
+    <Content Include="Views\Evaluation\ProjectCommentByBudgetor.cshtml" />
+    <Content Include="Views\Evaluation\ProjectCommentByBudgetorDetail.cshtml" />
+    <Content Include="Views\Evaluation\ProjectApprovedByPaliment.cshtml" />
+    <Content Include="Views\Evaluation\ProjectApproveByPalimentDetail.cshtml" />
+    <Content Include="Views\Report\ProjectGroupByRiskAnalysisReport.cshtml" />
+    <Content Include="Views\Report\ProjectGroupByCategoryReport.cshtml" />
+    <Content Include="Views\Report\ProjectGroupByApprovedReport.cshtml" />
+    <Content Include="Views\Report\ProjectGroupByTypeReport.cshtml" />
+    <Content Include="Views\Report\ProjectGroupByStrategicReport.cshtml" />
+    <Content Include="Views\Report\ProjectGroupByStatusReport.cshtml" />
+    <Content Include="Views\Report\ProjectGroupByRiskResultAnalysisReport.cshtml" />
+    <Content Include="Views\Report\ProjectCheckReport.cshtml" />
+    <Content Include="Views\Report\ProjectAllReport.cshtml" />
+    <Content Include="Views\Budgetor\Index.cshtml" />
+    <Content Include="Views\Budgetor\CommentProjectByBudgetor.cshtml" />
+    <Content Include="Views\Budgetor\SaveResultFromPaliment.cshtml" />
+    <Content Include="Views\Budgetor\ProjectApprovedByPaliment.cshtml" />
+    <Content Include="Views\Budgetor\ChangeProfile.cshtml" />
+    <Content Include="Views\Government\Index.cshtml" />
+    <Content Include="Views\Government\ProjectIntro.cshtml" />
+    <Content Include="Views\Government\ProjectDetail.cshtml" />
+    <Content Include="Views\Government\ProjectFilter.cshtml" />
+    <Content Include="Views\Register\Staff.cshtml" />
+    <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Contacts\Index.cshtml" />
+    <Content Include="Views\UserPage\Home.cshtml" />
+    <Content Include="Views\UserPage\ProjectEBudget.cshtml" />
+    <Content Include="Views\UserPage\ProjectRisk_Incomplete.cshtml" />
+    <Content Include="Views\UserPage\ProjectRisk_Intro.cshtml" />
+    <Content Include="Views\UserPage\ProjectRisk_New.cshtml" />
+    <Content Include="Views\Shared\_LayoutAnonymous.cshtml" />
+    <Content Include="Views\Questionnaire\CreateQuestionnaire.cshtml" />
+    <Content Include="log4net.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
+    <Folder Include="Views\Default\" />
+    <Folder Include="Views\Evaluation\Shared\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\Rdlc\CheckProjectAllReport.rdlc" />
+    <EmbeddedResource Include="Reports\Rdlc\ProjectAllReport.rdlc" />
+    <EmbeddedResource Include="Reports\Rdlc\ReportFactorRisk.rdlc" />
+    <EmbeddedResource Include="Reports\Rdlc\RiskAnalysisEnvironment.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Rdlc\ScreeningProject.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Rdlc\SubInprocessCheckProjectAllReport.rdlc" />
+    <EmbeddedResource Include="Reports\Rdlc\SubNotSubmitCheckProjectAllReport.rdlc" />
+    <EmbeddedResource Include="Reports\Rdlc\SubSuccessCheckProjectAllReport.rdlc" />
+    <EmbeddedResource Include="Reports\Rdlc\sub_header.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\UsersReport.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BBORM\BudgetORM.csproj">
+      <Project>{af0cd22a-1c1a-439f-b4d6-6f9013acb18b}</Project>
+      <Name>BudgetORM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BB\Budget.csproj">
+      <Project>{bc3c5331-6f3f-4cd4-8259-1d2978312918}</Project>
+      <Name>Budget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Budget.DataAccess\Budget.DataBase.csproj">
+      <Project>{d5297398-620a-41bf-b9a5-93e276a8510f}</Project>
+      <Name>Budget.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iSabaya Frameworks\iSabaya.Config\iSabaya.Config.csproj">
+      <Project>{e4e75898-cb9f-44de-ac2a-39692f41c13a}</Project>
+      <Name>iSabaya.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iSabaya Frameworks\iSabaya.ExtensibleORM\iSabaya.ExtensibleORM.csproj">
+      <Project>{04e88657-e0dd-435c-8879-429c1210e27d}</Project>
+      <Name>iSabaya.ExtensibleORM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iSabaya Frameworks\iSabayaORM\iSabayaORM.csproj">
+      <Project>{f8965a6d-6c8c-4cba-9dbf-85459f9e61b2}</Project>
+      <Name>iSabayaORM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iSabaya Frameworks\iSabaya\iSabaya.csproj">
+      <Project>{d168c3f8-e236-4bbe-8de4-86b05b12594f}</Project>
+      <Name>iSabaya</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>19856</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:19856/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

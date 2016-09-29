@@ -1,0 +1,147 @@
+﻿@{
+    ViewBag.Title = "แสดงความคิดเห็นเพิ่มเติมจากเจ้าหน้าที่จัดทำงบประมาณ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    $body = $("body");
+
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    $(function () {
+
+        getProjects();
+        var selectedId = $("select option:selected").val();
+
+        console.log(selectedId);
+
+        if (selectedId != "0") {
+            $("#project-commenting-table").show();
+            getProjects();
+        }
+        else {
+            $("#project-commenting-table").hide();
+        }
+
+        $("#btSearch").click(function (e) {
+            e.preventDefault();
+            getProjects();
+        });
+
+        $("#btClear").click(function (e) {
+            e.preventDefault();
+            $("#ddlDepartment").val("0");
+            $("#tbYear").val("");
+            $("#tbBudget").val("");
+            getProjects();
+        });
+    });
+
+    function getProjects() {
+
+        $.ajax({
+            cache: false,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: appName + "/Budgetor/GetProjectByDepartment/",
+            data: {
+                id: $("#ddlDepartment option:selected").val(),
+                year: $("#tbYear").val(),
+                budget: $("#tbBudget").val(),
+                status: "completeSign"
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.Success) {
+                    //debugger
+                    //clear datatable
+
+                    $('#project-commenting-table').dataTable({
+                        "bDestroy": true
+                    }).fnDestroy();
+
+
+                    $('#project-commenting-table').DataTable({
+                        "dom": '<"toolbar">frtip',
+                        searching: false,
+                        ordering: true,
+                        paging: true,
+                        //scrollY: 400,
+                        //"bProcessing": true,
+                        //"bDeferRender": true,
+                        data: data.model,
+                        columns: [
+                            { data: 'NameLink' },
+                            { data: 'BudgetType' },                            
+                            { data: 'Department.Code' },
+                            { data: 'Year' },
+                            { data: 'Budget', sClass: "right" },
+                            { data: 'LastUpdate' },
+                            { data: 'RiskBox', sClass: "risk" },
+                        ]
+                    });
+
+                    $("#project-commenting-table").show();
+
+                    if (data.model.length <= 0)
+                        $("#project-commenting-table_paginate").hide();
+
+                    //} else {
+                    //    $("#project-commenting-table").show();
+                    //}
+
+                } else {
+                    $("#message-fail").text(data.Message);
+                    $('#modal-fail').modal('show');
+                }
+            }
+        });
+    }
+</script>
+
+<div>
+    <div class="modal"></div>
+    <fieldset class="fieldset">
+        <legend class="legend">@Html.Label("", "ค้นหาโครงการ")</legend>
+        <table>
+            <tr style="height:40px">
+                <td>@Html.Label("", "ค้นหาโครงการแยกตามหน่วยงาน")</td>
+                <td>@Html.DropDownList("ddlDepartment", null, new { @class = "form-control" })</td>
+            </tr>
+            <tr style="height:40px">
+                <td>@Html.Label("", "ปีงบประมาณ")</td>
+                <td>@Html.TextBox("tbYear", null, new { @class = "form-control" })</td>
+            </tr>
+            <tr style="height:40px">
+                <td>@Html.Label("", "งบประมาณ")</td>
+                <td>@Html.TextBox("tbBudget", null, new { @class = "form-control numericOnly" })</td>
+            </tr>
+        </table>
+        <input type="button" value="ค้นหา" class="btn btn-default" id="btSearch" />
+        <input type="button" value="เคลียร์" class="btn btn-default" id="btClear" />
+    </fieldset>
+</div>
+
+<div style="padding-top:5px">
+    <table id="project-commenting-table" class="table table-bordered table-striped table-hover" cellpadding="0" cellspacing="0" data-order='[[ 1, "asc" ]]' data-page-length='10'>
+        <thead>
+            <tr>
+                <th class="center" style="width:360px;vertical-align:middle">ชื่อโครงการ</th>
+                <th class="center" style="width:114px;vertical-align:middle">ลักษณะโครงการ</th>
+                <th class="center" style="width:129px;vertical-align:middle">รหัสหน่วยงาน</th>
+                <th class="center" style="width:100px;vertical-align:middle">ปีงบประมาณ</th>
+                <th class="center" style="width:129px;vertical-align:middle">งบประมาณ (บาท)</th>
+                <th class="center" style="width:158px;vertical-align:middle">วันที่แก้ไขครั้งสุดท้าย</th>
+                <th class="center" style="width:205px;vertical-align:middle">ผลการการวิเคราะห์ความเสี่ยง</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+

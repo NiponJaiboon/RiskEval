@@ -1,0 +1,715 @@
+﻿@{
+    ViewBag.Title = "ลงทะเบียนผู้ใช้งาน(สำนักงบประมาณ)";
+    Layout = "~/Views/Shared/_LayoutAnonymous.cshtml";
+}
+
+<style>
+    table #checkbox2column {
+    }
+
+        table #checkbox2column td {
+            vertical-align: top !important;
+        }
+
+            table #checkbox2column td .checkboxinput {
+                vertical-align: top !important;
+                margin-top: 8px !important;
+                /*margin: 0 !important;*/
+            }
+
+            table #checkbox2column td .spantext-Lable {
+                display: inline-block;
+                vertical-align: top !important;
+                width: 10%;
+            }
+
+            table #checkbox2column td .spantext-Feild {
+                display: inline-block;
+                vertical-align: top !important;
+                width: 90%;
+            }
+</style>
+<script type="text/javascript" src="~/Scripts/ValidateCharecter.js"></script>
+<script type="text/javascript">
+    var appName = "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)";
+    
+
+    var check_number = /^\d+$/;
+    var check_eng = /^[a-zA-Z]+$/;
+    var check_th = /^[ก-ฺเ-๏๚-๛]+$/;
+    var check_email = /^([\w-]+(?:\.[\w-]+)*)@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+
+    function check(s, field) {
+        if (s.checked) {
+            for (i = 0; i < field.length; i++) {
+                field[i].checked = true;
+            }
+            //checkflag = "true";
+            return true;
+        } else {
+            for (i = 0; i < field.length; i++) {
+                field[i].checked = false;
+            }
+            //checkflag = "false";
+            return false;
+        }
+    }
+    function uncheckall(s) {
+        if (s.checked) {
+            return true;
+        }
+        else {
+            document.getElementById("care").checked = false;
+            return false;
+        }
+    }
+    function checkform() {
+        var checkvar = document.form1.Chk1;
+        var check = "";
+        for (i = 0; i < checkvar.length; i++) {
+            if (checkvar[i].checked) {
+                check = "Y";
+                break;
+            }
+        }
+        if (check == "") {
+            alert("กรุณาเลือก CheckBox อย่างน้อย 1 ตัวครับ");
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function validateIssue(sender, errorText, errorSymbol, message, flag) {
+        var msg = ((message) ? message : "");
+        if (flag) {
+            if (errorText) { errorText.hide(); }
+            if (errorSymbol) { errorSymbol.css({ visibility: "hidden" }); }
+        }
+        else {
+            if (errorText) { errorText.text(msg).show(); }
+            if (errorSymbol) { errorSymbol.prop("title", msg).css({ visibility: "visible" }); }
+        }
+        sender.css({ borderColor: ((flag) ? "darkgray" : "red") });
+    }
+
+    $(function () {
+        $("#btSubmit").click(function (e) {
+            e.preventDefault();
+            var sender, errorText, errorSymbol;
+            var ispeopleid, isnameth, islastnameth, isnameen, islastnameen, isemail, isguild, isstats
+                , isminis, isaddress, isTelephone, isToNumber, isPhoneNumber, isSmartPhone, isUnit = false;
+
+
+            // เลขที่บัตรประชาชน
+            sender = $("#peopleID");
+            errorText = $("#idcard_er");
+            errorSymbol = $("#validatepeopleID");
+            ispeopleid = (sender.val().length == 13 && check_number.test(sender.val()));
+            validateIssue(sender, errorText, errorSymbol
+                , ((sender.val() == "") ? "กรุณาใส่เลขบัตรประชาน 13 หลัก" : "เลขบัตรประชาชนไม่ถูกต้อง")
+                , ispeopleid);
+
+
+            // ชื่อ(ภาษาไทย)
+            sender = $("#namethai");
+            errorText = $("#nameth_er");
+            errorSymbol = $("#validatenamethai");
+            isnameth = (check_th.test(sender.val()));
+            validateIssue(sender, errorText, errorSymbol
+                , ((sender.val() == "") ? "กรุณาใส่ชื่อภาษาไทย" : "ชื่อภาษาไทยไม่ถูกต้อง")
+                , isnameth);
+
+
+            // นามสกุล(ภาษาไทย)
+            sender = $("#lastnamethai");
+            errorText = $("#lastnameth_er");
+            errorSymbol = $("#validatelastnamethai");
+            islastnameth = (check_th.test(sender.val()));
+            validateIssue(sender, errorText, errorSymbol
+                , ((sender.val() == "") ? "กรุณาใส่นามสกุลภาษาไทย" : "นามสกุลภาษาไทยไม่ถูกต้อง")
+                , islastnameth);
+
+
+            // ชื่อ(ภาษาอังกฤษ)
+            sender = $("#nameenglish");
+            errorText = $("#nameeng_er");
+            errorSymbol = $("#validatenameenglish");
+            isnameen = (check_eng.test(sender.val()));
+            validateIssue(sender, errorText, errorSymbol
+                , ((sender.val() == "") ? "กรุณาใส่ชื่อภาษาอังกฤษ" : "ชื่อภาษาอังกฤษไม่ถูกต้อง")
+                , isnameen);
+
+
+            // นามสกุล(ภาษาอังกฤษ)
+            sender = $("#lastnameenglish");
+            errorText = $("#lastnameeng_er");
+            errorSymbol = $("#validatelastnameenglish");
+            islastnameen = (check_eng.test(sender.val()));
+            validateIssue(sender, errorText, errorSymbol
+                , ((sender.val() == "") ? "กรุณาใส่นามสกุลภาษาอังกฤษ" : "นามสกุลภาษาอังกฤษไม่ถูกต้อง")
+                , isnameen);
+
+
+            // ที่อยู่หน่วยงาน
+            sender = $("#addresswork");
+            errorText = $("#address_er");
+            errorSymbol = $("#validateaddresswork");
+            isaddress = (sender.val() != "");
+            validateIssue(sender, errorText, errorSymbol
+                , ((sender.val() == "") ? "กรุณาใส่ที่อยู่หน่วยงาน" : "")
+                , isaddress);
+
+
+            // หมายเลขโทรศัพท์กลาง
+            sender = $("#phonemid");
+            errorText = $("#Tel_error");
+            errorSymbol = $("#validatephonemid");
+            isTelephone = (sender.val() == "" || check_number.test(sender.val()));
+            validateIssue(sender, errorText, errorSymbol
+                , ((isTelephone) ? "" : "เบอร์โทรศัพท์ไม่ถูกต้อง")
+                , isTelephone);
+
+
+            // เบอร์ต่อ
+            sender = $("#phonenext");
+            errorText = $("#to_error");
+            errorSymbol = $("#validatephonenext");
+            isToNumber = (sender.val() == "" || check_number.test(sender.val()));
+            validateIssue(sender, errorText, errorSymbol
+                , ((isToNumber) ? "" : "เบอร์ต่อไม่ถูกต้อง")
+                , isToNumber);
+
+
+            // หมายเลขโทรศัพท์ตรง
+            sender = $("#phonetong");
+            errorText = $("#Phone_error");
+            errorSymbol = $("#validatephonetong");
+            isPhoneNumber = (sender.val() == "" || check_number.test(sender.val()));
+            validateIssue(sender, errorText, errorSymbol
+                , ((isPhoneNumber) ? "" : "เบอร์โทรศัพท์ตรงไม่ถูกต้อง")
+                , isPhoneNumber);
+
+
+            // หมายเลขโทรศัพท์มือถือ
+            sender = $("#mobile");
+            errorText = $("#SmartPhone_error");
+            errorSymbol = $("#validatemobile");
+            isSmartPhone = (sender.val() == "" || check_number.test(sender.val()));
+            validateIssue(sender, errorText, errorSymbol
+                , ((isSmartPhone) ? "" : "เบอร์โทรศัพท์มือถือไม่ถูกต้อง")
+                , isSmartPhone);
+
+
+            // E-Mail
+            sender = $("#email");
+            errorText = $("#emaild_er");
+            errorSymbol = $("#validateemail");
+            isemail = (check_email.test(sender.val()));
+            validateIssue(sender, errorText, errorSymbol
+                , ((sender.val() == "") ? "กรุณากรอก E-mail" : "อีเมล์ไม่ถูกต้อง")
+                , isemail);
+
+
+            // สังกัด
+            sender = $("#guild");
+            errorText = $("#guildd_er");
+            errorSymbol = $("#validateguild");
+            isguild = ($("#guild option:selected").val() > 0);
+            validateIssue(sender, errorText, errorSymbol
+                , ((isguild) ? "" : "กรุณาเลือกสังกัด")
+                , isguild);
+
+
+            // สถานะผู้ใช้งาน
+            sender = $("#Roles");
+            errorText = $("#statss_er");
+            errorSymbol = $("#validatestats");
+            isstats = ($("#Roles option:selected").val() > 0);
+            validateIssue(sender, errorText, errorSymbol
+                , ((isstats) ? "" : "กรุณาเลือกสถานะผู้ใช้งาน")
+                , isstats);
+
+
+            // กระทรวงที่ดูแล
+            sender = $("#Ministry");
+            errorText = $("#minis_er");
+            errorSymbol = $("#validateMinistry");
+            isminis = ($("#Ministry option:selected").val() > 0);
+            validateIssue(sender, errorText, errorSymbol
+                , ((isminis) ? "" : "กรุณาเลือกกระทรวงที่ดูแล")
+                , isminis);
+
+
+            // หน่วยงานที่ดูแล
+            var chk1 = $("input[name='chk1']");
+            var caree_er = $("#caree_er")
+            if (chk1.length == 0) {
+                caree_er.text("กรุณาเลือกหน่วยงานที่ดูแล").show();
+                $("#validatecare").prop("title", "กรุณาเลือกหน่วยงานที่ดูแล").css({ visibility: "visible" });
+            }
+            else {
+                for (var i = 0; i < chk1.length; i++) { isUnit = isUnit || chk1[i].checked; }
+                if (isUnit) {
+                    caree_er.hide();
+                    $("#validatecare").css({ visibility: "hidden" });
+                }
+                else {
+                    caree_er.text("กรุณาเลือกหน่วยงานที่ดูแล").show();
+                    $("#validatecare").prop("title", "กรุณาเลือกหน่วยงานที่ดูแล").css({ visibility: "visible" });
+                }
+            }
+
+
+            if (ispeopleid && isnameth && islastnameth && isnameen && islastnameen && isemail && isguild && isstats
+                 && isminis && isaddress && isTelephone && isToNumber && isPhoneNumber && isSmartPhone && isUnit) {
+                debugger;
+                var agencies = new Array();
+                var chkAgencies = $("input[name='chk1']");
+                for (var i = 0; i < chkAgencies.length; i++)
+                    if (chkAgencies[i].checked)
+                        agencies[agencies.length] = chkAgencies[i].value;
+
+                $.ajax({
+                    type: 'POST',
+                    url: appName + '/Register/RegisterStaff/',
+                    dataType: 'json',
+                    data: {
+                        idCard: $("#peopleID").val(),
+                        firstNameTH: $("#namethai").val(),
+                        LastnameTH: $("#lastnamethai").val(),
+                        firstNameEN: $("#nameenglish").val(),
+                        lastnameEN: $("#lastnameenglish").val(),
+                        address: $("#addresswork").val(),
+                        Telephone: $("#phonemid").val(),
+                        toNumber: $("#phonenext").val(),
+                        DirectTelephone: $("#phonetong").val(),
+                        mobilePhone: $("#mobile").val(),
+                        email: $("#email").val(),
+                        institute: $("#guild").val(),
+                        roleId: $("#Roles").val(),
+                        ministryId: $("#Ministry").val(),
+                        agencies: agencies,
+                    },
+                    success: function (data) {
+                        if (data.Success) {
+                            $("#message-success").text(data.Message);
+                            $('#modal-success').modal('show');
+                            
+
+                            $("#btnOkSuccess").click(function (e) {
+                                e.preventDefault();
+                                window.location = appName + "/Login/Index";
+                            });
+                        } else {
+                            $("#message-fail").text(data.Message);
+                            $('#modal-fail').modal('show');
+                        }
+                    }
+                });
+            }
+        });
+
+        $("#phonemid").keyup(function (e) {
+            if ($("#phonemid").val() == "") {
+                $("#phonenext").val("");
+                $("#phonenext").attr("disabled", "disabled");
+            }
+            else {
+                $("#phonenext").removeAttr("disabled");
+            }
+        });
+
+        $("#Ministry").change(function (e) {
+            e.preventDefault();
+            var t = $("#Ministry option:selected").val();
+            $.ajax({
+                url: appName + '/Register/Get/',
+                dataType: 'json',
+                data: { mId: (t == "" ? 0 : t) },
+                success: function (data) {
+                    var a = "<table id='checkbox2column' style='width:100%;'>";
+                    for (var i = 0; i < data.length; i = i + 2) {
+                        a += "<tr><td style='padding-right: 10px; width: 50%;'>";
+                        if (data[i]) {
+                            a += "<span class='spantext-Lable'><input type='checkbox' name='chk1' class='checkboxinput' value='" + data[i].ID + "' onclick = \"this.valed=uncheckall(this)\" /></span>";
+                            a += "<span class='spantext-Feild'>" + data[i].Code + " / " + data[i].Name + "</span>";
+                        }
+                        a += "</td><td style='width: 50%;'>";
+                        if (data[i + 1]) {
+                            a += "<span class='spantext-Lable'><input type='checkbox' name='chk1' class='checkboxinput' value='" + data[i + 1].ID + "' onclick = \"this.valed=uncheckall(this)\" /></span>";
+                            a += "<span class='spantext-Feild'>" + data[i + 1].Code + " / " + data[i + 1].Name + "</span>";
+                        }
+                        a += "</td></tr>";
+                    }
+                    a += "</table>";
+
+                    document.getElementById("care").checked = false;
+                    document.getElementById("abc").innerHTML = "";
+                    $("#abc").append(a);
+                },
+                type: 'GET'
+            });
+        });
+
+        // Validate Onblur
+        $("#peopleID").blur(function (e) {
+            var sender = $(this);
+            validateIssue(sender, null, $("#validatepeopleID")
+                , ((sender.val() == "") ? "กรุณาใส่เลขบัตรประชาน 13 หลัก" : "เลขบัตรประชาชนไม่ถูกต้อง")
+                , (sender.val().length == 13 && check_number.test(sender.val())));
+        });
+
+        $("#namethai").blur(function (e) {
+            var sender = $(this);
+            validateIssue(sender, null, $("#validatenamethai")
+                , ((sender.val() == "") ? "กรุณาใส่ชื่อภาษาไทย" : "ชื่อภาษาไทยไม่ถูกต้อง")
+                , (check_th.test(sender.val())));
+        });
+
+        $("#lastnamethai").blur(function (e) {
+            var sender = $(this);
+            validateIssue(sender, null, $("#validatelastnamethai")
+                , ((sender.val() == "") ? "กรุณาใส่นามสกุลภาษาไทย" : "นามสกุลภาษาไทยไม่ถูกต้อง")
+                , (check_th.test(sender.val())));
+        });
+
+        $("#nameenglish").blur(function (e) {
+            var sender = $(this);
+            validateIssue(sender, null, $("#validatenameenglish")
+                , ((sender.val() == "") ? "กรุณาใส่ชื่อภาษาอังกฤษ" : "ชื่อภาษาอังกฤษไม่ถูกต้อง")
+                , (check_eng.test(sender.val())));
+        });
+
+        $("#lastnameenglish").blur(function (e) {
+            var sender = $(this);
+            validateIssue(sender, null, $("#validatelastnameenglish")
+                , ((sender.val() == "") ? "กรุณาใส่นามสกุลภาษาอังกฤษ" : "นามสกุลภาษาอังกฤษไม่ถูกต้อง")
+                , (check_eng.test(sender.val())));
+        });
+
+        $("#addresswork").blur(function (e) {
+            var sender = $("#addresswork");
+            validateIssue(sender, null, $("#validateaddresswork")
+                , ((sender.val() == "") ? "กรุณาใส่ที่อยู่หน่วยงาน" : "")
+                , (sender.val() != ""));
+        });
+
+        $("#phonemid").blur(function (e) {
+            var sender = $(this);
+            var isTelephone = (sender.val() == "" || check_number.test(sender.val()));
+            validateIssue(sender, null, $("#validatephonemid")
+                , ((isTelephone) ? "" : "เบอร์โทรศัพท์ไม่ถูกต้อง")
+                , isTelephone);
+        });
+
+        $("#phonenext").blur(function (e) {
+            var sender = $(this);
+            var isToNumber = (sender.val() == "" || check_number.test(sender.val()));
+            validateIssue(sender, null, $("#validatephonenext")
+                , ((isToNumber) ? "" : "เบอร์ต่อไม่ถูกต้อง")
+                , isToNumber);
+        });
+
+        $("#phonetong").blur(function (e) {
+            var sender = $("#phonetong");
+            var isPhoneNumber = (sender.val() == "" || check_number.test(sender.val()));
+            validateIssue(sender, null, $("#validatephonetong")
+                , ((isPhoneNumber) ? "" : "เบอร์โทรศัพท์ตรงไม่ถูกต้อง")
+                , isPhoneNumber);
+        });
+
+        $("#mobile").blur(function (e) {
+            var sender = $("#mobile");
+            var isSmartPhone = (sender.val() == "" || check_number.test(sender.val()));
+            validateIssue(sender, null, $("#validatemobile")
+                , ((isSmartPhone) ? "" : "เบอร์โทรศัพท์มือถือไม่ถูกต้อง")
+                , isSmartPhone);
+        });
+
+        $("#email").blur(function (e) {
+            sender = $("#email");
+            validateIssue(sender, null, $("#validateemail")
+                , ((sender.val() == "") ? "กรุณากรอก E-mail" : "อีเมล์ไม่ถูกต้อง")
+                , (check_email.test(sender.val())));
+        });
+
+        $("#guild").blur(function (e) {
+            var sender = $("#guild");
+            var isguild = ($("#guild option:selected").val() > 0);
+            validateIssue(sender, null, $("#validateguild")
+                , ((isguild) ? "" : "กรุณาเลือกสังกัด")
+                , isguild);
+        });
+
+        $("#Roles").blur(function (e) {
+            // สถานะผู้ใช้งาน
+            var sender = $("#Roles");
+            var isstats = ($("#Roles option:selected").val() > 0);
+            validateIssue(sender, null, $("#validatestats")
+                , ((isstats) ? "" : "กรุณาเลือกสถานะผู้ใช้งาน")
+                , isstats);
+        });
+
+        $("#Ministry").blur(function (e) {
+            var sender = $("#Ministry");
+            var isminis = ($("#Ministry option:selected").val() > 0);
+            validateIssue(sender, null, $("#validateMinistry")
+                , ((isminis) ? "" : "กรุณาเลือกกระทรวงที่ดูแล")
+                , isminis);
+        });
+    });
+</script>
+<div>
+    <table border="0">
+        <tr>
+            <td style="padding-left:15px">
+                เลขที่บัตรประชาชน<span style="color:red;">*</span>
+            </td>
+            <td>
+                @Html.TextBox("peopleID", "", new { maxlength = "13", @class = "form-control", @onkeypress = "return FillterNumber(event);", @onpaste = "return FillterNumberOnPaste(event);" })
+            </td>
+            <td style="width:50px;">
+                <span id="validatepeopleID" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="padding-left:15px">
+                ชื่อ(ภาษาไทย)<span style="color:red;">*</span>
+            </td>
+            <td>
+                @Html.TextBox("namethai", "", new { maxlength = "200", @class = "form-control", @onkeypress = "return FillterThaiAlphabet(event);", @onpaste = "return FillterThaiAlphabetOnPaste(event);" })
+            </td>
+            <td>
+                <span id="validatenamethai" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+            <td>
+                นามสกุล(ภาษาไทย)<span style="color:red;">*</span>
+            </td>
+            <td>
+                @Html.TextBox("lastnamethai", "", new { maxlength = "200", @class = "form-control", @onkeypress = "return FillterThaiAlphabet(event);", @onpaste = "return FillterThaiAlphabetOnPaste(event);" })
+            </td>
+            <td>
+                <span id="validatelastnamethai" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-left:15px">
+                ชื่อ(ภาษาอังกฤษ)<span style="color:red;">*</span>
+            </td>
+            <td>
+                @Html.TextBox("nameenglish", "", new { maxlength = "200", @class = "form-control", @onkeypress = "return FillterAlphabet(event);", @onpaste = "return FillterAlphabetOnPaste(event);" })
+            </td>
+            <td>
+                <span id="validatenameenglish" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+            <td>
+                นามสกุล(ภาษาอังกฤษ)<span style="color:red;">*</span>
+            </td>
+            <td>
+                @Html.TextBox("lastnameenglish", "", new { maxlength = "200", @class = "form-control", @onkeypress = "return FillterAlphabet(event);", @onpaste = "return FillterAlphabetOnPaste(event);" })
+            </td>
+            <td>
+                <span id="validatelastnameenglish" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-left:15px">
+                ที่อยู่หน่วยงาน<span style="color:red;">*</span>
+            </td>
+            <td colspan="4">
+                @Html.TextArea("addresswork", "", new { @cols = "0", @rows = " 3 ", @maxlength = "400", @style = "width:100%;", @class = "form-control" })
+            </td>
+            <td>
+                <span id="validateaddresswork" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-left:15px">
+                หมายเลขโทรศัพท์กลาง
+            </td>
+            <td>
+                @Html.TextBox("phonemid", "", new { maxlength = "15", @class = "form-control", @onkeypress = "return FillterNumber(event);", @onpaste = "return FillterNumberOnPaste(event);" })
+            </td>
+            <td>
+                <span id="validatephonemid" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+            <td>
+                เบอร์ต่อ
+            </td>
+            <td>
+                @Html.TextBox("phonenext", "", new { @disabled = "disabled", maxlength = "15", @class = "form-control", @onkeypress = "return FillterNumber(event);", @onpaste = "return FillterNumberOnPaste(event);" })
+            </td>
+            <td>
+                <span id="validatephonenext" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-left:15px">
+                หมายเลขโทรศัพท์ตรง
+            </td>
+            <td>
+                @Html.TextBox("phonetong", "", new { maxlength = "15", @class = "form-control", @onkeypress = "return FillterNumber(event);", @onpaste = "return FillterNumberOnPaste(event);" })
+            </td>
+            <td>
+                <span id="validatephonetong" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+            <td>
+                หมายเลขโทรศัพท์มือถือ
+            </td>
+            <td>
+                @Html.TextBox("mobile", "", new { maxlength = "15", @class = "form-control", @onkeypress = "return FillterNumber(event);", @onpaste = "return FillterNumberOnPaste(event);" })
+            </td>
+            <td>
+                <span id="validatemobile" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-left:15px">
+                E-Mail<span style="color:red;">*</span>
+            </td>
+            <td>
+                @Html.TextBox("email", "", new { maxlength = "200", @class = "form-control" })
+            </td>
+            <td>
+                <span id="validateemail" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="padding-left:15px">
+                สังกัด<span style="color:red;">*</span>
+            </td>
+            <td colspan="5">
+                @Html.DropDownList("guild", null, "กรุณาเลือก", new { @style = "color:#34a014;", @class = "form-control" })
+                <span id="validateguild" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-left:15px">
+                สถานะผู้ใช้งาน<span style="color:red;">*</span>
+            </td>
+            <td colspan="5">
+                @*<select id="stats" style="color:#34a014" class="form-control">
+                    <option value="" selected>กรุณาเลือก</option>
+                    <option value="1">เจ้าหน้าที่จัดทำงบประมาณ(สำนักงบประมาณ)</option>
+                    <option value="2">เจ้าหน้าที่ประเมินผล(สำนักงบประมาณ)</option>
+                    <option value="3">ผู้ดูแลระบบ(สำนักงบประมาณ)</option>
+                </select>*@
+                @Html.DropDownList("Roles", null, "กรุณาเลือก", new { @style = "color:#34a014;", @class = "form-control" })
+                <span id="validatestats" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-left:15px">
+                กระทรวงที่ดูแล<span style="color:red;">*</span>
+            </td>
+            <td colspan="5">
+                @Html.DropDownList("Ministry", null, "กรุณาเลือก", new { @style = "color:#34a014", @class = "form-control" })
+                <span id="validateMinistry" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td id="care2" style="padding-left:15px">
+                หน่วยงานที่ดูแล<span style="color:red;">*</span>
+            </td>
+            <td colspan="5">
+                <input type="checkbox" id="care" name="All1" onclick="this.valed=check(this, document.getElementById('abc').chk1)" style="margin-top: 8px !important;" />
+                <span id="labelselectall">เลือกหน่วยงานทั้งหมด</span>
+                <span id="validatecare" style="visibility:hidden;">
+                    <img alt="" src="~/Images/icon/icon_15.gif" style="width:16px; height:16px; vertical-align:middle;" />
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <form id="abc"></form>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <input type="button" value="ลงทะเบียน" id="btSubmit" />
+            </td>
+        </tr>
+    </table>
+    <br />
+    <ul>
+        <li id="idcard_er" style="display:none; color:red;">
+            กรุณาใส่เลขบัตรประชาน 13 หลัก
+        </li>
+        <li id="nameth_er" style="display:none; color:red;">
+            กรุณาใส่ชื่อภาษาไทย
+        </li>
+        <li id="lastnameth_er" style="display:none; color:red;">
+            กรุณาใส่นามสกุลภาษาไทย
+        </li>
+        <li id="nameeng_er" style="display:none; color:red;">
+            กรุณาใส่ชื่อภาษาอังกฤษ
+        </li>
+        <li id="lastnameeng_er" style="display:none; color:red;">
+            กรุณาใส่นามสกุลภาษาอังกฤษ
+        </li>
+        <li id="address_er" style="display:none; color:red;">
+            กรุณาใส่ที่อยู่หน่วยงาน
+        </li>
+        <li id="Tel_error" style="display:none; color:red;">
+            เบอร์โทรศัพท์ไม่ถูกต้อง
+        </li>
+        <li id="to_error" style="display:none; color:red;">
+            เบอร์ต่อไม่ถูกต้อง
+        </li>
+        <li id="Phone_error" style="display:none; color:red;">
+            เบอร์โทรศัพท์ตรงไม่ถูกต้อง
+        </li>
+        <li id="SmartPhone_error" style="display:none; color:red;">
+            เบอร์โทรศัพท์มือถือไม่ถูกต้อง
+        </li>
+        <li id="emaild_er" style="display:none; color:red;">
+            กรุณากรอก E-mail
+        </li>
+        <li id="guildd_er" style="display:none; color:red;">
+            กรุณาเลือกสังกัด
+        </li>
+        <li id="statss_er" style="display:none; color:red;">
+            กรุณาเลือกสถานะผู้ใช้งาน
+        </li>
+        <li id="minis_er" style="display:none; color:red;">
+            กรุณาเลือกกระทรวงที่ดูแล
+        </li>
+        <li id="caree_er" style="display:none; color:red;">
+            กรุณาเลือกหน่วยงานที่ดูแล
+        </li>
+    </ul>
+</div>

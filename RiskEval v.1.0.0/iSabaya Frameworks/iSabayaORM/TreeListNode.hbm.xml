@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.TreeListNode, iSabaya" table="TreeListNode">
+    <id name="NodeID" column="NodeID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <property name="Code" column="Code" type="String"  not-null="true" />
+    <many-to-one name="Description" column="DescriptionMLSID"  cascade="save-update"/>
+    <component name="EffectivePeriod"  >
+      <property name="From" column="EffectiveFrom"/>
+      <property name="To" column="EffectiveTo"/>
+    </component>
+    <property name="IsActive" />
+    <property name="IsBuiltin" />
+    <property name="IsCredit" />
+    <property name="IsDebit" />
+    <property name="IsDefault" />
+    <property name="IsImmutable" />
+    <property name="IsMandatory" />
+    <property name="IsParent" />
+    <property name="Level" column="NodeLevel" type="int"  not-null="true" />
+    <many-to-one name="RelatedNode" column="RelatedNodeID" class="iSabaya.TreeListNode, iSabaya" />
+    <many-to-one name="RelatedNodeTitle" column="RelatedNodeTitleMLSID"  cascade="save-update"/>
+    <property name="Remark" />
+    <many-to-one name="Root" column="RootNodeID" class="iSabaya.TreeListNode, iSabaya" />
+    <many-to-one name="Parent" column="ParentNodeID" class="iSabaya.TreeListNode, iSabaya" />
+    <property name="SeqNo" column="SeqNo" type="int"  not-null="true" />
+    <many-to-one name="ShortTitle" column="ShortTitleMLSID"  cascade="save-update"/>
+    <many-to-one name="Title" column="TitleMLSID"  cascade="save-update" outer-join="false" />
+    <property name="ValueDate" />
+    <property name="ValueNumber" />
+    <many-to-one name="ValueMLS" column="ValueMLSID"  cascade="save-update"/>
+    <property name="ValueString" />
+    <component name="ValueTypes" class="iSabaya.AttributeValueTypes,iSabaya">
+      <property name="Types" column="ValueTypes"/>
+    </component>
+    <property name="Weight" />
+    
+    <bag name="Children" table="TreeListNode" inverse="true" >
+      <key column="ParentNodeID"/>
+      <one-to-many class="iSabaya.TreeListNode, iSabaya"/>
+    </bag>
+  </class>
+</hibernate-mapping>
+
+

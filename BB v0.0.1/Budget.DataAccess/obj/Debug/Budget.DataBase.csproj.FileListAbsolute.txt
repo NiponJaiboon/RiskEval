@@ -12,3 +12,17 @@ D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\Budget.DataAccess\bin\Debug
 D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\Budget.DataAccess\obj\Debug\Budget.DataBase.csprojResolveAssemblyReference.cache
 D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\Budget.DataAccess\obj\Debug\Budget.DataAccess.dll
 D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\Budget.DataAccess\obj\Debug\Budget.DataAccess.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\Budget.DataAccess\bin\Debug\Budget.DataAccess.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\Budget.DataAccess\bin\Debug\Budget.DataAccess.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\Budget.DataAccess\bin\Debug\Budget.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\Budget.DataAccess\bin\Debug\iSabaya.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\Budget.DataAccess\bin\Debug\NHibernate.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\Budget.DataAccess\bin\Debug\iSabaya.Questionnaire.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\Budget.DataAccess\bin\Debug\iSabaya.Config.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\Budget.DataAccess\bin\Debug\Budget.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\Budget.DataAccess\bin\Debug\iSabaya.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\Budget.DataAccess\bin\Debug\iSabaya.Questionnaire.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\Budget.DataAccess\bin\Debug\iSabaya.Config.pdb
+D:\Work\iSabaya\RiskEval\BB v0.0.1\Budget.DataAccess\obj\Debug\Budget.DataBase.csprojResolveAssemblyReference.cache
+D:\Work\iSabaya\RiskEval\BB v0.0.1\Budget.DataAccess\obj\Debug\Budget.DataAccess.dll
+D:\Work\iSabaya\RiskEval\BB v0.0.1\Budget.DataAccess\obj\Debug\Budget.DataAccess.pdb

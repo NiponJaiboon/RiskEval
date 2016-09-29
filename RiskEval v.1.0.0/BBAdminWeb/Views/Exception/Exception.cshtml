@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "การวิเคราะห์ความเสี่ยงตามหลักธรรมมาภิบาล ตามแผนงาน/โครงการ";
+    Layout = "~/Views/Shared/_LayoutException.cshtml";
+}
+
+<div style="position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -5px;
+    margin-left: -200px;
+    width: 400px;
+    height: 50px;background-color:">
+    <center><h2>ไม่พบหน้า ที่คุณต้องการ</h2></center>
+    <center>@Html.ActionLink("กลับหน้าแรก", "Index", "Login", null, new { @id = "openDialog", @class = "btn btn-default" })</center>
+</div>
+

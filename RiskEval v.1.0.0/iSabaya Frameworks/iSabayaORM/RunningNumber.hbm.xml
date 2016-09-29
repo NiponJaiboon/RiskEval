@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+
+
+  <class name="iSabaya.RunningNumber,iSabaya" table="RunningNumber">
+    <id name="Id" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <property name="Code" column="Code" type="String"  not-null="true" />
+    <property name="Next" column="Next" type="int"  not-null="true" />
+     
+  </class>
+</hibernate-mapping>
+
+

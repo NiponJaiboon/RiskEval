@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "บันทึกผลการพิจารณาจากรัฐสภา ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model BBWeb.Models.Project
+
+<fieldset class="fieldset">
+    <legend class="legend">ข้อมูลโครงการ</legend>
+
+    <table>
+        <tr>
+            <td>@Html.Label("", "รหัสกระทรวง:", new { @class = "bold1" })</td>
+            <td>@Model.Department.Ministry.Code</td>
+            <td>@Html.Label("", "ชื่อกระทรวง:")</td>
+            <td>@Model.Department.Ministry.Name</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("", "รหัสหน่วยงาน:", new { @class = "bold1" })</td>
+            <td>@Model.Department.Code</td>
+            <td>@Html.Label("", "ชื่อหน่วยงาน:", new { @class = "bold1" })</td>
+            <td>@Model.Department.Name</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("", "รหัสโครงการ:", new { @class = "bold1" })</td>
+            <td>@Model.ProjectCode</td>
+            <td>@Html.Label("", "ชื่อโครงการ:", new { @class = "bold1" })</td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td colspan="2">@Html.Label("", "ยุทธศาสตร์การจัดสรรงบประมาณ:", new { @class = "bold1" })</td>
+            <td colspan="2">@Model.StrategicName</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("", "ปีงบประมาณ:", new { @class = "bold1" })</td>
+            <td>@Model.Year</td>
+            <td>@Html.Label("", "วงเงินงบประมาณทั้งสิ้น (บาท):", new { @class = "bold1" })</td>
+            <td>@Model.Budget</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("", "เลขที่นำส่ง:", new { @class = "bold1" })</td>
+            <td>@Model.NumberOfSend</td>
+            <td>@Html.Label("", "วันที่นำส่ง", new { @class = "bold1" })</td>
+            <td>@Model.DateOfSend</td>
+        </tr>
+    </table>
+</fieldset>
+
+<div>
+    <center>
+        <div class="submit-box">
+            <table id="ContentPlaceHolder1_tbl_appr">
+                <tbody>
+                    <tr>
+                        <td class="td_appr_text">
+                            ผลการพิจารณา
+                        </td>
+                        <td class="td_appr_result">
+                            รอการพิจารณาจากรัฐสภา
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table id="tb-sumbit" cellpadding="2" cellspacing="0">
+                <tbody>
+                    <tr class="tr-submit">
+                        <td class="td-text">
+                            สรุปผลคะแนนการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล อยู่ในเกณฑ์ที่มีระดับความเสี่ยง
+                        </td>
+                        <td style="border-style: solid; width: 100px; text-align: center; border-color: #666600;">
+                            <div style="background-color:green; font-weight:bold; font-size:23px;">ต่ำ</div>
+                        </td>
+                    </tr>
+
+                    <tr style="display:none">
+                        <td class="td-text">
+                            สรุปผลคะแนนการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล ตามชุดคำถามหลัก
+                        </td>
+                        <td style="border-style: solid; width: 100px; text-align: center; border-color: #666600;">
+                            <div style="background-color:green; font-weight:bold; font-size:23px;">ต่ำ</div>
+                        </td>
+                    </tr>
+                    <tr style="display:none">
+                        <td class="td-text">
+                            สรุปผลคะแนนการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล ตามชุดคำถามย่อย
+                        </td>
+                        <td style="border-style: solid; width: 100px; text-align: center; border-color: #666600;">
+                            <div style="background-color:green; font-weight:bold; font-size:23px;">ต่ำ</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table id="Table1" cellpadding="2" cellspacing="0">
+                <tbody>
+                    <tr class="tr-submit">
+                        <td class="td-text">
+                            ผลคะแนนการวิเคราะห์ความเสี่ยงด้านสภาพแวดล้อมภายในและภายนอก อยู่ในระดับที่มีความเสี่ยง
+                        </td>
+                        <td style="border-style: solid; width: 100px; text-align: center; border-color: #666600;">
+                            <div style="background-color:green; font-weight:bold; font-size:23px;">ต่ำ</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </center>
+</div>
+
+<div class="submit-box">
+
+    <p>@Html.ActionLink("รายงานที่ 1 รายงานการกลั่นกรองโครงการ", "ScreeningProject", "Report", new { projectId = @Model.Id }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่ 2 รายงานการวิเคราะห์ความเสี่ยงตามหลักธรรมาธิบาล", "RiskAnalysisGoodGovernance", "Report", new { projectId = @Model.Id }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่่ 3 รายงานการวิเคราะห์ความเสี่ยงด้านสภาพแวดล้อมภายในและภายนอก", "RiskAnalysisEnvironment", "Report", new { projectId = @Model.Id }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่ 4 รายงานสรุปผลการประเมินการวิเคราะห์ความเสี่ยงตามหลักธรรมภิบาล", "RiskAnalysisEnvironment", "Report", new { projectId = @Model.Id }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่ 5 รายงานความคิดเห็นเพิ่มเติมจากเจ้าหน้าที่สำนักงบประมาณ", "RiskAnalysisEnvironment", "Report", new { projectId = @Model.Id }, new { @class = "link" })</p>
+</div>
+

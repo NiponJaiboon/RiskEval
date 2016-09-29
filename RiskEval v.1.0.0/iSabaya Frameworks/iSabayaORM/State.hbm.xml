@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+
+  <class name="iSabaya.State,iSabaya" table="State"  >
+    <!-- Primary key-->
+    <id name="StateID" column="StateID" type="Int32" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <property name="Category" />
+    <property name="Code" />
+    <many-to-one name="Description" column="DescriptionMLSID" class="iSabaya.MultilingualString, iSabaya"  not-found="ignore"/>
+    <property name="IsFinalState" />
+    <property name="IsInitialState" />
+    <any name="Owner" meta-type="String" id-type="Int32" cascade="save-update">
+      <meta-value value="TT" class="imSabaya.TransactionType,imSabaya"/>
+      <column name="OwnerDiscriminator"/>
+      <column name="OwnerID"/>
+    </any>
+    <many-to-one name="OnEnterRule" column="OnEnterRuleID" class="iSabaya.Rule, iSabaya"  not-found="ignore"/>
+    <many-to-one name="OnExitRule" column="OnExitRuleID" class="iSabaya.Rule, iSabaya"  not-found="ignore"/>
+    <many-to-one name="OnTimeoutRule" column="OnTimeoutRuleID" class="iSabaya.Rule, iSabaya"  not-found="ignore"/>
+    <many-to-one name="RollbackRule" column="RollbackRuleID" class="iSabaya.Rule, iSabaya"  not-found="ignore"/>
+    <property name="SeqNo" />
+    <component name="TimeOutDuration" class="iSabaya.TimeDuration, iSabaya">
+      <property name="Years" column="TimeOutYears"/>
+      <!--<property name="Months" column="TimeOutMonths"/>-->
+      <property name="Days" column="TimeOutDays"/>
+      <property name="Hours" column="TimeOutHours"/>
+      <property name="Minutes" column="TimeOutMinutes"/>
+      <property name="Seconds" column="TimeOutSeconds"/>
+    </component>
+    <many-to-one name="Title" column="TitleMLSID" class="iSabaya.MultilingualString,iSabaya" />
+    <bag name="Transitions" table="StateTransition" >
+      <key column="FromState"/>
+      <one-to-many class="iSabaya.StateTransition,iSabaya"/>
+    </bag>
+    <many-to-one name="UpdatedBy" class="iSabaya.User,iSabaya" />
+    <property name="UpdatedTS" />
+  </class>
+</hibernate-mapping>
+
+

@@ -1,0 +1,183 @@
+﻿@{
+    ViewBag.Title = "ติดต่อเรา";
+    Layout = "~/Views/Shared/_LayoutAnonymous.cshtml";
+}
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style type="text/css">
+    .tableTitle {
+        font-size: 18px;
+        font-weight: bold;
+        font-family: "Courier New", Courier, monospace;
+        text-align: center;
+        background-color: #FFFFFF !important;
+    }
+
+    .tableHeaderColumn1 {
+        width: 93px;
+        font-size: 16px !important;
+        font-family: "Courier New", Courier, monospace;
+        vertical-align: middle !important;
+    }
+
+    .tableHeaderColumn2 {
+        width: 131px;
+        font-size: 16px !important;
+        font-family: "Courier New", Courier, monospace;
+        vertical-align: middle !important;
+    }
+
+    .tableHeaderColumn3 {
+        width: 473px;
+        font-size: 16px !important;
+        font-family: "Courier New", Courier, monospace;
+        vertical-align: middle !important;
+    }
+
+    .tableHeaderColumn4 {
+        width: 128px;
+        font-size: 16px !important;
+        font-family: "Courier New", Courier, monospace;
+        vertical-align: middle !important;
+    }
+
+    .tableHeaderColumn5 {
+        font-size: 16px !important;
+        font-family: "Courier New", Courier, monospace;
+        vertical-align: middle !important;
+    }
+
+    .tableCellColumn1 {
+        height: 21px;
+        width: 70px;
+        color: black;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: "Courier New", Courier, monospace;
+        text-align: center;
+        padding-left: 1px;
+        padding-right: 1px;
+        padding-top: 1px;
+        vertical-align: top;
+    }
+
+    .tableCellColumn2 {
+        height: 21px;
+        width: 98px;
+        color: black;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: "Courier New", Courier, monospace;
+        text-align: center;
+        padding-left: 1px;
+        padding-right: 1px;
+        padding-top: 1px;
+        vertical-align: top;
+    }
+
+    .tableCellColumn3 {
+        height: 21px;
+        width: 355px;
+        color: black;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: "Courier New", Courier, monospace;
+        text-align: left;
+        padding-left: 10px;
+        padding-right: 1px;
+        padding-top: 1px;
+        vertical-align: top;
+    }
+
+    .tableCellColumn4 {
+        height: 21px;
+        width: 96px;
+        color: black;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: "Courier New", Courier, monospace;
+        text-align: center;
+        padding-left: 1px;
+        padding-right: 1px;
+        padding-top: 1px;
+        vertical-align: top;
+    }
+
+    .tableCellColumn5 {
+        height: 21px;
+        width: 116px;
+        color: black;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: "Courier New", Courier, monospace;
+        text-align: center;
+        padding-left: 1px;
+        padding-right: 1px;
+        padding-top: 1px;
+        vertical-align: top;
+    }
+</style>
+
+<div class="clearFix"></div>
+<div class="content-box">
+    @for (int i = 0; i < ((List<BBWeb.Models.Contact>)ViewBag.aaa).Count; i++)
+    {
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td class="tableTitle" style="border:none !important;" colspan="5">
+                        @(((List<BBWeb.Models.Contact>)ViewBag.aaa)[i].Title1)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableTitle" style="border-top:none !important; border-left:none !important; border-right:none !important" colspan="5">
+                        @(((List<BBWeb.Models.Contact>)ViewBag.aaa)[i].Title2)
+                    </td>
+                </tr>
+                <tr>
+                    <th class="tableHeaderColumn1">
+                        ลำดับ
+                    </th>
+                    <th class="tableHeaderColumn2">
+                        รหัสหน่วยงาน
+                    </th>
+                    <th class="tableHeaderColumn3">
+                        หน่วยงาน
+                    </th>
+                    <th class="tableHeaderColumn4">
+                        ผู้รับผิดชอบ
+                    </th>
+                    <th class="tableHeaderColumn5">
+                        เบอร์โทรศัพท์(ต่อ)
+                    </th>
+                </tr>
+                @for (int j = 0; j < ((List<BBWeb.Models.Contact>)ViewBag.aaa)[i].ContactPersons.Count; j++)
+                {
+                    <tr style="@( (((List<BBWeb.Models.Contact>)ViewBag.aaa)[i].ContactPersons[j].No == "") ? "background-color:#A0A0A0;" : (j % 2 == 0) ? "background-color:#f5f5f5;" : "")">
+                        <td class="tableCellColumn1" height="27">
+                            @(((List<BBWeb.Models.Contact>)ViewBag.aaa)[i].ContactPersons[j].No)
+                        </td>
+                        <td class="tableCellColumn2" height="27">
+                            @(((List<BBWeb.Models.Contact>)ViewBag.aaa)[i].ContactPersons[j].DepartmentCode)
+                        </td>
+                        <td class="tableCellColumn3" style="@((((List<BBWeb.Models.Contact>)ViewBag.aaa)[i].ContactPersons[j].No == "") ? "color:white;" : "")" height="27">
+                            @(((List<BBWeb.Models.Contact>)ViewBag.aaa)[i].ContactPersons[j].Department)
+                        </td>
+                        <td class="tableCellColumn4" height="27">
+                            @(((List<BBWeb.Models.Contact>)ViewBag.aaa)[i].ContactPersons[j].Person)
+                        </td>
+                        <td class="tableCellColumn5" height="27">
+                            @(((List<BBWeb.Models.Contact>)ViewBag.aaa)[i].ContactPersons[j].Phone)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p>
+            <strong>
+                <br>
+            </strong>
+        </p>
+    }
+</div>
+<div class="clearFix"></div>

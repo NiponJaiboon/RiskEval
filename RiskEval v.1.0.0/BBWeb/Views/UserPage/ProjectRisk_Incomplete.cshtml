@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "โครงการที่ยังไม่สมบูรณ์ โครงการบันทึกการวิเคราะห์";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#dgProject").dataTable({
+            "bLengthChange": false,
+            "lengthMenu": [[10, 50, 100], [10, 50, 100]],
+            "oLanguage": {
+                "sEmptyTable": "ไม่พบข้อมูล",
+                "sInfo": "แสดง _START_ ถึง _END_ จาก _TOTAL_ รายการ",
+                "sInfoEmpty": "แสดง 0 ถึง 0 จาก 0 รายการ",
+                "sInfoFiltered": "(จากทั้งหมด _MAX_ รายการ)",
+                "sInfoPostFix": "",
+                //"sInfoThousands": ".",
+                "sLengthMenu": "แสดง _MENU_ รายการต่อหน้า",
+                "sLoadingRecords": "กำลังโหลด...",
+                "sProcessing": "กำลังประมวลผล...",
+                "sSearch": "ค้นหา",
+                "sZeroRecords": "ไม่พบข้อมูล",
+                "sPaginationType": "input",
+                "oPaginate": {
+                    "sFirst": "",
+                    "sPrevious": "ก่อนหน้า",
+                    "sNext": "ถัดไป",
+                    "sLast": ""
+                },
+                //"oAria": {
+                //    "sSortAscending": "",
+                //    "sSortDescending": ""
+                //}
+            }
+        });
+    });
+
+    function LoadProjectRiskIncomplete(s) {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)/UserPage/GetProjectRisk_IncompleteYear",
+            data: { year: s.value },
+            success: function (d) {
+
+            }
+        });
+    }
+</script>
+<div class="clearFix"></div>
+
+<div class="content-box">
+    <div style="display:inline-block;margin-bottom:10px;">
+        <span>ปีงบประมาณ: </span>
+        <select style="width:100px; padding-left:5px;" onchange="LoadProjectRiskIncomplete(this);">
+            <option value="0" selected>กรุณาเลือก</option>
+            @for (int i = 2015; i <= (DateTime.Today.Year + 2); i++)
+            {
+                <option value="@(i + 543)">@(i + 543)</option>
+            }
+        </select>
+        <span style="margin-left:5px; width:20px; height:20px; vertical-align:middle;">
+            <img alt="" src="~/Images/icon/ajax-loader.gif" style="width:25px; height:25px;" />
+        </span>
+    </div>
+    <table id="dgProject" class="table table-striped">
+        <thead>
+            <tr>
+                <th>ชื่อโครงการ</th>
+                <th>ลักษณะโครงการ</th>
+                <th>วงเงินงบประมาณ</th>
+                <th>วันที่แก้ไขครั้งสุดท้าย</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*<tr>
+                    <td style="width:350px;">
+                        <a href="#">โครงการนำร่องผลิตน้ำมันเพื่อใช้ภายในประเทศจากแหล่งทรัพยากรธรรมชาติของชาติ</a>
+                    </td>
+                    <td align="center">&nbsp;</td>
+                    <td align="center">1,000,000,000</td>
+                    <td align="center">29/05/2558</td>
+                </tr>*@
+        </tbody>
+    </table>
+</div>
+<div class="clearFix"></div>

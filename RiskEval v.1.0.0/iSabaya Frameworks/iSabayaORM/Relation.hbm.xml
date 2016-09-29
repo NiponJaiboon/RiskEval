@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.Relation, iSabaya" table="Relation">
+    <id name="RelationID" column="RelationID" type="Int32" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <any name="FirstEntity" meta-type="String" id-type="Int32" >
+      <meta-value value="Person" class="iSabaya.Person,iSabaya"/>
+      <meta-value value="Org" class="iSabaya.Organization,iSabaya"/>
+      <meta-value value="OrgUnit" class="iSabaya.OrgUnit,iSabaya"/>
+      <meta-value value="Node" class="iSabaya.TreeListNode,iSabaya"/>
+      <meta-value value="MF" class="imSabaya.MutualFund,imSabaya"/>
+      <meta-value value="PF" class="imSabaya.ProvidentFund,imSabaya"/>
+      <meta-value value="MFT" class="imSabaya.MutualFundSystem.MFTransaction,imSabaya"/>
+      <meta-value value="PFT" class="imSabaya.ProvidentFundSystem.PFTransaction,imSabaya"/>
+      <column name="FirstEntityType"/>
+      <column name="FirstEntityID"/>
+    </any>
+    <any name="SecondEntity" meta-type="String" id-type="Int32" >
+      <meta-value value="Person" class="iSabaya.Person,iSabaya"/>
+      <meta-value value="Org" class="iSabaya.Organization,iSabaya"/>
+      <meta-value value="OrgUnit" class="iSabaya.OrgUnit,iSabaya"/>
+      <meta-value value="Node" class="iSabaya.TreeListNode,iSabaya"/>
+      <meta-value value="MF" class="imSabaya.MutualFund,imSabaya"/>
+      <meta-value value="PF" class="imSabaya.ProvidentFund,imSabaya"/>
+      <meta-value value="MFT" class="imSabaya.MutualFundSystem.MFTransaction,imSabaya"/>
+      <meta-value value="PFT" class="imSabaya.ProvidentFundSystem.PFTransaction,imSabaya"/>
+      <column name="SecondEntityType"/>
+      <column name="SecondEntityID"/>
+    </any>
+    <many-to-one name="Relationship" class="iSabaya.Relationship,iSabaya" column="Relationship" />
+    <many-to-one name="Category" class="iSabaya.TreeListNode,iSabaya" column="CategoryNodeID" />
+    <property name="Remark" type="string" column="Remark" />
+    <property name="Reference" type="string" column="Reference" />
+    <property name="RecordedDate" type="DateTime" column="RecordedDate" />
+    <component name="EffectivePeriod" class="iSabaya.TimeInterval, iSabaya">
+      <property name="From" column="EffectiveFrom"/>
+      <property name="To" column="EffectiveTo"/>
+    </component>
+    <!--<any name="Info" meta-type="String" id-type="Int32" >
+      <column name="InfoType"/>
+      <column name="InfoID"/>
+    </any>-->
+  </class>
+</hibernate-mapping>
+
+

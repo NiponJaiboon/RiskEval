@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.ReceiptItem,iSabaya" table="ReceiptItem">
+    <!-- Primary key-->
+    <id name="ReceiptItemID" type="Int32" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <property name="SeqNo" />
+    <many-to-one name="Receipt" column="ReceiptID" class="iSabaya.Receipt,iSabaya"/>
+    <many-to-one name="Category" column="CategoryNodeID" class="iSabaya.TreeListNode,iSabaya"/>
+    <property name="Detail" />
+    <property name="Units"/>
+    <component name="UnitPrice" class="iSabaya.Money, iSabaya">
+      <property name="Amount" column="UnitPrice"/>
+      <property name="CurrencyID" column="UnitPriceCurrencyID" />
+    </component>
+    <component name="Amount" class="iSabaya.Money, iSabaya">
+      <property name="Amount" />
+      <property name="CurrencyID" column="AmountCurrencyID" />
+    </component>
+    <property name="UpdatedTS" />
+    <many-to-one name="UpdatedBy" class="iSabaya.User,iSabaya" not-null="false"/>
+  </class>
+</hibernate-mapping>
+
+

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  
+  <class name="iSabaya.PartyPropertyValueContainer,iSabaya" table="PartyPropertyValueContainer">
+
+    <id name="ID" column="PartyPropertyValueContainerID" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+
+    <component name="EffectivePeriod" >
+      <property name="From" column="EffectiveFrom"/>
+      <property name="To" column="EffectiveTo"/>
+    </component>
+    <property name="IsDefault" />
+    <property name="Description" />
+    <property name="OrderedDate" />
+    <any name="Party" meta-type="byte" id-type="Int64" >
+      <meta-value value="10" class="iSabaya.Organization,iSabaya"/>
+      <meta-value value="11" class="iSabaya.Bank,iSabaya"/>
+      <meta-value value="15" class="iSabaya.OrgUnit,iSabaya"/>
+      <meta-value value="20" class="iSabaya.Person,iSabaya"/>
+      <meta-value value="25" class="iSabaya.Incognito,iSabaya"/>
+
+      <column name="PartyDiscriminator"/>
+      <column name="PartyID"/>
+    </any>
+    <any name="PropertyTemplate" meta-type="byte" id-type="Int64" >
+      <meta-value value="1" class="iSabaya.PropertyTemplateGroup,iSabaya"/>
+      <meta-value value="2" class="iSabaya.PropertyTemplate,iSabaya"/>
+      <column name="PropertyTemplateDiscriminator"/>
+      <column name="PropertyTemplateID"/>
+    </any>
+    <any name="PropertyValueContainer" meta-type="byte" id-type="Int64" >
+      <meta-value value="1" class="iSabaya.PropertyValueGroupContainer,iSabaya"/>
+      <meta-value value="2" class="iSabaya.PropertyValueContainer,iSabaya"/>
+      <column name="PropertyValueContainerDiscriminator"/>
+      <column name="PropertyValueContainerID"/>
+    </any>
+    <property name="Reference" />
+    <property name="Remark" />
+    <property name="SeqNo" />
+    <property name="UpdatedTS" />
+    <many-to-one name="UpdatedBy" />
+
+
+  </class>
+
+
+</hibernate-mapping>
+
+

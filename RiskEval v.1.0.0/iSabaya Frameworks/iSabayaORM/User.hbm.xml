@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="iSabaya.User,iSabaya" abstract="1" discriminator-value="0" table="Users">
+    <!-- Primary key-->
+    <id name="ID" column="UserID" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <discriminator column="Discriminator" type="byte" />
+    <property name="SystemID" type="iSabaya.SystemEnum,iSabaya.Config"/>
+    <property name="IsNotFinalized" />
+
+    <component name="CreateAction" >
+      <many-to-one name="ByUser" column="CreatedBy"   />
+      <property name="Timestamp" column="CreatedTS" />
+    </component>
+    <component name="ApproveAction" >
+      <many-to-one name="ByUser" column="ApprovedBy"   />
+      <property name="Timestamp" column="ApprovedTS" />
+    </component>
+    <component name="EffectivePeriod" >
+      <property name="From" column="EffectiveFrom" />
+      <property name="To" column="EffectiveTo" />
+    </component>
+
+    <property name="ConsecutiveFailedLoginCount" />
+    <property name="IsBuiltin" />
+    <property name="IsDisable" />
+    <property name="LastLoginTimestamp" />
+    <property name="LastFailedLoginTimestamp" />
+    <many-to-one name="Organization" column="OrgID" class="iSabaya.Organization,iSabaya" />
+    <many-to-one name="Person" column="PersonId" class="iSabaya.Person,iSabaya" />
+    <!--<many-to-one name="Name" column="PersonNameId" class="iSabaya.PersonName,iSabaya" />-->
+    <property name="LoginName" access="field.camelcase" />
+    <property name="EMailAddress" />
+    <property name="MobilePhoneNumber" />
+    <bag name="UserRoles" table="UserRole" inverse="true" cascade="delete">
+      <key column="UserID" />
+      <one-to-many class="iSabaya.UserRole,iSabaya" />
+    </bag>
+    <!--<bag name="UserGroupUsers" table="UserGroupUser" inverse="true" cascade="delete">
+      <key column="UserID" />
+      <one-to-many class="iSabaya.UserGroupUser,iSabaya" />
+    </bag>-->
+    <!--<bag name="Personalizations" table="UserPersonalization" inverse="true" cascade="delete">
+      <key column="UserID" />
+      <one-to-many class="iSabaya.UserPersonalization,iSabaya" />
+    </bag>-->
+
+    <subclass name="iSabaya.SelfAuthenticatedUser,iSabaya" discriminator-value="1">
+      <!--Do not remove access attribute of CurrentPassword.  It is necessary.-->
+      <many-to-one name="CurrentPassword" column="CurrentPasswordID" class="iSabaya.Password,iSabaya" access="field.camelcase" />
+      <many-to-one name="OrgUnit" column="OrgUnitID" class="iSabaya.OrgUnit,iSabaya" />
+      <property name="IsReinstated" />
+      <property name="MustChangePasswordAfterFirstLogon" />
+      <property name="MustChangePasswordAtNextLogon" />
+      <!--<property name="PasswordAgeInDays" />-->
+      <property name="PasswordNeverExpires" />
+      <!--<bag name="Passwords" table="Password" inverse="true" order-by="PasswordID desc">
+        <key column="UserID" />
+        <one-to-many class="iSabaya.Password,iSabaya" />
+      </bag>-->
+
+      <bag name="ResponsibleOrgUnits" table="UserOrgUnit" inverse="true" order-by="UserID desc">
+        <key column="UserID" />
+        <one-to-many class="iSabaya.UserOrgUnit,iSabaya" />
+      </bag>
+
+      <property name="PhoneCenter" />
+      <property name="PhoneCenterTo" />
+      <property name="PhoneDirect" />
+      <property name="Address" />
+    </subclass>
+
+    <subclass name="iSabaya.ActiveDirectoryUser,iSabaya" discriminator-value="2">
+      <!--Add Code Validate Inactive User AD By Kunakorn-->
+      <property name="IsReinstated" />
+    </subclass>
+    
+  </class>
+</hibernate-mapping>

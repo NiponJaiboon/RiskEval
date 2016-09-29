@@ -1,0 +1,47 @@
+﻿@model Budget.Project
+
+@{
+    ViewBag.Title = "คำถาม ชุด ค: การจัดลำดับและจัดสรรงบประมาณโครงการ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (@ViewBag.ErrorMessage != null)
+{
+    @ViewBag.ErrorMessage
+}
+else
+{
+
+    @Html.HiddenFor(x => x.ID)
+
+    if (@Model.Status == Budget.Status.SaveAnswerSetB6 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerB)
+    {
+        <div id="questionC1">
+            @Html.Partial("Questions/_QuestionC1", @Model)
+        </div>
+    }
+    else if (@Model.Status == Budget.Status.SaveAnswerSetC1 && @Model.StatusCategory == Budget.StatusCategory.IncompleteAnswerC)
+    {
+        <div id="questionBSuccess">
+            เสร็จสิ้นการประเมินชุด ค: ขั้นตอนการริเริ่มแผนงาน/โครงการและวิเคราะห์เบื้องต้น โปรดดำเนินการต่อ
+            <div>
+                <input type="submit" value="ดำเนินงานต่อไป" id="btnSaveQuestionSetCContinun" class="btn btn-default">
+            </div>
+        </div>
+    }
+
+
+
+}
+
+<script type="text/javascript">
+
+    $(function () {
+
+        $("#btnSaveQuestionSetCContinun").click(function (e) {
+            e.preventDefault();
+
+            window.location.href = '@Url.Action("QuestionChoice", "Government", new { p = Budget.Security.MapCipher.Encrypt(HttpUtility.UrlEncode(@Model.ID.ToString())) })';
+        });
+    });
+</script>

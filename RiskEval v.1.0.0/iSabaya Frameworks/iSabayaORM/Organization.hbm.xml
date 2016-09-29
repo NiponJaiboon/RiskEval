@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="iSabaya" namespace="iSabaya">
+
+  <class name="Organization" table="Organization" discriminator-value="10">
+
+    <id name="ID" column="OrgID" unsaved-value="0" >
+      <generator class="native"/>
+    </id>
+    <!--<discriminator column="Discriminator" />-->
+    <component name="CreateAction" >
+      <many-to-one name="ByUser" column="CreatedBy"  />
+      <property name="Timestamp" column="CreatedTS" />
+    </component>
+    <component name="ApproveAction" >
+      <many-to-one name="ByUser" column="ApprovedBy"  />
+      <property name="Timestamp" column="ApprovedTS" />
+    </component>
+    <component name="EffectivePeriod" >
+      <property name="From" column="EffectiveFrom"/>
+      <property name="To" column="EffectiveTo"/>
+    </component>
+    <property name="IsActive" />
+    <property name="OrderedDate" />
+    <property name="Reference" />
+    <property name="Remark" />
+    <property name="UpdatedTS" />
+    <many-to-one name="UpdatedBy" />
+
+    <many-to-one name="Category" column="CategoryNodeID" />
+
+    <!--<bag name="Addresses" table="PartyAddress" inverse="true" lazy="true" where="PartyDiscriminator=10"
+        collection-type="iSabaya.PersistentListType`3[
+            [iSabaya.PartyAddress, iSabaya],
+            [iSabaya.CategorizedTemporalList`1[iSabaya.PartyAddress, iSabaya], iSabaya],
+            [iSabaya.PersistentCategorizedTemporalList`1[iSabaya.PartyAddress, iSabaya], iSabaya]]">
+      <key column="PartyID"/>
+      <one-to-many class="PartyAddress"/>
+      --><!--<loader query-ref="LoadOrgAddresses"/>--><!--
+    </bag>-->
+    <!--<bag name="Attributes" table="PartyAttribute" inverse="true" lazy="true" where="PartyDiscriminator=10"
+      collection-type="iSabaya.PersistentListType`3[
+          [iSabaya.PartyAttribute, iSabaya],
+          [iSabaya.CategorizedTemporalList`1[iSabaya.PartyAttribute, iSabaya], iSabaya],
+          [iSabaya.PersistentCategorizedTemporalList`1[iSabaya.PartyAttribute, iSabaya], iSabaya]]">
+      <key column="PartyID"/>
+      <one-to-many class="PartyAttribute"/>
+    </bag>
+    <bag name="AssociatedBankAccounts" table="PartyBankAccount" inverse="true" lazy="true" where="PartyDiscriminator=10">
+      <key column="PartyID"/>
+      <one-to-many class="PartyBankAccount"/>
+    </bag>-->
+    <!--<bag name="Categories" table="PartyCategory" inverse="true" lazy="true" where="PartyDiscriminator=10"
+        collection-type="iSabaya.PersistentListType`3[
+						[iSabaya.PartyCategory, iSabaya], 
+						[iSabaya.CategorizedTemporalList`1[iSabaya.PartyCategory, iSabaya], iSabaya], 
+						[iSabaya.PersistentCategorizedTemporalList`1[iSabaya.PartyCategory, iSabaya], iSabaya]]">
+      <key column="PartyID"/>
+      <one-to-many class="PartyCategory"/>
+    </bag>-->
+    <many-to-one name="ContactName" column="ContactNameMLSID" class="MultilingualString" />
+    <!--<bag name="Contacts" table="PartyContact" inverse="1" where="PartyDiscriminator=10"
+      collection-type="iSabaya.PersistentListType`3[
+        [iSabaya.PartyContact,iSabaya],
+        [iSabaya.CategorizedTemporalList`1[iSabaya.PartyContact,iSabaya],iSabaya],
+        [iSabaya.PersistentCategorizedTemporalList`1[iSabaya.PartyContact,iSabaya],iSabaya]]">
+      <key column="PartyID"/>
+      <one-to-many class="PartyContact"/>
+    </bag>-->
+    <property name="Email" />
+    <!--<bag name="Identities" table="PartyIdentity" inverse="true" lazy="true" where="PartyDiscriminator=10"
+        collection-type="iSabaya.PersistentListType`3[
+				  	[iSabaya.PartyIdentity, iSabaya], 
+						[iSabaya.CategorizedTemporalList`1[iSabaya.PartyIdentity, iSabaya], iSabaya], 
+						[iSabaya.PersistentCategorizedTemporalList`1[iSabaya.PartyIdentity, iSabaya], iSabaya]]">
+      <key column="PartyID"/>
+      <one-to-many class="PartyIdentity"/>
+    </bag>-->
+    <property name="ImageFileName" column="ImageFileName" type="String"  not-null="false" />
+    <many-to-one name="Nationality" column="NationalityID" class="TreeListNode" access="field.camelcase" />
+    <property name="OfficialIDNo" />
+    <bag name="OrgUnits" table="OrgUnit" inverse="true">
+      <key column="OrgParentID"/>
+      <one-to-many class="OrgUnit"/>
+    </bag>
+    <bag name="Users" table="User" inverse="true" cascade="delete">
+      <key column="OrgID"/>
+      <one-to-many class="User" />
+    </bag>
+
+    <!--start OrgBase-->
+    <many-to-one name="CurrentName" column="CurrentNameID" class="OrgName" cascade="save-update" />
+    <property name="Code" />
+    <many-to-one name="HolidayCalendar" column="HolidayCalendarID" class="TimeSchedule" />
+    <!--<bag name="MoneyRateSchedules" table="PartyMoneyRateSchedule" inverse="true" lazy="true" where="PartyDiscriminator=10"
+      collection-type="iSabaya.PersistentListType`3[
+          [iSabaya.PartyMoneyRateSchedule,iSabaya],
+          [iSabaya.CategorizedTemporalList`1[iSabaya.PartyMoneyRateSchedule,iSabaya],iSabaya],
+          [iSabaya.PersistentCategorizedTemporalList`1[iSabaya.PartyMoneyRateSchedule,iSabaya],iSabaya]]">
+      <key column="PartyID"/>
+      <one-to-many class="PartyMoneyRateSchedule"/>
+    </bag>-->
+    <bag name="Names" table="OrgName" inverse="true" lazy="true" where="OwnerDiscriminator=10"
+      collection-type="iSabaya.PersistentListType`3[
+						[iSabaya.OrgName, iSabaya], 
+						[iSabaya.TemporalList`1[iSabaya.OrgName, iSabaya], iSabaya], 
+						[iSabaya.PersistentTemporalList`1[iSabaya.OrgName, iSabaya], iSabaya]]">
+      <key column="OwnerID"/>
+      <one-to-many class="OrgName"/>
+    </bag>
+    <property name="URL" />
+    <many-to-one name="WorkCalendar" column="WorkCalendarID" class="TimeSchedule" />
+    <!--end OrgBase-->
+
+    <!--<subclass name="Bank" discriminator-value ="11" >
+      <property name="SwiftCode" />
+      <property name="IsITMXMember" />
+      <property name="IsBahtNetMember" />
+      <property name="IsORFTMember" />
+      <property name="IsBCMember" />
+    </subclass>-->
+
+  </class>
+
+</hibernate-mapping>

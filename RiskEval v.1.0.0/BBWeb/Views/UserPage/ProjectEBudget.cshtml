@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "ProjectEBudget";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .money {
+        text-align: right;
+    }
+
+    .customButton {
+        text-align: center;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#table1").dataTable({
+            "lengthMenu": [[10, 50, 100], [10, 50, 100]],
+            "oLanguage": {
+                "sEmptyTable": "ไม่พบข้อมูล",
+                "sInfo": "แสดง _START_ ถึง _END_ จาก _TOTAL_ รายการ",
+                "sInfoEmpty": "แสดง 0 ถึง 0 จาก 0 รายการ",
+                "sInfoFiltered": "(จากทั้งหมด _MAX_ รายการ)",
+                "sInfoPostFix": "",
+                //"sInfoThousands": ".",
+                "sLengthMenu": "แสดง _MENU_ รายการต่อหน้า",
+                "sLoadingRecords": "กำลังโหลด...",
+                "sProcessing": "กำลังประมวลผล...",
+                "sSearch": "ค้นหา",
+                "sZeroRecords": "ไม่พบข้อมูล",
+                "sPaginationType": "input",
+                "oPaginate": {
+                    "sFirst": "",
+                    "sPrevious": "ก่อนหน้า",
+                    "sNext": "ถัดไป",
+                    "sLast": ""
+                },
+                //"oAria": {
+                //    "sSortAscending": "",
+                //    "sSortDescending": ""
+                //}
+            }
+        });
+    });
+
+    function EBudgetAddRisk(s, i, pc, pn, a) {
+        if (confirm("sure?")) {
+            document.getElementById("ebudget-imgbtn-" + i).style.display = "none";
+            document.getElementById("ebudget-imgload-" + i).style.display = "";
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "@(ViewBag.AppName == "" ? "" : "/" + ViewBag.AppName)/UserPage/ProjectEBudget_Add",
+                data: {
+                    id: i,
+                    projectCode: pc,
+                    projectName: pn,
+                    amount: a
+                },
+                success: function (data) {
+                    if (data.result == 1) {
+                        s.src = "@ViewBag.AppName" == "" ? "/Images/icon/icon_03.gif" : "/@ViewBag.AppName/Images/icon/icon_03.gif";
+                        s.onclick = function () {
+                            window.location = 'ProjectRisk_New/' + i;
+                        };
+                    }
+                    else {
+                        alert("Failed exception: " + data.message);
+                    }
+                    document.getElementById("ebudget-imgbtn-" + i).style.display = "";
+                    document.getElementById("ebudget-imgload-" + i).style.display = "none";
+                }
+            });
+        }
+    }
+
+    function Go2ProjectRisk(s, e) {
+        window.location = 'ProjectRisk_New/' + e;
+    }
+</script>
+<table id="table1" class="table table-striped">
+    <thead>
+        <tr>
+            <th>รหัสโครงการ</th>
+            <th>ชื่อโครงการ</th>
+            <th>จำนวนงิน</th>
+            <th>เพิ่มเข้าระบบความเสี่ยง</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (KeyValuePair<string, List<string>> item in ((Dictionary<string, List<string>>)ViewBag.ProjectEBudget))
+        {
+            <tr id="ebudget-@item.Key">
+                <td>@item.Value[0]</td>
+                <td>@item.Value[1]</td>
+                <td class="money">@item.Value[2]</td>
+                <td class="customButton">
+                    @if (item.Value[3] == "0")
+                    {
+                        <img id="ebudget-imgbtn-@item.Key" alt="" src="~/Images/icon/icon_13.gif" style="cursor:pointer; width:24px; height:24px;" onclick="EBudgetAddRisk(this, '@item.Key')" />
+                    }
+                    else
+                    {
+                        <img id="ebudget-imgbtn-@item.Key" alt="" src="~/Images/icon/icon_03.gif" style="cursor:pointer; width:24px; height:24px;" onclick="Go2ProjectRisk(this, '@item.Key')" />
+                    }
+                    <img alt="" id="ebudget-imgload-@item.Key" src="~/Images/icon/ajax-loader.gif" style="width:24px; height:24px; display:none;" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

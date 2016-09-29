@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "รายงานการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Budget.Project
+
+@Html.Partial("_ProjectDetail", @Model)
+
+<table id="tb-submit" style="margin-top:10px" cellpadding="2" cellspacing="0">
+    <tr class="tr-submit">
+        <td class="td-text">สรุปผลคะแนนการวิเคราะห์ความเสี่ยงตามหลักธรรมาภิบาล อยู่ในเกณฑ์ที่มีระดับความเสี่ยง</td>
+        <td style="border-style:solid; width:100px; text-align:center; border-color:#666600;" class='@Model.RiskResultClass'>
+            <div style="background-color:red; font-weight:bold; font-size:23px;">@Model.RiskResultName</div>
+        </td>
+    </tr>
+    <tr class="tr-submit">
+        <td class="td-text">ผลคะแนนการวิเคราะห์ความเสี่ยงด้านสภาพแวดล้อมภายในและภายนอก อยู่ในระดับที่มีความเสี่ยง</td>
+        <td style="border-style:solid; width:100px; text-align:center; border-color:#666600;" class='@Model.RiskResultClass'>
+            <div style="background-color:red; font-weight:bold; font-size:23px;">@Model.RiskResultName</div>
+        </td>
+    </tr>
+</table>
+
+<div class="submit-box">
+
+    <p>@Html.ActionLink("รายงานที่ 1 รายงานการกลั่นกรองโครงการ", "ScreeningProject", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่ 2 รายงานการวิเคราะห์ความเสี่ยงตามหลักธรรมาธิบาล", "RiskAnalysisGoodGovernance", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่่ 3 รายงานการวิเคราะห์ความเสี่ยงด้านสภาพแวดล้อมภายในและภายนอก", "RiskAnalysisEnvironment", "Report", new { projectId = @Model.ID }, new { @class = "link" })</p>
+    <p>@Html.ActionLink("รายงานที่ 4 สรุปผลการวิเคราะห์ความเสี่ยงตามหลักธรรมภิบาลและสภาพแวดล้อมภายในภายนอก", "ProjectSummaryComment", "Budgetor", new { projectId = @Model.ID }, new { @class = "link" })</p>
+</div>
+
+

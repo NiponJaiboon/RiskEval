@@ -1,0 +1,2 @@
+2016-09-13 22:45:58,498 [1] ERROR NHibernate.Cfg.Configuration - An association from the table ProjectQuestionnaireResponse refers to an unmapped class: iSabaya.Questionnaire.QuestionnaireResponse
+NHibernate.MappingException: An association from the table ProjectQuestionnaireResponse refers to an unmapped class: iSabaya.Questionnaire.QuestionnaireResponse

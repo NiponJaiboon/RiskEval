@@ -1,0 +1,10 @@
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.Questionnaire\bin\Debug\iSabaya.Questionnaire.dll
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.Questionnaire\bin\Debug\iSabaya.Questionnaire.pdb
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.Questionnaire\bin\Debug\iSabaya.Config.dll
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.Questionnaire\bin\Debug\iSabaya.dll
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.Questionnaire\bin\Debug\NHibernate.dll
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.Questionnaire\bin\Debug\iSabaya.Config.pdb
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.Questionnaire\bin\Debug\iSabaya.pdb
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.Questionnaire\obj\Debug\iSabaya.Questionnaire.csprojResolveAssemblyReference.cache
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.Questionnaire\obj\Debug\iSabaya.Questionnaire.dll
+D:\iSabaya\tfs\RiskEval_New\Release\RiskEval v.1.0.0\iSabaya Frameworks\iSabaya.Questionnaire\obj\Debug\iSabaya.Questionnaire.pdb
